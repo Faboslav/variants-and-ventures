@@ -1,0 +1,8 @@
+{
+	"replace": false,
+	"values": [
+		"#variantsandventures:collections/frozen",
+		"#variantsandventures:collections/ice",
+		"#variantsandventures:collections/snowy"
+	]
+}

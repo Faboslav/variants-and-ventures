@@ -1,0 +1,29 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "CC BY-NC-ND 4.0"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/variants-and-ventures"
+issueTrackerURL = "https://github.com/Faboslav/variants-and-ventures/issues"
+
+[[mods]]
+modId = "${modId}"
+version = "${modVersion}"
+displayName = "${modName}"
+authors = "${modAuthor}"
+description = "${modDescription}"
+logoFile = "icon.png"
+logoBlur = false
+
+[[dependencies.${ modId }]]
+modId = "forge"
+mandatory = true
+versionRange = "[${forgeVersion},)"
+
+[[dependencies.${ modId }]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[${minecraftVersion},)"
+
+[modproperties.${ modId }]
+catalogueImageIcon = "catalogue_icon.png"
+catalogueBackground = "catalogue_logo.png"
+configuredBackground = "catalogue_background.png"

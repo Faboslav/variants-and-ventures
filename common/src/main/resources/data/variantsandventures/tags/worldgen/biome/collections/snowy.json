@@ -1,0 +1,21 @@
+{
+	"replace": false,
+	"values": [
+		"#variantsandventures:collections/snowy_forest",
+		"#variantsandventures:collections/snowy_mountains",
+		"#variantsandventures:collections/snowy_plains",
+		"minecraft:snowy_beach",
+		{
+			"id": "#c:snowy",
+			"required": false
+		},
+		{
+			"id": "#c:snowy_plains",
+			"required": false
+		},
+		{
+			"id": "#forge:is_snowy",
+			"required": false
+		}
+	]
+}

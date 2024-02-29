@@ -1,0 +1,35 @@
+{
+	"required": true,
+	"package": "com.faboslav.variantsandventures.common.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"minVersion": "0.8",
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"mixins": [
+		"AbstractSkeletonEntityMixin",
+		"AddCustomEntityPoseMixin",
+		"AddCustomSkullBlockTypeMixin",
+		"BlockEntityTypeAccessor",
+		"DungeonFeatureMixin",
+		"ItemDispenserBehaviorInvoker",
+		"LivingEntityMixin",
+		"ProjectileEntityMixin",
+		"SkeletonEntityEntityMixin",
+		"SkeletonEntityLivingEntityMixin",
+		"SkeletonEntityMobEntityMixin",
+		"SkullBlockAccessor",
+		"SpawnEggItemAccessor",
+		"SpawnHelperMixin",
+		"WallSkullBlockAccessor",
+		"ZombieEntityEntityMixin",
+		"ZombieEntityLivingEntityMixin",
+		"ZombieEntityMixin",
+		"ZombieEntityMobEntityMixin"
+	],
+	"client": [
+		"AbstractZombieModelMixin",
+		"SkeletonEntityModelMixin",
+		"SkullBlockEntityRendererMixin"
+	]
+}

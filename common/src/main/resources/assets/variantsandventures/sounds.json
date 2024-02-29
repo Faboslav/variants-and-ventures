@@ -1,0 +1,143 @@
+{
+	"entity.gelid.ambient": {
+		"sounds": [
+			"variantsandventures:entity/gelid/ambient1",
+			"variantsandventures:entity/gelid/ambient2",
+			"variantsandventures:entity/gelid/ambient3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.gelid.ambient"
+	},
+	"entity.gelid.attack": {
+		"sounds": [
+			"variantsandventures:entity/gelid/attack1",
+			"variantsandventures:entity/gelid/attack2",
+			"variantsandventures:entity/gelid/attack3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.gelid.attack"
+	},
+	"entity.gelid.death": {
+		"sounds": [
+			"variantsandventures:entity/gelid/death1",
+			"variantsandventures:entity/gelid/death2",
+			"variantsandventures:entity/gelid/death3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.gelid.death"
+	},
+	"entity.gelid.hurt": {
+		"sounds": [
+			"variantsandventures:entity/gelid/hurt1",
+			"variantsandventures:entity/gelid/hurt2",
+			"variantsandventures:entity/gelid/hurt3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.gelid.hurt"
+	},
+	"entity.gelid.step": {
+		"sounds": [
+			"variantsandventures:entity/gelid/step1",
+			"variantsandventures:entity/gelid/step2",
+			"variantsandventures:entity/gelid/step3",
+			"variantsandventures:entity/gelid/step4",
+			"variantsandventures:entity/gelid/step5"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"entity.snowball.impact": {
+		"sounds": [
+			"variantsandventures:entity/snowball/impact1",
+			"variantsandventures:entity/snowball/impact2"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.snowball.impact"
+	},
+	"entity.thicket.ambient": {
+		"sounds": [
+			"variantsandventures:entity/thicket/ambient1",
+			"variantsandventures:entity/thicket/ambient2",
+			"variantsandventures:entity/thicket/ambient3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.thicket.ambient"
+	},
+	"entity.thicket.attack": {
+		"sounds": [
+			"variantsandventures:entity/thicket/attack1",
+			"variantsandventures:entity/thicket/attack2",
+			"variantsandventures:entity/thicket/attack3",
+			"variantsandventures:entity/thicket/attack4",
+			"variantsandventures:entity/thicket/attack5",
+			"variantsandventures:entity/thicket/attack6",
+			"variantsandventures:entity/thicket/attack7"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.thicket.attack"
+	},
+	"entity.thicket.death": {
+		"sounds": [
+			"variantsandventures:entity/thicket/death1",
+			"variantsandventures:entity/thicket/death2",
+			"variantsandventures:entity/thicket/death3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.thicket.death"
+	},
+	"entity.thicket.hurt": {
+		"sounds": [
+			"variantsandventures:entity/thicket/hurt1",
+			"variantsandventures:entity/thicket/hurt2",
+			"variantsandventures:entity/thicket/hurt3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.thicket.hurt"
+	},
+	"entity.thicket.step": {
+		"sounds": [
+			"variantsandventures:entity/thicket/step1",
+			"variantsandventures:entity/thicket/step2",
+			"variantsandventures:entity/thicket/step3",
+			"variantsandventures:entity/thicket/step4",
+			"variantsandventures:entity/thicket/step5"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"entity.verdant.ambient": {
+		"sounds": [
+			"variantsandventures:entity/verdant/ambient1",
+			"variantsandventures:entity/verdant/ambient2",
+			"variantsandventures:entity/verdant/ambient3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.verdant.ambient"
+	},
+	"entity.verdant.attack": {
+		"sounds": [
+			"variantsandventures:entity/verdant/attack1",
+			"variantsandventures:entity/verdant/attack2",
+			"variantsandventures:entity/verdant/attack3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.verdant.attack"
+	},
+	"entity.verdant.death": {
+		"sounds": [
+			"variantsandventures:entity/verdant/death1",
+			"variantsandventures:entity/verdant/death2",
+			"variantsandventures:entity/verdant/death3",
+			"variantsandventures:entity/verdant/death4",
+			"variantsandventures:entity/verdant/death5",
+			"variantsandventures:entity/verdant/death6",
+			"variantsandventures:entity/verdant/death7"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.verdant.death"
+	},
+	"entity.verdant.hurt": {
+		"sounds": [
+			"variantsandventures:entity/verdant/hurt1",
+			"variantsandventures:entity/verdant/hurt2",
+			"variantsandventures:entity/verdant/hurt3",
+			"variantsandventures:entity/verdant/hurt4"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.verdant.hurt"
+	},
+	"entity.verdant.step": {
+		"sounds": [
+			"variantsandventures:entity/verdant/step1",
+			"variantsandventures:entity/verdant/step2",
+			"variantsandventures:entity/verdant/step3",
+			"variantsandventures:entity/verdant/step4"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	}
+}

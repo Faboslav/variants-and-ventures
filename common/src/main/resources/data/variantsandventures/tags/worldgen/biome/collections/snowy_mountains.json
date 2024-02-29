@@ -1,0 +1,19 @@
+{
+	"replace": false,
+	"values": [
+		"minecraft:snowy_slopes",
+		"minecraft:jagged_peaks",
+		{
+			"id": "wythers:snowy_peaks",
+			"required": false
+		},
+		{
+			"id": "wythers:icy_crags",
+			"required": false
+		},
+		{
+			"id": "wythers:icy_volcano",
+			"required": false
+		}
+	]
+}

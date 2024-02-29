@@ -1,0 +1,4 @@
+accessWidener v2 named
+
+accessible    class    net/minecraft/entity/mob/AbstractSkeletonEntity
+accessible    method    net/minecraft/entity/mob/AbstractSkeletonEntity    getStepSound    ()Lnet/minecraft/sound/SoundEvent;

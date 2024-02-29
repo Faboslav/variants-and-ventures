@@ -1,0 +1,61 @@
+{
+	"schemaVersion": 1,
+	"id": "${modId}",
+	"version": "${modVersion}",
+	"name": "${modName}",
+	"description": "${modDescription}",
+	"authors": [
+		"${modAuthor}"
+	],
+	"contact": {
+		"homepage": "https://github.com/Faboslav/variants-and-ventures",
+		"sources": "https://github.com/Faboslav/variants-and-ventures",
+		"issues": "https://github.com/Faboslav/variants-and-ventures/issues",
+		"wiki": "https://github.com/Faboslav/variants-and-ventures/wiki",
+		"discord": "https://discord.com/invite/QGwFvvMQCn"
+	},
+	"license": "CC BY-NC-ND 4.0",
+	"icon": "icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.faboslav.variantsandventures.fabric.VariantsAndVenturesFabric"
+		],
+		"client": [
+			"com.faboslav.variantsandventures.fabric.VariantsAndVenturesClientFabric"
+		],
+		"preLaunch": [
+			"com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
+		],
+		"modmenu": [
+			"com.faboslav.variantsandventures.fabric.integrations.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"variantsandventures-common.mixins.json"
+	],
+	"depends": {
+		"java": ">=17",
+		"minecraft": ">=${minecraftVersion}",
+		"fabricloader": ">=${fabricLoaderVersion}",
+		"fabric": ">=${fabricApiVersion}"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"Discord": "https://discord.com/invite/QGwFvvMQCn",
+				"Wiki": "https://github.com/Faboslav/variants-and-ventures/wiki",
+				"CurseForge": "https://www.curseforge.com/minecraft/mc-mods/variants-and-ventures",
+				"Modrinth": "https://modrinth.com/mod/variants-and-ventures"
+			}
+		},
+		"catalogue": {
+			"configFactory": "com.faboslav.variantsandventures.fabric.integrations.CatalogueIntegration",
+			"icon": {
+				"image": "catalogue_icon.png"
+			},
+			"banner": "catalogue_logo.png",
+			"background": "catalogue_background.png"
+		}
+	}
+}
