@@ -25,7 +25,7 @@ The mod is licensed with [CC BY-NC-ND 4.0] license.
 Feel free to look over my code for examples of how I have implemented and solved various problems while writing this
 mod, incorporate snippets into your own. Get inspired, but please don't just copy & paste any of it as your own.
 
-[report crash/bug, share your ideas or give some feedback]: https://github.com/Faboslav/variants-and-ventures/new/choose
+[report crash/bug, share your ideas or give some feedback]: https://github.com/Faboslav/variants-and-ventures/issues/new/choose
 
 [wiki]: https://github.com/Faboslav/variants-and-ventures/wiki
 
