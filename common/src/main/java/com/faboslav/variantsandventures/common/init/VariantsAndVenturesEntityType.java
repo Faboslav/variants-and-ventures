@@ -37,7 +37,7 @@ public final class VariantsAndVenturesEntityType
 	}
 
 	public static void createMobAttributes() {
-		EntityAttributeRegistry.register(VariantsAndVenturesEntityType.GELID, GelidEntity::createZombieAttributes);
+		EntityAttributeRegistry.register(VariantsAndVenturesEntityType.GELID, GelidEntity::createGelidAttributes);
 		EntityAttributeRegistry.register(VariantsAndVenturesEntityType.THICKET, GelidEntity::createZombieAttributes);
 		EntityAttributeRegistry.register(VariantsAndVenturesEntityType.VERDANT, VerdantEntity::createAbstractSkeletonAttributes);
 	}
