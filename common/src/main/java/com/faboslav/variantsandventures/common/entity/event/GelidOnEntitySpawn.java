@@ -8,8 +8,8 @@ import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 
@@ -44,7 +44,6 @@ public final class GelidOnEntitySpawn
 
 			GelidEntity gelid = VariantsAndVenturesEntityType.GELID.get().create(
 				(ServerWorld) event.worldAccess(),
-				null,
 				null,
 				null,
 				event.entity().getBlockPos(),

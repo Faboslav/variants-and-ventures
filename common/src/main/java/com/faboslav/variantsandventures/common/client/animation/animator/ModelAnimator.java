@@ -8,7 +8,7 @@ import com.faboslav.variantsandventures.common.entity.animation.*;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
+import org.joml.Vector3f;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public final class ModelAnimator
 {
-	private static final Vec3f TEMP = new Vec3f();
+	private static final Vector3f TEMP = new Vector3f();
 
 	public static void updateKeyframeAnimations(
 		AnimatedEntity animatedEntity,
@@ -55,7 +55,7 @@ public final class ModelAnimator
 		Animation animation,
 		long runningTime,
 		float scale,
-		Vec3f vec3f
+		Vector3f vec3f
 	) {
 		float f = getRunningSeconds(animation, runningTime);
 		Iterator var7 = animation.boneAnimations().entrySet().iterator();

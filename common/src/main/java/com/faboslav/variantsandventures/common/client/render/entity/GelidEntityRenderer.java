@@ -12,7 +12,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 
 @Environment(EnvType.CLIENT)
 public class GelidEntityRenderer extends ZombieBaseEntityRenderer<GelidEntity, DrownedEntityModel<GelidEntity>>
@@ -40,7 +40,7 @@ public class GelidEntityRenderer extends ZombieBaseEntityRenderer<GelidEntity, D
 		super.setupTransforms(gelid, matrixStack, f, g, h);
 		float i = gelid.getLeaningPitch(h);
 		if (i > 0.0F) {
-			matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(MathHelper.lerp(i, gelid.getPitch(), -10.0F - gelid.getPitch())));
+			matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.lerp(i, gelid.getPitch(), -10.0F - gelid.getPitch())));
 		}
 	}
 }

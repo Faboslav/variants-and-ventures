@@ -12,9 +12,11 @@ import net.minecraft.SharedConstants;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -38,6 +40,7 @@ public final class VariantsAndVenturesForge
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		modEventBus.addListener(VariantsAndVenturesForge::onSetup);
+		modEventBus.addListener(VariantsAndVenturesForge::registerItemsToTabs);
 		modEventBus.addListener(VariantsAndVenturesForge::registerEntityAttributes);
 		modEventBus.addListener(VariantsAndVenturesForge::registerItemColors);
 
@@ -54,6 +57,24 @@ public final class VariantsAndVenturesForge
 
 	private static void onSetup(FMLCommonSetupEvent event) {
 		SetupEvent.EVENT.invoke(new SetupEvent(event::enqueueWork));
+	}
+
+	private static void registerItemsToTabs(CreativeModeTabEvent.BuildContents event) {
+		ItemGroupRegistryImpl.ITEMS_TO_ADD_BEFORE.forEach((itemGroup, itemPairs) -> {
+			if (event.getTab() == itemGroup) {
+				itemPairs.forEach((item, before) -> {
+					event.getEntries().putBefore(before.getDefaultStack(), item.getDefaultStack(), ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
+				});
+			}
+		});
+
+		ItemGroupRegistryImpl.ITEMS_TO_ADD_AFTER.forEach((itemGroup, itemPairs) -> {
+			if (event.getTab() == itemGroup) {
+				itemPairs.forEach((item, after) -> {
+					event.getEntries().putAfter(after.getDefaultStack(), item.getDefaultStack(), ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
+				});
+			}
+		});
 	}
 
 	private static void registerEntityAttributes(EntityAttributeCreationEvent event) {

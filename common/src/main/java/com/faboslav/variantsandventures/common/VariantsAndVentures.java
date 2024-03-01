@@ -48,6 +48,7 @@ public final class VariantsAndVentures
 	}
 
 	public static void lateInit() {
+		VariantsAndVenturesItems.lateInit();
 		VariantsAndVenturesBlockEntityTypes.lateInit();
 	}
 

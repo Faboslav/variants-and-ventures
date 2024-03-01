@@ -50,7 +50,7 @@ public final class VariantsAndVenturesSoundEvents
 
 	private static Supplier<SoundEvent> register(String type, String name) {
 		String id = type + "." + name;
-		var soundEvent = new SoundEvent(VariantsAndVentures.makeID(id));
+		var soundEvent = SoundEvent.of(VariantsAndVentures.makeID(id));
 
 		return SoundEventRegistry.register(id, () -> soundEvent);
 	}

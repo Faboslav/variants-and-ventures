@@ -10,18 +10,26 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
 
-public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertible[]> colors, BlockColorProvider blockColors) {
+public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertible[]> colors,
+									 BlockColorProvider blockColors)
+{
 
-    public static final EventHandler<RegisterItemColorEvent> EVENT = new EventHandler<>();
+	public static final EventHandler<RegisterItemColorEvent> EVENT = new EventHandler<>();
 
-    public void register(ItemColorProvider color, ItemConvertible... items) {
-        colors.accept(color, items);
-    }
+	public void register(ItemColorProvider color, ItemConvertible... items) {
+		colors.accept(color, items);
+	}
 
 
-    @FunctionalInterface
-    public interface BlockColorProvider {
+	@FunctionalInterface
+	public interface BlockColorProvider
+	{
 
-        int getColor(BlockState blockState, @Nullable BlockRenderView blockRenderView, @Nullable BlockPos blockPos, int i);
-    }
+		int getColor(
+			BlockState blockState,
+			@Nullable BlockRenderView blockRenderView,
+			@Nullable BlockPos blockPos,
+			int i
+		);
+	}
 }
