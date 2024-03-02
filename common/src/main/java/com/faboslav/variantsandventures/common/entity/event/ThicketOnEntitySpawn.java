@@ -3,7 +3,7 @@ package com.faboslav.variantsandventures.common.entity.event;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.ThicketEntity;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityType;
+import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -42,7 +42,7 @@ public final class ThicketOnEntitySpawn
 				return false;
 			}
 
-			ThicketEntity thicket = VariantsAndVenturesEntityType.THICKET.get().create(
+			ThicketEntity thicket = VariantsAndVenturesEntityTypes.THICKET.get().create(
 				(ServerWorld) event.worldAccess(),
 				null,
 				null,

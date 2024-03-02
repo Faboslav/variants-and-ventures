@@ -16,4 +16,7 @@ public final class VariantsAndVenturesTags
 	private static TagKey<Biome> biomeTag(String name) {
 		return TagKey.of(Registry.BIOME_KEY, VariantsAndVentures.makeID(name));
 	}
+
+	public static void init() {
+	}
 }

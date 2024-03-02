@@ -5,9 +5,11 @@ import com.faboslav.variantsandventures.common.config.omegaconfig.OmegaConfig;
 import com.faboslav.variantsandventures.common.entity.event.*;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.entity.ProjectileHitEvent;
+import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.*;
 import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
+import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,12 +41,9 @@ public final class VariantsAndVentures
 
 
 	public static void init() {
+		VariantsAndVenturesTags.init();
 		initEvents();
-
-		VariantsAndVenturesEntityType.init();
-		VariantsAndVenturesItems.init();
-		VariantsAndVenturesBlocks.init();
-		VariantsAndVenturesSoundEvents.init();
+		initRegistries();
 	}
 
 	public static void lateInit() {
@@ -58,6 +57,15 @@ public final class VariantsAndVentures
 		EntitySpawnEvent.EVENT.addListener(ThicketOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(VerdantOnEntitySpawn::handleEntitySpawn);
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);
+		RegisterEntityAttributesEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntityAttributes);
 		SetupEvent.EVENT.addListener(DispenserAddedSpawnEgg::onSetup);
+	}
+
+	private static void initRegistries() {
+		VariantsAndVenturesItems.ITEMS.init();
+		VariantsAndVenturesBlocks.BLOCKS.init();
+		VariantsAndVenturesEntityTypes.ENTITY_TYPES.init();
+		VariantsAndVenturesSoundEvents.SOUND_EVENTS.init();
+		VariantsAndVenturesBlockEntityTypes.BLOCK_ENTITIES.init();
 	}
 }

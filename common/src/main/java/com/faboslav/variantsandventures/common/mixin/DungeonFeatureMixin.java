@@ -1,7 +1,7 @@
 package com.faboslav.variantsandventures.common.mixin;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityType;
+import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -47,7 +47,7 @@ public class DungeonFeatureMixin
 				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().gelidSpawnerChance
 			) {
 				VariantsAndVentures.getLogger().info(String.valueOf(blockPos.get()));
-				return VariantsAndVenturesEntityType.GELID.get();
+				return VariantsAndVenturesEntityTypes.GELID.get();
 			}
 
 			if (
@@ -56,7 +56,7 @@ public class DungeonFeatureMixin
 				&& VariantsAndVentures.getConfig().enableThicketSpawners
 				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().thicketSpawnerChance
 			) {
-				return VariantsAndVenturesEntityType.THICKET.get();
+				return VariantsAndVenturesEntityTypes.THICKET.get();
 			}
 		} else if (original == EntityType.SKELETON) {
 			if (
@@ -73,7 +73,7 @@ public class DungeonFeatureMixin
 				&& VariantsAndVentures.getConfig().enableVerdantSpawners
 				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().verdantSpawnerChance
 			) {
-				return VariantsAndVenturesEntityType.VERDANT.get();
+				return VariantsAndVenturesEntityTypes.VERDANT.get();
 			}
 		}
 
