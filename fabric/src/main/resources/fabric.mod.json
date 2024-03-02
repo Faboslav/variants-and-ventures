@@ -32,7 +32,8 @@
 		]
 	},
 	"mixins": [
-		"variantsandventures-common.mixins.json"
+		"variantsandventures-common.mixins.json",
+		"variantsandventures-fabric.mixins.json"
 	],
 	"depends": {
 		"java": ">=17",

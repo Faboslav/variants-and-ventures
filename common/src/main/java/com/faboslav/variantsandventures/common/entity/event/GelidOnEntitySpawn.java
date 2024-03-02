@@ -3,7 +3,7 @@ package com.faboslav.variantsandventures.common.entity.event;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityType;
+import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -42,7 +42,7 @@ public final class GelidOnEntitySpawn
 				return false;
 			}
 
-			GelidEntity gelid = VariantsAndVenturesEntityType.GELID.get().create(
+			GelidEntity gelid = VariantsAndVenturesEntityTypes.GELID.get().create(
 				(ServerWorld) event.worldAccess(),
 				null,
 				null,

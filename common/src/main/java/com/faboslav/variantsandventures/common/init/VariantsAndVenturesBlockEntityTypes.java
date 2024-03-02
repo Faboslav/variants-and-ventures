@@ -1,10 +1,17 @@
 package com.faboslav.variantsandventures.common.init;
 
+import com.faboslav.variantsandventures.common.VariantsAndVentures;
+import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
+import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import com.faboslav.variantsandventures.common.mixin.BlockEntityTypeAccessor;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +21,8 @@ import java.util.Set;
  */
 public final class VariantsAndVenturesBlockEntityTypes
 {
+	public static final ResourcefulRegistry<BlockEntityType<?>> BLOCK_ENTITIES = ResourcefulRegistries.create(Registries.BLOCK_ENTITY_TYPE, VariantsAndVentures.MOD_ID);
+
 	private static final Set<Block> SKULLS = ImmutableList.of(
 		VariantsAndVenturesBlocks.GELID_HEAD.get(),
 		VariantsAndVenturesBlocks.GELID_WALL_HEAD.get(),
