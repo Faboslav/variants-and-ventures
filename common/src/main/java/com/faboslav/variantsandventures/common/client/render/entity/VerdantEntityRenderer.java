@@ -18,7 +18,7 @@ public class VerdantEntityRenderer extends BipedEntityRenderer<VerdantEntity, Sk
 
 	public VerdantEntityRenderer(EntityRendererFactory.Context context) {
 		super(context, new SkeletonEntityModel<>(context.getPart(EntityModelLayers.SKELETON)), 0.5F);
-		this.addFeature(new ArmorFeatureRenderer<>(this, new SkeletonEntityModel(context.getPart(EntityModelLayers.SKELETON_INNER_ARMOR)), new SkeletonEntityModel(context.getPart(EntityModelLayers.SKELETON_OUTER_ARMOR))));
+		this.addFeature(new ArmorFeatureRenderer<>(this, new SkeletonEntityModel(context.getPart(EntityModelLayers.SKELETON_INNER_ARMOR)), new SkeletonEntityModel(context.getPart(EntityModelLayers.SKELETON_OUTER_ARMOR)), context.getModelManager()));
 	}
 
 	@Override
