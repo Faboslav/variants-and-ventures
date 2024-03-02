@@ -20,7 +20,6 @@ public final class VariantsAndVenturesForge
 		IEventBus eventBus = MinecraftForge.EVENT_BUS;
 
 		VariantsAndVentures.init();
-		VariantsAndVentures.lateInit();
 
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			VariantsAndVenturesClientForge.init(modEventBus, eventBus);
@@ -32,6 +31,10 @@ public final class VariantsAndVenturesForge
 
 	private static void onSetup(FMLCommonSetupEvent event) {
 		SetupEvent.EVENT.invoke(new SetupEvent(event::enqueueWork));
+
+		event.enqueueWork(() -> {
+			VariantsAndVentures.lateInit();
+		});
 	}
 
 	private static void onRegisterAttributes(EntityAttributeCreationEvent event) {
