@@ -32,7 +32,7 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 		RegisterItemGroupsEvent.EVENT.invoke(new RegisterItemGroupsEvent((id, initializer, initialDisplayItems) -> {
 			ItemGroup.Builder builder = FabricItemGroup.builder(id);
 			initializer.accept(builder);
-			builder.entries((flags, output, bl) -> {
+			builder.entries((flags, output) -> {
 				List<ItemStack> stacks = Lists.newArrayList();
 				initialDisplayItems.accept(stacks);
 				output.addAll(stacks);

@@ -50,7 +50,7 @@ public final class VariantsAndVenturesForge
 		RegisterItemGroupsEvent.EVENT.invoke(new RegisterItemGroupsEvent((id, operator, initialDisplayItems) ->
 			event.registerCreativeModeTab(id, builder -> {
 				operator.accept(builder);
-				builder.entries((flag, output, bl) -> {
+				builder.entries((flag, output) -> {
 					List<ItemStack> stacks = Lists.newArrayList();
 					initialDisplayItems.accept(stacks);
 					output.addAll(stacks);
