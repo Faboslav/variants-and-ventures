@@ -74,6 +74,10 @@ public class DispenserAddedSpawnEgg extends SpawnEggItem
 		return getEntityType(null).getRequiredFeatures();
 	}
 
+	public FeatureSet getRequiredFeatures() {
+		return getEntityType(null).getRequiredFeatures();
+	}
+
 	protected EntityType<?> getDefaultType() {
 		return this.entityType.get();
 	}
