@@ -40,8 +40,15 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 			builder.build();
 		}));
 
-		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((tab, entries) ->
-			AddItemGroupEntriesEvent.EVENT.invoke(new AddItemGroupEntriesEvent(tab, tab.hasStacks(), entries::add)));
-
+		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((itemGroup, entries) ->
+			AddItemGroupEntriesEvent.EVENT.invoke(
+				new AddItemGroupEntriesEvent(
+					AddItemGroupEntriesEvent.Type.toType(itemGroup),
+					itemGroup,
+					itemGroup.hasStacks(),
+					entries::add
+				)
+			)
+		);
 	}
 }

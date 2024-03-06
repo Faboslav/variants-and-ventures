@@ -60,7 +60,7 @@ public final class VariantsAndVenturesForge
 	}
 
 	private static void onAddItemGroupEntries(CreativeModeTabEvent.BuildContents event) {
-		AddItemGroupEntriesEvent.EVENT.invoke(new AddItemGroupEntriesEvent(event.getTab(), event.hasPermissions(), event::add));
+		AddItemGroupEntriesEvent.EVENT.invoke(new AddItemGroupEntriesEvent(AddItemGroupEntriesEvent.Type.toType(event.getTab()), event.getTab(), event.hasPermissions(), event::add));
 	}
 
 	private static void onRegisterAttributes(EntityAttributeCreationEvent event) {

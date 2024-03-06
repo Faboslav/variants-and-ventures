@@ -33,7 +33,7 @@ public class VariantsAndVenturesItemGroups
 	}
 
 	public static void addItemGroupEntries(AddItemGroupEntriesEvent event) {
-		if (event.itemGroup() == ItemGroups.FUNCTIONAL) {
+		if (event.type() == AddItemGroupEntriesEvent.Type.FUNCTIONAL) {
 			Stream.of(
 				VariantsAndVenturesItems.GELID_HEAD,
 				VariantsAndVenturesItems.THICKET_HEAD,
@@ -41,7 +41,7 @@ public class VariantsAndVenturesItemGroups
 			).map(item -> item.get().getDefaultStack()).forEach(event::add);
 		}
 
-		if (event.itemGroup() == ItemGroups.SPAWN_EGGS) {
+		if (event.type() == AddItemGroupEntriesEvent.Type.SPAWN_EGGS) {
 			Stream.of(
 				VariantsAndVenturesItems.GELID_SPAWN_EGG,
 				VariantsAndVenturesItems.THICKET_SPAWN_EGG,
