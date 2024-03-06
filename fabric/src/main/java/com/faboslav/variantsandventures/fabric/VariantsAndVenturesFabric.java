@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 		RegisterEntityAttributesEvent.EVENT.invoke(new RegisterEntityAttributesEvent(FabricDefaultAttributeRegistry::register));
 		SetupEvent.EVENT.invoke(new SetupEvent(Runnable::run));
 		RegisterItemGroupsEvent.EVENT.invoke(new RegisterItemGroupsEvent((id, initializer, initialDisplayItems) -> {
-			ItemGroup.Builder builder = FabricItemGroup.builder(id);
+			ItemGroup.Builder builder = FabricItemGroup.builder();
 			initializer.accept(builder);
 			builder.entries((flags, output) -> {
 				List<ItemStack> stacks = Lists.newArrayList();
@@ -40,8 +41,15 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 			builder.build();
 		}));
 
-		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((tab, entries) ->
-			AddItemGroupEntriesEvent.EVENT.invoke(new AddItemGroupEntriesEvent(tab, tab.hasStacks(), entries::add)));
-
+		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((itemGroup, entries) ->
+			AddItemGroupEntriesEvent.EVENT.invoke(
+				new AddItemGroupEntriesEvent(
+					AddItemGroupEntriesEvent.Type.toType(Registries.ITEM_GROUP.getKey(itemGroup).orElse(null)),
+					itemGroup,
+					itemGroup.hasStacks(),
+					entries::add
+				)
+			)
+		);
 	}
 }

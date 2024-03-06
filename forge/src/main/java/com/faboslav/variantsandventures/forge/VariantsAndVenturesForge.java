@@ -7,8 +7,10 @@ import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAt
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.google.common.collect.Lists;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,7 +35,7 @@ public final class VariantsAndVenturesForge
 		}
 
 		modEventBus.addListener(VariantsAndVenturesForge::onSetup);
-		modEventBus.addListener(VariantsAndVenturesForge::onRegisterItemGroups);
+		//modEventBus.addListener(VariantsAndVenturesForge::onRegisterItemGroups);
 		modEventBus.addListener(VariantsAndVenturesForge::onAddItemGroupEntries);
 		modEventBus.addListener(VariantsAndVenturesForge::onRegisterAttributes);
 	}
@@ -46,6 +48,7 @@ public final class VariantsAndVenturesForge
 		});
 	}
 
+	/*
 	private static void onRegisterItemGroups(CreativeModeTabEvent.Register event) {
 		RegisterItemGroupsEvent.EVENT.invoke(new RegisterItemGroupsEvent((id, operator, initialDisplayItems) ->
 			event.registerCreativeModeTab(id, builder -> {
@@ -57,10 +60,17 @@ public final class VariantsAndVenturesForge
 				});
 			})
 		));
-	}
+	}*/
 
-	private static void onAddItemGroupEntries(CreativeModeTabEvent.BuildContents event) {
-		AddItemGroupEntriesEvent.EVENT.invoke(new AddItemGroupEntriesEvent(event.getTab(), event.hasPermissions(), event::add));
+	private static void onAddItemGroupEntries(BuildCreativeModeTabContentsEvent event) {
+		AddItemGroupEntriesEvent.EVENT.invoke(
+			new AddItemGroupEntriesEvent(
+				AddItemGroupEntriesEvent.Type.toType(Registries.ITEM_GROUP.getKey(event.getTab()).orElse(null)),
+				event.getTab(),
+				event.hasPermissions(),
+				event::add
+			)
+		);
 	}
 
 	private static void onRegisterAttributes(EntityAttributeCreationEvent event) {

@@ -5,10 +5,6 @@ import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.events.RegisterItemGroupsEvent;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 
 import java.util.List;
@@ -35,7 +31,7 @@ public class VariantsAndVenturesItemGroups
 	}
 
 	public static void addItemGroupEntries(AddItemGroupEntriesEvent event) {
-		if (RegistryKey.of(Registries.ITEM_GROUP.getKey(), event.itemGroup()) == ItemGroups.FUNCTIONAL) {
+		if (event.type() == AddItemGroupEntriesEvent.Type.FUNCTIONAL) {
 			Stream.of(
 				VariantsAndVenturesItems.GELID_HEAD,
 				VariantsAndVenturesItems.THICKET_HEAD,
@@ -43,7 +39,7 @@ public class VariantsAndVenturesItemGroups
 			).map(item -> item.get().getDefaultStack()).forEach(event::add);
 		}
 
-		if (event.itemGroup() == ItemGroups.SPAWN_EGGS) {
+		if (event.type() == AddItemGroupEntriesEvent.Type.SPAWN_EGGS) {
 			Stream.of(
 				VariantsAndVenturesItems.GELID_SPAWN_EGG,
 				VariantsAndVenturesItems.THICKET_SPAWN_EGG,
