@@ -4,6 +4,7 @@ import com.faboslav.variantsandventures.common.events.base.EventHandler;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -24,8 +25,8 @@ public record RegisterItemGroupsEvent(TabCreator creator)
 	}
 
 	@FunctionalInterface
-	public interface TabCreator {
-
+	public interface TabCreator
+	{
 		void create(Identifier id, Consumer<ItemGroup.Builder> builder, Consumer<List<ItemStack>> displayStacks);
 	}
 }

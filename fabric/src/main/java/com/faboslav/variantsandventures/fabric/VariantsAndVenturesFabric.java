@@ -30,6 +30,7 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 	private void initEvents() {
 		RegisterEntityAttributesEvent.EVENT.invoke(new RegisterEntityAttributesEvent(FabricDefaultAttributeRegistry::register));
 		SetupEvent.EVENT.invoke(new SetupEvent(Runnable::run));
+
 		RegisterItemGroupsEvent.EVENT.invoke(new RegisterItemGroupsEvent((id, initializer, initialDisplayItems) -> {
 			ItemGroup.Builder builder = FabricItemGroup.builder();
 			initializer.accept(builder);
