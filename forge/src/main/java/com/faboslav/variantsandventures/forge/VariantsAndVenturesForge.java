@@ -1,8 +1,8 @@
 package com.faboslav.variantsandventures.forge;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import com.faboslav.variantsandventures.common.events.RegisterItemGroupsEvent;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
+import com.faboslav.variantsandventures.common.events.RegisterItemGroupsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.google.common.collect.Lists;
