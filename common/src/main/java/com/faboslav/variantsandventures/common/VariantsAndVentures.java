@@ -61,7 +61,6 @@ public final class VariantsAndVentures
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);
 		RegisterEntityAttributesEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntityAttributes);
 		SetupEvent.EVENT.addListener(DispenserAddedSpawnEgg::onSetup);
-		RegisterItemGroupsEvent.EVENT.addListener(VariantsAndVenturesItemGroups::registerItemGroups);
 		AddItemGroupEntriesEvent.EVENT.addListener(VariantsAndVenturesItemGroups::addItemGroupEntries);
 	}
 

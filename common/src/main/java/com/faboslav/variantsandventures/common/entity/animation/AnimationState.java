@@ -46,7 +46,7 @@ public final class AnimationState
 
 	public void update(float animationProgress, float speedMultiplier) {
 		if (this.isRunning()) {
-			long l = MathHelper.lfloor((double) (animationProgress * 1000.0F / 20.0F));
+			long l = MathHelper.lfloor(animationProgress * 1000.0F / 20.0F);
 			this.timeRunning += (long) ((float) (l - this.updatedAt) * speedMultiplier);
 			this.updatedAt = l;
 		}
