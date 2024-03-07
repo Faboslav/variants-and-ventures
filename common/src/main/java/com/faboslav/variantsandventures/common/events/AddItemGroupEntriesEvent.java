@@ -5,11 +5,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.Util;
 
-import java.util.IdentityHashMap;
-import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -20,19 +16,21 @@ import java.util.function.Consumer;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public record AddItemGroupEntriesEvent(Type type, ItemGroup itemGroup, boolean hasPermission, Consumer<ItemStack> adder) {
+public record AddItemGroupEntriesEvent(Type type, ItemGroup itemGroup, boolean hasPermission, Consumer<ItemStack> adder)
+{
 
-    public static final EventHandler<AddItemGroupEntriesEvent> EVENT = new EventHandler<>();
+	public static final EventHandler<AddItemGroupEntriesEvent> EVENT = new EventHandler<>();
 
-    public void add(ItemStack stack) {
-        adder.accept(stack);
-    }
+	public void add(ItemStack stack) {
+		adder.accept(stack);
+	}
 
-    public void add(ItemConvertible item) {
-        adder.accept(new ItemStack(item));
-    }
+	public void add(ItemConvertible item) {
+		adder.accept(new ItemStack(item));
+	}
 
-	public enum Type {
+	public enum Type
+	{
 		BUILDING_BLOCKS,
 		COLORED_BLOCKS,
 		NATURAL,
