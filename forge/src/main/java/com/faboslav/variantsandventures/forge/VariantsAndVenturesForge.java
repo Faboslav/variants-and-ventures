@@ -28,6 +28,7 @@ public final class VariantsAndVenturesForge
 		}
 
 		modEventBus.addListener(VariantsAndVenturesForge::onSetup);
+		modEventBus.addListener(VariantsAndVenturesForge::onRegisterItemGroups);
 		modEventBus.addListener(VariantsAndVenturesForge::onAddItemGroupEntries);
 		modEventBus.addListener(VariantsAndVenturesForge::onRegisterAttributes);
 	}
@@ -38,6 +39,19 @@ public final class VariantsAndVenturesForge
 		event.enqueueWork(() -> {
 			VariantsAndVentures.lateInit();
 		});
+	}
+
+	private static void onRegisterItemGroups(CreativeModeTabEvent.Register event) {
+		RegisterItemGroupsEvent.EVENT.invoke(new RegisterItemGroupsEvent((id, operator, initialDisplayItems) ->
+			event.registerCreativeModeTab(id, builder -> {
+				operator.accept(builder);
+				builder.entries((flag, output, bl) -> {
+					List<ItemStack> stacks = Lists.newArrayList();
+					initialDisplayItems.accept(stacks);
+					output.addAll(stacks);
+				});
+			})
+		));
 	}
 
 	private static void onAddItemGroupEntries(CreativeModeTabEvent.BuildContents event) {

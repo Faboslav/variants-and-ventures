@@ -18,7 +18,8 @@ import java.util.function.BiConsumer;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertible[]> colors, BlockColorProvider blockColors)
+public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertible[]> colors,
+									 BlockColorProvider blockColors)
 {
 	public static final EventHandler<RegisterItemColorEvent> EVENT = new EventHandler<>();
 
