@@ -20,7 +20,6 @@
 		"SkeletonEntityMobEntityMixin",
 		"SkullBlockAccessor",
 		"SpawnEggItemAccessor",
-		"SpawnHelperMixin",
 		"WallSkullBlockAccessor",
 		"ZombieEntityEntityMixin",
 		"ZombieEntityLivingEntityMixin",

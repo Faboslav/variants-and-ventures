@@ -1,4 +1,4 @@
-package com.faboslav.variantsandventures.common.mixin;
+package com.faboslav.variantsandventures.fabric.mixin;
 
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;

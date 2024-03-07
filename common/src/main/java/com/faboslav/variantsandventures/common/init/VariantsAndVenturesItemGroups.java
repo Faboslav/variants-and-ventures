@@ -2,9 +2,13 @@ package com.faboslav.variantsandventures.common.init;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
-import com.faboslav.variantsandventures.common.events.RegisterItemGroupsEvent;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
+import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
+import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 
 import java.util.List;
@@ -21,14 +25,19 @@ public class VariantsAndVenturesItemGroups
 		VariantsAndVenturesItems.VERDANT_SPAWN_EGG
 	);
 
-	public static void registerItemGroups(RegisterItemGroupsEvent event) {
-		event.register(
-			VariantsAndVentures.makeID("main_tab"),
-			builder -> builder.icon(() -> VariantsAndVenturesItems.GELID_HEAD.get().getDefaultStack()).displayName(Text.translatable("item_group." + VariantsAndVentures.MOD_ID + ".main_tab")),
-			items -> CUSTOM_CREATIVE_TAB_ITEMS.stream().map(item -> item.get().getDefaultStack()).forEach(items::add)
+	public static final ResourcefulRegistry<ItemGroup> ITEM_GROUPS = ResourcefulRegistries.create(Registries.ITEM_GROUP, VariantsAndVentures.MOD_ID);
 
-		);
-	}
+	public static final RegistryEntry<ItemGroup> MAIN_TAB = ITEM_GROUPS.register("main_tab", () ->
+		ItemGroup.create(ItemGroup.Row.TOP, 0)
+			.displayName((Text.translatable("item_group." + VariantsAndVentures.MOD_ID + ".main_tab")))
+			.icon(() -> {
+				ItemStack iconStack = VariantsAndVenturesItems.GELID_HEAD.get().getDefaultStack();
+				iconStack.getOrCreateNbt().putBoolean("isCreativeTabIcon", true);
+				return iconStack;
+			})
+			.entries((itemDisplayParameters, entries) ->
+				CUSTOM_CREATIVE_TAB_ITEMS.stream().map(item -> item.get().getDefaultStack()).forEach(entries::add)
+			).build());
 
 	public static void addItemGroupEntries(AddItemGroupEntriesEvent event) {
 		if (event.type() == AddItemGroupEntriesEvent.Type.FUNCTIONAL) {

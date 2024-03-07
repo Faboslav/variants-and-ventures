@@ -4,7 +4,6 @@ import com.faboslav.variantsandventures.common.config.VariantsAndVenturesConfig;
 import com.faboslav.variantsandventures.common.config.omegaconfig.OmegaConfig;
 import com.faboslav.variantsandventures.common.entity.event.*;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
-import com.faboslav.variantsandventures.common.events.RegisterItemGroupsEvent;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.entity.ProjectileHitEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
@@ -61,7 +60,6 @@ public final class VariantsAndVentures
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);
 		RegisterEntityAttributesEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntityAttributes);
 		SetupEvent.EVENT.addListener(DispenserAddedSpawnEgg::onSetup);
-		RegisterItemGroupsEvent.EVENT.addListener(VariantsAndVenturesItemGroups::registerItemGroups);
 		AddItemGroupEntriesEvent.EVENT.addListener(VariantsAndVenturesItemGroups::addItemGroupEntries);
 	}
 
@@ -69,6 +67,7 @@ public final class VariantsAndVentures
 		VariantsAndVenturesItems.ITEMS.init();
 		VariantsAndVenturesBlocks.BLOCKS.init();
 		VariantsAndVenturesEntityTypes.ENTITY_TYPES.init();
+		VariantsAndVenturesItemGroups.ITEM_GROUPS.init();
 		VariantsAndVenturesSoundEvents.SOUND_EVENTS.init();
 	}
 }
