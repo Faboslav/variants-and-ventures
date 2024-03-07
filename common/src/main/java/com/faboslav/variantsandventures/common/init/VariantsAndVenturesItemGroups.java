@@ -23,15 +23,6 @@ public class VariantsAndVenturesItemGroups
 		VariantsAndVenturesItems.VERDANT_SPAWN_EGG
 	);
 
-	public static void registerItemGroups(RegisterItemGroupsEvent event) {
-		event.register(
-			VariantsAndVentures.makeID("main_tab"),
-			builder -> builder.icon(() -> VariantsAndVenturesItems.GELID_HEAD.get().getDefaultStack()).displayName(Text.translatable("item_group." + VariantsAndVentures.MOD_ID + ".main_tab")),
-			items -> CUSTOM_CREATIVE_TAB_ITEMS.stream().map(item -> item.get().getDefaultStack()).forEach(items::add)
-
-		);
-	}
-
 	public static void addItemGroupEntries(AddItemGroupEntriesEvent event) {
 		if (event.type() == AddItemGroupEntriesEvent.Type.FUNCTIONAL) {
 			Stream.of(
