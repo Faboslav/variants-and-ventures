@@ -46,7 +46,6 @@ public class DungeonFeatureMixin
 				&& VariantsAndVentures.getConfig().enableGelidSpawners
 				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().gelidSpawnerChance
 			) {
-				VariantsAndVentures.getLogger().info(String.valueOf(blockPos.get()));
 				return VariantsAndVenturesEntityTypes.GELID.get();
 			}
 
