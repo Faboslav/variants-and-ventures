@@ -23,11 +23,11 @@ public final class VariantsAndVenturesNeoForge
 {
 	public VariantsAndVenturesNeoForge(IEventBus modEventBus) {
 		IEventBus eventBus = NeoForge.EVENT_BUS;
-		modEventBus.addListener(EventPriority.NORMAL, ResourcefulRegistriesImpl::onRegisterNeoForgeRegistries);
 
+		modEventBus.addListener(EventPriority.NORMAL, ResourcefulRegistriesImpl::onRegisterNeoForgeRegistries);
 		VariantsAndVentures.init();
 
-		if (FMLEnvironment.dist == Dist.CLIENT.CLIENT) {
+		if (FMLEnvironment.dist == Dist.CLIENT) {
 			VariantsAndVenturesClientNeoForge.init(modEventBus, eventBus);
 		}
 
