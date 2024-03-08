@@ -25,7 +25,6 @@ import java.util.function.Supplier;
 
 public class DispenserAddedSpawnEgg extends SpawnEggItem
 {
-
 	private static final List<Pair<Supplier<? extends EntityType<? extends MobEntity>>, SpawnEggItem>> SPAWN_EGGS = new ArrayList<>();
 	private final Supplier<? extends EntityType<? extends MobEntity>> entityType;
 
@@ -70,10 +69,7 @@ public class DispenserAddedSpawnEgg extends SpawnEggItem
 		return this.entityType.get();
 	}
 
-	public FeatureSet requiredFeatures() {
-		return getEntityType(null).getRequiredFeatures();
-	}
-
+	@Override
 	public FeatureSet getRequiredFeatures() {
 		return getEntityType(null).getRequiredFeatures();
 	}

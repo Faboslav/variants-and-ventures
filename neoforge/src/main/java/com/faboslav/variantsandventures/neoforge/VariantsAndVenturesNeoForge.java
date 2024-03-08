@@ -2,7 +2,6 @@ package com.faboslav.variantsandventures.neoforge;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
-import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.registry.neoforge.ResourcefulRegistriesImpl;
@@ -16,7 +15,6 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.entity.living.MobSpawnEvent;
 
 @Mod(VariantsAndVentures.MOD_ID)
 public final class VariantsAndVenturesNeoForge
@@ -34,8 +32,6 @@ public final class VariantsAndVenturesNeoForge
 		modEventBus.addListener(VariantsAndVenturesNeoForge::onSetup);
 		modEventBus.addListener(VariantsAndVenturesNeoForge::onAddItemGroupEntries);
 		modEventBus.addListener(VariantsAndVenturesNeoForge::onRegisterAttributes);
-
-		eventBus.addListener(VariantsAndVenturesNeoForge::onEntitySpawn);
 	}
 
 	private static void onSetup(FMLCommonSetupEvent event) {
@@ -44,15 +40,6 @@ public final class VariantsAndVenturesNeoForge
 		event.enqueueWork(() -> {
 			VariantsAndVentures.lateInit();
 		});
-	}
-
-	private static void onEntitySpawn(MobSpawnEvent.FinalizeSpawn event) {
-		boolean cancel = EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(event.getEntity(), event.getLevel(), event.getEntity().isBaby(), event.getSpawnType()), event.isCanceled());
-
-		if (cancel) {
-			event.setCanceled(true);
-			event.setSpawnCancelled(true);
-		}
 	}
 
 	private static void onAddItemGroupEntries(BuildCreativeModeTabContentsEvent event) {
