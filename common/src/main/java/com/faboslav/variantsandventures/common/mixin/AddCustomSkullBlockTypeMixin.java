@@ -22,7 +22,8 @@ public final class AddCustomSkullBlockTypeMixin
 	@Invoker("<init>")
 	public static SkullBlock.Type newSkullBlockType(
 		String internalName,
-		int internalId
+		int internalId,
+		String name
 	) {
 		throw new AssertionError();
 	}
@@ -46,21 +47,25 @@ public final class AddCustomSkullBlockTypeMixin
 		var lastSkullBlockTypeIndex = skullBlockTypes.get(skullBlockTypes.size() - 1);
 		var nextSkullBlockTypeIndex = lastSkullBlockTypeIndex.ordinal();
 
+
 		var gelidSkullBlockType = newSkullBlockType(
 			SkullBlockType.GELID.name(),
-			++nextSkullBlockTypeIndex
+			++nextSkullBlockTypeIndex,
+			"gelid"
 		);
 		skullBlockTypes.add(gelidSkullBlockType);
 
 		var thicketSkullBlockType = newSkullBlockType(
 			SkullBlockType.THICKET.name(),
-			++nextSkullBlockTypeIndex
+			++nextSkullBlockTypeIndex,
+			"thicket"
 		);
 		skullBlockTypes.add(thicketSkullBlockType);
 
 		var verdantSkullBlockType = newSkullBlockType(
 			SkullBlockType.VERDANT.name(),
-			++nextSkullBlockTypeIndex
+			++nextSkullBlockTypeIndex,
+			"verdant"
 		);
 		skullBlockTypes.add(verdantSkullBlockType);
 
