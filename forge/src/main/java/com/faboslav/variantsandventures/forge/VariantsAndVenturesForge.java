@@ -2,7 +2,6 @@ package com.faboslav.variantsandventures.forge;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
-import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.registry.forge.ResourcefulRegistriesImpl;
@@ -11,7 +10,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -36,8 +34,6 @@ public final class VariantsAndVenturesForge
 		modEventBus.addListener(VariantsAndVenturesForge::onSetup);
 		modEventBus.addListener(VariantsAndVenturesForge::onAddItemGroupEntries);
 		modEventBus.addListener(VariantsAndVenturesForge::onRegisterAttributes);
-
-		eventBus.addListener(VariantsAndVenturesForge::onEntitySpawn);
 	}
 
 	private static void onSetup(FMLCommonSetupEvent event) {
@@ -46,15 +42,6 @@ public final class VariantsAndVenturesForge
 		event.enqueueWork(() -> {
 			VariantsAndVentures.lateInit();
 		});
-	}
-
-	private static void onEntitySpawn(MobSpawnEvent.FinalizeSpawn event) {
-		boolean cancel = EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(event.getEntity(), event.getLevel(), event.getEntity().isBaby(), event.getSpawnType()), event.isCanceled());
-
-		if (cancel) {
-			event.setCanceled(true);
-			event.setSpawnCancelled(true);
-		}
 	}
 
 	private static void onAddItemGroupEntries(BuildCreativeModeTabContentsEvent event) {
