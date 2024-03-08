@@ -5,7 +5,6 @@ import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Collection;
@@ -19,6 +18,7 @@ import java.util.function.Supplier;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
+@SuppressWarnings({"deprecation", "removal"})
 public final class NeoForgeResourcefulRegistry<T> implements ResourcefulRegistry<T>
 {
 	private final DeferredRegister<T> register;
@@ -40,6 +40,6 @@ public final class NeoForgeResourcefulRegistry<T> implements ResourcefulRegistry
 
 	@Override
 	public void init() {
-		register.register(FMLJavaModLoadingContext.get().getModEventBus());
+		register.register(net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus());
 	}
 }

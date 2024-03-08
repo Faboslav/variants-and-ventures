@@ -28,7 +28,7 @@ forgix {
 	if (findProject(":neoforge"))
 		custom {
 			projectName = "neoforge"
-			jarLocation = "build/libs/${rootProject.mod_id}-forge-mc${rootProject.minecraft_version}-${rootProject.mod_version}.jar"
+			jarLocation = "build/libs/${rootProject.mod_id}-neoforge-mc${rootProject.minecraft_version}-${rootProject.mod_version}.jar"
 		}
 }
 
@@ -41,7 +41,10 @@ subprojects {
 
 	dependencies {
 		minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-		mappings "net.fabricmc:yarn:${rootProject.yarn_mappings}"
+		mappings loom.layered {
+			it.mappings "net.fabricmc:yarn:${rootProject.yarn_mappings}"
+			it.mappings "dev.architectury:yarn-mappings-patch-forge:${rootProject.yarn_mappings_patch}"
+		}
 	}
 }
 
