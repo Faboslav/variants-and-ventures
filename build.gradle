@@ -28,7 +28,7 @@ forgix {
 	if (findProject(":neoforge"))
 		custom {
 			projectName = "neoforge"
-			jarLocation = "build/libs/${rootProject.mod_id}-forge-mc${rootProject.minecraft_version}-${rootProject.mod_version}.jar"
+			jarLocation = "build/libs/${rootProject.mod_id}-neoforge-mc${rootProject.minecraft_version}-${rootProject.mod_version}.jar"
 		}
 }
 
