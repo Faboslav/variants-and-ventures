@@ -108,7 +108,7 @@ jobs:
                     game-versions: "${{ matrix.branch }}"
                     changelog-file: RELEASE_CHANGELOG.md
                     files: |
-                        /build/libs/merged/!(*-@(dev|dev-shadow|sources|javadoc)).jar
+                        build/libs/merged/!(*-@(dev|dev-shadow|sources|javadoc)).jar
 
     clear-cache:
         needs: publish
