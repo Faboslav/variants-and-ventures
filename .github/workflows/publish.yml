@@ -19,12 +19,6 @@ jobs:
             fail-fast: false
             matrix:
                 branch: ${{ fromJson(inputs.branches) }}
-                include:
-                    -   branch: "1.20.1"
-                        secondary_game_version: "1.20"
-
-                    -   branch: "1.20.4"
-                        secondary_game_version: "1.20.3"
 
         steps:
             -   name: "Checkout repository"
@@ -111,7 +105,7 @@ jobs:
                         forge
                         neoforge
                         quilt
-                    game-versions: "${{ matrix.branch }}\n${{ matrix.secondary_game_version }}"
+                    game-versions: "${{ matrix.branch }}"
                     changelog-file: RELEASE_CHANGELOG.md
                     files: |
                         /build/libs/merged/!(*-@(dev|dev-shadow|sources|javadoc)).jar
