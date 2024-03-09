@@ -45,7 +45,7 @@ processResources {
 	inputs.property "modDescription", rootProject.mod_description
 	inputs.property "modAuthor", rootProject.mod_author
 	inputs.property "minecraftVersion", rootProject.minecraft_version
-	inputs.property "forgeVersion", rootProject.forge_version
+	inputs.property "neoForgeVersion", rootProject.neoforge_version
 
 	filesMatching("META-INF/mods.toml") {
 		expand "modId": rootProject.mod_id,
@@ -54,7 +54,7 @@ processResources {
 			"modDescription": rootProject.mod_description,
 			"modAuthor": rootProject.mod_author,
 			"minecraftVersion": rootProject.minecraft_version,
-			"forgeVersion": rootProject.forge_version
+			"neoForgeVersion": rootProject.neoforge_version
 	}
 }
 
