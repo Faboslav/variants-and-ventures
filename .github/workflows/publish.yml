@@ -97,10 +97,10 @@ jobs:
                     github-token: ${{ secrets.GITHUB_TOKEN }}
                     github-tag: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
 
-                    curseforge-id: ${{ matrix.curseforge_id }}
+                    curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID }}
                     curseforge-token: ${{ secrets.CURSEFORGE_RELEASE_TOKEN }}
 
-                    modrinth-id: ${{ matrix.modrinth_id }}
+                    modrinth-id: ${{ vars.MODRINTH_PROJECT_ID }}
                     modrinth-featured: true
                     modrinth-token: ${{ secrets.MODRINTH_RELEASE_TOKEN }}
 
