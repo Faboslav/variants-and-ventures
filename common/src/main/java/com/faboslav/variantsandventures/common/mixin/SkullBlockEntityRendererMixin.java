@@ -46,7 +46,7 @@ public abstract class SkullBlockEntityRendererMixin
 
 	@WrapOperation(
 		method = "getRenderLayer",
-		at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;")
+		at = @At(value = "INVOKE", target = "Ljava/util/Map;get(Ljava/lang/Object;)Ljava/lang/Object;", ordinal = 0)
 	)
 	private static Object variantsandventures$getIdentifier(Map instance, Object o, Operation<Identifier> original) {
 		SkullBlock.SkullType skullType = (SkullBlock.SkullType) o;
