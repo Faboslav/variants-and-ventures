@@ -59,7 +59,8 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 	protected PersistentProjectileEntity createArrowProjectile(ItemStack arrow, float damageModifier) {
 		PersistentProjectileEntity persistentProjectileEntity = super.createArrowProjectile(arrow, damageModifier);
 		if (persistentProjectileEntity instanceof ArrowEntity) {
-			((ArrowEntity) persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 600));
+			float difficulty = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
+			((ArrowEntity) persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 80 * (int) difficulty));
 		}
 
 		return persistentProjectileEntity;
