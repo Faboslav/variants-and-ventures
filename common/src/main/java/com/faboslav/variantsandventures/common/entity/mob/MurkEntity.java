@@ -115,6 +115,14 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
+	public void playAmbientSound() {
+		SoundEvent soundEvent = this.getAmbientSound();
+		if (soundEvent != null) {
+			this.playSound(soundEvent, this.isTouchingWater() ? 0.25F : this.getSoundVolume(), this.getSoundPitch());
+		}
+	}
+
+	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return this.isTouchingWater() ? VariantsAndVenturesSoundEvents.ENTITY_MURK_HURT_WATER.get():VariantsAndVenturesSoundEvents.ENTITY_MURK_HURT.get();
 	}

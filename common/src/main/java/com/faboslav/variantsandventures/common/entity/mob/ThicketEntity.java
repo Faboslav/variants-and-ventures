@@ -37,8 +37,24 @@ public final class ThicketEntity extends ZombieEntity
 	}
 
 	@Override
+	public void playAmbientSound() {
+		SoundEvent soundEvent = this.getAmbientSound();
+		if (soundEvent != null) {
+			this.playSound(soundEvent, 0.4F, this.getSoundPitch());
+		}
+	}
+
+	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return VariantsAndVenturesSoundEvents.ENTITY_THICKET_HURT.get();
+	}
+
+	@Override
+	protected void playHurtSound(DamageSource source) {
+		SoundEvent soundEvent = this.getHurtSound(source);
+		if (soundEvent != null) {
+			this.playSound(soundEvent, 0.75F, this.getSoundPitch());
+		}
 	}
 
 	@Override

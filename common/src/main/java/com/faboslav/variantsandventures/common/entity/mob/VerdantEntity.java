@@ -16,6 +16,7 @@ import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 public final class VerdantEntity extends AbstractSkeletonEntity
@@ -27,6 +28,14 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return VariantsAndVenturesSoundEvents.ENTITY_VERDANT_AMBIENT.get();
+	}
+
+	@Override
+	public void playAmbientSound() {
+		SoundEvent soundEvent = this.getAmbientSound();
+		if (soundEvent != null) {
+			this.playSound(soundEvent, 0.25F, this.getSoundPitch());
+		}
 	}
 
 	@Override
