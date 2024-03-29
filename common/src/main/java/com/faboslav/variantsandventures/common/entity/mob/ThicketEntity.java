@@ -58,8 +58,7 @@ public final class ThicketEntity extends ZombieEntity
 		boolean attackResult = super.tryAttack(target);
 
 		if (attackResult && this.getMainHandStack().isEmpty() && target instanceof LivingEntity) {
-			float difficulty = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
-			((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 80 * (int) difficulty), this);
+			((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100), this);
 		}
 
 		return attackResult;

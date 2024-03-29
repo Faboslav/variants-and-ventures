@@ -1,6 +1,7 @@
 ## 1.0.2
 
-- Decreased the poison time of the verdant and thicket attacks
+- Added Verdant to the skeletons entity types tag
+- Decreased the poison time of the Verdant and Thicket attacks
 - Added missing translation keys
 - Added uk_ua translations (Thanks to unroman)
 
