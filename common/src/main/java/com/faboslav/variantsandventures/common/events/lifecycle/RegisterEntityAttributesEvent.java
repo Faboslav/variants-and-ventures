@@ -10,7 +10,6 @@ import java.util.function.BiConsumer;
 public record RegisterEntityAttributesEvent(
 	BiConsumer<EntityType<? extends LivingEntity>, DefaultAttributeContainer.Builder> attributes)
 {
-
 	public static final EventHandler<RegisterEntityAttributesEvent> EVENT = new EventHandler<>();
 
 	public void register(EntityType<? extends LivingEntity> entityType, DefaultAttributeContainer.Builder builder) {

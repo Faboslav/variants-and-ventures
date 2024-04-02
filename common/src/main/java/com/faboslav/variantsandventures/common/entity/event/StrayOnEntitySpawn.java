@@ -30,6 +30,10 @@ public final class StrayOnEntitySpawn
 				return false;
 			}
 
+			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().strayMinimumYLevel) {
+				return false;
+			}
+
 			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().straySpawnChance) {
 				return false;
 			}

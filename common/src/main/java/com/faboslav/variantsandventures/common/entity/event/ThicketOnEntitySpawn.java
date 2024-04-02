@@ -31,6 +31,10 @@ public final class ThicketOnEntitySpawn
 				return false;
 			}
 
+			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().thicketMinimumYLevel) {
+				return false;
+			}
+
 			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().thicketSpawnChance) {
 				return false;
 			}

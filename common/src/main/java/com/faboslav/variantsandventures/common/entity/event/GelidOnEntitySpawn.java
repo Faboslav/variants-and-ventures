@@ -35,6 +35,10 @@ public final class GelidOnEntitySpawn
 				return false;
 			}
 
+			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().gelidMinimumYLevel) {
+				return false;
+			}
+
 			WorldAccess worldAccess = event.worldAccess();
 			RegistryEntry<Biome> biome = worldAccess.getBiome(entity.getBlockPos());
 

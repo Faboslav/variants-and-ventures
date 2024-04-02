@@ -13,7 +13,6 @@ import java.util.function.BiConsumer;
 public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertible[]> colors,
 									 BlockColorProvider blockColors)
 {
-
 	public static final EventHandler<RegisterItemColorEvent> EVENT = new EventHandler<>();
 
 	public void register(ItemColorProvider color, ItemConvertible... items) {
@@ -24,7 +23,6 @@ public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertib
 	@FunctionalInterface
 	public interface BlockColorProvider
 	{
-
 		int getColor(
 			BlockState blockState,
 			@Nullable BlockRenderView blockRenderView,

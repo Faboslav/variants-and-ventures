@@ -11,7 +11,7 @@ import net.minecraft.client.util.math.MatrixStack;
 public final class MurkSkullEntityModel extends SkullEntityModel
 {
 	private final ModelPart root;
-	protected final ModelPart head;
+	private final ModelPart head;
 
 	public MurkSkullEntityModel(ModelPart root) {
 		super(root);

@@ -5,9 +5,11 @@ import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
 import com.faboslav.variantsandventures.common.entity.mob.ThicketEntity;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
+import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
+import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -43,5 +45,11 @@ public final class VariantsAndVenturesEntityTypes
 		event.register(VariantsAndVenturesEntityTypes.MURK.get(), MurkEntity.createMurkAttributes());
 		event.register(VariantsAndVenturesEntityTypes.THICKET.get(), ThicketEntity.createZombieAttributes());
 		event.register(VariantsAndVenturesEntityTypes.VERDANT.get(), VerdantEntity.createAbstractSkeletonAttributes());
+	}
+
+	public static void addSpawnBiomeModifications(AddSpawnBiomeModificationEvent event) {
+		if (VariantsAndVentures.getConfig().enableMurk && VariantsAndVentures.getConfig().enableMurkSpawns) {
+			event.add(VariantsAndVenturesTags.HAS_MURK, SpawnGroup.MONSTER, MURK.get(), 1, 1, 1);
+		}
 	}
 }
