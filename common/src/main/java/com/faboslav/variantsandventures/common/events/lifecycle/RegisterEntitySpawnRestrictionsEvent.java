@@ -19,8 +19,11 @@ public record RegisterEntitySpawnRestrictionsEvent(Registrar registrar)
 		registrar.register(entityType, new Placement<>(predicate, location, heightmap));
 	}
 
-	public record Placement<T extends MobEntity>(SpawnRestriction.SpawnPredicate<T> predicate,
-												 SpawnRestriction.Location location, Heightmap.Type heightmap)
+	public record Placement<T extends MobEntity>(
+		SpawnRestriction.SpawnPredicate<T> predicate,
+		SpawnRestriction.Location location,
+		Heightmap.Type heightmap
+	)
 	{
 	}
 
