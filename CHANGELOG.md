@@ -1,9 +1,11 @@
 ## 1.0.2
 
+- Added Murk (Sunken Skeleton)
 - Added Verdant to the skeletons entity types tag
 - Decreased the poison time of the Verdant and Thicket attacks
 - Added missing translation keys
 - Added uk_ua translations (Thanks to unroman)
+- Added pt_br translations (Thanks to Ezequiel9898)
 
 ## 1.0.1
 
