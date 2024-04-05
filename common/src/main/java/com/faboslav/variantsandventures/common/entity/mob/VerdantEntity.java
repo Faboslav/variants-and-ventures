@@ -30,6 +30,14 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 	}
 
 	@Override
+	public void playAmbientSound() {
+		SoundEvent soundEvent = this.getAmbientSound();
+		if (soundEvent != null) {
+			this.playSound(soundEvent, 0.25F, this.getSoundPitch());
+		}
+	}
+
+	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return VariantsAndVenturesSoundEvents.ENTITY_VERDANT_HURT.get();
 	}
@@ -60,7 +68,7 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 		PersistentProjectileEntity persistentProjectileEntity = super.createArrowProjectile(arrow, damageModifier);
 		if (persistentProjectileEntity instanceof ArrowEntity) {
 			float difficulty = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
-			((ArrowEntity) persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 80 * (int) difficulty));
+			((ArrowEntity) persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 100));
 		}
 
 		return persistentProjectileEntity;
