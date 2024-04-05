@@ -7,6 +7,7 @@ import com.faboslav.variantsandventures.common.entity.mob.ThicketEntity;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
 import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
+import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
@@ -14,7 +15,9 @@ import net.minecraft.SharedConstants;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.Heightmap;
 
 import java.util.function.Supplier;
 
@@ -45,6 +48,10 @@ public final class VariantsAndVenturesEntityTypes
 		event.register(VariantsAndVenturesEntityTypes.MURK.get(), MurkEntity.createMurkAttributes());
 		event.register(VariantsAndVenturesEntityTypes.THICKET.get(), ThicketEntity.createZombieAttributes());
 		event.register(VariantsAndVenturesEntityTypes.VERDANT.get(), VerdantEntity.createAbstractSkeletonAttributes());
+	}
+
+	public static void registerEntitySpawnRestrictions(RegisterEntitySpawnRestrictionsEvent event) {
+		event.register(MURK.get(), SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MurkEntity::canSpawn);
 	}
 
 	public static void addSpawnBiomeModifications(AddSpawnBiomeModificationEvent event) {

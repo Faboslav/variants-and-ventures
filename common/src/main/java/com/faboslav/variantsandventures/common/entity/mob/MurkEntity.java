@@ -5,6 +5,7 @@ import com.faboslav.variantsandventures.common.init.VariantsAndVenturesItems;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.pathing.MobNavigation;
 import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.entity.ai.pathing.SwimNavigation;
@@ -31,10 +32,13 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
@@ -59,7 +63,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	public MurkEntity(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
 		super(entityType, world);
 		this.stepHeight = 1.0F;
-		//this.moveControl = new DrownedEntity.DrownedMoveControl(this);
+		this.moveControl = new MurkMoveControl(this);
 		this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
 		this.waterNavigation = new SwimNavigation(this, world);
 		this.landNavigation = new MobNavigation(this, world);
@@ -76,6 +80,30 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		this.setVariant(Variant.getRandom(random));
 
 		return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+	}
+
+	public static boolean canSpawn(
+		EntityType<MurkEntity> type,
+		ServerWorldAccess world,
+		SpawnReason spawnReason,
+		BlockPos pos,
+		Random random
+	) {
+		if (
+			!world.getFluidState(pos.down()).isIn(FluidTags.WATER)
+			|| !isValidSpawnDepth(world, pos)
+			|| random.nextInt(5) != 0
+		) {
+			VariantsAndVentures.getLogger().info("cant spawn!");
+			return false;
+		}
+
+		VariantsAndVentures.getLogger().info("can spawn?");
+		return true;
+	}
+
+	private static boolean isValidSpawnDepth(WorldAccess world, BlockPos pos) {
+		return pos.getY() < world.getSeaLevel() - 5;
 	}
 
 	@Override
@@ -153,7 +181,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
 		double f = target.getZ() - this.getZ();
 		double g = Math.sqrt(d * d + f * f);
-		persistentProjectileEntity.setVelocity(d, e + g * 0.20000000298023224, f, isInsideWaterOrBubbleColumn() ? 3.2F:1.6F, (float) (14 - this.getWorld().getDifficulty().getId() * 4));
+		persistentProjectileEntity.setVelocity(d, e + g * 0.20000000298023224, f, 1.6F, (float) (14 - this.getWorld().getDifficulty().getId() * 4));
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_MURK_ATTACK.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.getWorld().spawnEntity(persistentProjectileEntity);
 	}
@@ -282,6 +310,50 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	@Override
 	public boolean isShearable() {
 		return !this.isSheared() && this.isAlive();
+	}
+
+	private final class MurkMoveControl extends MoveControl
+	{
+		private final MurkEntity murk;
+
+		public MurkMoveControl(MurkEntity murk) {
+			super(murk);
+			this.murk = murk;
+		}
+
+		public void tick() {
+			LivingEntity livingEntity = this.murk.getTarget();
+			if (this.murk.isTargetingUnderwater() && this.murk.isTouchingWater()) {
+				if (livingEntity != null && livingEntity.getY() > this.murk.getY() || this.murk.targetingUnderwater) {
+					this.murk.setVelocity(this.murk.getVelocity().add(0.0, 0.002, 0.0));
+				}
+
+				if (this.state != State.MOVE_TO || this.murk.getNavigation().isIdle()) {
+					this.murk.setMovementSpeed(0.0F);
+					return;
+				}
+
+				double d = this.targetX - this.murk.getX();
+				double e = this.targetY - this.murk.getY();
+				double f = this.targetZ - this.murk.getZ();
+				double g = Math.sqrt(d * d + e * e + f * f);
+				e /= g;
+				float h = (float) (MathHelper.atan2(f, d) * 57.2957763671875) - 90.0F;
+				this.murk.setYaw(this.wrapDegrees(this.murk.getYaw(), h, 90.0F));
+				this.murk.bodyYaw = this.murk.getYaw();
+				float i = (float) (this.speed * this.murk.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+				float j = MathHelper.lerp(0.125F, this.murk.getMovementSpeed(), i);
+				this.murk.setMovementSpeed(j);
+				this.murk.setVelocity(this.murk.getVelocity().add((double) j * d * 0.005, (double) j * e * 0.1, (double) j * f * 0.005));
+			} else {
+				if (!this.murk.onGround) {
+					this.murk.setVelocity(this.murk.getVelocity().add(0.0, -0.008, 0.0));
+				}
+
+				super.tick();
+			}
+
+		}
 	}
 
 	public Variant getVariant() {
