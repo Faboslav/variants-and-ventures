@@ -6,9 +6,9 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.tag.TagKey;
 import net.minecraft.world.biome.Biome;
 
-public record AddSpawnBiomeModificationEvent(Registrar registrar)
+public record AddSpawnBiomeModificationsEvent(Registrar registrar)
 {
-	public static final EventHandler<AddSpawnBiomeModificationEvent> EVENT = new EventHandler<>();
+	public static final EventHandler<AddSpawnBiomeModificationsEvent> EVENT = new EventHandler<>();
 
 	public void add(
 		TagKey<Biome> tag,

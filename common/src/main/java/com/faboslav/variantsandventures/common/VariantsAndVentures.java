@@ -5,7 +5,7 @@ import com.faboslav.variantsandventures.common.config.omegaconfig.OmegaConfig;
 import com.faboslav.variantsandventures.common.entity.event.*;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.entity.ProjectileHitEvent;
-import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationEvent;
+import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
@@ -61,7 +61,7 @@ public final class VariantsAndVentures
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);
 		RegisterEntityAttributesEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntityAttributes);
 		RegisterEntitySpawnRestrictionsEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntitySpawnRestrictions);
-		AddSpawnBiomeModificationEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::addSpawnBiomeModifications);
+		AddSpawnBiomeModificationsEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::addSpawnBiomeModifications);
 		SetupEvent.EVENT.addListener(DispenserAddedSpawnEgg::onSetup);
 	}
 

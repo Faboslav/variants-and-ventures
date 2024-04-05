@@ -5,7 +5,7 @@ import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
 import com.faboslav.variantsandventures.common.entity.mob.ThicketEntity;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
-import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationEvent;
+import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
@@ -54,7 +54,7 @@ public final class VariantsAndVenturesEntityTypes
 		event.register(MURK.get(), SpawnRestriction.Location.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, MurkEntity::canSpawn);
 	}
 
-	public static void addSpawnBiomeModifications(AddSpawnBiomeModificationEvent event) {
+	public static void addSpawnBiomeModifications(AddSpawnBiomeModificationsEvent event) {
 		if (VariantsAndVentures.getConfig().enableMurk && VariantsAndVentures.getConfig().enableMurkSpawns) {
 			event.add(VariantsAndVenturesTags.HAS_MURK, SpawnGroup.MONSTER, MURK.get(), 1, 1, 1);
 		}
