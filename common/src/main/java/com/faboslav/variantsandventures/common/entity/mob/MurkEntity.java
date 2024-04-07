@@ -62,7 +62,6 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	public MurkEntity(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
 		super(entityType, world);
-		this.stepHeight = 1.0F;
 		this.moveControl = new MurkMoveControl(this);
 		this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
 		this.waterNavigation = new SwimNavigation(this, world);
@@ -175,7 +174,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	@Override
 	public void attack(LivingEntity target, float pullProgress) {
-		ItemStack itemStack = this.getArrowType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
+		ItemStack itemStack = this.getProjectileType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
 		PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack, pullProgress);
 		double d = target.getX() - this.getX();
 		double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
