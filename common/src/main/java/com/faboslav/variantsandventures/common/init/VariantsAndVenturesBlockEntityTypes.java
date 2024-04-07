@@ -17,6 +17,8 @@ public final class VariantsAndVenturesBlockEntityTypes
 	private static final Set<Block> SKULLS = ImmutableList.of(
 		VariantsAndVenturesBlocks.GELID_HEAD.get(),
 		VariantsAndVenturesBlocks.GELID_WALL_HEAD.get(),
+		VariantsAndVenturesBlocks.MURK_SKULL.get(),
+		VariantsAndVenturesBlocks.MURK_WALL_SKULL.get(),
 		VariantsAndVenturesBlocks.THICKET_HEAD.get(),
 		VariantsAndVenturesBlocks.THICKET_WALL_HEAD.get(),
 		VariantsAndVenturesBlocks.VERDANT_SKULL.get(),

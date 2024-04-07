@@ -30,7 +30,6 @@ public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertib
 	@FunctionalInterface
 	public interface BlockColorProvider
 	{
-
 		int getColor(
 			BlockState blockState,
 			@Nullable BlockRenderView blockRenderView,

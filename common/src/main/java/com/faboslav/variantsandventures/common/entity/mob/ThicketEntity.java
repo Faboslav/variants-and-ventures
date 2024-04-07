@@ -37,8 +37,24 @@ public final class ThicketEntity extends ZombieEntity
 	}
 
 	@Override
+	public void playAmbientSound() {
+		SoundEvent soundEvent = this.getAmbientSound();
+		if (soundEvent != null) {
+			this.playSound(soundEvent, 0.4F, this.getSoundPitch());
+		}
+	}
+
+	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return VariantsAndVenturesSoundEvents.ENTITY_THICKET_HURT.get();
+	}
+
+	@Override
+	protected void playHurtSound(DamageSource source) {
+		SoundEvent soundEvent = this.getHurtSound(source);
+		if (soundEvent != null) {
+			this.playSound(soundEvent, 0.75F, this.getSoundPitch());
+		}
 	}
 
 	@Override
@@ -58,8 +74,7 @@ public final class ThicketEntity extends ZombieEntity
 		boolean attackResult = super.tryAttack(target);
 
 		if (attackResult && this.getMainHandStack().isEmpty() && target instanceof LivingEntity) {
-			float difficulty = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
-			((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 140 * (int) difficulty), this);
+			((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100), this);
 		}
 
 		return attackResult;

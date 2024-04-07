@@ -5,6 +5,7 @@ import net.minecraft.block.SkullBlock;
 public enum SkullBlockType
 {
 	GELID,
+	MURK,
 	THICKET,
 	VERDANT;
 
