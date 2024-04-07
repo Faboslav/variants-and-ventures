@@ -7,7 +7,9 @@ import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.events.RegisterItemGroupsEvent;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.entity.ProjectileHitEvent;
+import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
+import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.*;
 import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
@@ -60,6 +62,8 @@ public final class VariantsAndVentures
 		EntitySpawnEvent.EVENT.addListener(VerdantOnEntitySpawn::handleEntitySpawn);
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);
 		RegisterEntityAttributesEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntityAttributes);
+		RegisterEntitySpawnRestrictionsEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntitySpawnRestrictions);
+		AddSpawnBiomeModificationsEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::addSpawnBiomeModifications);
 		SetupEvent.EVENT.addListener(DispenserAddedSpawnEgg::onSetup);
 		RegisterItemGroupsEvent.EVENT.addListener(VariantsAndVenturesItemGroups::registerItemGroups);
 		AddItemGroupEntriesEvent.EVENT.addListener(VariantsAndVenturesItemGroups::addItemGroupEntries);
