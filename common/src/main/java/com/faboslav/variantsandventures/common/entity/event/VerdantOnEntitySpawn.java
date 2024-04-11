@@ -31,6 +31,10 @@ public final class VerdantOnEntitySpawn
 				return false;
 			}
 
+			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().verdantMinimumYLevel) {
+				return false;
+			}
+
 			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().verdantSpawnChance) {
 				return false;
 			}

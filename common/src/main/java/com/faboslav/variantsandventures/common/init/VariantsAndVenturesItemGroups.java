@@ -18,9 +18,11 @@ public class VariantsAndVenturesItemGroups
 {
 	public static final List<RegistryEntry<? extends Item>> CUSTOM_CREATIVE_TAB_ITEMS = List.of(
 		VariantsAndVenturesItems.GELID_HEAD,
+		VariantsAndVenturesItems.MURK_SKULL,
 		VariantsAndVenturesItems.THICKET_HEAD,
 		VariantsAndVenturesItems.VERDANT_SKULL,
 		VariantsAndVenturesItems.GELID_SPAWN_EGG,
+		VariantsAndVenturesItems.MURK_SPAWN_EGG,
 		VariantsAndVenturesItems.THICKET_SPAWN_EGG,
 		VariantsAndVenturesItems.VERDANT_SPAWN_EGG
 	);
@@ -43,6 +45,7 @@ public class VariantsAndVenturesItemGroups
 		if (event.type() == AddItemGroupEntriesEvent.Type.FUNCTIONAL) {
 			Stream.of(
 				VariantsAndVenturesItems.GELID_HEAD,
+				VariantsAndVenturesItems.MURK_SKULL,
 				VariantsAndVenturesItems.THICKET_HEAD,
 				VariantsAndVenturesItems.VERDANT_SKULL
 			).map(item -> item.get().getDefaultStack()).forEach(event::add);
@@ -51,6 +54,7 @@ public class VariantsAndVenturesItemGroups
 		if (event.type() == AddItemGroupEntriesEvent.Type.SPAWN_EGGS) {
 			Stream.of(
 				VariantsAndVenturesItems.GELID_SPAWN_EGG,
+				VariantsAndVenturesItems.MURK_SPAWN_EGG,
 				VariantsAndVenturesItems.THICKET_SPAWN_EGG,
 				VariantsAndVenturesItems.VERDANT_SPAWN_EGG
 			).map(item -> item.get().getDefaultStack()).forEach(event::add);
