@@ -21,16 +21,6 @@ public final class ThicketEntity extends ZombieEntity
 		super(entityType, world);
 	}
 
-	public static boolean canSpawn(
-		EntityType<StrayEntity> type,
-		ServerWorldAccess world,
-		SpawnReason spawnReason,
-		BlockPos pos,
-		Random random
-	) {
-		return canSpawnInDark(type, world, spawnReason, pos, random) && (spawnReason == SpawnReason.SPAWNER || world.isSkyVisible(pos));
-	}
-
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return VariantsAndVenturesSoundEvents.ENTITY_THICKET_AMBIENT.get();

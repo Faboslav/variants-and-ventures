@@ -1,0 +1,11 @@
+{
+	"type": "forge:add_spawns",
+	"biomes": "#variantsandventures:has_murk",
+	"spawners": {
+		"type": "variantsandventures:murk",
+		"minCount": 1,
+		"maxCount": 1,
+		"weight": 4
+	},
+	"category": "monster"
+}
