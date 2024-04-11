@@ -91,13 +91,11 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		if (
 			!world.getFluidState(pos.down()).isIn(FluidTags.WATER)
 			|| !isValidSpawnDepth(world, pos)
-			|| random.nextInt(5) != 0
+			|| random.nextInt(15) != 0
 		) {
-			VariantsAndVentures.getLogger().info("cant spawn!");
 			return false;
 		}
 
-		VariantsAndVentures.getLogger().info("can spawn?");
 		return true;
 	}
 
