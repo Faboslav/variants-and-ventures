@@ -30,6 +30,10 @@ public final class HuskOnEntitySpawn
 				return false;
 			}
 
+			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().huskMinimumYLevel) {
+				return false;
+			}
+
 			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().huskSpawnChance) {
 				return false;
 			}

@@ -37,7 +37,7 @@
 <h1>Gelid (Frozen Zombie)</h1>
 
 <p style="font-size: 18px;">
-	<a href="https://github.com/Faboslav/variants-and-ventures/wiki/Gelid">Gelid</a> is a new zombie variant that inflicts freezing when it attacks. You can find the gelid in frozen biomes.
+	<a href="https://github.com/Faboslav/variants-and-ventures/wiki/Gelid">Gelid</a> is a new zombie variant that inflicts freezing when it attacks. You can find the gelid in cold biomes.
 </p>
 
 <p align="center" style="text-align: center;">
@@ -51,7 +51,7 @@
 </p>
 <ul style="font-size: 18px;">
 	<li><a href="https://github.com/Faboslav/variants-and-ventures/wiki/Gelid-Head">Gelid Head</a> block/item</li>
-	<li>Possibility of Gelid monster spawner in the jungle biomes</li>
+	<li>Possibility of Gelid monster spawner in the cold biomes</li>
 </ul>
 
 <br>
@@ -96,7 +96,7 @@
 </p>
 <ul style="font-size: 18px;">
 	<li><a href="https://github.com/Faboslav/variants-and-ventures/wiki/Verdant-Head">Verdant Head</a> block/item</li>
-	<li>Possibility of Verdant monster spawner in the cold biomes</li>
+	<li>Possibility of Verdant monster spawner in the jungle biomes</li>
 </ul>
 
 <br>

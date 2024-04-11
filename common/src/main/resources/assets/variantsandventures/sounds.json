@@ -41,6 +41,78 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"entity.murk.ambient": {
+		"sounds": [
+			"variantsandventures:entity/murk/ambient1",
+			"variantsandventures:entity/murk/ambient2",
+			"variantsandventures:entity/murk/ambient3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.murk.ambient"
+	},
+	"entity.murk.ambient_water": {
+		"sounds": [
+			"variantsandventures:entity/murk/ambient_water1",
+			"variantsandventures:entity/murk/ambient_water2",
+			"variantsandventures:entity/murk/ambient_water3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.murk.ambient"
+	},
+	"entity.murk.death": {
+		"sounds": [
+			"variantsandventures:entity/murk/death"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.murk.death"
+	},
+	"entity.murk.death_water": {
+		"sounds": [
+			"variantsandventures:entity/murk/death_water1",
+			"variantsandventures:entity/murk/death_water2",
+			"variantsandventures:entity/murk/death_water3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.murk.death"
+	},
+	"entity.murk.hurt": {
+		"sounds": [
+			"variantsandventures:entity/murk/hurt1",
+			"variantsandventures:entity/murk/hurt2",
+			"variantsandventures:entity/murk/hurt3",
+			"variantsandventures:entity/murk/hurt4"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.murk.hurt"
+	},
+	"entity.murk.hurt_water": {
+		"sounds": [
+			"variantsandventures:entity/murk/hurt_water1",
+			"variantsandventures:entity/murk/hurt_water2",
+			"variantsandventures:entity/murk/hurt_water3",
+			"variantsandventures:entity/murk/hurt_water4"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.murk.hurt"
+	},
+	"entity.murk.shear": {
+		"sounds": [
+			"variantsandventures:entity/murk/shear"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.murk.shear"
+	},
+	"entity.murk.step": {
+		"sounds": [
+			"variantsandventures:entity/murk/step1",
+			"variantsandventures:entity/murk/step2",
+			"variantsandventures:entity/murk/step3",
+			"variantsandventures:entity/murk/step4"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
+	"entity.murk.step_water": {
+		"sounds": [
+			"variantsandventures:entity/murk/step_water1",
+			"variantsandventures:entity/murk/step_water2",
+			"variantsandventures:entity/murk/step_water3",
+			"variantsandventures:entity/murk/step_water4"
+		],
+		"subtitle": "subtitles.block.generic.footsteps"
+	},
 	"entity.snowball.impact": {
 		"sounds": [
 			"variantsandventures:entity/snowball/impact1",
