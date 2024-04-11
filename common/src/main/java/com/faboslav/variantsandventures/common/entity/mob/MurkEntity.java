@@ -227,7 +227,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	@Override
 	public void updateSwimming() {
-		if (!this.world.isClient) {
+		if (!this.getWorld().isClient) {
 			if (this.canMoveVoluntarily() && this.isTouchingWater() && this.isTargetingUnderwater()) {
 				this.navigation = this.waterNavigation;
 				this.setSwimming(true);
