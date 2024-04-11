@@ -15,6 +15,5 @@ import net.minecraft.world.WorldAccess;
  */
 public record EntitySpawnEvent(MobEntity entity, WorldAccess worldAccess, boolean isBaby, SpawnReason spawnReason)
 {
-
 	public static final CancellableEventHandler<EntitySpawnEvent> EVENT = new CancellableEventHandler<>();
 }
