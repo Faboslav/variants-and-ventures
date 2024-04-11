@@ -26,6 +26,9 @@ public final class VariantsAndVenturesConfig implements Config
 	@Description("Spawn chance of Stray (For example 0.8 means that stray will spawn in place of 80% of all skeletons spawned in cold biomes.")
 	public float straySpawnChance = 0.8F;
 
+	@Description("Minimum Y level for Stray spawns (For example 62 means that stray will spawn only above the ocean Y level.")
+	public float strayMinimumYLevel = -64;
+
 	@Description("Enable spawners in dungeons")
 	public boolean enableStraySpawners = true;
 
@@ -38,6 +41,9 @@ public final class VariantsAndVenturesConfig implements Config
 
 	@Description("Spawn chance of Husk (For example 0.8 means that husk will spawn in place of 80% of all skeletons spawned in cold biomes.")
 	public float huskSpawnChance = 0.8F;
+
+	@Description("Minimum Y level for Husk spawns (For example 62 means that husk will spawn only above the ocean Y level.")
+	public float huskMinimumYLevel = -64;
 
 	@Description("Enable spawners in dungeons")
 	public boolean enableHuskSpawners = true;
@@ -55,11 +61,21 @@ public final class VariantsAndVenturesConfig implements Config
 	@Description("Spawn chance of Gelid (For example 0.8 means that gelid will spawn in place of 80% of all zombies spawned in cold biomes.")
 	public float gelidSpawnChance = 0.8F;
 
+	@Description("Minimum Y level for Gelid spawns (For example 62 means that gelid will spawn only above the ocean Y level.")
+	public float gelidMinimumYLevel = -64;
+
 	@Description("Enable Gelid spawners in dungeons")
 	public boolean enableGelidSpawners = true;
 
 	@Description("Chance of Gelid spawner in dungeons (For example 0.8 means that gelid spawner will be in place of 80% of all zombie spawners in cold biomes.")
 	public float gelidSpawnerChance = 0.8F;
+
+	@Category("Murk (Sunken Skeleton)")
+	@Description("Enable Murk")
+	public boolean enableMurk = true;
+
+	@Description("Enable Murk spawns")
+	public boolean enableMurkSpawns = true;
 
 	@Category("Thicket (Jungle Zombie)")
 	@Description("Enable Thickets")
@@ -70,6 +86,9 @@ public final class VariantsAndVenturesConfig implements Config
 
 	@Description("Spawn chance of Thicket (For example 0.8 means that thicket will spawn in place of 80% of all zombies spawned in cold biomes.")
 	public float thicketSpawnChance = 0.8F;
+
+	@Description("Minimum Y level for Thicket spawns (For example 62 means that thicket will spawn only above the ocean Y level.")
+	public float thicketMinimumYLevel = -64;
 
 	@Description("Enable Thicket spawners in dungeons")
 	public boolean enableThicketSpawners = true;
@@ -86,6 +105,9 @@ public final class VariantsAndVenturesConfig implements Config
 
 	@Description("Spawn chance of Verdant (For example 0.8 means that verdant will spawn in place of 80% of all skeletons spawned in jungle biomes.")
 	public float verdantSpawnChance = 0.8F;
+
+	@Description("Minimum Y level for Verdant spawns (For example 62 means that verdant will spawn only above the ocean Y level.")
+	public float verdantMinimumYLevel = -64;
 
 	@Description("Enable Verdant spawners in dungeons")
 	public boolean enableVerdantSpawners = true;

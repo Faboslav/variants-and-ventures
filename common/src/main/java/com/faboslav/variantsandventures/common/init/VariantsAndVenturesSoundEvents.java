@@ -23,6 +23,15 @@ public final class VariantsAndVenturesSoundEvents
 	public static final Supplier<SoundEvent> ENTITY_GELID_DEATH = registerSoundEvent("entity.gelid.death");
 	public static final Supplier<SoundEvent> ENTITY_GELID_HURT = registerSoundEvent("entity.gelid.hurt");
 	public static final Supplier<SoundEvent> ENTITY_GELID_STEP = registerSoundEvent("entity.gelid.step");
+	public static final Supplier<SoundEvent> ENTITY_MURK_AMBIENT = registerSoundEvent("entity.murk.ambient");
+	public static final Supplier<SoundEvent> ENTITY_MURK_AMBIENT_WATER = registerSoundEvent("entity.murk.ambient_water");
+	public static final Supplier<SoundEvent> ENTITY_MURK_ATTACK = registerSoundEvent("entity.murk.attack");
+	public static final Supplier<SoundEvent> ENTITY_MURK_DEATH = registerSoundEvent("entity.murk.death");
+	public static final Supplier<SoundEvent> ENTITY_MURK_DEATH_WATER = registerSoundEvent("entity.murk.death_water");
+	public static final Supplier<SoundEvent> ENTITY_MURK_SHEAR = registerSoundEvent("entity.murk.shear");
+	public static final Supplier<SoundEvent> ENTITY_MURK_HURT = registerSoundEvent("entity.murk.hurt");
+	public static final Supplier<SoundEvent> ENTITY_MURK_HURT_WATER = registerSoundEvent("entity.murk.hurt_water");
+	public static final Supplier<SoundEvent> ENTITY_MURK_STEP = registerSoundEvent("entity.murk.step");
 	public static final Supplier<SoundEvent> ENTITY_SNOWBALL_IMPACT = registerSoundEvent("entity.snowball.impact");
 	public static final Supplier<SoundEvent> ENTITY_THICKET_AMBIENT = registerSoundEvent("entity.thicket.ambient");
 	public static final Supplier<SoundEvent> ENTITY_THICKET_ATTACK = registerSoundEvent("entity.thicket.attack");

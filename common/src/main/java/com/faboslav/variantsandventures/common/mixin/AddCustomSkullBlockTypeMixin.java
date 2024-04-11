@@ -47,27 +47,15 @@ public final class AddCustomSkullBlockTypeMixin
 		var lastSkullBlockTypeIndex = skullBlockTypes.get(skullBlockTypes.size() - 1);
 		var nextSkullBlockTypeIndex = lastSkullBlockTypeIndex.ordinal();
 
+		for (SkullBlockType skullBlockType : SkullBlockType.values()) {
+			var newSkullBlockType = newSkullBlockType(
+				skullBlockType.name(),
+				++nextSkullBlockTypeIndex,
+				skullBlockType.asString()
+			);
 
-		var gelidSkullBlockType = newSkullBlockType(
-			SkullBlockType.GELID.name(),
-			++nextSkullBlockTypeIndex,
-			"gelid"
-		);
-		skullBlockTypes.add(gelidSkullBlockType);
-
-		var thicketSkullBlockType = newSkullBlockType(
-			SkullBlockType.THICKET.name(),
-			++nextSkullBlockTypeIndex,
-			"thicket"
-		);
-		skullBlockTypes.add(thicketSkullBlockType);
-
-		var verdantSkullBlockType = newSkullBlockType(
-			SkullBlockType.VERDANT.name(),
-			++nextSkullBlockTypeIndex,
-			"verdant"
-		);
-		skullBlockTypes.add(verdantSkullBlockType);
+			skullBlockTypes.add(newSkullBlockType);
+		}
 
 		field_11509 = skullBlockTypes.toArray(new SkullBlock.Type[0]);
 	}
