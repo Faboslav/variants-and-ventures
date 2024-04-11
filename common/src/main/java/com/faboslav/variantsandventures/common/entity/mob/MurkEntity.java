@@ -344,7 +344,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 				this.murk.setMovementSpeed(j);
 				this.murk.setVelocity(this.murk.getVelocity().add((double) j * d * 0.005, (double) j * e * 0.1, (double) j * f * 0.005));
 			} else {
-				if (!this.murk.onGround) {
+				if (!this.murk.isOnGround()) {
 					this.murk.setVelocity(this.murk.getVelocity().add(0.0, -0.008, 0.0));
 				}
 
