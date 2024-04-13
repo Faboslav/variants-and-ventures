@@ -24,7 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootManager;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
@@ -171,7 +171,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
-	public void attack(LivingEntity target, float pullProgress) {
+	public void shootAt(LivingEntity target, float pullProgress) {
 		ItemStack itemStack = this.getProjectileType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
 		PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack, pullProgress);
 		double d = target.getX() - this.getX();
@@ -226,7 +226,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	@Override
 	public void updateSwimming() {
-		if (!this.world.isClient) {
+		if (!this.getWorld().isClient) {
 			if (this.canMoveVoluntarily() && this.isTouchingWater() && this.isTargetingUnderwater()) {
 				this.navigation = this.waterNavigation;
 				this.setSwimming(true);
@@ -290,12 +290,12 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 		Identifier fap = VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()));
 		VariantsAndVentures.getLogger().info(fap.toString());
-		LootTable boggedShearingLootTable = lootManager.getTable(
+		LootTable boggedShearingLootTable = lootManager.getLootTable(
 			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
 		);
-		LootContext lootContextParameterSet = new LootContext.Builder((ServerWorld) world)
-			.parameter(LootContextParameters.ORIGIN, this.getPos())
-			.parameter(LootContextParameters.THIS_ENTITY, this)
+		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
+			.add(LootContextParameters.ORIGIN, this.getPos())
+			.add(LootContextParameters.THIS_ENTITY, this)
 			.build(LootContextTypes.GIFT);
 		ObjectArrayList<ItemStack> shearingDrops = boggedShearingLootTable.generateLoot(lootContextParameterSet);
 
@@ -343,7 +343,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 				this.murk.setMovementSpeed(j);
 				this.murk.setVelocity(this.murk.getVelocity().add((double) j * d * 0.005, (double) j * e * 0.1, (double) j * f * 0.005));
 			} else {
-				if (!this.murk.onGround) {
+				if (!this.murk.isOnGround()) {
 					this.murk.setVelocity(this.murk.getVelocity().add(0.0, -0.008, 0.0));
 				}
 
