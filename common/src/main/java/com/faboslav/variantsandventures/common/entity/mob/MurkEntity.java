@@ -24,7 +24,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.LootManager;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
@@ -290,12 +290,12 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 		Identifier fap = VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()));
 		VariantsAndVentures.getLogger().info(fap.toString());
-		LootTable boggedShearingLootTable = lootManager.getTable(
+		LootTable boggedShearingLootTable = lootManager.getLootTable(
 			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
 		);
-		LootContext lootContextParameterSet = new LootContext.Builder((ServerWorld) world)
-			.parameter(LootContextParameters.ORIGIN, this.getPos())
-			.parameter(LootContextParameters.THIS_ENTITY, this)
+		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
+			.add(LootContextParameters.ORIGIN, this.getPos())
+			.add(LootContextParameters.THIS_ENTITY, this)
 			.build(LootContextTypes.GIFT);
 		ObjectArrayList<ItemStack> shearingDrops = boggedShearingLootTable.generateLoot(lootContextParameterSet);
 
