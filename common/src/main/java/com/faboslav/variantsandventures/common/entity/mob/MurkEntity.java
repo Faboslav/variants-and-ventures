@@ -171,7 +171,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
-	public void attack(LivingEntity target, float pullProgress) {
+	public void shootAt(LivingEntity target, float pullProgress) {
 		ItemStack itemStack = this.getProjectileType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
 		PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack, pullProgress);
 		double d = target.getX() - this.getX();
