@@ -108,6 +108,31 @@
 <br>
 <br>
 
+<h1>Murk (Sunken Skeleton)</h1>
+
+<hr>
+
+<p style="font-size: 18px;">
+	<a href="https://github.com/Faboslav/variants-and-ventures/wiki/Murk">Murk</a> is a new skeleton variant that lives underwater. You can find the murk in the warm ocean biomes.
+</p>
+
+<p align="center" style="text-align: center;">
+	<a href="https://raw.githubusercontent.com/Faboslav/variants-and-ventures/master/.github/assets/murk.webp" style="text-decoration: none;">
+		<img src="https://raw.githubusercontent.com/Faboslav/variants-and-ventures/master/.github/assets/murk.webp" alt="Murk" title="Murk">
+	</a>
+</p>
+
+<p style="font-size: 18px;">
+	Other features related to the murk:
+</p>
+<ul style="font-size: 18px;">
+	<li><a href="https://github.com/Faboslav/variants-and-ventures/wiki/Murk-Skull">Murk Skull</a> block/item</li>
+	<li>Can be sheader for live and/or dead corals</li>
+</ul>
+
+<br>
+<br>
+
 <h1>🗿 Other features</h1>
 
 <hr>
