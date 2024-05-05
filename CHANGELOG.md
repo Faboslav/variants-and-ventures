@@ -1,3 +1,9 @@
+## 1.0.3
+
+- Murk should be able to swim in the water similarly to drowned
+- Decreased Murk spawn chance
+- Added ja_jp translations (Thanks to EndilCrafter)
+
 ## 1.0.2
 
 - Added Murk (Sunken Skeleton)
