@@ -1,19 +1,23 @@
 plugins {
-	id "com.github.johnrengelman.shadow" version "8.1.1"
+	id 'java'
+	id 'idea'
+	id 'dev.architectury.loom'
+	id 'architectury-plugin'
+	id 'com.github.johnrengelman.shadow'
 }
 
-allprojects {
-	archivesBaseName = "${rootProject.mod_id}-forge-mc${rootProject.minecraft_version}"
+def currentRootVersion = getRootProject().stonecutter.current.version;
+def subproject = stonecutter.current.project
+def minecraftVersion = stonecutter.current.version
+def modrinth(String name, String version) {
+	return "maven.modrinth:$name:$version"
+}
+def prop(String name) {
+	return rootProject.project(stonecutter.current.project).property(name).toString()
 }
 
-loom {
-	accessWidenerPath = project(":common").loom.accessWidenerPath
-
-	forge {
-		convertAccessWideners = true
-		extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
-		mixinConfig "variantsandventures-common.mixins.json"
-	}
+base {
+	archivesName.set("${mod_id}-forge-mc${minecraftVersion}-${mod_version}")
 }
 
 architectury {
@@ -21,84 +25,138 @@ architectury {
 	forge()
 }
 
+loom {
+	silentMojangMappingsLicense()
+
+	accessWidenerPath.set(project(":common:$subproject").loom.accessWidenerPath)
+
+	forge {
+		convertAccessWideners = true
+		extraAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
+
+		mixinConfig "${mod_id}-common.mixins.json"
+		mixinConfig "${mod_id}-forge.mixins.json"
+	}
+
+	runConfigs.all {
+		ideConfigGenerated true
+	}
+}
+
 configurations {
-	common
-	shadowCommon
+	common {
+		canBeResolved = true
+		canBeConsumed = false
+	}
+
 	compileClasspath.extendsFrom common
 	runtimeClasspath.extendsFrom common
 	developmentForge.extendsFrom common
+
+	shadowBundle {
+		canBeResolved = true
+		canBeConsumed = false
+	}
+}
+
+java {
+	withSourcesJar()
+
+	def javaVersion = (stonecutter.compare(stonecutter.current.version, "1.20.6") >= 0) ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17
+	sourceCompatibility = javaVersion
+	targetCompatibility = javaVersion
+}
+
+tasks.withType(JavaCompile).configureEach {
+	def releaseVersion = (stonecutter.compare(stonecutter.current.version, "1.20.6") >= 0) ? 21 : 17;
+	it.options.release = releaseVersion
 }
 
 dependencies {
-	forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+	minecraft "com.mojang:minecraft:${minecraftVersion}"
+	mappings loom.layered {
+		it.mappings "net.fabricmc:yarn:${prop('yarn_mappings')}:v2"
+		if (stonecutter.compare(minecraftVersion, '1.20.4') == 0) {
+			it.mappings "dev.architectury:yarn-mappings-patch-forge:${prop('yarn_mappings_patch')}"
+		} else if (stonecutter.compare(minecraftVersion, '1.20.6') >= 0) {
+			it.mappings "dev.architectury:yarn-mappings-patch-neoforge:${prop('yarn_mappings_patch')}"
+		}
+	}
 
-	common(project(path: ":common", configuration: "namedElements")) { transitive false }
-	shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
+	forge "net.minecraftforge:forge:${prop('minecraft_version')}-${prop('forge_version')}"
 
-	// Mixin extras (https://github.com/LlamaLad7/MixinExtras)
-	implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixin_extras_version}"))
-	implementation(include("io.github.llamalad7:mixinextras-forge:${rootProject.mixin_extras_version}"))
 
 	// Cloth config (https://www.curseforge.com/minecraft/mc-mods/cloth-config)
-	modImplementation("me.shedaniel.cloth:cloth-config-forge:${rootProject.cloth_config_version}")
+	modImplementation("me.shedaniel.cloth:cloth-config-forge:${prop('cloth_config_version')}")
+
+	def availableVersions = enabled_forge_versions.split(',').collect { it.trim() }
+
+	if(!availableVersions.contains(currentRootVersion) && minecraftVersion != currentRootVersion) {
+		common(project(path: ":common:$currentRootVersion", configuration: 'namedElements')) { transitive false }
+		shadowBundle(project(path: ":common:$subproject", configuration: 'transformProductionForge')) { transitive false }
+	} else {
+		common(project(path: ":common:$subproject", configuration: 'namedElements')) { transitive false }
+		shadowBundle(project(path: ":common:$subproject", configuration: 'transformProductionForge')) { transitive false }
+	}
 }
 
 processResources {
-	inputs.property "modId", rootProject.mod_id
-	inputs.property "modVersion", rootProject.mod_version
-	inputs.property "modName", rootProject.mod_name
-	inputs.property "modDescription", rootProject.mod_description
-	inputs.property "modAuthor", rootProject.mod_author
-	inputs.property "minecraftVersion", rootProject.minecraft_version
-	inputs.property "forgeVersion", rootProject.forge_version
+	inputs.property "modId", mod_id
+	inputs.property "modVersion", mod_version
+	inputs.property "modName", mod_name
+	inputs.property "modDescription", mod_description
+	inputs.property "modAuthor", mod_author
+	inputs.property "minecraftVersion", prop('min_minecraft_version')
+	inputs.property "forgeVersion", prop('forge_version')
 
 	filesMatching("META-INF/mods.toml") {
-		expand "modId": rootProject.mod_id,
-			"modVersion": rootProject.mod_version,
-			"modName": rootProject.mod_name,
-			"modDescription": rootProject.mod_description,
-			"modAuthor": rootProject.mod_author,
-			"minecraftVersion": rootProject.minecraft_version,
-			"forgeVersion": rootProject.forge_version
+		expand "modId": mod_id,
+			"modVersion": mod_version,
+			"modName": mod_name,
+			"modDescription": mod_description,
+			"modAuthor": mod_author,
+			"minecraftVersion": prop('min_minecraft_version'),
+			"forgeVersion": prop('forge_version')
 	}
 }
 
 shadowJar {
-	exclude "fabric.mod.json"
-	exclude "architectury.common.json"
+	exclude("fabric.mod.json")
+	exclude("architectury.common.json")
 
-	configurations = [project.configurations.shadowCommon]
-	archiveClassifier.set("dev-shadow")
-}
-
-remapJar {
-	inputFile.set shadowJar.archiveFile
-	dependsOn shadowJar
-	archiveClassifier.set(null)
+	configurations = [project.configurations.shadowBundle]
+	archiveClassifier = 'dev-shadow'
 }
 
 jar {
 	archiveClassifier.set("dev")
 }
 
-sourcesJar {
-	def commonSources = project(":common").sourcesJar
-	dependsOn commonSources
-	from commonSources.archiveFile.map { zipTree(it) }
-}
-
-components.java {
-	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-		skip()
-	}
+remapJar {
+	injectAccessWidener.set(true)
+	input.set(shadowJar.archiveFile)
+	dependsOn(shadowJar)
+	archiveClassifier.set(null)
 }
 
 repositories {
+	// Mod Menu.
+	maven { url 'https://maven.terraformersmc.com' }
+
+	// Mixin Extras.
 	maven {
-		url = "https://maven.theillusivec4.top/"
+		url 'https://jitpack.io'
+		content {
+			includeGroup 'com.github.llamalad7'
+		}
 	}
-
-	maven { url "https://www.cursemaven.com" }
-
-	maven { url = "https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1" }
 }
+
+if(stonecutter.current.isActive) {
+	rootProject.tasks.register("buildActiveForge") {
+		group = "project"
+		dependsOn(tasks.named("build"))
+	}
+}
+
+stonecutter.exclude("*.DS_Store")

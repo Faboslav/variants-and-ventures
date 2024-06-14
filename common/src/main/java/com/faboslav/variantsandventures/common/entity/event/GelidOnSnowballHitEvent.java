@@ -30,7 +30,7 @@ public final class GelidOnSnowballHitEvent
 
 		target.playSound(getImpactSound(), 1.0F, 0.4F / (((LivingEntity) target).getRandom().nextFloat() * 0.4F + 0.8F));
 		float difficulty = target.getWorld().getLocalDifficulty(target.getBlockPos()).getLocalDifficulty();
-		target.damage(DamageSource.thrownProjectile(projectile, projectile.getOwner()), 2 * difficulty);
+		target.damage(projectile.getOwner().getDamageSources().thrown(projectile, projectile.getOwner()), 2 * difficulty);
 		target.setFrozenTicks(140 * (int) difficulty);
 	}
 

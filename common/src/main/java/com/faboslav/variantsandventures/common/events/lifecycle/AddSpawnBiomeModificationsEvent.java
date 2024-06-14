@@ -3,8 +3,8 @@ package com.faboslav.variantsandventures.common.events.lifecycle;
 import com.faboslav.variantsandventures.common.events.base.EventHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.tag.TagKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.registry.tag.TagKey;
 
 /**
  * Event related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors

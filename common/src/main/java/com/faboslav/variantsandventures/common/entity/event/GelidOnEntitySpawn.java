@@ -9,9 +9,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.registry.entry.RegistryEntry;
 
 public final class GelidOnEntitySpawn
 {
@@ -46,9 +46,8 @@ public final class GelidOnEntitySpawn
 				return false;
 			}
 
-			GelidEntity gelid = VariantsAndVenturesEntityTypes.GELID.get().create(
+			var gelid = VariantsAndVenturesEntityTypes.GELID.get().create(
 				(ServerWorld) event.worldAccess(),
-				null,
 				null,
 				null,
 				event.entity().getBlockPos(),

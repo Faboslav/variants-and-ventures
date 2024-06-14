@@ -1,17 +1,20 @@
 package com.faboslav.variantsandventures.fabric;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
+import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.tag.BiomeTags;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.BiomeTags;
 
 public final class VariantsAndVenturesFabric implements ModInitializer
 {
@@ -31,6 +34,17 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 			BiomeModifications.addSpawn(biomeSelector -> biomeSelector.hasTag(tag) && biomeSelector.hasTag(BiomeTags.IS_OVERWORLD), spawnGroup, entityType, weight, minGroupSize, maxGroupSize);
 		}));
 		SetupEvent.EVENT.invoke(new SetupEvent(Runnable::run));
+
+		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((itemGroup, entries) ->
+			AddItemGroupEntriesEvent.EVENT.invoke(
+				new AddItemGroupEntriesEvent(
+					AddItemGroupEntriesEvent.Type.toType(Registries.ITEM_GROUP.getKey(itemGroup).orElse(null)),
+					itemGroup,
+					itemGroup.hasStacks(),
+					entries::add
+				)
+			)
+		);
 	}
 
 	private static <T extends MobEntity> void registerPlacement(

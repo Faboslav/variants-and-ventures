@@ -1,15 +1,46 @@
 pluginManagement {
 	repositories {
+		gradlePluginPortal()
 		maven { url "https://maven.fabricmc.net/" }
 		maven { url "https://maven.architectury.dev/" }
-		maven { url "https://maven.minecraftforge.net/" }
-		gradlePluginPortal()
+		maven { url "https://files.minecraftforge.net/maven/" }
+		maven { url "https://maven.kikugie.dev/releases" }
+		maven { url "https://maven.kikugie.dev/snapshots" }
 	}
 }
 
-include("common")
-include("fabric")
-include("forge")
+plugins {
+	id "dev.kikugie.stonecutter" version "0.4-beta.5"
+}
 
+rootProject.name = 'variants-and-ventures'
 
-rootProject.name = "variants-and-ventures"
+def dists = [
+	common: enabled_common_versions.split(',').collect { it.trim() },
+	fabric: enabled_fabric_versions.split(',').collect { it.trim() },
+	forge: enabled_forge_versions.split(',').collect { it.trim() },
+	neoforge: enabled_neoforge_versions.split(',').collect { it.trim() }
+]
+
+def uniqueVersions = dists.values().flatten().unique().collect { "'${it}'" }.join(", ")
+
+stonecutter {
+	for (def dist : dists.entrySet()) {
+		def platform = dist.getKey()
+		def platformVersions = dist.getValue()
+
+		include(platform)
+
+		shared {
+			versions(platformVersions)
+		}
+
+		create(project(":$platform"))
+	}
+
+	shared {
+		versions uniqueVersions.split(", ").collect { it.replaceAll("'", "") }
+	}
+
+	create(rootProject)
+}

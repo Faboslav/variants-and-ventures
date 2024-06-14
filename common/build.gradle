@@ -1,42 +1,102 @@
+plugins {
+	id 'java'
+	id 'idea'
+	id 'dev.architectury.loom'
+	id 'architectury-plugin'
+}
+
+def minecraftVersion = stonecutter.current.version
+def modrinth(String name, String version) {
+	return "maven.modrinth:$name:$version"
+}
+def prop(String name) {
+	return rootProject.project(stonecutter.current.project).property(name).toString()
+}
+
+base {
+	archivesName.set("${mod_id}-common-mc${minecraftVersion}-${mod_version}")
+}
+
 architectury {
-	common(rootProject.enabled_platforms.split(","))
+	common prop('enabled_platforms').split(',')
 }
 
 loom {
-	accessWidenerPath = file("src/main/resources/variantsandventures.accesswidener")
+	silentMojangMappingsLicense()
+
+	accessWidenerPath = file("../../src/main/resources/${mod_id}.accesswidener")
+
+	runConfigs.all {
+		ideConfigGenerated true
+	}
 }
 
 dependencies {
-	modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+	minecraft "com.mojang:minecraft:${minecraftVersion}"
+	mappings loom.layered {
+		it.mappings "net.fabricmc:yarn:${prop('yarn_mappings')}:v2"
+		if (stonecutter.compare(minecraftVersion, '1.20.4') == 0) {
+			it.mappings "dev.architectury:yarn-mappings-patch-forge:${prop('yarn_mappings_patch')}"
+		} else if (stonecutter.compare(minecraftVersion, '1.20.6') >= 0) {
+			it.mappings "dev.architectury:yarn-mappings-patch-neoforge:${prop('yarn_mappings_patch')}"
+		}
+	}
 
-	// Mixin extras (https://github.com/LlamaLad7/MixinExtras)
-	implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixin_extras_version}"))
+	// General
+	modImplementation("net.fabricmc:fabric-loader:${prop('fabric_loader_version')}")
+	implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${prop('mixin_extras_version')}"))
 
 	// Cloth config (https://www.curseforge.com/minecraft/mc-mods/cloth-config)
-	modImplementation("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}")
+	modImplementation("me.shedaniel.cloth:cloth-config-fabric:${prop('cloth_config_version')}")
+
+	implementation 'org.joml:joml:1.10.5'
+}
+
+java {
+	withSourcesJar()
+
+	def javaVersion = (stonecutter.compare(stonecutter.current.version, "1.20.6") >= 0) ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17
+	sourceCompatibility = javaVersion
+	targetCompatibility = javaVersion
+}
+
+tasks.withType(JavaCompile).configureEach {
+	def releaseVersion = (stonecutter.compare(stonecutter.current.version, "1.20.6") >= 0) ? 21 : 17;
+	it.options.release = releaseVersion
 }
 
 repositories {
+	// CurseForge
 	maven {
-		name = 'Fabric'
-		url = 'https://maven.fabricmc.net/'
+		name 'CurseForge'
+		url "https://www.cursemaven.com"
 	}
 
+	// Modrinth
 	maven {
-		name = "Modrinth"
-		url = "https://api.modrinth.com/maven"
-
+		url "https://api.modrinth.com/maven"
 		content {
-			includeGroup "maven.modrinth"
+			includeGroup("maven.modrinth")
 		}
 	}
 
+	// Mixin Extras
 	maven {
-		url "https://maven.terraformersmc.com/releases/"
+		url 'https://jitpack.io'
 		content {
-			includeGroup "com.terraformersmc"
+			includeGroup 'com.github.llamalad7'
 		}
 	}
 
-	maven { url "https://www.cursemaven.com" }
+	// Mod Menu / Cloth Config
+	maven { url 'https://maven.terraformersmc.com/releases/' }
 }
+
+if (stonecutter.current.isActive) {
+	rootProject.tasks.register("buildActiveCommon") {
+		group = "project"
+		dependsOn(tasks.named("build"))
+	}
+}
+
+stonecutter.exclude("*.DS_Store")

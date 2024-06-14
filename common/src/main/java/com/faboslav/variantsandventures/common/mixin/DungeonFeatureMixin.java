@@ -9,12 +9,12 @@ import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.DungeonFeature;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import net.minecraft.registry.entry.RegistryEntry;
 
 @Mixin(DungeonFeature.class)
 public class DungeonFeatureMixin

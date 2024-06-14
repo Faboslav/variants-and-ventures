@@ -1,9 +1,10 @@
 package com.faboslav.variantsandventures.common.tag;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import net.minecraft.tag.TagKey;
-import net.minecraft.util.registry.Registry;
+import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.registry.RegistryKeys;
 
 public final class VariantsAndVenturesTags
 {
@@ -15,7 +16,7 @@ public final class VariantsAndVenturesTags
 	public static final TagKey<Biome> HAS_VERDANT = biomeTag("has_verdant");
 
 	private static TagKey<Biome> biomeTag(String name) {
-		return TagKey.of(Registry.BIOME_KEY, VariantsAndVentures.makeID(name));
+		return TagKey.of(RegistryKeys.BIOME, VariantsAndVentures.makeID(name));
 	}
 
 	public static void init() {

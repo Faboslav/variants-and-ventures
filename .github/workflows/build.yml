@@ -14,52 +14,77 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
-            matrix:
-                mod_loader: [ fabric, forge, neoforge, quilt ]
-                script: [ client, server ]
-
-        name: Run ${{ matrix.mod_loader }} ${{ matrix.script }}
-        timeout-minutes: 15
+        name: Run build
+        timeout-minutes: 30
+        outputs:
+            matrix: ${{ steps.set-matrix.outputs.matrix }}
 
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v4.1.1
+                uses: actions/checkout@v4
                 with:
                     fetch-depth: 0
 
-            -   name: "Check if the mod loader is supported"
-                id: check-mod-loader
-                run: |
-                    if [ -d ${{ matrix.mod_loader }} ]; then
-                        echo "Mod loader is supported"
-                        echo "is_mod_loader_supported=true" >> $GITHUB_OUTPUT
-                    else
-                        echo "Mod loader is not supported"
-                        echo "is_mod_loader_supported=false" >> $GITHUB_OUTPUT
-                    fi
+            -   name: "Install missing flite"
+                run: sudo apt-get install -y flite
 
             -   name: "Set up JDK"
-                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
-                uses: actions/setup-java@v4.0.0
+                uses: actions/setup-java@v4
                 with:
-                    java-version: 17
+                    java-version: 21
                     distribution: temurin
 
             -   name: "Setup Gradle and run build"
-                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
-                uses: gradle/gradle-build-action@v2.11.1
+                uses: gradle/actions/setup-gradle@v3
                 with:
-                    cache-read-only: false
                     gradle-version: wrapper
-                    arguments: ${{ matrix.mod_loader }}:build
+                    arguments: build
+
+            -   name: "Generate matrix for the run job"
+                id: set-matrix
+                run: ./.github/scripts/generate-run-matrix.sh
+                
+
+    run:
+        runs-on: ubuntu-latest
+        needs: build
+        strategy:
+            fail-fast: false
+            matrix: ${{fromJson(needs.build.outputs.matrix)}}
+
+        name: Run ${{ matrix.mod_loader }} ${{ matrix.version }} ${{ matrix.script }}
+        timeout-minutes: 30
+
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v4
+                with:
+                    fetch-depth: 0
+
+            -   name: "Install missing flite"
+                run: sudo apt-get install -y flite
+
+            -   name: "Set up JDK"
+                uses: actions/setup-java@v4
+                with:
+                    java-version: 21
+                    distribution: temurin
+
+            -   name: "Setup Gradle and run build"
+                uses: gradle/actions/setup-gradle@v3
+                with:
+                    cache-read-only: true
+                    gradle-version: wrapper
+                    arguments: ${{ matrix.mod_loader }}:${{ matrix.version }}:build
+
+            -   name: "Switch active versions"
+                run: ./gradlew "Set active project to ${{ matrix.version }}"
 
             -   name: "Accept eula"
-                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
-                run: mkdir -p ${{ matrix.mod_loader }}/run && echo "eula=true" > ${{ matrix.mod_loader }}/run/eula.txt
+                run: mkdir -p ${{ matrix.mod_loader }}/versions/${{ matrix.version }}/run && echo "eula=true" > ${{ matrix.mod_loader }}/versions/${{ matrix.version }}/run/eula.txt
 
-            -   name: Run ${{ matrix.mod_loader }} ${{ matrix.script }}
-                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
+            -   name: Run ${{ matrix.mod_loader }} ${{ matrix.version }} ${{ matrix.script }}
                 uses: modmuss50/xvfb-action@v1
                 with:
-                    run: ./.github/scripts/run-${{ matrix.script }}.sh ${{ matrix.mod_loader }}
+                    run: ./.github/scripts/run-${{ matrix.script }}.sh ${{ matrix.mod_loader }}:${{ matrix.version }}
                     shell: bash

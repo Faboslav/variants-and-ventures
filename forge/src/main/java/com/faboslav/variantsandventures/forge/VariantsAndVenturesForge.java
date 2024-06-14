@@ -1,6 +1,7 @@
 package com.faboslav.variantsandventures.forge;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
+import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
@@ -17,6 +18,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraft.registry.Registries;
 
 @Mod(VariantsAndVentures.MOD_ID)
 public final class VariantsAndVenturesForge
@@ -35,6 +41,7 @@ public final class VariantsAndVenturesForge
 		modEventBus.addListener(VariantsAndVenturesForge::onSetup);
 		modEventBus.addListener(VariantsAndVenturesForge::onRegisterAttributes);
 		modEventBus.addListener(VariantsAndVenturesForge::onRegisterSpawnRestrictions);
+		modEventBus.addListener(VariantsAndVenturesForge::onAddItemGroupEntries);
 	}
 
 	private static void onSetup(FMLCommonSetupEvent event) {
@@ -66,5 +73,16 @@ public final class VariantsAndVenturesForge
 				event.register(type, placement.location(), placement.heightmap(), placement.predicate(), SpawnPlacementRegisterEvent.Operation.AND);
 			}
 		};
+	}
+
+	private static void onAddItemGroupEntries(BuildCreativeModeTabContentsEvent event) {
+		AddItemGroupEntriesEvent.EVENT.invoke(
+			new AddItemGroupEntriesEvent(
+				AddItemGroupEntriesEvent.Type.toType(Registries.ITEM_GROUP.getKey(event.getTab()).orElse(null)),
+				event.getTab(),
+				event.hasPermissions(),
+				event::add
+			)
+		);
 	}
 }

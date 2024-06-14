@@ -12,21 +12,22 @@ import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistri
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.SharedConstants;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
 
 import java.util.function.Supplier;
+import net.minecraft.registry.Registries;
 
 /**
  * @see EntityType
  */
 public final class VariantsAndVenturesEntityTypes
 {
-	public static final ResourcefulRegistry<EntityType<?>> ENTITY_TYPES = ResourcefulRegistries.create(Registry.ENTITY_TYPE, VariantsAndVentures.MOD_ID);
+	public static final ResourcefulRegistry<EntityType<?>> ENTITY_TYPES = ResourcefulRegistries.create(Registries.ENTITY_TYPE, VariantsAndVentures.MOD_ID);
 	public static boolean previousUseChoiceTypeRegistrations = SharedConstants.useChoiceTypeRegistrations;
 
 	public static final Supplier<EntityType<GelidEntity>> GELID;

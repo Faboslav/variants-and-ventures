@@ -69,6 +69,7 @@ public final class VariantsAndVentures
 		VariantsAndVenturesItems.ITEMS.init();
 		VariantsAndVenturesBlocks.BLOCKS.init();
 		VariantsAndVenturesEntityTypes.ENTITY_TYPES.init();
+		VariantsAndVenturesItemGroups.ITEM_GROUPS.init();
 		VariantsAndVenturesSoundEvents.SOUND_EVENTS.init();
 	}
 }

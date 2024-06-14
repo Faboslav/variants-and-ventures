@@ -8,9 +8,9 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.HuskEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.registry.entry.RegistryEntry;
 
 public final class HuskOnEntitySpawn
 {
@@ -45,9 +45,8 @@ public final class HuskOnEntitySpawn
 				return false;
 			}
 
-			HuskEntity husk = EntityType.HUSK.create(
+			var husk = EntityType.HUSK.create(
 				(ServerWorld) event.worldAccess(),
-				null,
 				null,
 				null,
 				event.entity().getBlockPos(),

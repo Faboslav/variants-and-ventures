@@ -32,6 +32,7 @@ import net.minecraft.item.Items;
 import net.minecraft.loot.LootManager;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
@@ -39,7 +40,6 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -56,6 +56,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
 import java.util.function.Predicate;
+import net.minecraft.registry.tag.FluidTags;
 
 public final class MurkEntity extends AbstractSkeletonEntity implements Shearable
 {
@@ -77,7 +78,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	public MurkEntity(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
 		super(entityType, world);
-		this.stepHeight = 1.0F;
+		this.setStepHeight(1.0F);
 		this.moveControl = new MurkMoveControl(this);
 		this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
 		this.waterNavigation = new SwimNavigation(this, world);
@@ -203,7 +204,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	@Override
 	public void attack(LivingEntity target, float pullProgress) {
-		ItemStack itemStack = this.getArrowType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
+		ItemStack itemStack = this.getProjectileType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
 		PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack, pullProgress);
 		double d = target.getX() - this.getX();
 		double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
@@ -341,12 +342,12 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 		Identifier fap = VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()));
 		VariantsAndVentures.getLogger().info(fap.toString());
-		LootTable boggedShearingLootTable = lootManager.getTable(
+		LootTable boggedShearingLootTable = lootManager.getLootTable(
 			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
 		);
-		LootContext lootContextParameterSet = new LootContext.Builder((ServerWorld) world)
-			.parameter(LootContextParameters.ORIGIN, this.getPos())
-			.parameter(LootContextParameters.THIS_ENTITY, this)
+		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
+			.add(LootContextParameters.ORIGIN, this.getPos())
+			.add(LootContextParameters.THIS_ENTITY, this)
 			.build(LootContextTypes.GIFT);
 		ObjectArrayList<ItemStack> shearingDrops = boggedShearingLootTable.generateLoot(lootContextParameterSet);
 

@@ -9,9 +9,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.registry.entry.RegistryEntry;
 
 public final class VerdantOnEntitySpawn
 {
@@ -46,9 +46,8 @@ public final class VerdantOnEntitySpawn
 				return false;
 			}
 
-			VerdantEntity verdant = VariantsAndVenturesEntityTypes.VERDANT.get().create(
+			var verdant = VariantsAndVenturesEntityTypes.VERDANT.get().create(
 				(ServerWorld) event.worldAccess(),
-				null,
 				null,
 				null,
 				event.entity().getBlockPos(),

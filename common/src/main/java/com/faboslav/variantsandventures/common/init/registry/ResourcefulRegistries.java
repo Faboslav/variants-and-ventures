@@ -1,12 +1,12 @@
 package com.faboslav.variantsandventures.common.init.registry;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.function.Supplier;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 
 /**
  * Event/registry related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors

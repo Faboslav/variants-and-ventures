@@ -13,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +51,7 @@ public class DispenserAddedSpawnEgg extends SpawnEggItem
 				public ItemStack execute(@NotNull BlockPointer source, @NotNull ItemStack stack) {
 					Direction direction = source.getBlockState().get(DispenserBlock.FACING);
 					EntityType<?> entitytype = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getNbt());
-					entitytype.spawn(source.getWorld(), stack.getNbt(), null, null, source.getPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+					entitytype.spawn(source.getWorld(), stack.getNbt(), null, source.getPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
 					stack.decrement(1);
 					return stack;
 				}
@@ -66,6 +67,18 @@ public class DispenserAddedSpawnEgg extends SpawnEggItem
 			}
 		}
 
+		return this.entityType.get();
+	}
+
+	public FeatureSet requiredFeatures() {
+		return getEntityType(null).getRequiredFeatures();
+	}
+
+	public FeatureSet getRequiredFeatures() {
+		return getEntityType(null).getRequiredFeatures();
+	}
+
+	protected EntityType<?> getDefaultType() {
 		return this.entityType.get();
 	}
 

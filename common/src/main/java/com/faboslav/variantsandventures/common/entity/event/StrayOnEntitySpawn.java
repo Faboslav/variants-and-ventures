@@ -8,9 +8,9 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.StrayEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.registry.entry.RegistryEntry;
 
 public final class StrayOnEntitySpawn
 {
@@ -45,9 +45,8 @@ public final class StrayOnEntitySpawn
 				return false;
 			}
 
-			StrayEntity stray = EntityType.STRAY.create(
+			var stray = EntityType.STRAY.create(
 				(ServerWorld) event.worldAccess(),
-				null,
 				null,
 				null,
 				event.entity().getBlockPos(),

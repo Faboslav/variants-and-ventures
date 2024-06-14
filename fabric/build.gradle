@@ -1,9 +1,22 @@
 plugins {
-	id "com.github.johnrengelman.shadow" version "8.1.1"
+	id 'java'
+	id 'idea'
+	id 'dev.architectury.loom'
+	id 'architectury-plugin'
+	id 'com.github.johnrengelman.shadow'
 }
 
-allprojects {
-	archivesBaseName = "${rootProject.mod_id}-fabric-mc${rootProject.minecraft_version}"
+def subproject = stonecutter.current.project
+def minecraftVersion = stonecutter.current.version
+def modrinth(String name, String version) {
+	return "maven.modrinth:$name:$version"
+}
+def prop(String name) {
+	return rootProject.project(stonecutter.current.project).property(name).toString()
+}
+
+base {
+	archivesName.set("${mod_id}-fabric-mc${minecraftVersion}-${mod_version}")
 }
 
 architectury {
@@ -12,111 +25,142 @@ architectury {
 }
 
 loom {
-	accessWidenerPath = project(":common").loom.accessWidenerPath
+	silentMojangMappingsLicense()
+
+	runConfigs.all {
+		ideConfigGenerated true
+	}
 }
 
 configurations {
-	common
-	shadowCommon
+	common {
+		canBeResolved = true
+		canBeConsumed = false
+	}
+
 	compileClasspath.extendsFrom common
 	runtimeClasspath.extendsFrom common
 	developmentFabric.extendsFrom common
+
+	shadowBundle {
+		canBeResolved = true
+		canBeConsumed = false
+	}
 }
 
 dependencies {
+	minecraft "com.mojang:minecraft:${minecraftVersion}"
+	mappings loom.layered {
+		it.mappings "net.fabricmc:yarn:${prop('yarn_mappings')}:v2"
+		if (stonecutter.compare(minecraftVersion, '1.20.4') == 0) {
+			it.mappings "dev.architectury:yarn-mappings-patch-forge:${prop('yarn_mappings_patch')}"
+		} else if (stonecutter.compare(minecraftVersion, '1.20.6') >= 0) {
+			it.mappings "dev.architectury:yarn-mappings-patch-neoforge:${prop('yarn_mappings_patch')}"
+		}
+	}
+
 	// Core dependencies
-	modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-	modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+	modImplementation "net.fabricmc:fabric-loader:${prop('fabric_loader_version')}"
+	modApi "net.fabricmc.fabric-api:fabric-api:${prop('fabric_api_version')}"
 
-	// Mixin extras (https://github.com/LlamaLad7/MixinExtras)
-	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${rootProject.mixin_extras_version}")))
-
+	// Optional client
 	// Mod menu (https://modrinth.com/mod/modmenu)
-	modImplementation("com.terraformersmc:modmenu:${project.mod_menu_version}") { transitive = false }
+	modImplementation("com.terraformersmc:modmenu:${prop('mod_menu_version')}") { transitive = false }
 
 	// Cloth config (https://www.curseforge.com/minecraft/mc-mods/cloth-config)
-	modImplementation("me.shedaniel.cloth:cloth-config:${rootProject.cloth_config_version}")
-	modImplementation("me.shedaniel.cloth:cloth-config-fabric:${rootProject.cloth_config_version}") { transitive = false }
+	modImplementation("me.shedaniel.cloth:cloth-config:${prop('cloth_config_version')}")
+	modImplementation("me.shedaniel.cloth:cloth-config-fabric:${prop('cloth_config_version')}") { transitive = false }
 
-	common(project(path: ":common", configuration: "namedElements")) { transitive false }
-	shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+	common(project(path: ":common:$subproject", configuration: 'namedElements')) { transitive false }
+	shadowBundle(project(path: ":common:$subproject", configuration: 'transformProductionFabric')) { transitive false }
 }
 
 processResources {
-	inputs.property 'modId', rootProject.mod_id
-	inputs.property 'modName', rootProject.mod_name
-	inputs.property 'modDescription', rootProject.mod_description
-	inputs.property 'modVersion', rootProject.mod_version
-	inputs.property 'modAuthor', rootProject.mod_author
-	inputs.property "minecraftVersion", rootProject.minecraft_version
-	inputs.property "fabricLoaderVersion", rootProject.fabric_loader_version
-	inputs.property "fabricApiVersion", rootProject.fabric_api_version
+	inputs.property 'modId', mod_id
+	inputs.property 'modName', mod_name
+	inputs.property 'modDescription', mod_description
+	inputs.property 'modVersion', mod_version
+	inputs.property 'modAuthor', mod_author
+	inputs.property "minecraftVersion", prop('min_minecraft_version')
+	inputs.property "fabricLoaderVersion", prop('fabric_loader_version')
+	inputs.property "fabricApiVersion", prop('fabric_api_version')
 
 	filesMatching("fabric.mod.json") {
 		expand([
-			'modId'              : rootProject.mod_id,
-			'modName'            : rootProject.mod_name,
-			'modDescription'     : rootProject.mod_description,
-			'modVersion'         : rootProject.mod_version,
-			'modAuthor'          : rootProject.mod_author,
-			"minecraftVersion"   : rootProject.minecraft_version,
-			"fabricLoaderVersion": rootProject.fabric_loader_version,
-			"fabricApiVersion"   : rootProject.fabric_api_version
+			'modId'              : mod_id,
+			'modName'            : mod_name,
+			'modDescription'     : mod_description,
+			'modVersion'         : mod_version,
+			'modAuthor'          : mod_author,
+			"minecraftVersion"   : prop('min_minecraft_version'),
+			"fabricLoaderVersion": prop('fabric_loader_version'),
+			"fabricApiVersion"   : prop('fabric_api_version')
 		])
 	}
 }
 
 shadowJar {
-	exclude "architectury.common.json"
-
-	configurations = [project.configurations.shadowCommon]
-	archiveClassifier.set("dev-shadow")
-}
-
-remapJar {
-	injectAccessWidener = true
-	input.set shadowJar.archiveFile
-	dependsOn shadowJar
-	archiveClassifier.set(null)
+	configurations = [project.configurations.shadowBundle]
+	archiveClassifier = 'dev-shadow'
 }
 
 jar {
 	archiveClassifier.set("dev")
 }
 
-sourcesJar {
-	def commonSources = project(":common").sourcesJar
-	dependsOn commonSources
-	from commonSources.archiveFile.map { zipTree(it) }
+
+remapJar {
+	injectAccessWidener.set(true)
+	input.set(shadowJar.archiveFile)
+	dependsOn(shadowJar)
+	archiveClassifier.set(null)
 }
 
-components.java {
-	withVariantsFromConfiguration(project.configurations.shadowRuntimeElements) {
-		skip()
-	}
+java {
+	withSourcesJar()
+
+	def javaVersion = (stonecutter.compare(stonecutter.current.version, "1.20.6") >= 0) ? JavaVersion.VERSION_21 : JavaVersion.VERSION_17
+	sourceCompatibility = javaVersion
+	targetCompatibility = javaVersion
+}
+
+tasks.withType(JavaCompile).configureEach {
+	def releaseVersion = (stonecutter.compare(stonecutter.current.version, "1.20.6") >= 0) ? 21 : 17;
+	it.options.release = releaseVersion
 }
 
 repositories {
-	maven {
-		name = 'Fabric'
-		url = 'https://maven.fabricmc.net/'
-	}
-
-	maven {
-		name = "Modrinth"
-		url = "https://api.modrinth.com/maven"
-
-		content {
-			includeGroup "maven.modrinth"
-		}
-	}
-
-	maven {
-		url "https://maven.terraformersmc.com/releases/"
-		content {
-			includeGroup "com.terraformersmc"
-		}
-	}
-
+	// CurseForge
 	maven { url "https://www.cursemaven.com" }
+
+	// Mod Menu / Cloth Config
+	maven { url 'https://maven.terraformersmc.com/releases/' }
+
+	// Mixin Extras.
+	maven {
+		url 'https://jitpack.io'
+		content {
+			includeGroup 'com.github.llamalad7'
+		}
+	}
+
+	// Modrinth
+	maven {
+		url "https://api.modrinth.com/maven"
+		content {
+			includeGroup("maven.modrinth")
+		}
+	}
+
+	// Random
+	maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 }
+
+if(stonecutter.current.isActive) {
+	rootProject.tasks.register("buildActiveFabric") {
+		group = "project"
+		dependsOn(tasks.named("build"))
+	}
+}
+
+stonecutter.exclude("*.DS_Store")
