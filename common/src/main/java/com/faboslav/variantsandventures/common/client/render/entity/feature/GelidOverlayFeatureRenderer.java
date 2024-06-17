@@ -28,17 +28,17 @@ public class GelidOverlayFeatureRenderer<T extends GelidEntity> extends FeatureR
 	}
 
 	public void render(
-		MatrixStack matrixStack,
-		VertexConsumerProvider vertexConsumerProvider,
-		int i,
-		T drownedEntity,
-		float f,
-		float g,
-		float h,
-		float j,
-		float k,
-		float l
+		MatrixStack matrices,
+		VertexConsumerProvider vertexConsumers,
+		int light,
+		T thicket,
+		float limbAngle,
+		float limbDistance,
+		float tickDelta,
+		float animationProgress,
+		float headYaw,
+		float headPitch
 	) {
-		render(this.getContextModel(), this.model, SKIN, matrixStack, vertexConsumerProvider, i, drownedEntity, f, g, j, k, l, h, 1.0F, 1.0F, 1.0F);
+		render(this.getContextModel(), this.model, SKIN, matrices, vertexConsumers, light, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, 1.0F, 1.0F, 1.0F);
 	}
 }
