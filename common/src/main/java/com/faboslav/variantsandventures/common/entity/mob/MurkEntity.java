@@ -1,14 +1,18 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
+import com.faboslav.variantsandventures.common.entity.ai.goal.LeaveWaterGoal;
+import com.faboslav.variantsandventures.common.entity.ai.goal.TargetAboveWaterGoal;
+import com.faboslav.variantsandventures.common.entity.ai.goal.WanderAroundOnSurfaceGoal;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesItems;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.MoveControl;
-import net.minecraft.entity.ai.pathing.MobNavigation;
-import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.ai.pathing.SwimNavigation;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
+import net.minecraft.entity.ai.goal.WanderAroundGoal;
+import net.minecraft.entity.ai.pathing.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
@@ -17,17 +21,21 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.passive.AxolotlEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
+import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootManager;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -35,7 +43,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -48,6 +55,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
+import java.util.function.Predicate;
 
 public final class MurkEntity extends AbstractSkeletonEntity implements Shearable
 {
@@ -59,6 +67,13 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	private boolean targetingUnderwater;
 	private final SwimNavigation waterNavigation;
 	private final MobNavigation landNavigation;
+	private final Predicate<LivingEntity> PLAYER_FILTER = (LivingEntity entity) -> {
+		if (entity != null) {
+			return !this.getWorld().isDay() || entity.isTouchingWater();
+		} else {
+			return false;
+		}
+	};
 
 	public MurkEntity(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
 		super(entityType, world);
@@ -73,12 +88,11 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		ServerWorldAccess world,
 		LocalDifficulty difficulty,
 		SpawnReason spawnReason,
-		@Nullable EntityData entityData,
-		@Nullable NbtCompound entityNbt
+		@Nullable EntityData entityData
 	) {
 		this.setVariant(Variant.getRandom(random));
 
-		return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+		return super.initialize(world, difficulty, spawnReason, entityData);
 	}
 
 	public static boolean canSpawn(
@@ -88,15 +102,9 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		BlockPos pos,
 		Random random
 	) {
-		if (
-			!world.getFluidState(pos.down()).isIn(FluidTags.WATER)
-			|| !isValidSpawnDepth(world, pos)
-			|| random.nextInt(15) != 0
-		) {
-			return false;
-		}
-
-		return true;
+		return world.getFluidState(pos.down()).isIn(FluidTags.WATER)
+			   && isValidSpawnDepth(world, pos)
+			   && random.nextInt(40) == 0;
 	}
 
 	private static boolean isValidSpawnDepth(WorldAccess world, BlockPos pos) {
@@ -104,10 +112,25 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
-	protected void initDataTracker() {
-		super.initDataTracker();
-		this.dataTracker.startTracking(VARIANT, 0);
-		this.dataTracker.startTracking(SHEARED, false);
+	protected void initGoals() {
+		this.goalSelector.add(1, new WanderAroundOnSurfaceGoal(this, 1.0));
+		this.goalSelector.add(5, new LeaveWaterGoal(this, 1.0));
+		this.goalSelector.add(6, new TargetAboveWaterGoal(this, 1.0, this.getWorld().getSeaLevel()));
+		this.goalSelector.add(7, new WanderAroundGoal(this, 1.0));
+		this.targetSelector.add(1, new RevengeGoal(this));
+		this.targetSelector.add(2, new ActiveTargetGoal(this, PlayerEntity.class, 10, true, false, PLAYER_FILTER));
+		this.targetSelector.add(3, new ActiveTargetGoal(this, IronGolemEntity.class, true));
+		this.targetSelector.add(3, new ActiveTargetGoal(this, AxolotlEntity.class, true, false));
+		this.targetSelector.add(3, new ActiveTargetGoal(this, TurtleEntity.class, 10, true, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER));
+
+		super.initGoals();
+	}
+
+	@Override
+	protected void initDataTracker(DataTracker.Builder builder) {
+		super.initDataTracker(builder);
+		builder.add(VARIANT, 0);
+		builder.add(SHEARED, false);
 	}
 
 	@Override
@@ -172,8 +195,9 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	@Override
 	public void shootAt(LivingEntity target, float pullProgress) {
-		ItemStack itemStack = this.getProjectileType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
-		PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack, pullProgress);
+		ItemStack itemStack = this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW));
+		ItemStack itemStack2 = this.getProjectileType(itemStack);
+		PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack2, pullProgress, itemStack);
 		double d = target.getX() - this.getX();
 		double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
 		double f = target.getZ() - this.getZ();
@@ -184,8 +208,8 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
-	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-		super.dropEquipment(source, lootingMultiplier, allowDrops);
+	protected void dropEquipment(ServerWorld world, DamageSource source, boolean causedByPlayer) {
+		super.dropEquipment(world, source, causedByPlayer);
 		Entity entity = source.getAttacker();
 		if (entity instanceof CreeperEntity creeperEntity) {
 			if (creeperEntity.shouldDropHead()) {
@@ -198,6 +222,11 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	@Override
 	public boolean isPushedByFluids() {
 		return !this.isSwimming();
+	}
+
+	@Override
+	public boolean hasNoDrag() {
+		return this.isSwimming();
 	}
 
 	private boolean isTargetingUnderwater() {
@@ -237,6 +266,19 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		}
 	}
 
+	public boolean hasFinishedCurrentPath() {
+		Path path = this.getNavigation().getCurrentPath();
+		if (path != null) {
+			BlockPos blockPos = path.getTarget();
+			if (blockPos != null) {
+				double d = this.squaredDistanceTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+				return d < 4.0;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean isSheared() {
 		return this.dataTracker.get(SHEARED);
 	}
@@ -254,7 +296,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			this.emitGameEvent(GameEvent.SHEAR, player);
 
 			if (this.getWorld().isClient() == false) {
-				itemStack.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+				itemStack.damage(1, player, PlayerEntity.getSlotForHand(hand));
 			}
 
 			return ActionResult.success(this.getWorld().isClient());
@@ -277,22 +319,10 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			world instanceof ServerWorld == false
 			|| world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT) == false
 		) {
-			VariantsAndVentures.getLogger().info("nope");
 			return;
 		}
 
-		LootManager lootManager = world.getServer().getLootManager();
-
-		if (lootManager == null) {
-			VariantsAndVentures.getLogger().info("nope2");
-			return;
-		}
-
-		Identifier fap = VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()));
-		VariantsAndVentures.getLogger().info(fap.toString());
-		LootTable boggedShearingLootTable = lootManager.getLootTable(
-			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
-		);
+		LootTable boggedShearingLootTable = world.getServer().getReloadableRegistries().getLootTable(RegistryKey.of(RegistryKeys.LOOT_TABLE, VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))));
 		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
 			.add(LootContextParameters.ORIGIN, this.getPos())
 			.add(LootContextParameters.THIS_ENTITY, this)
@@ -351,6 +381,18 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			}
 
 		}
+	}
+
+	private void setNavigation(EntityNavigation navigation) {
+		this.navigation = navigation;
+	}
+
+	public void setLandNavigation() {
+		this.navigation = this.landNavigation;
+	}
+
+	public void setWaterNavigation() {
+		this.navigation = this.waterNavigation;
 	}
 
 	public Variant getVariant() {

@@ -2,3 +2,18 @@ accessWidener v2 named
 
 accessible    class    net/minecraft/entity/mob/AbstractSkeletonEntity
 accessible    method    net/minecraft/entity/mob/AbstractSkeletonEntity    getStepSound    ()Lnet/minecraft/sound/SoundEvent;
+accessible    field    net/minecraft/item/ItemGroups    BUILDING_BLOCKS    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    COLORED_BLOCKS    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    NATURAL    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    FUNCTIONAL    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    REDSTONE    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    HOTBAR    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    SEARCH    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    TOOLS    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    COMBAT    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    FOOD_AND_DRINK    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    INGREDIENTS    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    SPAWN_EGGS    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    OPERATOR    Lnet/minecraft/registry/RegistryKey;
+accessible    field    net/minecraft/item/ItemGroups    INVENTORY    Lnet/minecraft/registry/RegistryKey;
+accessible    method    net/minecraft/entity/EntityPose    <init>    (Ljava/lang/String;II)V

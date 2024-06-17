@@ -13,11 +13,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.EntityTrackerEntry;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
@@ -132,7 +132,6 @@ public abstract class AbstractSkeletonEntityMixin extends SkeletonEntityMobEntit
 		LocalDifficulty difficulty,
 		SpawnReason spawnReason,
 		EntityData entityData,
-		NbtCompound entityNbt,
 		CallbackInfoReturnable<EntityData> cir
 	) {
 		if (
@@ -190,9 +189,12 @@ public abstract class AbstractSkeletonEntityMixin extends SkeletonEntityMobEntit
 	}
 
 	@Override
-	public void variantsandventures$skeleton$createSpawnPacket(CallbackInfoReturnable<Packet<?>> cir) {
+	public void variantsandventures$skeleton$createSpawnPacket(
+		EntityTrackerEntry entityTrackerEntry,
+		CallbackInfoReturnable<Packet<?>> cir
+	) {
 		if (VariantsAndVentures.getConfig().enableKeyframeAnimationsForSkeletonAndItsVariants) {
-			cir.setReturnValue(new EntitySpawnS2CPacket((Entity) (Object) this, this.variantsandventures$isInPose(SkeletonEntityPose.EMERGE.get()) ? 1:0));
+			cir.setReturnValue(new EntitySpawnS2CPacket((Entity) (Object) this, entityTrackerEntry, this.variantsandventures$isInPose(SkeletonEntityPose.EMERGE.get()) ? 1:0));
 		}
 	}
 

@@ -12,8 +12,10 @@ import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public final class VerdantEntity extends AbstractSkeletonEntity
 {
@@ -48,10 +50,14 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 		return VariantsAndVenturesSoundEvents.ENTITY_VERDANT_STEP.get();
 	}
 
-	protected PersistentProjectileEntity createArrowProjectile(ItemStack arrow, float damageModifier) {
-		PersistentProjectileEntity persistentProjectileEntity = super.createArrowProjectile(arrow, damageModifier);
+	@Override
+	protected PersistentProjectileEntity createArrowProjectile(
+		ItemStack arrow,
+		float damageModifier,
+		@Nullable ItemStack shotFrom
+	) {
+		PersistentProjectileEntity persistentProjectileEntity = super.createArrowProjectile(arrow, damageModifier, shotFrom);
 		if (persistentProjectileEntity instanceof ArrowEntity) {
-			float difficulty = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
 			((ArrowEntity) persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 100));
 		}
 
@@ -59,8 +65,8 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 	}
 
 	@Override
-	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-		super.dropEquipment(source, lootingMultiplier, allowDrops);
+	protected void dropEquipment(ServerWorld world, DamageSource source, boolean causedByPlayer) {
+		super.dropEquipment(world, source, causedByPlayer);
 		Entity entity = source.getAttacker();
 		if (entity instanceof CreeperEntity creeperEntity) {
 			if (creeperEntity.shouldDropHead()) {

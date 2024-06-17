@@ -7,7 +7,6 @@ import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry
 import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
 
 import java.util.function.Supplier;
 
@@ -45,7 +44,7 @@ public final class VariantsAndVenturesSoundEvents
 	public static final Supplier<SoundEvent> ENTITY_VERDANT_STEP = registerSoundEvent("entity.verdant.step");
 
 	private static RegistryEntry<SoundEvent> registerSoundEvent(String path) {
-		return SOUND_EVENTS.register(path, () -> SoundEvent.of(new Identifier(VariantsAndVentures.MOD_ID, path)));
+		return SOUND_EVENTS.register(path, () -> SoundEvent.of(VariantsAndVentures.makeID(path)));
 	}
 
 	private VariantsAndVenturesSoundEvents() {

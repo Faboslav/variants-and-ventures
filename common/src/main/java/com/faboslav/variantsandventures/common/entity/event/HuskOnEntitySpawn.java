@@ -48,7 +48,6 @@ public final class HuskOnEntitySpawn
 			HuskEntity husk = EntityType.HUSK.create(
 				(ServerWorld) event.worldAccess(),
 				null,
-				null,
 				event.entity().getBlockPos(),
 				event.spawnReason(),
 				false,

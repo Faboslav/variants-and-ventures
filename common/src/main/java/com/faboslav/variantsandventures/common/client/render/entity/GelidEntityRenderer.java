@@ -36,11 +36,19 @@ public class GelidEntityRenderer extends ZombieBaseEntityRenderer<GelidEntity, D
 	}
 
 	@Override
-	protected void setupTransforms(GelidEntity gelid, MatrixStack matrixStack, float f, float g, float h) {
-		super.setupTransforms(gelid, matrixStack, f, g, h);
-		float i = gelid.getLeaningPitch(h);
+	protected void setupTransforms(
+		GelidEntity gelid,
+		MatrixStack matrices,
+		float animationProgress,
+		float bodyYaw,
+		float tickDelta,
+		float scale
+	) {
+		super.setupTransforms(gelid, matrices, animationProgress, bodyYaw, tickDelta, scale);
+
+		float i = gelid.getLeaningPitch(tickDelta);
 		if (i > 0.0F) {
-			matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.lerp(i, gelid.getPitch(), -10.0F - gelid.getPitch())));
+			matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.lerp(i, gelid.getPitch(), -10.0F - gelid.getPitch())));
 		}
 	}
 }

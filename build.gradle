@@ -1,6 +1,6 @@
 plugins {
 	id "architectury-plugin" version "3.4-SNAPSHOT"
-	id "dev.architectury.loom" version "1.5-SNAPSHOT" apply false
+	id "dev.architectury.loom" version "1.6-SNAPSHOT" apply false
 	id "io.github.pacifistmc.forgix" version "1.2.6"
 }
 
@@ -43,7 +43,7 @@ subprojects {
 		minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
 		mappings loom.layered {
 			it.mappings "net.fabricmc:yarn:${rootProject.yarn_mappings}"
-			it.mappings "dev.architectury:yarn-mappings-patch-forge:${rootProject.yarn_mappings_patch}"
+			it.mappings "dev.architectury:yarn-mappings-patch-neoforge:${rootProject.yarn_mappings_patch}"
 		}
 	}
 }
@@ -65,7 +65,7 @@ allprojects {
 
 	tasks.withType(JavaCompile) {
 		options.encoding = "UTF-8"
-		options.release = 17
+		options.release = 21
 	}
 
 	java {

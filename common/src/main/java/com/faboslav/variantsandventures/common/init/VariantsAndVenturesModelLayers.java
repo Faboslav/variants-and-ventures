@@ -8,7 +8,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.entity.model.SkullEntityModel;
 
 /**
  * @see EntityModelLayers
@@ -16,12 +15,10 @@ import net.minecraft.client.render.entity.model.SkullEntityModel;
 @Environment(EnvType.CLIENT)
 public final class VariantsAndVenturesModelLayers
 {
-	public static final EntityModelLayer GELID_HEAD = new EntityModelLayer(VariantsAndVentures.makeID("gelid"), "outer");
 	public static final EntityModelLayer MURK = new EntityModelLayer(VariantsAndVentures.makeID("murk"), "main");
 	public static final EntityModelLayer MURK_SKULL = new EntityModelLayer(VariantsAndVentures.makeID("murk_skull"), "main");
 
 	public static void registerEntityLayers(RegisterEntityLayersEvent event) {
-		event.register(GELID_HEAD, SkullEntityModel::getHeadTexturedModelData);
 		event.register(MURK, MurkEntityModel::getTexturedModelData);
 		event.register(MURK_SKULL, MurkSkullEntityModel::getSkullTexturedModelData);
 	}
