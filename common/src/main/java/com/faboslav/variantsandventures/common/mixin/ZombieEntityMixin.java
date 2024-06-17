@@ -13,7 +13,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.BlockStateParticleEffect;
@@ -189,7 +188,10 @@ public abstract class ZombieEntityMixin extends ZombieEntityMobEntityMixin imple
 	}
 
 	@Override
-	public void variantsandventures$createSpawnPacket(EntityTrackerEntry entityTrackerEntry, CallbackInfoReturnable<Packet<?>> cir) {
+	public void variantsandventures$createSpawnPacket(
+		EntityTrackerEntry entityTrackerEntry,
+		CallbackInfoReturnable<Packet<?>> cir
+	) {
 		if (VariantsAndVentures.getConfig().enableKeyframeAnimationsForZombieAndItsVariants) {
 			cir.setReturnValue(new EntitySpawnS2CPacket((Entity) (Object) this, entityTrackerEntry, this.variantsandventures$isInPose(ZombieEntityPose.EMERGE.get()) ? 1:0));
 		}

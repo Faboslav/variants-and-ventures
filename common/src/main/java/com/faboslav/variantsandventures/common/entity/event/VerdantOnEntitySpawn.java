@@ -13,63 +13,62 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 
-public final class VerdantOnEntitySpawn
-{
-	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
-		MobEntity entity = event.entity();
+public final class VerdantOnEntitySpawn {
+    public static boolean handleEntitySpawn(EntitySpawnEvent event) {
+        MobEntity entity = event.entity();
 
-		if (event.spawnReason() == SpawnReason.NATURAL
-			|| event.spawnReason() == SpawnReason.SPAWNER
-			|| event.spawnReason() == SpawnReason.CHUNK_GENERATION
-			|| event.spawnReason() == SpawnReason.STRUCTURE
-		) {
-			if (entity.getType() != EntityType.SKELETON) {
-				return false;
-			}
+        if (event.spawnReason() == SpawnReason.NATURAL
+                || event.spawnReason() == SpawnReason.SPAWNER
+                || event.spawnReason() == SpawnReason.CHUNK_GENERATION
+                || event.spawnReason() == SpawnReason.STRUCTURE
+        ) {
+            if (entity.getType() != EntityType.SKELETON) {
+                return false;
+            }
 
-			if (VariantsAndVentures.getConfig().enableVerdant == false || VariantsAndVentures.getConfig().enableVerdantSpawns == false) {
-				return false;
-			}
+            if (VariantsAndVentures.getConfig().enableVerdant == false || VariantsAndVentures.getConfig().enableVerdantSpawns == false) {
+                return false;
+            }
 
-			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().verdantMinimumYLevel) {
-				return false;
-			}
+            if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().verdantMinimumYLevel) {
+                return false;
+            }
 
-			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().verdantSpawnChance) {
-				return false;
-			}
+            if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().verdantSpawnChance) {
+                return false;
+            }
 
-			WorldAccess worldAccess = event.worldAccess();
-			RegistryEntry<Biome> biome = worldAccess.getBiome(entity.getBlockPos());
+            WorldAccess worldAccess = event.worldAccess();
+            RegistryEntry<Biome> biome = worldAccess.getBiome(entity.getBlockPos());
 
-			if (biome.isIn(VariantsAndVenturesTags.HAS_VERDANT) == false) {
-				return false;
-			}
+            if (biome.isIn(VariantsAndVenturesTags.HAS_VERDANT) == false) {
+                return false;
+            }
 
-			VerdantEntity verdant = VariantsAndVenturesEntityTypes.VERDANT.get().create(
-				(ServerWorld) event.worldAccess(),
-				null,
-				event.entity().getBlockPos(),
-				event.spawnReason(),
-				false,
-				false
-			);
+            VerdantEntity verdant = VariantsAndVenturesEntityTypes.VERDANT.get().create(
+                    (ServerWorld) event.worldAccess(),
+                    null,
+                    event.entity().getBlockPos(),
+                    event.spawnReason(),
+                    false,
+                    false
+            );
 
-			if (verdant == null) {
-				return false;
-			}
+            if (verdant == null) {
+                return false;
+            }
 
-			verdant.copyPositionAndRotation(entity);
-			verdant.prevBodyYaw = entity.prevBodyYaw;
-			verdant.bodyYaw = entity.bodyYaw;
-			verdant.prevHeadYaw = entity.prevHeadYaw;
-			verdant.headYaw = entity.headYaw;
-			verdant.setBaby(event.isBaby());
-			worldAccess.spawnEntity(verdant);
+            verdant.copyPositionAndRotation(entity);
+            verdant.prevBodyYaw = entity.prevBodyYaw;
+            verdant.bodyYaw = entity.bodyYaw;
+            verdant.prevHeadYaw = entity.prevHeadYaw;
+            verdant.headYaw = entity.headYaw;
+            verdant.setBaby(event.isBaby());
+            worldAccess.spawnEntity(verdant);
 
-			return true;
-		}
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

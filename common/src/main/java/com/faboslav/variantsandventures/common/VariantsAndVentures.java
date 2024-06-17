@@ -24,7 +24,7 @@ public final class VariantsAndVentures
 	private static final VariantsAndVenturesConfig CONFIG = OmegaConfig.register(VariantsAndVenturesConfig.class);
 
 	public static Identifier makeID(String path) {
-		return new Identifier(
+		return Identifier.of(
 			MOD_ID,
 			path
 		);

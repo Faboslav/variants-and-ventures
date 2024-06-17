@@ -57,9 +57,10 @@ public abstract class SkeletonEntityEntityMixin
 	@Shadow
 	public abstract boolean isInPose(EntityPose pose);
 
-    @Shadow public abstract Random getRandom();
+	@Shadow
+	public abstract Random getRandom();
 
-    @Inject(
+	@Inject(
 		method = "onSpawnPacket",
 		at = @At("TAIL"),
 		cancellable = true
@@ -99,6 +100,9 @@ public abstract class SkeletonEntityEntityMixin
 		at = @At("TAIL"),
 		cancellable = true
 	)
-	public void variantsandventures$skeleton$createSpawnPacket(EntityTrackerEntry entityTrackerEntry, CallbackInfoReturnable<Packet<?>> cir) {
+	public void variantsandventures$skeleton$createSpawnPacket(
+		EntityTrackerEntry entityTrackerEntry,
+		CallbackInfoReturnable<Packet<?>> cir
+	) {
 	}
 }

@@ -33,14 +33,14 @@ public final class FabricCustomResourcefulRegistry<T> implements ResourcefulRegi
 
 	@Override
 	public <I extends T> RegistryEntry<I> register(String id, Supplier<I> supplier) {
-		I value = Registry.register(registry, new Identifier(this.id, id), supplier.get());
+		I value = Registry.register(registry, Identifier.of(this.id, id), supplier.get());
 		if (value instanceof PointOfInterestType poiType) {
 			PointOfInterestTypesAccessor.callRegisterStates(
 				(net.minecraft.registry.entry.RegistryEntry<PointOfInterestType>) registry.entryOf(registry.getKey(value).orElseThrow()),
 				poiType.blockStates()
 			);
 		}
-		return entries.add(new BasicRegistryEntry<>(new Identifier(this.id, id), value));
+		return entries.add(new BasicRegistryEntry<>(Identifier.of(this.id, id), value));
 	}
 
 	@Override

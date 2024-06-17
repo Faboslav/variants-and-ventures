@@ -3,9 +3,7 @@ package com.faboslav.variantsandventures.common.client.render.entity.model;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SkullEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
 
 @Environment(EnvType.CLIENT)
 public final class MurkSkullEntityModel extends SkullEntityModel

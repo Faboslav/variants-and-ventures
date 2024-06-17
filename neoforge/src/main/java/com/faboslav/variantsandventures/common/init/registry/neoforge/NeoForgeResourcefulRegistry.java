@@ -5,6 +5,7 @@ import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Collection;
@@ -40,6 +41,6 @@ public final class NeoForgeResourcefulRegistry<T> implements ResourcefulRegistry
 
 	@Override
 	public void init() {
-		register.register(net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext.get().getModEventBus());
+		register.register(ModLoadingContext.get().getActiveContainer().getEventBus());
 	}
 }

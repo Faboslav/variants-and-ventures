@@ -51,10 +51,14 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 	}
 
 	@Override
-	protected PersistentProjectileEntity createArrowProjectile(ItemStack arrow, float damageModifier, @Nullable ItemStack shotFrom) {
+	protected PersistentProjectileEntity createArrowProjectile(
+		ItemStack arrow,
+		float damageModifier,
+		@Nullable ItemStack shotFrom
+	) {
 		PersistentProjectileEntity persistentProjectileEntity = super.createArrowProjectile(arrow, damageModifier, shotFrom);
 		if (persistentProjectileEntity instanceof ArrowEntity) {
-			((ArrowEntity)persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 100));
+			((ArrowEntity) persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 100));
 		}
 
 		return persistentProjectileEntity;

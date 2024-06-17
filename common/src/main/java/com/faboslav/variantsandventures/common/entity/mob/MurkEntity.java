@@ -43,7 +43,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -196,8 +195,9 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	@Override
 	public void shootAt(LivingEntity target, float pullProgress) {
-		ItemStack itemStack = this.getProjectileType(this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW)));
-		PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack, pullProgress);
+		ItemStack itemStack = this.getStackInHand(ProjectileUtil.getHandPossiblyHolding(this, Items.BOW));
+		ItemStack itemStack2 = this.getProjectileType(itemStack);
+		PersistentProjectileEntity persistentProjectileEntity = this.createArrowProjectile(itemStack2, pullProgress, itemStack);
 		double d = target.getX() - this.getX();
 		double e = target.getBodyY(0.3333333333333333) - persistentProjectileEntity.getY();
 		double f = target.getZ() - this.getZ();
@@ -322,7 +322,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			return;
 		}
 
-		LootTable boggedShearingLootTable = world.getServer().getReloadableRegistries().getLootTable(RegistryKey.of(RegistryKeys.LOOT_TABLE,VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))));
+		LootTable boggedShearingLootTable = world.getServer().getReloadableRegistries().getLootTable(RegistryKey.of(RegistryKeys.LOOT_TABLE, VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))));
 		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
 			.add(LootContextParameters.ORIGIN, this.getPos())
 			.add(LootContextParameters.THIS_ENTITY, this)
