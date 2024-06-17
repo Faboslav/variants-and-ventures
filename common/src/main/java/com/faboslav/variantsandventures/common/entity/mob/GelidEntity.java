@@ -105,6 +105,18 @@ public final class GelidEntity extends ZombieEntity
 
 		if (attackResult && this.getMainHandStack().isEmpty() && target instanceof LivingEntity) {
 			float difficulty = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
+
+			if (target instanceof LivingEntity livingEntity) {
+				if (
+					livingEntity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_HELMET)
+					|| livingEntity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_CHESTPLATE)
+					|| livingEntity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_LEGGINGS)
+					|| livingEntity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_BOOTS)
+				) {
+					return attackResult;
+				}
+			}
+
 			target.setFrozenTicks(140 * (int) difficulty);
 		}
 
