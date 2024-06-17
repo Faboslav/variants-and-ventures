@@ -6,7 +6,9 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.server.network.EntityTrackerEntry;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -55,7 +57,9 @@ public abstract class SkeletonEntityEntityMixin
 	@Shadow
 	public abstract boolean isInPose(EntityPose pose);
 
-	@Inject(
+    @Shadow public abstract Random getRandom();
+
+    @Inject(
 		method = "onSpawnPacket",
 		at = @At("TAIL"),
 		cancellable = true
@@ -95,6 +99,6 @@ public abstract class SkeletonEntityEntityMixin
 		at = @At("TAIL"),
 		cancellable = true
 	)
-	public void variantsandventures$skeleton$createSpawnPacket(CallbackInfoReturnable<Packet<?>> cir) {
+	public void variantsandventures$skeleton$createSpawnPacket(EntityTrackerEntry entityTrackerEntry, CallbackInfoReturnable<Packet<?>> cir) {
 	}
 }

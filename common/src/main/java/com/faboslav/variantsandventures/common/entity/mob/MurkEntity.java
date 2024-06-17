@@ -208,8 +208,8 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
-	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-		super.dropEquipment(source, lootingMultiplier, allowDrops);
+	protected void dropEquipment(ServerWorld world, DamageSource source, boolean causedByPlayer) {
+		super.dropEquipment(world, source, causedByPlayer);
 		Entity entity = source.getAttacker();
 		if (entity instanceof CreeperEntity creeperEntity) {
 			if (creeperEntity.shouldDropHead()) {

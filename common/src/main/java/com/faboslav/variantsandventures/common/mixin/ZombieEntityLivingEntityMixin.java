@@ -8,6 +8,4 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(LivingEntity.class)
 public abstract class ZombieEntityLivingEntityMixin extends ZombieEntityEntityMixin
 {
-	@Shadow
-	public abstract Random getRandom();
 }
