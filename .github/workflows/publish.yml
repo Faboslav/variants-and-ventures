@@ -30,7 +30,7 @@ jobs:
             -   name: "Set up JDK"
                 uses: actions/setup-java@v4.0.0
                 with:
-                    java-version: 17
+                    java-version: 21
                     distribution: temurin
 
             -   name: "Parse gradle properties"
