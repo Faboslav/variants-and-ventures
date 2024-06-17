@@ -2,7 +2,9 @@
 
 - Murk should be able to swim in the water similarly to drowned
 - Decreased Murk spawn chance
+- Fixed missing Murk death sound effect
 - Added ja_jp translations (Thanks to EndilCrafter)
+- Updated uk_ua translations (Thanks to unroman)
 
 ## 1.0.2
 
