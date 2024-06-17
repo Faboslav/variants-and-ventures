@@ -49,7 +49,6 @@ public final class GelidOnEntitySpawn
 			GelidEntity gelid = VariantsAndVenturesEntityTypes.GELID.get().create(
 				(ServerWorld) event.worldAccess(),
 				null,
-				null,
 				event.entity().getBlockPos(),
 				event.spawnReason(),
 				false,

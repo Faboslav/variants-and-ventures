@@ -13,9 +13,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.ConfigScreenHandler;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 public final class VariantsAndVenturesClientNeoForge
 {
@@ -31,11 +31,9 @@ public final class VariantsAndVenturesClientNeoForge
 	private static void onClientSetup(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
 			if (ModList.get().isLoaded("cloth_config")) {
-				ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () ->
-					new ConfigScreenHandler.ConfigScreenFactory(
-						(mc, screen) -> ConfigScreenBuilder.createConfigScreen(VariantsAndVentures.getConfig(), screen)
-					)
-				);
+				ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (client, screen) -> {
+					return ConfigScreenBuilder.createConfigScreen(VariantsAndVentures.getConfig(), screen);
+				});
 			}
 		});
 	}

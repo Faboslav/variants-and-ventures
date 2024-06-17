@@ -2,6 +2,7 @@ package com.faboslav.variantsandventures.common.events.lifecycle;
 
 import com.faboslav.variantsandventures.common.events.base.EventHandler;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnLocation;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.world.Heightmap;
@@ -20,7 +21,7 @@ public record RegisterEntitySpawnRestrictionsEvent(Registrar registrar)
 
 	public <T extends MobEntity> void register(
 		EntityType<T> entityType,
-		SpawnRestriction.Location location,
+		SpawnLocation location,
 		Heightmap.Type heightmap,
 		SpawnRestriction.SpawnPredicate<T> predicate
 	) {
@@ -29,7 +30,7 @@ public record RegisterEntitySpawnRestrictionsEvent(Registrar registrar)
 
 	public record Placement<T extends MobEntity>(
 		SpawnRestriction.SpawnPredicate<T> predicate,
-		SpawnRestriction.Location location,
+		SpawnLocation location,
 		Heightmap.Type heightmap
 	)
 	{

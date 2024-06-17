@@ -48,7 +48,6 @@ public final class StrayOnEntitySpawn
 			StrayEntity stray = EntityType.STRAY.create(
 				(ServerWorld) event.worldAccess(),
 				null,
-				null,
 				event.entity().getBlockPos(),
 				event.spawnReason(),
 				false,

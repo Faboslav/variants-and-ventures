@@ -5,9 +5,12 @@ import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 
@@ -34,7 +37,9 @@ public class VariantsAndVenturesItemGroups
 			.displayName((Text.translatable("item_group." + VariantsAndVentures.MOD_ID + ".main_tab")))
 			.icon(() -> {
 				ItemStack iconStack = VariantsAndVenturesItems.GELID_HEAD.get().getDefaultStack();
-				iconStack.getOrCreateNbt().putBoolean("isCreativeTabIcon", true);
+				NbtCompound nbtCompound = new NbtCompound();
+				nbtCompound.putBoolean("isCreativeTabIcon", true);
+				iconStack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbtCompound));
 				return iconStack;
 			})
 			.entries((itemDisplayParameters, entries) ->

@@ -49,7 +49,6 @@ public final class VerdantOnEntitySpawn
 			VerdantEntity verdant = VariantsAndVenturesEntityTypes.VERDANT.get().create(
 				(ServerWorld) event.worldAccess(),
 				null,
-				null,
 				event.entity().getBlockPos(),
 				event.spawnReason(),
 				false,

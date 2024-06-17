@@ -4,18 +4,16 @@ import net.minecraft.entity.EntityPose;
 
 public enum SkeletonEntityPose
 {
-	EMERGE,
-	IDLE;
+	IDLE(EntityPose.STANDING),
+	EMERGE(EntityPose.EMERGING);
 
-	public String getName() {
-		return "SKELETON_" + this.name();
-	}
+	private final EntityPose originalEntityPose;
 
 	public EntityPose get() {
-		return EntityPose.valueOf(this.getName());
+		return this.originalEntityPose;
 	}
 
-	static {
-		EntityPose.values();
+	SkeletonEntityPose(final EntityPose originalEntityPose) {
+		this.originalEntityPose = originalEntityPose;
 	}
 }

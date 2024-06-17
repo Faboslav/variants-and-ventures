@@ -132,7 +132,6 @@ public abstract class AbstractSkeletonEntityMixin extends SkeletonEntityMobEntit
 		LocalDifficulty difficulty,
 		SpawnReason spawnReason,
 		EntityData entityData,
-		NbtCompound entityNbt,
 		CallbackInfoReturnable<EntityData> cir
 	) {
 		if (

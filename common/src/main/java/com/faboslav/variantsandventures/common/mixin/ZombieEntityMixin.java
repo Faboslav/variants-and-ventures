@@ -131,7 +131,6 @@ public abstract class ZombieEntityMixin extends ZombieEntityMobEntityMixin imple
 		LocalDifficulty difficulty,
 		SpawnReason spawnReason,
 		EntityData entityData,
-		NbtCompound entityNbt,
 		CallbackInfoReturnable<EntityData> cir
 	) {
 		if (

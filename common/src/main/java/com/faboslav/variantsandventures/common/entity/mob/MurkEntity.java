@@ -22,12 +22,13 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootManager;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -73,12 +74,11 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		ServerWorldAccess world,
 		LocalDifficulty difficulty,
 		SpawnReason spawnReason,
-		@Nullable EntityData entityData,
-		@Nullable NbtCompound entityNbt
+		@Nullable EntityData entityData
 	) {
 		this.setVariant(Variant.getRandom(random));
 
-		return super.initialize(world, difficulty, spawnReason, entityData, entityNbt);
+		return super.initialize(world, difficulty, spawnReason, entityData);
 	}
 
 	public static boolean canSpawn(
@@ -104,10 +104,10 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
-	protected void initDataTracker() {
-		super.initDataTracker();
-		this.dataTracker.startTracking(VARIANT, 0);
-		this.dataTracker.startTracking(SHEARED, false);
+	protected void initDataTracker(DataTracker.Builder builder) {
+		super.initDataTracker(builder);
+		builder.add(VARIANT, 0);
+		builder.add(SHEARED, false);
 	}
 
 	@Override
@@ -254,7 +254,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			this.emitGameEvent(GameEvent.SHEAR, player);
 
 			if (this.getWorld().isClient() == false) {
-				itemStack.damage(1, player, (p) -> p.sendToolBreakStatus(hand));
+				itemStack.damage(1, player, PlayerEntity.getSlotForHand(hand));
 			}
 
 			return ActionResult.success(this.getWorld().isClient());
@@ -277,22 +277,10 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			world instanceof ServerWorld == false
 			|| world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT) == false
 		) {
-			VariantsAndVentures.getLogger().info("nope");
 			return;
 		}
 
-		LootManager lootManager = world.getServer().getLootManager();
-
-		if (lootManager == null) {
-			VariantsAndVentures.getLogger().info("nope2");
-			return;
-		}
-
-		Identifier fap = VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()));
-		VariantsAndVentures.getLogger().info(fap.toString());
-		LootTable boggedShearingLootTable = lootManager.getLootTable(
-			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
-		);
+		LootTable boggedShearingLootTable = world.getServer().getReloadableRegistries().getLootTable(RegistryKey.of(RegistryKeys.LOOT_TABLE,VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))));
 		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
 			.add(LootContextParameters.ORIGIN, this.getPos())
 			.add(LootContextParameters.THIS_ENTITY, this)

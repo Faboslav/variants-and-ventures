@@ -4,8 +4,12 @@ package com.faboslav.variantsandventures.common.items;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.mixin.SpawnEggItemAccessor;
 import com.mojang.datafixers.util.Pair;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.component.DataComponentType;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
@@ -13,6 +17,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.BuiltinRegistries;
+import net.minecraft.registry.Registries;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.Direction;
@@ -25,6 +31,7 @@ import java.util.function.Supplier;
 
 public class DispenserAddedSpawnEgg extends SpawnEggItem
 {
+	private static final MapCodec<EntityType<?>> ENTITY_TYPE_FIELD_CODEC = Registries.ENTITY_TYPE.getCodec().fieldOf("id");
 	private static final List<Pair<Supplier<? extends EntityType<? extends MobEntity>>, SpawnEggItem>> SPAWN_EGGS = new ArrayList<>();
 	private final Supplier<? extends EntityType<? extends MobEntity>> entityType;
 
@@ -42,15 +49,14 @@ public class DispenserAddedSpawnEgg extends SpawnEggItem
 	}
 
 	protected void setupDispenserBehavior() {
-		// Have to manually add dispenser behavior due to forge item registry event running too late.
 		DispenserBlock.registerBehavior(
 			this,
 			new ItemDispenserBehavior()
 			{
 				public ItemStack execute(@NotNull BlockPointer source, @NotNull ItemStack stack) {
 					Direction direction = source.state().get(DispenserBlock.FACING);
-					EntityType<?> entitytype = ((SpawnEggItem) stack.getItem()).getEntityType(stack.getNbt());
-					entitytype.spawn(source.world(), stack.getNbt(), null, source.pos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+					EntityType<?> entitytype = ((SpawnEggItem) stack.getItem()).getEntityType(stack);
+					entitytype.spawnFromItemStack(source.world(), stack, null, source.pos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
 					stack.decrement(1);
 					return stack;
 				}
@@ -58,20 +64,14 @@ public class DispenserAddedSpawnEgg extends SpawnEggItem
 	}
 
 	@Override
-	public EntityType<?> getEntityType(@Nullable NbtCompound nbt) {
-		if (nbt != null && nbt.contains("EntityTag", 10)) {
-			NbtCompound nbtCompound = nbt.getCompound("EntityTag");
-			if (nbtCompound.contains("id", 8)) {
-				return EntityType.get(nbtCompound.getString("id")).orElse(this.entityType.get());
-			}
-		}
-
-		return this.entityType.get();
+	public EntityType<?> getEntityType(ItemStack stack) {
+		var customData = stack.getOrDefault(DataComponentTypes.ENTITY_DATA, NbtComponent.DEFAULT);
+		return !customData.isEmpty() ? customData.get(ENTITY_TYPE_FIELD_CODEC).result().orElse(this.entityType.get()) : this.entityType.get();
 	}
 
 	@Override
 	public FeatureSet getRequiredFeatures() {
-		return getEntityType(null).getRequiredFeatures();
+		return getEntityType(ItemStack.EMPTY).getRequiredFeatures();
 	}
 
 	protected EntityType<?> getDefaultType() {
