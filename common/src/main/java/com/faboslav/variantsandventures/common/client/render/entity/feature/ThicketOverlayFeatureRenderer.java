@@ -39,6 +39,6 @@ public class ThicketOverlayFeatureRenderer<T extends ThicketEntity> extends Feat
 		float headYaw,
 		float headPitch
 	) {
-		render(this.getContextModel(), this.model, SKIN, matrices, vertexConsumers, light, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, 1);
+		render(this.getContextModel(), this.model, SKIN, matrices, vertexConsumers, light, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, -1);
 	}
 }

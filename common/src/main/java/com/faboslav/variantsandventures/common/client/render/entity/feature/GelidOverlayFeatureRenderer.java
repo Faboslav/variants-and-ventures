@@ -39,6 +39,6 @@ public class GelidOverlayFeatureRenderer<T extends GelidEntity> extends FeatureR
 		float headYaw,
 		float headPitch
 	) {
-		render(this.getContextModel(), this.model, SKIN, matrices, vertexConsumers, light, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, 1);
+		render(this.getContextModel(), this.model, SKIN, matrices, vertexConsumers, light, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, -1);
 	}
 }
