@@ -59,7 +59,7 @@
 	},
 	"entity.murk.death": {
 		"sounds": [
-			"variantsandventures:entity/murk/death"
+			"variantsandventures:entity/murk/death1"
 		],
 		"subtitle": "subtitles.entity.variantsandventures.murk.death"
 	},
