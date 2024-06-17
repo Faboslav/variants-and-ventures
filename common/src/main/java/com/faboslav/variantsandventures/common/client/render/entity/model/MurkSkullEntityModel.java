@@ -47,17 +47,4 @@ public final class MurkSkullEntityModel extends SkullEntityModel
 		this.head.yaw = yaw * 0.017453292F;
 		this.head.pitch = pitch * 0.017453292F;
 	}
-
-	public void render(
-		MatrixStack matrices,
-		VertexConsumer vertices,
-		int light,
-		int overlay,
-		float red,
-		float green,
-		float blue,
-		float alpha
-	) {
-		this.root.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-	}
 }
