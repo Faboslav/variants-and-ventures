@@ -24,7 +24,7 @@ public final class LeaveWaterGoal extends MoveToTargetPosGoal
 
 	protected boolean isTargetPos(WorldView world, BlockPos pos) {
 		BlockPos blockPos = pos.up();
-		return world.isAir(blockPos) && world.isAir(blockPos.up()) ? world.getBlockState(pos).hasSolidTopSurface(world, pos, this.murk):false;
+		return world.isAir(blockPos) && world.isAir(blockPos.up()) && world.getBlockState(pos).hasSolidTopSurface(world, pos, this.murk);
 	}
 
 	public void start() {

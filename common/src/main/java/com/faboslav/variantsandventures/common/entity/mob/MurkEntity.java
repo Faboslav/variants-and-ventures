@@ -104,15 +104,9 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		BlockPos pos,
 		Random random
 	) {
-		if (
-			!world.getFluidState(pos.down()).isIn(FluidTags.WATER)
-			|| !isValidSpawnDepth(world, pos)
-			|| random.nextInt(40) != 0
-		) {
-			return false;
-		}
-
-		return true;
+		return world.getFluidState(pos.down()).isIn(FluidTags.WATER)
+			   && isValidSpawnDepth(world, pos)
+			   && random.nextInt(40) == 0;
 	}
 
 	private static boolean isValidSpawnDepth(WorldAccess world, BlockPos pos) {
@@ -231,6 +225,11 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		return !this.isSwimming();
 	}
 
+	@Override
+	public boolean hasNoDrag() {
+		return this.isSwimming();
+	}
+
 	private boolean isTargetingUnderwater() {
 		if (this.targetingUnderwater) {
 			return true;
@@ -268,20 +267,13 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		}
 	}
 
-	@Override
-	public boolean isInSwimmingPose() {
-		return this.isSwimming();
-	}
-
 	public boolean hasFinishedCurrentPath() {
 		Path path = this.getNavigation().getCurrentPath();
 		if (path != null) {
 			BlockPos blockPos = path.getTarget();
 			if (blockPos != null) {
-				double d = this.squaredDistanceTo((double) blockPos.getX(), (double) blockPos.getY(), (double) blockPos.getZ());
-				if (d < 4.0) {
-					return true;
-				}
+				double d = this.squaredDistanceTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+				return d < 4.0;
 			}
 		}
 
