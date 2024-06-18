@@ -15,7 +15,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                mod_loader: [ fabric, forge, neoforge, quilt ]
+                mod_loader: [ fabric, forge, neoforge ]
                 script: [ client, server ]
 
         name: Run ${{ matrix.mod_loader }} ${{ matrix.script }}
@@ -23,7 +23,7 @@ jobs:
 
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v4.1.1
+                uses: actions/checkout@v4
                 with:
                     fetch-depth: 0
 
@@ -40,14 +40,14 @@ jobs:
 
             -   name: "Set up JDK"
                 if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
-                uses: actions/setup-java@v4.0.0
+                uses: actions/setup-java@v4
                 with:
                     java-version: 21
                     distribution: temurin
 
             -   name: "Setup Gradle and run build"
                 if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
-                uses: gradle/gradle-build-action@v2.11.1
+                uses: gradle/gradle-build-action@v3
                 with:
                     cache-read-only: false
                     gradle-version: wrapper
