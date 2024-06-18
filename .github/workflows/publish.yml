@@ -120,7 +120,7 @@ jobs:
 
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     version: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                    loaders: ${{ steps.enabled-platforms.outputs.LOADERS }}
+                    loaders: ${{ join(steps.enabled-platforms.outputs.LOADERS, ' ') }}
                     game-versions: "${{ matrix.branch }}"
                     dependencies: ""
                     changelog-file: RELEASE_CHANGELOG.md
