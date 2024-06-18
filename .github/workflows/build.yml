@@ -69,4 +69,3 @@ jobs:
                 uses: modmuss50/xvfb-action@v1
                 with:
                     run: ./.github/scripts/run-${{ matrix.script }}.sh ${{ matrix.mod_loader }}
-                    shell: bash
