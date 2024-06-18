@@ -38,12 +38,19 @@ jobs:
                         echo "is_mod_loader_supported=false" >> $GITHUB_OUTPUT
                     fi
 
-            -   name: "Set up JDK"
-                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
-                uses: actions/setup-java@v4
-                with:
-                    java-version: 21
-                    distribution: temurin
+            - name: "Set up JDK 17"
+              if: matrix.branch != '1.20.6' && matrix.branch != '1.21'
+              uses: actions/setup-java@v4
+              with:
+                  java-version: 17
+                  distribution: temurin
+
+            - name: "Set up JDK 21"
+              if: matrix.branch == '1.20.6' || matrix.branch == '1.21'
+              uses: actions/setup-java@v4
+              with:
+                  java-version: 21
+                  distribution: temurin
 
             -   name: "Setup Gradle and run build"
                 if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
@@ -62,4 +69,3 @@ jobs:
                 uses: modmuss50/xvfb-action@v1
                 with:
                     run: ./.github/scripts/run-${{ matrix.script }}.sh ${{ matrix.mod_loader }}
-                    shell: bash
