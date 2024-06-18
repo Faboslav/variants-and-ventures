@@ -61,7 +61,7 @@ jobs:
               run: |
                 platforms="${{ steps.gradle-properties.outputs.ENABLED_PLATFORMS }}"
                 platforms_array=$(echo "$platforms" | sed "s/,/','/g")
-                platforms_array="['$platforms_array','quilt']"
+                platforms_array=['$platforms_array','quilt']
                 echo "LOADERS=$platforms_array" >> $GITHUB_OUTPUT
 
             -   name: "Parse changelog"
