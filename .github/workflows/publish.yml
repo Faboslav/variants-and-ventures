@@ -6,7 +6,7 @@ on:
             branches:
                 description: 'List of branches to be published'
                 required: true
-                default: "['1.19.2', '1.19.3', '1.19.4', '1.20.1', '1.20.2', '1.20.4']"
+                default: "['1.19.2', '1.19.3', '1.19.4', '1.20.1', '1.20.2', '1.20.4', '1.20.6', '1.21']"
                 type: string
 
 jobs:
@@ -22,15 +22,15 @@ jobs:
 
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v4.1.1
+                uses: actions/checkout@v4
                 with:
                     ref: ${{ matrix.branch }}
                     fetch-depth: 0
 
             -   name: "Set up JDK"
-                uses: actions/setup-java@v4.0.0
+                uses: actions/setup-java@v4
                 with:
-                    java-version: 17
+                    java-version: 21
                     distribution: temurin
 
             -   name: "Parse gradle properties"
@@ -73,7 +73,7 @@ jobs:
                     bodyFile: RELEASE_CHANGELOG.md
 
             -   name: "Run gradle build"
-                uses: gradle/gradle-build-action@v2.11.1
+                uses: gradle/gradle-build-action@v2
                 with:
                     cache-read-only: true
                     generate-job-summary: false
@@ -81,7 +81,7 @@ jobs:
                     arguments: build
 
             -   name: "Run gradle mergeJars"
-                uses: gradle/gradle-build-action@v2.11.1
+                uses: gradle/gradle-build-action@v3
                 with:
                     cache-read-only: true
                     generate-job-summary: false
