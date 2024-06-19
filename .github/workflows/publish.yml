@@ -64,7 +64,7 @@ jobs:
                 platforms=$(echo "$platforms" | tr -d ' ')
                 platforms_array=$(echo "$platforms" | sed 's/,/","/g')
                 platforms_array="[$(echo \"$platforms_array\")]"
-                echo "LOADERS=\"$loaders\"" >> $GITHUB_OUTPUT
+                echo "LOADERS=$platforms_array" >> $GITHUB_OUTPUT
 
             -   name: "Parse changelog"
                 id: parse-changelog
