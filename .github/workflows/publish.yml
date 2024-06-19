@@ -61,9 +61,10 @@ jobs:
               run: |
                 platforms="${{ steps.gradle-properties.outputs.ENABLED_PLATFORMS }}"
                 platforms="$platforms,quilt"
-                parsedPlatforms=$(echo "'$platforms'" | sed "s/,/','/g")
-                platforms_array=[$parsedPlatforms]
-                echo "LOADERS=$platforms_array" >> $GITHUB_OUTPUT
+                platforms=$(echo "$platforms" | tr -d ' ')
+                IFS=',' read -r -a platforms_array <<< "$platforms"
+                loaders=$(IFS=' '; echo "${platforms_array[*]}")
+                echo "LOADERS=$loaders" >> $GITHUB_OUTPUT
 
             -   name: "Parse changelog"
                 id: parse-changelog
@@ -121,7 +122,7 @@ jobs:
 
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     version: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                    loaders: ${{ join(steps.enabled-platforms.outputs.LOADERS, ' ') }}
+                    loaders: ${{ steps.enabled-platforms.outputs.LOADERS }}
                     game-versions: "${{ matrix.branch }}"
                     dependencies: ""
                     changelog-file: RELEASE_CHANGELOG.md
