@@ -12,5 +12,4 @@ include("fabric")
 include("forge")
 include("neoforge")
 
-
 rootProject.name = "variants-and-ventures"
