@@ -332,14 +332,14 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			return;
 		}
 
-		LootTable boggedShearingLootTable = lootManager.getTable(
+		LootTable shearingLootTable = lootManager.getTable(
 			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
 		);
 		LootContext lootContextParameterSet = new LootContext.Builder((ServerWorld) world)
 			.parameter(LootContextParameters.ORIGIN, this.getPos())
 			.parameter(LootContextParameters.THIS_ENTITY, this)
 			.build(LootContextTypes.GIFT);
-		ObjectArrayList<ItemStack> shearingDrops = boggedShearingLootTable.generateLoot(lootContextParameterSet);
+		ObjectArrayList<ItemStack> shearingDrops = shearingLootTable.generateLoot(lootContextParameterSet);
 
 		for (ItemStack shearingDrop : shearingDrops) {
 			this.dropStack(shearingDrop);
