@@ -30,7 +30,6 @@
 	],
 	"client": [
 		"AbstractZombieModelMixin",
-		"SkeletonEntityModelMixin",
-		"SkullBlockEntityRendererMixin"
+		"SkeletonEntityModelMixin"
 	]
 }
