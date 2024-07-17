@@ -46,7 +46,7 @@ jobs:
                     distribution: temurin
 
             -   name: "Run gradle build"
-                uses: gradle/gradle-build-action@v3
+                uses: gradle/actions/setup-gradle@v3
                 with:
                     generate-job-summary: false
                     gradle-version: wrapper
