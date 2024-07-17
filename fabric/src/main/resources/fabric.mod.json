@@ -37,7 +37,7 @@
 	],
 	"depends": {
 		"java": ">=${modJavaVersion}",
-		"minecraft": ">=${minecraftVersion}",
+		"minecraft": ">=${minMinecraftVersion}",
 		"fabricloader": ">=${fabricLoaderVersion}",
 		"fabric": ">=${fabricApiVersion}"
 	},
