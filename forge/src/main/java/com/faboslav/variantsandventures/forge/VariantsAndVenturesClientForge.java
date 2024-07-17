@@ -10,7 +10,6 @@ import com.faboslav.variantsandventures.common.events.client.RegisterSkullModelE
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesItems;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
-import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;

@@ -1,23 +1,16 @@
 package com.faboslav.variantsandventures.common;
 
 import com.faboslav.variantsandventures.common.block.SkullBlockType;
-import com.faboslav.variantsandventures.common.client.render.entity.GelidEntityRenderer;
-import com.faboslav.variantsandventures.common.client.render.entity.MurkEntityRenderer;
-import com.faboslav.variantsandventures.common.client.render.entity.ThicketEntityRenderer;
-import com.faboslav.variantsandventures.common.client.render.entity.VerdantEntityRenderer;
 import com.faboslav.variantsandventures.common.client.render.entity.model.MurkSkullEntityModel;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityLayersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterSkullModelEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityRenderers;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.entity.model.EntityModelLoader;
 import net.minecraft.client.render.entity.model.SkullEntityModel;
-import net.minecraft.client.render.model.ModelLoader;
 
 public final class VariantsAndVenturesClient
 {

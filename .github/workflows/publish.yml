@@ -43,13 +43,13 @@ jobs:
                         esac
                     done < gradle.properties
 
-            - name: "Parse enabled platforms"
-              id: enabled-platforms
-              run: |
-                platforms="${{ steps.gradle-properties.outputs.ENABLED_PLATFORMS }}"
-                platforms_array=$(echo "$platforms" | sed "s/,/','/g")
-                platforms_array=['$platforms_array','quilt']
-                echo "LOADERS=$platforms_array" >> $GITHUB_OUTPUT
+            -   name: "Parse enabled platforms"
+                id: enabled-platforms
+                run: |
+                    platforms="${{ steps.gradle-properties.outputs.ENABLED_PLATFORMS }}"
+                    platforms_array=$(echo "$platforms" | sed "s/,/','/g")
+                    platforms_array=['$platforms_array','quilt']
+                    echo "LOADERS=$platforms_array" >> $GITHUB_OUTPUT
 
             -   name: "Parse changelog"
                 id: parse-changelog
@@ -76,11 +76,11 @@ jobs:
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }} for Minecraft ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
                     bodyFile: RELEASE_CHANGELOG.md
 
-            - name: "Set up JDK"
-              uses: actions/setup-java@v4
-              with:
-                  java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
-                  distribution: temurin
+            -   name: "Set up JDK"
+                uses: actions/setup-java@v4
+                with:
+                    java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+                    distribution: temurin
 
             -   name: "Run gradle build"
                 uses: gradle/gradle-build-action@v3

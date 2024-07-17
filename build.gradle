@@ -51,7 +51,7 @@ allprojects {
 
 	processResources {
 		def expandProps = [
-			"modJavaVersion"   : mod_java_version,
+			"modJavaVersion"     : mod_java_version,
 			'modId'              : mod_id,
 			'modName'            : mod_name,
 			'modDescription'     : mod_description,

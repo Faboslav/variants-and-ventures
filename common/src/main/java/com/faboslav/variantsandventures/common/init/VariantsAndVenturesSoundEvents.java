@@ -6,7 +6,6 @@ import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistri
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import java.util.function.Supplier;

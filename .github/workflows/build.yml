@@ -39,11 +39,11 @@ jobs:
                         esac
                     done < gradle.properties
 
-            - name: "Set up JDK"
-              uses: actions/setup-java@v4
-              with:
-                  java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
-                  distribution: temurin
+            -   name: "Set up JDK"
+                uses: actions/setup-java@v4
+                with:
+                    java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+                    distribution: temurin
 
             -   name: "Run gradle build"
                 uses: gradle/gradle-build-action@v3

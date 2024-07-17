@@ -1,6 +1,5 @@
 package com.faboslav.variantsandventures.fabric.mixin;
 
-import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.block.SkullBlockType;
 import com.faboslav.variantsandventures.common.client.render.entity.GelidEntityRenderer;
 import com.faboslav.variantsandventures.common.client.render.entity.MurkEntityRenderer;
@@ -46,7 +45,10 @@ public abstract class SkullBlockEntityRendererMixin
 		cir.setReturnValue(variantsandventures$builder.build());
 	}
 
-	private static void variantsandventures$addModel(SkullBlock.SkullType skullType, SkullBlockEntityModel skullBlockEntityModel) {
+	private static void variantsandventures$addModel(
+		SkullBlock.SkullType skullType,
+		SkullBlockEntityModel skullBlockEntityModel
+	) {
 		variantsandventures$builder.put(skullType, skullBlockEntityModel);
 	}
 
