@@ -3,7 +3,7 @@ plugins {
 }
 
 allprojects {
-	archivesBaseName = "${rootProject.mod_id}-forge-mc${rootProject.minecraft_version}"
+	archivesBaseName = "${mod_id}-forge-mc${minecraft_version}"
 }
 
 loom {
@@ -30,37 +30,17 @@ configurations {
 }
 
 dependencies {
-	forge "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+	forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
 	common(project(path: ":common", configuration: "namedElements")) { transitive false }
 	shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
 	// Mixin extras (https://github.com/LlamaLad7/MixinExtras)
-	implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${rootProject.mixin_extras_version}"))
-	implementation(include("io.github.llamalad7:mixinextras-forge:${rootProject.mixin_extras_version}"))
+	implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
+	implementation(include("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}"))
 
 	// Cloth config (https://www.curseforge.com/minecraft/mc-mods/cloth-config)
-	modImplementation("me.shedaniel.cloth:cloth-config-forge:${rootProject.cloth_config_version}")
-}
-
-processResources {
-	inputs.property "modId", rootProject.mod_id
-	inputs.property "modVersion", rootProject.mod_version
-	inputs.property "modName", rootProject.mod_name
-	inputs.property "modDescription", rootProject.mod_description
-	inputs.property "modAuthor", rootProject.mod_author
-	inputs.property "minecraftVersion", rootProject.minecraft_version
-	inputs.property "forgeVersion", rootProject.forge_version
-
-	filesMatching("META-INF/mods.toml") {
-		expand "modId": rootProject.mod_id,
-			"modVersion": rootProject.mod_version,
-			"modName": rootProject.mod_name,
-			"modDescription": rootProject.mod_description,
-			"modAuthor": rootProject.mod_author,
-			"minecraftVersion": rootProject.minecraft_version,
-			"forgeVersion": rootProject.forge_version
-	}
+	modImplementation("me.shedaniel.cloth:cloth-config-forge:${cloth_config_version}")
 }
 
 shadowJar {

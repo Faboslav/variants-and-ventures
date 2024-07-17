@@ -221,6 +221,11 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
+	public boolean canBreatheInWater() {
+		return true;
+	}
+
+	@Override
 	public boolean isPushedByFluids() {
 		return !this.isSwimming();
 	}
@@ -320,19 +325,15 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			world instanceof ServerWorld == false
 			|| world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT) == false
 		) {
-			VariantsAndVentures.getLogger().info("nope");
 			return;
 		}
 
 		LootManager lootManager = world.getServer().getLootManager();
 
 		if (lootManager == null) {
-			VariantsAndVentures.getLogger().info("nope2");
 			return;
 		}
 
-		Identifier fap = VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()));
-		VariantsAndVentures.getLogger().info(fap.toString());
 		LootTable boggedShearingLootTable = lootManager.getTable(
 			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
 		);
