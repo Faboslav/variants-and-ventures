@@ -36,8 +36,8 @@
 		"variantsandventures-fabric.mixins.json"
 	],
 	"depends": {
-		"java": ">=17",
-		"minecraft": ">=${minecraftVersion}",
+		"java": ">=${modJavaVersion}",
+		"minecraft": ">=${minMinecraftVersion}",
 		"fabricloader": ">=${fabricLoaderVersion}",
 		"fabric": ">=${fabricApiVersion}"
 	},

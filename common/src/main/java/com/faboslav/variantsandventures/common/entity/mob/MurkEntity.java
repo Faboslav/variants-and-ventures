@@ -42,7 +42,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -220,6 +219,11 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
+	public boolean canBreatheInWater() {
+		return true;
+	}
+
+	@Override
 	public boolean isPushedByFluids() {
 		return !this.isSwimming();
 	}
@@ -319,27 +323,23 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			world instanceof ServerWorld == false
 			|| world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT) == false
 		) {
-			VariantsAndVentures.getLogger().info("nope");
 			return;
 		}
 
 		LootManager lootManager = world.getServer().getLootManager();
 
 		if (lootManager == null) {
-			VariantsAndVentures.getLogger().info("nope2");
 			return;
 		}
 
-		Identifier fap = VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()));
-		VariantsAndVentures.getLogger().info(fap.toString());
-		LootTable boggedShearingLootTable = lootManager.getLootTable(
+		LootTable shearingLootTable = lootManager.getLootTable(
 			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
 		);
 		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
 			.add(LootContextParameters.ORIGIN, this.getPos())
 			.add(LootContextParameters.THIS_ENTITY, this)
 			.build(LootContextTypes.GIFT);
-		ObjectArrayList<ItemStack> shearingDrops = boggedShearingLootTable.generateLoot(lootContextParameterSet);
+		ObjectArrayList<ItemStack> shearingDrops = shearingLootTable.generateLoot(lootContextParameterSet);
 
 		for (ItemStack shearingDrop : shearingDrops) {
 			this.dropStack(shearingDrop);
