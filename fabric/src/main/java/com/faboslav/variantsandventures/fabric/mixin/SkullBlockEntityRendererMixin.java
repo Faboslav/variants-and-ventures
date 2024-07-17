@@ -1,13 +1,12 @@
-package com.faboslav.variantsandventures.common.mixin;
+package com.faboslav.variantsandventures.fabric.mixin;
 
 import com.faboslav.variantsandventures.common.block.SkullBlockType;
 import com.faboslav.variantsandventures.common.client.render.entity.GelidEntityRenderer;
 import com.faboslav.variantsandventures.common.client.render.entity.MurkEntityRenderer;
 import com.faboslav.variantsandventures.common.client.render.entity.ThicketEntityRenderer;
 import com.faboslav.variantsandventures.common.client.render.entity.VerdantEntityRenderer;
-import com.faboslav.variantsandventures.common.client.render.entity.model.MurkSkullEntityModel;
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
+import com.faboslav.variantsandventures.common.events.client.RegisterSkullModelEvent;
 import com.google.common.collect.ImmutableMap;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -16,9 +15,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.SkullBlock;
 import net.minecraft.client.render.block.entity.SkullBlockEntityModel;
 import net.minecraft.client.render.block.entity.SkullBlockEntityRenderer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
-import net.minecraft.client.render.entity.model.SkullEntityModel;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,6 +28,8 @@ import java.util.Map;
 @Environment(EnvType.CLIENT)
 public abstract class SkullBlockEntityRendererMixin
 {
+	private static ImmutableMap.Builder<SkullBlock.SkullType, SkullBlockEntityModel> variantsandventures$builder = ImmutableMap.builder();
+
 	@Inject(
 		at = @At("RETURN"),
 		method = "getModels",
@@ -40,13 +39,17 @@ public abstract class SkullBlockEntityRendererMixin
 		EntityModelLoader modelLoader,
 		CallbackInfoReturnable<Map<SkullBlock.SkullType, SkullBlockEntityModel>> cir
 	) {
-		ImmutableMap.Builder<SkullBlock.SkullType, SkullBlockEntityModel> builder = ImmutableMap.builder();
-		builder.put(SkullBlockType.GELID.get(), new SkullEntityModel(modelLoader.getModelPart(EntityModelLayers.ZOMBIE_HEAD)));
-		builder.put(SkullBlockType.MURK.get(), new MurkSkullEntityModel(modelLoader.getModelPart(VariantsAndVenturesModelLayers.MURK_SKULL)));
-		builder.put(SkullBlockType.THICKET.get(), new SkullEntityModel(modelLoader.getModelPart(EntityModelLayers.ZOMBIE_HEAD)));
-		builder.put(SkullBlockType.VERDANT.get(), new SkullEntityModel(modelLoader.getModelPart(EntityModelLayers.SKELETON_SKULL)));
-		builder.putAll(cir.getReturnValue());
-		cir.setReturnValue(builder.build());
+		variantsandventures$builder = ImmutableMap.builder();
+		variantsandventures$builder.putAll(cir.getReturnValue());
+		RegisterSkullModelEvent.EVENT.invoke(new RegisterSkullModelEvent(SkullBlockEntityRendererMixin::variantsandventures$addModel, modelLoader));
+		cir.setReturnValue(variantsandventures$builder.build());
+	}
+
+	private static void variantsandventures$addModel(
+		SkullBlock.SkullType skullType,
+		SkullBlockEntityModel skullBlockEntityModel
+	) {
+		variantsandventures$builder.put(skullType, skullBlockEntityModel);
 	}
 
 	@WrapOperation(
