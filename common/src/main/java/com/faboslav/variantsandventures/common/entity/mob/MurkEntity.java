@@ -331,7 +331,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		if (lootManager == null) {
 			return;
 		}
-
+		
 		LootTable shearingLootTable = lootManager.getLootTable(
 			VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))
 		);
