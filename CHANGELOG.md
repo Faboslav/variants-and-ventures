@@ -3,9 +3,6 @@
 - Fixed skull model related crashes
 - Murk Fresh Animations support (Thanks to EgeK)
 - Added vi_vn translations (Thanks to godkyo98)
-
-## 1.0.4
-
 - Fixed Murk not being able to breath underwater
 
 ## 1.0.3
