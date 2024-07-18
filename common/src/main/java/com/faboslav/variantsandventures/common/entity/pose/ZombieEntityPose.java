@@ -4,16 +4,28 @@ import net.minecraft.entity.EntityPose;
 
 public enum ZombieEntityPose
 {
-	IDLE(EntityPose.STANDING),
-	EMERGE(EntityPose.EMERGING);
+	EMERGE,
+	IDLE;
 
-	private final EntityPose originalEntityPose;
+	private int index = 0;
 
-	public EntityPose get() {
-		return this.originalEntityPose;
+	public int getIndex() {
+		return index;
 	}
 
-	ZombieEntityPose(final EntityPose originalEntityPose) {
-		this.originalEntityPose = originalEntityPose;
+	public void setIndex(int index) {
+		this.index = index;
+	}
+
+	public String getName() {
+		return "ZOMBIE_" + this.name();
+	}
+
+	public EntityPose get() {
+		return EntityPose.valueOf(this.getName());
+	}
+
+	static {
+		EntityPose.values();
 	}
 }
