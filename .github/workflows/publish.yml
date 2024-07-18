@@ -27,20 +27,6 @@ jobs:
                     ref: ${{ matrix.branch }}
                     fetch-depth: 0
 
-            - name: "Set up JDK 17"
-              if: matrix.branch != '1.20.6' && matrix.branch != '1.21'
-              uses: actions/setup-java@v4
-              with:
-                  java-version: 17
-                  distribution: temurin
-
-            - name: "Set up JDK 21"
-              if: matrix.branch == '1.20.6' || matrix.branch == '1.21'
-              uses: actions/setup-java@v4
-              with:
-                  java-version: 21
-                  distribution: temurin
-
             -   name: "Parse gradle properties"
                 id: gradle-properties
                 run: |
@@ -49,6 +35,7 @@ jobs:
                         value=$(echo $value | awk '{$1=$1;print}')
                     
                         case "$key" in
+                          mod_java_version) echo "JAVA_VERSION=$value" >> $GITHUB_OUTPUT ;;
                           minecraft_version) echo "MINECRAFT_VERSION=$value" >> $GITHUB_OUTPUT ;;
                           mod_name) echo "MOD_NAME=$value" >> $GITHUB_OUTPUT ;;
                           mod_version) echo "MOD_VERSION=$value" >> $GITHUB_OUTPUT ;;
@@ -56,15 +43,13 @@ jobs:
                         esac
                     done < gradle.properties
 
-            - name: "Parse enabled platforms"
-              id: enabled-platforms
-              run: |
-                platforms="${{ steps.gradle-properties.outputs.ENABLED_PLATFORMS }}"
-                platforms="$platforms,quilt"
-                platforms=$(echo "$platforms" | tr -d ' ')
-                IFS=',' read -r -a platforms_array <<< "$platforms"
-                loaders=$(IFS=' '; echo "${platforms_array[*]}")
-                echo "LOADERS=$loaders" >> $GITHUB_OUTPUT
+            -   name: "Parse enabled platforms"
+                id: enabled-platforms
+                run: |
+                    platforms="${{ steps.gradle-properties.outputs.ENABLED_PLATFORMS }}"
+                    platforms_array=$(echo "$platforms" | sed "s/,/','/g")
+                    platforms_array=['$platforms_array','quilt']
+                    echo "LOADERS=$platforms_array" >> $GITHUB_OUTPUT
 
             -   name: "Parse changelog"
                 id: parse-changelog
@@ -91,8 +76,14 @@ jobs:
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }} for Minecraft ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
                     bodyFile: RELEASE_CHANGELOG.md
 
+            -   name: "Set up JDK"
+                uses: actions/setup-java@v4
+                with:
+                    java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
+                    distribution: temurin
+
             -   name: "Run gradle build"
-                uses: gradle/gradle-build-action@v2
+                uses: gradle/gradle-build-action@v3
                 with:
                     cache-read-only: true
                     generate-job-summary: false
@@ -112,6 +103,7 @@ jobs:
                 with:
                     github-token: ${{ secrets.GITHUB_TOKEN }}
                     github-tag: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    github-commitish: ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
 
                     curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID }}
                     curseforge-token: ${{ secrets.CURSEFORGE_RELEASE_TOKEN }}
@@ -122,7 +114,7 @@ jobs:
 
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     version: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                    loaders: "${{ steps.enabled-platforms.outputs.LOADERS }}"
+                    loaders: ${{ join(steps.enabled-platforms.outputs.LOADERS, ' ') }}
                     game-versions: "${{ matrix.branch }}"
                     dependencies: ""
                     changelog-file: RELEASE_CHANGELOG.md

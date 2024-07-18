@@ -18,7 +18,7 @@ import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 
 @Mod(VariantsAndVentures.MOD_ID)
 public final class VariantsAndVenturesNeoForge
@@ -62,12 +62,12 @@ public final class VariantsAndVenturesNeoForge
 		RegisterEntityAttributesEvent.EVENT.invoke(new RegisterEntityAttributesEvent((entity, builder) -> event.put(entity, builder.build())));
 	}
 
-	private static void onRegisterSpawnRestrictions(SpawnPlacementRegisterEvent event) {
+	private static void onRegisterSpawnRestrictions(RegisterSpawnPlacementsEvent event) {
 		RegisterEntitySpawnRestrictionsEvent.EVENT.invoke(new RegisterEntitySpawnRestrictionsEvent(VariantsAndVenturesNeoForge.registerEntitySpawnRestriction(event)));
 	}
 
 	private static RegisterEntitySpawnRestrictionsEvent.Registrar registerEntitySpawnRestriction(
-		SpawnPlacementRegisterEvent event
+		RegisterSpawnPlacementsEvent event
 	) {
 		return new RegisterEntitySpawnRestrictionsEvent.Registrar()
 		{
@@ -76,7 +76,7 @@ public final class VariantsAndVenturesNeoForge
 				EntityType<T> type,
 				RegisterEntitySpawnRestrictionsEvent.Placement<T> placement
 			) {
-				event.register(type, placement.location(), placement.heightmap(), placement.predicate(), SpawnPlacementRegisterEvent.Operation.AND);
+				event.register(type, placement.location(), placement.heightmap(), placement.predicate(), RegisterSpawnPlacementsEvent.Operation.AND);
 			}
 		};
 	}

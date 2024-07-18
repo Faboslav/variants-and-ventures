@@ -22,7 +22,7 @@ config = "variantsandventures-neoforge.mixins.json"
 [[dependencies.${ modId }]]
 modId = "minecraft"
 required = true
-versionRange = "[${minecraftVersion},)"
+versionRange = "[${minMinecraftVersion},)"
 
 [modproperties.${ modId }]
 catalogueImageIcon = "catalogue_icon.png"

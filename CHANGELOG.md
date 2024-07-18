@@ -1,3 +1,12 @@
+## 1.0.5
+
+- Fixed skull model related crashes
+- Murk Fresh Animations support (Thanks to EgeK)
+
+## 1.0.4
+
+- Fixed Murk not being able to breath underwater
+
 ## 1.0.3
 
 - Murk should be able to swim in the water similarly to drowned
