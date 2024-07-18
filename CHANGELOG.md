@@ -1,4 +1,4 @@
-## 1.0.5
+## 1.0.4
 
 - Fixed skull model related crashes
 - Murk Fresh Animations support (Thanks to EgeK)
