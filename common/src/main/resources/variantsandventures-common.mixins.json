@@ -1,13 +1,14 @@
 {
 	"required": true,
 	"package": "com.faboslav.variantsandventures.common.mixin",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_${modJavaVersion}",
 	"minVersion": "0.8",
 	"injectors": {
 		"defaultRequire": 1
 	},
 	"mixins": [
 		"AbstractSkeletonEntityMixin",
+		"AddCustomEntityPoseMixin",
 		"AddCustomSkullBlockTypeMixin",
 		"BlockEntityTypeAccessor",
 		"DungeonFeatureMixin",
