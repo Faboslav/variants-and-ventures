@@ -7,7 +7,6 @@ import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.component.DataComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.EntityType;
@@ -16,14 +15,11 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SpawnEggItem;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.BuiltinRegistries;
 import net.minecraft.registry.Registries;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +62,7 @@ public class DispenserAddedSpawnEgg extends SpawnEggItem
 	@Override
 	public EntityType<?> getEntityType(ItemStack stack) {
 		var customData = stack.getOrDefault(DataComponentTypes.ENTITY_DATA, NbtComponent.DEFAULT);
-		return !customData.isEmpty() ? customData.get(ENTITY_TYPE_FIELD_CODEC).result().orElse(this.entityType.get()) : this.entityType.get();
+		return !customData.isEmpty() ? customData.get(ENTITY_TYPE_FIELD_CODEC).result().orElse(this.entityType.get()):this.entityType.get();
 	}
 
 	@Override

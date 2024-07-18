@@ -13,7 +13,9 @@ import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.world.Heightmap;
 
