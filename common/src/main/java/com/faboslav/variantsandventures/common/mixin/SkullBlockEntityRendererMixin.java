@@ -6,22 +6,15 @@ import com.faboslav.variantsandventures.common.client.render.entity.MurkEntityRe
 import com.faboslav.variantsandventures.common.client.render.entity.ThicketEntityRenderer;
 import com.faboslav.variantsandventures.common.client.render.entity.VerdantEntityRenderer;
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
-import com.faboslav.variantsandventures.common.events.client.RegisterSkullModelEvent;
-import com.google.common.collect.ImmutableMap;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.SkullBlock;
-import net.minecraft.client.render.block.entity.SkullBlockEntityModel;
 import net.minecraft.client.render.block.entity.SkullBlockEntityRenderer;
-import net.minecraft.client.render.entity.model.EntityModelLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Mixin(SkullBlockEntityRenderer.class)
 @Environment(EnvType.CLIENT)
