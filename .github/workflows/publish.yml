@@ -3,6 +3,11 @@ name: "Publish"
 on:
     workflow_dispatch:
         inputs:
+            mod_loaders:
+                description: 'List of mod loaders to be published'
+                required: true
+                default: "['fabric', 'forge', 'neoforge']"
+                type: string
             branches:
                 description: 'List of branches to be published'
                 required: true
@@ -12,13 +17,23 @@ on:
 jobs:
     publish:
         runs-on: ubuntu-latest
-        name: Publish ${{ matrix.branch }}
+        name: Publish ${{ matrix.branch }} ${{ matrix.mod_loader }}
         timeout-minutes: 60
         strategy:
             max-parallel: 3
             fail-fast: false
             matrix:
                 branch: ${{ fromJson(inputs.branches) }}
+                mod_loader: ${{ fromJson(inputs.mod_loaders) }}
+                include:
+                    -   mod_loader: "fabric"
+                        supported_mod_loaders: [ "fabric", "quilt" ]
+
+                    -   mod_loader: "forge"
+                        supported_mod_loaders: [ "forge" ]
+
+                    -   mod_loader: "neoforge"
+                        supported_mod_loaders: [ "neoforge" ]
 
         steps:
             -   name: "Checkout repository"
@@ -27,7 +42,19 @@ jobs:
                     ref: ${{ matrix.branch }}
                     fetch-depth: 0
 
+            -   name: "Check if the mod loader is supported"
+                id: check-mod-loader
+                run: |
+                    if [ -d ${{ matrix.mod_loader }} ]; then
+                        echo "Mod loader is supported"
+                        echo "is_mod_loader_supported=true" >> $GITHUB_OUTPUT
+                    else
+                        echo "Mod loader is not supported"
+                        echo "is_mod_loader_supported=false" >> $GITHUB_OUTPUT
+                    fi
+
             -   name: "Parse gradle properties"
+                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
                 id: gradle-properties
                 run: |
                     while IFS='=' read -r key value; do
@@ -37,36 +64,25 @@ jobs:
                         case "$key" in
                           mod_java_version) echo "JAVA_VERSION=$value" >> $GITHUB_OUTPUT ;;
                           minecraft_version) echo "MINECRAFT_VERSION=$value" >> $GITHUB_OUTPUT ;;
+                          min_minecraft_version) echo "MIN_MINECRAFT_VERSION=$value" >> $GITHUB_OUTPUT ;;
                           mod_name) echo "MOD_NAME=$value" >> $GITHUB_OUTPUT ;;
                           mod_version) echo "MOD_VERSION=$value" >> $GITHUB_OUTPUT ;;
-                          enabled_platforms) echo "ENABLED_PLATFORMS=$value" >> $GITHUB_OUTPUT ;;
                         esac
                     done < gradle.properties
 
-            - name: "Parse enabled platforms"
-              id: enabled-platforms
-              run: |
-                  platforms="${{ steps.gradle-properties.outputs.ENABLED_PLATFORMS }}"
-                  platforms="$platforms,quilt"
-                  platforms=$(echo "$platforms" | tr -d ' ')
-                  IFS=',' read -r -a platforms_array <<< "$platforms"
-                  loaders=$(IFS=' '; echo "${platforms_array[*]}")
-                  echo "LOADERS=$loaders" >> $GITHUB_OUTPUT
-
             -   name: "Parse changelog"
+                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
                 id: parse-changelog
                 run: |
                     changelog=$(cat CHANGELOG.md)
                     tag=${{ steps.gradle-properties.outputs.MOD_VERSION }}
 
-                    list=$(echo "$changelog" | sed -n "/^## $tag$/,/^## [0-9]/ {
-                    /^## [0-9]/d;
-                    p
-                    }" | sed '1d;/^$/d')
+                    list=$(echo "$changelog" | sed -n "/^## $tag/,/^## [0-9]/p" | sed -e '1d;$d' -e '/^$/d')
 
                     echo "$list" > RELEASE_CHANGELOG.md
 
             -   name: "Create github release"
+                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
                 continue-on-error: true
                 uses: ncipollo/release-action@v1
                 with:
@@ -84,23 +100,17 @@ jobs:
                     java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
                     distribution: temurin
 
-            -   name: "Run gradle build"
+            -   name: "Setup gradle and run build"
+                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
                 uses: gradle/gradle-build-action@v3
                 with:
                     cache-read-only: true
                     generate-job-summary: false
                     gradle-version: wrapper
-                    arguments: build
+                    arguments: ${{ matrix.mod_loader }}:build
 
-            -   name: "Run gradle mergeJars"
-                uses: gradle/gradle-build-action@v3
-                with:
-                    cache-read-only: true
-                    generate-job-summary: false
-                    gradle-version: wrapper
-                    arguments: mergeJars
-
-            -   name: Publish
+            -   name: Publish ${{ matrix.mod_loader }}
+                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
                 uses: Kir-Antipov/mc-publish@v3.3.0
                 with:
                     github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -112,16 +122,15 @@ jobs:
 
                     modrinth-id: ${{ vars.MODRINTH_PROJECT_ID }}
                     modrinth-featured: true
-                    modrinth-token: ${{ secrets.MODRINTH_RELEASE_TOKEN }}
+                    modrinth-token: ${{ secrets.MODRINTH_RELEASE_TOKEN}}
 
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                    version: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                    loaders: "${{ steps.enabled-platforms.outputs.LOADERS }}"
-                    game-versions: "${{ matrix.branch }}"
-                    dependencies: ""
+                    version: ${{ matrix.mod_loader }}-mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    loaders: ${{ join(matrix.supported_mod_loaders, ' ') }}
+                    game-versions: "${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}\n${{ steps.gradle-properties.outputs.MIN_MINECRAFT_VERSION }}"
                     changelog-file: RELEASE_CHANGELOG.md
                     files: |
-                        build/libs/merged/!(*-@(dev|dev-shadow|sources|javadoc)).jar
+                        ${{ matrix.mod_loader }}/build/libs/!(*-@(dev|dev-shadow|sources|javadoc)).jar
 
     clear-cache:
         needs: publish
