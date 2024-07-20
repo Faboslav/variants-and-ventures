@@ -95,6 +95,7 @@ jobs:
                     bodyFile: RELEASE_CHANGELOG.md
 
             -   name: "Set up JDK"
+                if: steps.check-mod-loader.outputs.is_mod_loader_supported == 'true'
                 uses: actions/setup-java@v4
                 with:
                     java-version: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
