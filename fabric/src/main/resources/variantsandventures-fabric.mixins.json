@@ -9,8 +9,5 @@
 	"mixins": [
 		"PointOfInterestTypesAccessor",
 		"SpawnHelperMixin"
-	],
-	"client": [
-		"SkullBlockEntityRendererMixin"
 	]
 }
