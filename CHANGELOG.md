@@ -1,3 +1,7 @@
+## 1.0.5
+
+- Removed custom head/skull blocks
+
 ## 1.0.4
 
 - Fixed skull model related crashes
