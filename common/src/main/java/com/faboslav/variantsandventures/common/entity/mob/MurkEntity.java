@@ -205,11 +205,6 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
-	public boolean canBreatheInWater() {
-		return true;
-	}
-
-	@Override
 	public boolean isPushedByFluids() {
 		return !this.isSwimming();
 	}
