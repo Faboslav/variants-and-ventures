@@ -8,8 +8,5 @@
 	},
 	"mixins": [
 		"PointOfInterestTypesAccessor"
-	],
-	"client": [
-		"SkullBlockEntityRendererMixin"
 	]
 }
