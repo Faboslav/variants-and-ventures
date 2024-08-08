@@ -50,7 +50,6 @@ public final class VariantsAndVentures
 	}
 
 	public static void lateInit() {
-		VariantsAndVenturesBlockEntityTypes.lateInit();
 	}
 
 	private static void initEvents() {
