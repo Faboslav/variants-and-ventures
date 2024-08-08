@@ -12,15 +12,14 @@ import java.util.stream.Stream;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public interface ResourcefulRegistry<T>
-{
-	<I extends T> RegistryEntry<I> register(String id, Supplier<I> supplier);
+public interface ResourcefulRegistry<T> {
+    <I extends T> RegistryEntry<I> register(String id, Supplier<I> supplier);
 
-	Collection<RegistryEntry<T>> getEntries();
+    Collection<RegistryEntry<T>> getEntries();
 
-	default Stream<RegistryEntry<T>> stream() {
-		return getEntries().stream();
-	}
+    default Stream<RegistryEntry<T>> stream() {
+        return getEntries().stream();
+    }
 
-	void init();
+    void init();
 }

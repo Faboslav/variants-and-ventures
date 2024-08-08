@@ -3,12 +3,11 @@ package com.faboslav.variantsandventures.forge;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
 import com.faboslav.variantsandventures.common.config.ConfigScreenBuilder;
-import com.faboslav.variantsandventures.common.events.client.RegisterEntityLayersEvent;
-import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
-import com.faboslav.variantsandventures.common.events.client.RegisterItemColorEvent;
+import com.faboslav.variantsandventures.common.events.client.*;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesItems;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
@@ -26,11 +25,14 @@ public final class VariantsAndVenturesClientForge
 		modEventBus.addListener(VariantsAndVenturesClientForge::onClientSetup);
 		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterEntityRenderers);
 		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterEntityLayers);
+		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterBlockColors);
 		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterItemColors);
 	}
 
 	private static void onClientSetup(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
+			RegisterRenderLayersEvent.EVENT.invoke(new RegisterRenderLayersEvent(RenderLayers::setRenderLayer, RenderLayers::setRenderLayer));
+
 			if (ModList.get().isLoaded("cloth_config")) {
 				ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () ->
 					new ConfigScreenHandler.ConfigScreenFactory(
@@ -47,6 +49,10 @@ public final class VariantsAndVenturesClientForge
 
 	private static void onRegisterEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		RegisterEntityLayersEvent.EVENT.invoke(new RegisterEntityLayersEvent(event::registerLayerDefinition));
+	}
+
+	private static void onRegisterBlockColors(RegisterColorHandlersEvent.Block event) {
+		RegisterBlockColorEvent.EVENT.invoke(new RegisterBlockColorEvent(event::register));
 	}
 
 	private static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {

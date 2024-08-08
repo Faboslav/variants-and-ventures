@@ -9,10 +9,7 @@ import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeMod
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesBlocks;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesItems;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
+import com.faboslav.variantsandventures.common.init.*;
 import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.util.Identifier;
@@ -72,5 +69,6 @@ public final class VariantsAndVentures
 		VariantsAndVenturesBlocks.BLOCKS.init();
 		VariantsAndVenturesEntityTypes.ENTITY_TYPES.init();
 		VariantsAndVenturesSoundEvents.SOUND_EVENTS.init();
+		VariantsAndVenturesTrunkPlacerType.TRUNK_PLACER_TYPE.init();
 	}
 }

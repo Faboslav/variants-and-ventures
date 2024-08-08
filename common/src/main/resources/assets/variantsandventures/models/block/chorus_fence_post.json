@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/fence_post",
+	"textures": {
+		"texture": "variantsandventures:block/chorus_planks"
+	}
+}

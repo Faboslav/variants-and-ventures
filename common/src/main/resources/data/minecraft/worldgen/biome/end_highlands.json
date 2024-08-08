@@ -1,0 +1,59 @@
+{
+	"carvers": {},
+	"downfall": 0.5,
+	"effects": {
+		"fog_color": 10518688,
+		"mood_sound": {
+			"block_search_extent": 8,
+			"offset": 2.0,
+			"sound": "minecraft:ambient.cave",
+			"tick_delay": 6000
+		},
+		"sky_color": 0,
+		"water_color": 4159204,
+		"water_fog_color": 329011
+	},
+	"features": [
+		[
+			"variantsandventures:road/end_highlands_road"
+		],
+		[],
+		[],
+		[],
+		[
+			"minecraft:end_gateway_return"
+		],
+		[],
+		[
+		],
+		[],
+		[
+		],
+		[
+			"variantsandventures:terrain/local/end_chorus_forest_grass",
+			"variantsandventures:vegetation/local/patch/end_highlands_end_grass",
+			"variantsandventures:vegetation/local/patch/end_highlands_large_end_ferns",
+			"variantsandventures:trees_end_highlands"
+		]
+	],
+	"precipitation": "none",
+	"spawn_costs": {},
+	"spawners": {
+		"ambient": [],
+		"axolotls": [],
+		"creature": [],
+		"misc": [],
+		"monster": [
+			{
+				"type": "minecraft:endermite",
+				"maxCount": 4,
+				"minCount": 4,
+				"weight": 10
+			}
+		],
+		"underground_water_creature": [],
+		"water_ambient": [],
+		"water_creature": []
+	},
+	"temperature": 0.5
+}

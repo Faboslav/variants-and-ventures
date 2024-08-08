@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/stairs",
+	"textures": {
+		"bottom": "variantsandventures:block/chorus_planks",
+		"side": "variantsandventures:block/chorus_planks",
+		"top": "variantsandventures:block/chorus_planks"
+	}
+}

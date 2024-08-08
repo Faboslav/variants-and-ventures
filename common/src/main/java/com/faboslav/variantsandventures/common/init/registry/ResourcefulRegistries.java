@@ -16,25 +16,24 @@ import java.util.function.Supplier;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public final class ResourcefulRegistries
-{
-	public static <T> ResourcefulRegistry<T> create(ResourcefulRegistry<T> parent) {
-		return new ResourcefulRegistryChild<>(parent);
-	}
+public final class ResourcefulRegistries {
+    public static <T> ResourcefulRegistry<T> create(ResourcefulRegistry<T> parent) {
+        return new ResourcefulRegistryChild<>(parent);
+    }
 
-	@ExpectPlatform
-	public static <T> ResourcefulRegistry<T> create(Registry<T> registry, String id) {
-		throw new NotImplementedException();
-	}
+    @ExpectPlatform
+    public static <T> ResourcefulRegistry<T> create(Registry<T> registry, String id) {
+        throw new NotImplementedException();
+    }
 
-	@ExpectPlatform
-	public static <T, R extends T, K extends Registry<T>> Pair<Supplier<CustomRegistryLookup<T, R>>, ResourcefulRegistry<T>> createCustomRegistryInternal(
-		String modId,
-		RegistryKey<K> key,
-		boolean save,
-		boolean sync,
-		boolean allowModification
-	) {
-		throw new NotImplementedException();
-	}
+    @ExpectPlatform
+    public static <T, R extends T, K extends Registry<T>> Pair<Supplier<CustomRegistryLookup<T, R>>, ResourcefulRegistry<T>> createCustomRegistryInternal(
+            String modId,
+            RegistryKey<K> key,
+            boolean save,
+            boolean sync,
+            boolean allowModification
+    ) {
+        throw new NotImplementedException();
+    }
 }

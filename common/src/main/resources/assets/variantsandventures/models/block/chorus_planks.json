@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "variantsandventures:block/chorus_planks"
+	}
+}

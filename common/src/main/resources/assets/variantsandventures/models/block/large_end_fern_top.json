@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/tinted_cross",
+	"textures": {
+		"cross": "variantsandventures:block/large_end_fern_top"
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cross",
+	"textures": {
+		"cross": "variantsandventures:block/chorus_sapling"
+	}
+}

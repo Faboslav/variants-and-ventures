@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"axis=x": {
+			"model": "variantsandventures:block/stripped_chorus_wood",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y": {
+			"model": "variantsandventures:block/stripped_chorus_wood"
+		},
+		"axis=z": {
+			"model": "variantsandventures:block/stripped_chorus_wood",
+			"x": 90
+		}
+	}
+}

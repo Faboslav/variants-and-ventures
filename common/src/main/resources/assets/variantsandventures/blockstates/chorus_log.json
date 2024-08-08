@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"axis=x": {
+			"model": "variantsandventures:block/chorus_log_horizontal",
+			"x": 90,
+			"y": 90
+		},
+		"axis=y": {
+			"model": "variantsandventures:block/chorus_log"
+		},
+		"axis=z": {
+			"model": "variantsandventures:block/chorus_log_horizontal",
+			"x": 90
+		}
+	}
+}

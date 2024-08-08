@@ -1,0 +1,126 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/gui_leaves",
+	"textures": {
+		"particle": "#0"
+	},
+	"elements": [
+		{
+			"from": [
+				-7.9759,
+				-7.9759,
+				-0.05
+			],
+			"to": [
+				23.9,
+				23.9,
+				16.05
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					8,
+					8,
+					8
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0,
+						16,
+						16
+					],
+					"texture": "#0",
+					"cullface": "north",
+					"tintindex": 0
+				},
+				"south": {
+					"uv": [
+						0,
+						0,
+						16,
+						16
+					],
+					"texture": "#0",
+					"cullface": "south",
+					"tintindex": 0
+				}
+			}
+		},
+		{
+			"from": [
+				-0.05,
+				-7.9759,
+				-7.9759
+			],
+			"to": [
+				16.05,
+				23.9,
+				23.9
+			],
+			"faces": {
+				"east": {
+					"uv": [
+						0,
+						0,
+						16,
+						16
+					],
+					"texture": "#0",
+					"cullface": "east",
+					"tintindex": 0
+				},
+				"west": {
+					"uv": [
+						0,
+						0,
+						16,
+						16
+					],
+					"texture": "#0",
+					"cullface": "west",
+					"tintindex": 0
+				}
+			}
+		},
+		{
+			"from": [
+				-7.9759,
+				-0.05,
+				-7.9759
+			],
+			"to": [
+				23.9,
+				16.05,
+				23.9
+			],
+			"faces": {
+				"up": {
+					"uv": [
+						0,
+						0,
+						16,
+						16
+					],
+					"texture": "#0",
+					"cullface": "up",
+					"tintindex": 0
+				},
+				"down": {
+					"uv": [
+						0,
+						0,
+						16,
+						16
+					],
+					"texture": "#0",
+					"cullface": "down",
+					"tintindex": 0
+				}
+			}
+		}
+	]
+}
