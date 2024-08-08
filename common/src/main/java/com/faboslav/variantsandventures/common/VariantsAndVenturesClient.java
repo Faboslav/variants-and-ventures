@@ -6,7 +6,6 @@ import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityRen
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 
 public final class VariantsAndVenturesClient
 {

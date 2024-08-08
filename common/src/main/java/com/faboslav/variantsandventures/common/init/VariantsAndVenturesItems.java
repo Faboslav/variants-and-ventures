@@ -8,8 +8,6 @@ import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
-import net.minecraft.item.WallStandingBlockItem;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
 /**

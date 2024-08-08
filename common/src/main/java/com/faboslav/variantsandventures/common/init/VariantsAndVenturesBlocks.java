@@ -1,13 +1,10 @@
 package com.faboslav.variantsandventures.common.init;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.util.registry.Registry;
 
 /**
