@@ -122,10 +122,5 @@ public final class GelidEntity extends ZombieEntity
 
 		return attackResult;
 	}
-
-	@Override
-	protected ItemStack getSkull() {
-		return new ItemStack(VariantsAndVenturesItems.GELID_HEAD.get());
-	}
 }
 

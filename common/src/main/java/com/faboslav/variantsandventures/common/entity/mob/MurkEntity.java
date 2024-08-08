@@ -208,18 +208,6 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	@Override
-	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-		super.dropEquipment(source, lootingMultiplier, allowDrops);
-		Entity entity = source.getAttacker();
-		if (entity instanceof CreeperEntity creeperEntity) {
-			if (creeperEntity.shouldDropHead()) {
-				creeperEntity.onHeadDropped();
-				this.dropItem(VariantsAndVenturesItems.MURK_SKULL.get());
-			}
-		}
-	}
-
-	@Override
 	public boolean canBreatheInWater() {
 		return true;
 	}

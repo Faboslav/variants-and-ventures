@@ -23,10 +23,6 @@ public final class VariantsAndVenturesItems
 	public final static RegistryEntry<Item> MURK_SPAWN_EGG = ITEMS.register("murk_spawn_egg", () -> new DispenserAddedSpawnEgg(VariantsAndVenturesEntityTypes.MURK, 12698049, 0xA276A9, new Item.Settings().maxCount(64).group(ItemGroup.MISC)));
 	public final static RegistryEntry<Item> THICKET_SPAWN_EGG = ITEMS.register("thicket_spawn_egg", () -> new DispenserAddedSpawnEgg(VariantsAndVenturesEntityTypes.THICKET, 0x005B57, 0x2B4913, new Item.Settings().maxCount(64).group(ItemGroup.MISC)));
 	public final static RegistryEntry<Item> VERDANT_SPAWN_EGG = ITEMS.register("verdant_spawn_egg", () -> new DispenserAddedSpawnEgg(VariantsAndVenturesEntityTypes.VERDANT, 0x8B8A75, 0x4A5D21, new Item.Settings().maxCount(64).group(ItemGroup.MISC)));
-	public final static RegistryEntry<Item> GELID_HEAD = ITEMS.register("gelid_head", () -> new WallStandingBlockItem(VariantsAndVenturesBlocks.GELID_HEAD.get(), VariantsAndVenturesBlocks.GELID_WALL_HEAD.get(), (new Item.Settings()).group(ItemGroup.DECORATIONS).rarity(Rarity.UNCOMMON)));
-	public final static RegistryEntry<Item> MURK_SKULL = ITEMS.register("murk_skull", () -> new WallStandingBlockItem(VariantsAndVenturesBlocks.MURK_SKULL.get(), VariantsAndVenturesBlocks.MURK_WALL_SKULL.get(), (new Item.Settings()).group(ItemGroup.DECORATIONS).rarity(Rarity.UNCOMMON)));
-	public final static RegistryEntry<Item> THICKET_HEAD = ITEMS.register("thicket_head", () -> new WallStandingBlockItem(VariantsAndVenturesBlocks.THICKET_HEAD.get(), VariantsAndVenturesBlocks.THICKET_WALL_HEAD.get(), (new Item.Settings()).group(ItemGroup.DECORATIONS).rarity(Rarity.UNCOMMON)));
-	public final static RegistryEntry<Item> VERDANT_SKULL = ITEMS.register("verdant_skull", () -> new WallStandingBlockItem(VariantsAndVenturesBlocks.VERDANT_SKULL.get(), VariantsAndVenturesBlocks.VERDANT_WALL_SKULL.get(), (new Item.Settings()).group(ItemGroup.DECORATIONS).rarity(Rarity.UNCOMMON)));
 
 	private VariantsAndVenturesItems() {
 	}

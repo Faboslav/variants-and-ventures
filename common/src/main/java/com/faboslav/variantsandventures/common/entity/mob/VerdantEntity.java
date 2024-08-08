@@ -67,23 +67,9 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 	protected PersistentProjectileEntity createArrowProjectile(ItemStack arrow, float damageModifier) {
 		PersistentProjectileEntity persistentProjectileEntity = super.createArrowProjectile(arrow, damageModifier);
 		if (persistentProjectileEntity instanceof ArrowEntity) {
-			float difficulty = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
 			((ArrowEntity) persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 100));
 		}
 
 		return persistentProjectileEntity;
-	}
-
-	@Override
-	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-		super.dropEquipment(source, lootingMultiplier, allowDrops);
-		Entity entity = source.getAttacker();
-		if (entity instanceof CreeperEntity creeperEntity) {
-			if (creeperEntity.shouldDropHead()) {
-				creeperEntity.onHeadDropped();
-				this.dropItem(VariantsAndVenturesItems.VERDANT_SKULL.get());
-			}
-		}
-
 	}
 }

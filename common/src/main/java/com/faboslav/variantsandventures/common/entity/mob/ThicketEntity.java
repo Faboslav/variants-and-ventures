@@ -68,10 +68,5 @@ public final class ThicketEntity extends ZombieEntity
 
 		return attackResult;
 	}
-
-	@Override
-	protected ItemStack getSkull() {
-		return new ItemStack(VariantsAndVenturesItems.THICKET_HEAD.get());
-	}
 }
 
