@@ -9,7 +9,6 @@
 	"mixins": [
 		"AbstractSkeletonEntityMixin",
 		"AddCustomEntityPoseMixin",
-		"AddCustomSkullBlockTypeMixin",
 		"BlockEntityTypeAccessor",
 		"DungeonFeatureMixin",
 		"ItemDispenserBehaviorInvoker",
@@ -20,10 +19,8 @@
 		"SkeletonEntityEntityMixin",
 		"SkeletonEntityLivingEntityMixin",
 		"SkeletonEntityMobEntityMixin",
-		"SkullBlockAccessor",
 		"SpawnEggItemAccessor",
 		"SpawnHelperMixin",
-		"WallSkullBlockAccessor",
 		"ZombieEntityEntityMixin",
 		"ZombieEntityLivingEntityMixin",
 		"ZombieEntityMixin",
@@ -31,7 +28,6 @@
 	],
 	"client": [
 		"AbstractZombieModelMixin",
-		"SkeletonEntityModelMixin",
-		"SkullBlockEntityRendererMixin"
+		"SkeletonEntityModelMixin"
 	]
 }
