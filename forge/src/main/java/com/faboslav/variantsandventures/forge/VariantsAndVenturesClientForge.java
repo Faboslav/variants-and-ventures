@@ -6,7 +6,6 @@ import com.faboslav.variantsandventures.common.config.ConfigScreenBuilder;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityLayersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterItemColorEvent;
-import com.faboslav.variantsandventures.common.events.client.RegisterSkullModelEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesItems;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
@@ -27,7 +26,6 @@ public final class VariantsAndVenturesClientForge
 		modEventBus.addListener(VariantsAndVenturesClientForge::onClientSetup);
 		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterEntityRenderers);
 		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterEntityLayers);
-		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterSkullModels);
 		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterItemColors);
 	}
 
@@ -49,10 +47,6 @@ public final class VariantsAndVenturesClientForge
 
 	private static void onRegisterEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		RegisterEntityLayersEvent.EVENT.invoke(new RegisterEntityLayersEvent(event::registerLayerDefinition));
-	}
-
-	private static void onRegisterSkullModels(EntityRenderersEvent.CreateSkullModels event) {
-		RegisterSkullModelEvent.EVENT.invoke(new RegisterSkullModelEvent(event::registerSkullModel, event.getEntityModelSet()));
 	}
 
 	private static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {

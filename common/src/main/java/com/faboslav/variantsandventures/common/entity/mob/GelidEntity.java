@@ -1,7 +1,6 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.entity.ai.GelidSnowballRangedAttackGoal;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesItems;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -121,11 +120,6 @@ public final class GelidEntity extends ZombieEntity
 		}
 
 		return attackResult;
-	}
-
-	@Override
-	protected ItemStack getSkull() {
-		return new ItemStack(VariantsAndVenturesItems.GELID_HEAD.get());
 	}
 }
 

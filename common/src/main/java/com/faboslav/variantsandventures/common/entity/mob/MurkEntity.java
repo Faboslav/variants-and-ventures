@@ -4,7 +4,6 @@ import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.ai.goal.LeaveWaterGoal;
 import com.faboslav.variantsandventures.common.entity.ai.goal.TargetAboveWaterGoal;
 import com.faboslav.variantsandventures.common.entity.ai.goal.WanderAroundOnSurfaceGoal;
-import com.faboslav.variantsandventures.common.init.VariantsAndVenturesItems;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
@@ -20,7 +19,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.passive.AxolotlEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.TurtleEntity;
@@ -50,7 +48,6 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.*;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
@@ -204,18 +201,6 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		persistentProjectileEntity.setVelocity(d, e + g * 0.20000000298023224, f, 1.6F, (float) (14 - this.getWorld().getDifficulty().getId() * 4));
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_MURK_ATTACK.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.getWorld().spawnEntity(persistentProjectileEntity);
-	}
-
-	@Override
-	protected void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops) {
-		super.dropEquipment(source, lootingMultiplier, allowDrops);
-		Entity entity = source.getAttacker();
-		if (entity instanceof CreeperEntity creeperEntity) {
-			if (creeperEntity.shouldDropHead()) {
-				creeperEntity.onHeadDropped();
-				this.dropItem(VariantsAndVenturesItems.MURK_SKULL.get());
-			}
-		}
 	}
 
 	@Override
