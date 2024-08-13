@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "com.faboslav.variantsandventures.forge.mixin",
+	"compatibilityLevel": "JAVA_${modJavaVersion}",
+	"minVersion": "0.8",
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"mixins": [
+		"SpawnHelperMixin"
+	]
+}
