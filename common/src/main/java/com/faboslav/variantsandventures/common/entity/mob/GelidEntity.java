@@ -102,20 +102,12 @@ public final class GelidEntity extends ZombieEntity
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_GELID_ATTACK.get(), 1.0f, this.getSoundPitch());
 		boolean attackResult = super.tryAttack(target);
 
-		if (attackResult && this.getMainHandStack().isEmpty() && target instanceof LivingEntity) {
+		if (
+			attackResult && this.getMainHandStack().isEmpty()
+			&& target instanceof LivingEntity
+			&& target.canFreeze()
+		) {
 			float difficulty = this.getWorld().getLocalDifficulty(this.getBlockPos()).getLocalDifficulty();
-
-			if (target instanceof LivingEntity livingEntity) {
-				if (
-					livingEntity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_HELMET)
-					|| livingEntity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_CHESTPLATE)
-					|| livingEntity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_LEGGINGS)
-					|| livingEntity.getEquippedStack(EquipmentSlot.FEET).isOf(Items.LEATHER_BOOTS)
-				) {
-					return attackResult;
-				}
-			}
-
 			target.setFrozenTicks(140 * (int) difficulty);
 		}
 
