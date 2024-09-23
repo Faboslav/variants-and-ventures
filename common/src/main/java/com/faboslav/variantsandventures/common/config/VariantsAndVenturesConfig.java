@@ -13,11 +13,11 @@ public final class VariantsAndVenturesConfig implements Config
 
 	@Category("Zombies")
 	@Description("Enable experimental keyframe animations for zombie and its variants")
-	public boolean enableKeyframeAnimationsForZombieAndItsVariants = true;
+	public boolean enableKeyframeAnimationsForZombieAndItsVariants = false;
 
 	@Category("Skeletons")
 	@Description("Enable experimental keyframe animations for skeleton and its variants")
-	public boolean enableKeyframeAnimationsForSkeletonAndItsVariants = true;
+	public boolean enableKeyframeAnimationsForSkeletonAndItsVariants = false;
 
 	@Category("Stray")
 	@Description("Enable better Stray spawns")
