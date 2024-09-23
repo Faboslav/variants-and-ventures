@@ -1,3 +1,9 @@
+## 1.0.6
+
+- Experimental animations are disabled by default
+- Improved how compatibility works between minor minecraft versions
+- Fixed spawn eggs
+
 ## 1.0.5
 
 - Removed custom head/skull blocks
