@@ -32,14 +32,13 @@
 		]
 	},
 	"mixins": [
-		"variantsandventures-common.mixins.json",
-		"variantsandventures-fabric.mixins.json"
+		"${modId}-common.mixins.json",
+		"${modId}-fabric.mixins.json"
 	],
 	"depends": {
-		"java": ">=${modJavaVersion}",
-		"minecraft": ">=${minMinecraftVersion}",
-		"fabricloader": ">=${fabricLoaderVersion}",
-		"fabric": ">=${fabricApiVersion}"
+		"minecraft": ">=${minMinecraftVersion}-",
+		"fabricloader": "*",
+		"fabric": "*"
 	},
 	"custom": {
 		"modmenu": {
