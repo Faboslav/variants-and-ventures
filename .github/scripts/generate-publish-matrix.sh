@@ -5,7 +5,6 @@ allowed_mod_loaders=$1
 IFS=',' read -r -a allowed_mod_loaders_array <<< "${allowed_mod_loaders//[\[\]\']/}"
 matrix_content="{\"include\":["
 enabled_platforms=$(awk -F= '/enabled_platforms/{print $2}' gradle.properties | tr -d ' ')
-minecraft_version=$(awk -F= '/minecraft_version/{print $2; exit}' gradle.properties | tr -d ' ')
 
 for platform in $(echo $enabled_platforms | tr ',' ' '); do
   if [[ " ${allowed_mod_loaders_array[@]} " =~ " ${platform} " ]]; then
@@ -15,7 +14,7 @@ for platform in $(echo $enabled_platforms | tr ',' ' '); do
         	supported_mod_loaders="\"$platform\""
         fi
 
-        matrix_entry="{\"mod_loader\":\"$platform\",\"minecraft_version\":\"$minecraft_version\",\"supported_mod_loaders\":[$supported_mod_loaders]},"
+        matrix_entry="{\"mod_loader\":\"$platform\",\"supported_mod_loaders\":[$supported_mod_loaders]},"
         matrix_content+="$matrix_entry"
   fi
 done
