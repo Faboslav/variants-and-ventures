@@ -19,11 +19,6 @@ config = "variantsandventures-common.mixins.json"
 [[mixins]]
 config = "variantsandventures-neoforge.mixins.json"
 
-[[dependencies.${ modId }]]
-modId = "minecraft"
-required = true
-versionRange = "[${minMinecraftVersion},)"
-
 [modproperties.${ modId }]
 catalogueImageIcon = "catalogue_icon.png"
 catalogueBackground = "catalogue_background.png"
