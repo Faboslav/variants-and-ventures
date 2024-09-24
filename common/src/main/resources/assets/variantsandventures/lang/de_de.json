@@ -1,0 +1,31 @@
+{
+	"item_group.variantsandventures.main_tab": "Variants & Ventures",
+
+	"entity.variantsandventures.gelid": "Frostzombie",
+	"entity.variantsandventures.murk": "Ozeanskelett",
+	"entity.variantsandventures.thicket": "Urwaldzombie",
+	"entity.variantsandventures.verdant": "Urwaldskelett",
+
+	"item.variantsandventures.gelid_spawn_egg": "Frostzombie-Spawn-Ei",
+	"item.variantsandventures.murk_spawn_egg": "Ozeanskelett-Spawn-Ei",
+	"item.variantsandventures.thicket_spawn_egg": "Urwaldzombie-Spawn-Ei",
+	"item.variantsandventures.verdant_spawn_egg": "Urwaldskelett-Spawn-Ei",
+
+	"subtitles.entity.variantsandventures.snowball.impact": "Schneeballtreffer",
+	"subtitles.entity.variantsandventures.gelid.ambient": "Frostzombie stöhnt",
+	"subtitles.entity.variantsandventures.gelid.attack": "Frostzombie greift an",
+	"subtitles.entity.variantsandventures.gelid.death": "Frostzombie stirbt",
+	"subtitles.entity.variantsandventures.gelid.hurt": "Frostzombie nimmt Schaden",
+	"subtitles.entity.variantsandventures.murk.ambient": "Ozeanskelett klappert",
+	"subtitles.entity.variantsandventures.murk.attack": "Ozeanskelett schießt",
+	"subtitles.entity.variantsandventures.murk.death": "Ozeanskelett stirbt",
+	"subtitles.entity.variantsandventures.murk.hurt": "Ozeanskelett nimmt Schaden",
+	"subtitles.entity.variantsandventures.thicket.ambient": "Urwaldzombie stöhnt",
+	"subtitles.entity.variantsandventures.thicket.attack": "Urwaldzombie greift an",
+	"subtitles.entity.variantsandventures.thicket.death": "Urwaldzombie stirbt",
+	"subtitles.entity.variantsandventures.thicket.hurt": "Urwaldzombie nimmt Schaden",
+	"subtitles.entity.variantsandventures.verdant.ambient": "Urwaldskelett klappert",
+	"subtitles.entity.variantsandventures.verdant.attack": "Urwaldskelett schießt",
+	"subtitles.entity.variantsandventures.verdant.death": "Urwaldskelett stirbt",
+	"subtitles.entity.variantsandventures.verdant.hurt": "Urwaldskelett nimmt Schaden"
+}
