@@ -24,5 +24,4 @@ jobs:
         uses: ./.github/workflows/publish-branch.yml
         with:
             branch: ${{ matrix.branch }}
-            mod_loaders: ${{ inputs.mod_loaders }}
         secrets: inherit
