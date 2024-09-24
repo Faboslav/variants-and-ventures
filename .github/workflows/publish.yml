@@ -16,7 +16,7 @@ on:
 
 jobs:
     publish:
-        name: Publish
+        name: "Publish"
         strategy:
             fail-fast: false
             matrix:
