@@ -3,6 +3,8 @@
 - Experimental animations are disabled by default
 - Improved how compatibility works between minor minecraft versions
 - Fixed spawn eggs
+- Added ru_ru translations (Thanks to mpustovoi)
+- Updated vi_vn translations (Thanks to godkyo98)
 
 ## 1.0.5
 
