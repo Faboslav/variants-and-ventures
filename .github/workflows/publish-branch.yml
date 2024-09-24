@@ -24,7 +24,7 @@ jobs:
             -   name: "Checkout repository"
                 uses: actions/checkout@v4
                 with:
-                    ref: ${{ matrix.branch }}
+                    ref: ${{ inputs.branch }}
                     fetch-depth: 0
 
             -   name: "Parse gradle properties"
@@ -43,7 +43,7 @@ jobs:
                     omitNameDuringUpdate: true
                     omitBodyDuringUpdate: true
                     tag: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                    commit: ${{ matrix.branch }}
+                    commit: ${{ inputs.branch }}
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }} for Minecraft ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
                     bodyFile: RELEASE_CHANGELOG.md
 
