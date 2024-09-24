@@ -113,6 +113,7 @@ jobs:
 
                     modrinth-id: ${{ vars.MODRINTH_PROJECT_ID }}
                     modrinth-token: ${{ secrets.MODRINTH_RELEASE_TOKEN }}
+                    modrinth-featured: true
 
                     name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
                     version: ${{ matrix.mod_loader }}-mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
