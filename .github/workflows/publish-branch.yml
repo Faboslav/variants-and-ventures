@@ -76,7 +76,7 @@ jobs:
     publish:
         runs-on: ubuntu-latest
         needs: build
-        name: Publish ${{ matrix.minecraft_version }} ${{ matrix.mod_loader }}
+        name: Publish ${{ inputs.branch }} ${{ matrix.mod_loader }}
         timeout-minutes: 10
         strategy:
             fail-fast: false
@@ -86,7 +86,7 @@ jobs:
             -   name: "Checkout repository"
                 uses: actions/checkout@v4
                 with:
-                    ref: ${{ matrix.minecraft_version }}
+                    ref: ${{ inputs.branch }}
                     fetch-depth: 0
 
             -   name: "Download Built JARs"
