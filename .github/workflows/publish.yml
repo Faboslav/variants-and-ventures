@@ -23,6 +23,6 @@ jobs:
                 branch: ${{ fromJson(inputs.branches) }}
         uses: ./.github/workflows/publish-branch.yml
         with:
-            version: ${{ matrix.branch }}
+            branch: ${{ matrix.branch }}
             mod_loaders: ${{ fromJson(inputs.mod_loaders) }}
         secrets: inherit
