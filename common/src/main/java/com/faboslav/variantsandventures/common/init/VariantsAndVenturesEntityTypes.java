@@ -17,6 +17,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.Heightmap;
 
 import java.util.function.Supplier;
@@ -35,12 +38,16 @@ public final class VariantsAndVenturesEntityTypes {
 
     static {
         SharedConstants.useChoiceTypeRegistrations = false;
-        GELID = ENTITY_TYPES.register("gelid", () -> EntityType.Builder.create(GelidEntity::new, SpawnGroup.MONSTER).dimensions(0.6F, 1.95F).allowSpawningInside(Blocks.POWDER_SNOW).maxTrackingRange(8).build(VariantsAndVentures.makeStringID("gelid")));
-        MURK = ENTITY_TYPES.register("murk", () -> EntityType.Builder.create(MurkEntity::new, SpawnGroup.MONSTER).dimensions(0.6F, 1.99F).maxTrackingRange(8).build(VariantsAndVentures.makeStringID("murk")));
-        THICKET = ENTITY_TYPES.register("thicket", () -> EntityType.Builder.create(ThicketEntity::new, SpawnGroup.MONSTER).dimensions(0.6F, 1.95F).maxTrackingRange(8).build(VariantsAndVentures.makeStringID("thicket")));
-        VERDANT = ENTITY_TYPES.register("verdant", () -> EntityType.Builder.create(VerdantEntity::new, SpawnGroup.MONSTER).dimensions(0.6F, 1.99F).maxTrackingRange(8).build(VariantsAndVentures.makeStringID("verdant")));
+        GELID = ENTITY_TYPES.register("gelid", () -> EntityType.Builder.create(GelidEntity::new, SpawnGroup.MONSTER).dimensions(0.6F, 1.95F).allowSpawningInside(Blocks.POWDER_SNOW).maxTrackingRange(8).build(keyOf("gelid")));
+        MURK = ENTITY_TYPES.register("murk", () -> EntityType.Builder.create(MurkEntity::new, SpawnGroup.MONSTER).dimensions(0.6F, 1.99F).maxTrackingRange(8).build(keyOf("murk")));
+        THICKET = ENTITY_TYPES.register("thicket", () -> EntityType.Builder.create(ThicketEntity::new, SpawnGroup.MONSTER).dimensions(0.6F, 1.95F).maxTrackingRange(8).build(keyOf("thicket")));
+        VERDANT = ENTITY_TYPES.register("verdant", () -> EntityType.Builder.create(VerdantEntity::new, SpawnGroup.MONSTER).dimensions(0.6F, 1.99F).maxTrackingRange(8).build(keyOf("verdant")));
         SharedConstants.useChoiceTypeRegistrations = previousUseChoiceTypeRegistrations;
     }
+
+	private static RegistryKey<EntityType<?>> keyOf(String id) {
+		return RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.ofVanilla(id));
+	}
 
     public static void registerEntityAttributes(RegisterEntityAttributesEvent event) {
         event.register(VariantsAndVenturesEntityTypes.GELID.get(), GelidEntity.createGelidAttributes());
