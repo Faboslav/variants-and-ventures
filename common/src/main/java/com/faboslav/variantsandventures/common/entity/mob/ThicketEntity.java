@@ -9,6 +9,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.ZombieEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.world.World;
 
@@ -55,10 +56,10 @@ public final class ThicketEntity extends ZombieEntity
 	}
 
 	@Override
-	public boolean tryAttack(Entity target) {
+	public boolean tryAttack(ServerWorld world, Entity target) {
 		this.getWorld().sendEntityStatus(this, EntityStatuses.PLAY_ATTACK_SOUND);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 1.0f, this.getSoundPitch());
-		boolean attackResult = super.tryAttack(target);
+		boolean attackResult = super.tryAttack(world, target);
 
 		if (attackResult && this.getMainHandStack().isEmpty() && target instanceof LivingEntity) {
 			((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100), this);

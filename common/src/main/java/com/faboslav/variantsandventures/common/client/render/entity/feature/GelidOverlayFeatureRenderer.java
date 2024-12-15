@@ -10,35 +10,24 @@ import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.DrownedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.entity.model.EntityModelLoader;
+import net.minecraft.client.render.entity.state.ZombieEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class GelidOverlayFeatureRenderer<T extends GelidEntity> extends FeatureRenderer<T, DrownedEntityModel<T>>
-{
+public class GelidOverlayFeatureRenderer extends FeatureRenderer<ZombieEntityRenderState, DrownedEntityModel> {
 	private static final Identifier SKIN = VariantsAndVentures.makeID("textures/entity/gelid/gelid_overlay.png");
-	private final DrownedEntityModel<T> model;
+	private final DrownedEntityModel model;
+	private final DrownedEntityModel babyModel;
 
-	public GelidOverlayFeatureRenderer(
-		FeatureRendererContext<T, DrownedEntityModel<T>> context,
-		EntityModelLoader loader
-	) {
+	public GelidOverlayFeatureRenderer(FeatureRendererContext<ZombieEntityRenderState, DrownedEntityModel> context, EntityModelLoader loader) {
 		super(context);
-		this.model = new DrownedEntityModel<>(loader.getModelPart(EntityModelLayers.DROWNED_OUTER));
+		this.model = new DrownedEntityModel(loader.getModelPart(EntityModelLayers.DROWNED_OUTER));
+		this.babyModel = new DrownedEntityModel(loader.getModelPart(EntityModelLayers.DROWNED_BABY_OUTER));
 	}
 
-	public void render(
-		MatrixStack matrices,
-		VertexConsumerProvider vertexConsumers,
-		int light,
-		T thicket,
-		float limbAngle,
-		float limbDistance,
-		float tickDelta,
-		float animationProgress,
-		float headYaw,
-		float headPitch
-	) {
-		render(this.getContextModel(), this.model, SKIN, matrices, vertexConsumers, light, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, -1);
+	public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, ZombieEntityRenderState zombieEntityRenderState, float f, float g) {
+		DrownedEntityModel drownedEntityModel = zombieEntityRenderState.baby ? this.babyModel : this.model;
+		render(drownedEntityModel, SKIN, matrixStack, vertexConsumerProvider, i, zombieEntityRenderState, -1);
 	}
 }

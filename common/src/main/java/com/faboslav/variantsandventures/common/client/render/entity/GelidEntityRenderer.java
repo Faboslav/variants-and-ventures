@@ -9,46 +9,38 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.ZombieBaseEntityRenderer;
 import net.minecraft.client.render.entity.model.DrownedEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
+import net.minecraft.client.render.entity.state.ZombieEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 
 @Environment(EnvType.CLIENT)
-public class GelidEntityRenderer extends ZombieBaseEntityRenderer<GelidEntity, DrownedEntityModel<GelidEntity>>
+public class GelidEntityRenderer extends ZombieBaseEntityRenderer<GelidEntity, ZombieEntityRenderState, DrownedEntityModel>
 {
 	public static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
 
 	public GelidEntityRenderer(EntityRendererFactory.Context context) {
-		super(context, new DrownedEntityModel<>(context.getPart(EntityModelLayers.DROWNED)), new DrownedEntityModel<>(context.getPart(EntityModelLayers.DROWNED_INNER_ARMOR)), new DrownedEntityModel<>(context.getPart(EntityModelLayers.DROWNED_OUTER_ARMOR)));
-		this.addFeature(new GelidOverlayFeatureRenderer<>(this, context.getModelLoader()));
+		super(context, new DrownedEntityModel(context.getPart(EntityModelLayers.DROWNED)), new DrownedEntityModel(context.getPart(EntityModelLayers.DROWNED_BABY)), new DrownedEntityModel(context.getPart(EntityModelLayers.DROWNED_INNER_ARMOR)), new DrownedEntityModel(context.getPart(EntityModelLayers.DROWNED_OUTER_ARMOR)), new DrownedEntityModel(context.getPart(EntityModelLayers.DROWNED_BABY_INNER_ARMOR)), new DrownedEntityModel(context.getPart(EntityModelLayers.DROWNED_BABY_OUTER_ARMOR)));
+		this.addFeature(new GelidOverlayFeatureRenderer(this, context.getModelLoader()));
 	}
 
-	@Override
-	protected void scale(GelidEntity gelid, MatrixStack matrixStack, float f) {
-		matrixStack.scale(1.0625F, 1.0625F, 1.0625F);
-		super.scale(gelid, matrixStack, f);
+	public ZombieEntityRenderState createRenderState() {
+		return new ZombieEntityRenderState();
 	}
 
-	@Override
-	public Identifier getTexture(GelidEntity gelid) {
+	public Identifier getTexture(ZombieEntityRenderState zombieEntityRenderState) {
 		return TEXTURE;
 	}
 
-	@Override
-	protected void setupTransforms(
-		GelidEntity gelid,
-		MatrixStack matrices,
-		float animationProgress,
-		float bodyYaw,
-		float tickDelta,
-		float scale
-	) {
-		super.setupTransforms(gelid, matrices, animationProgress, bodyYaw, tickDelta, scale);
-
-		float i = gelid.getLeaningPitch(tickDelta);
-		if (i > 0.0F) {
-			matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.lerp(i, gelid.getPitch(), -10.0F - gelid.getPitch())));
+	protected void setupTransforms(ZombieEntityRenderState zombieEntityRenderState, MatrixStack matrixStack, float f, float g) {
+		super.setupTransforms(zombieEntityRenderState, matrixStack, f, g);
+		float h = zombieEntityRenderState.leaningPitch;
+		if (h > 0.0F) {
+			float i = -10.0F - zombieEntityRenderState.pitch;
+			float j = MathHelper.lerp(h, 0.0F, i);
+			matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(j), 0.0F, zombieEntityRenderState.height / 2.0F / g, 0.0F);
 		}
+
 	}
 }

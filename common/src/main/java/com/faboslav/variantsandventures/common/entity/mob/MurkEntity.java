@@ -5,7 +5,6 @@ import com.faboslav.variantsandventures.common.entity.ai.goal.LeaveWaterGoal;
 import com.faboslav.variantsandventures.common.entity.ai.goal.TargetAboveWaterGoal;
 import com.faboslav.variantsandventures.common.entity.ai.goal.WanderAroundOnSurfaceGoal;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
@@ -27,10 +26,6 @@ import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContextParameterSet;
-import net.minecraft.loot.context.LootContextParameters;
-import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -52,7 +47,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
-import java.util.function.Predicate;
 
 public final class MurkEntity extends AbstractSkeletonEntity implements Shearable
 {
@@ -64,13 +58,6 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	private boolean targetingUnderwater;
 	private final SwimNavigation waterNavigation;
 	private final MobNavigation landNavigation;
-	private final Predicate<LivingEntity> PLAYER_FILTER = (LivingEntity entity) -> {
-		if (entity != null) {
-			return !this.getWorld().isDay() || entity.isTouchingWater();
-		} else {
-			return false;
-		}
-	};
 
 	public MurkEntity(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
 		super(entityType, world);
@@ -115,7 +102,9 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		this.goalSelector.add(6, new TargetAboveWaterGoal(this, 1.0, this.getWorld().getSeaLevel()));
 		this.goalSelector.add(7, new WanderAroundGoal(this, 1.0));
 		this.targetSelector.add(1, new RevengeGoal(this));
-		this.targetSelector.add(2, new ActiveTargetGoal(this, PlayerEntity.class, 10, true, false, PLAYER_FILTER));
+		this.targetSelector.add(2, new ActiveTargetGoal(this, PlayerEntity.class, 10, true, false, (target, world) -> {
+			return this.canAttackTarget(target);
+		}));
 		this.targetSelector.add(3, new ActiveTargetGoal(this, IronGolemEntity.class, true));
 		this.targetSelector.add(3, new ActiveTargetGoal(this, AxolotlEntity.class, true, false));
 		this.targetSelector.add(3, new ActiveTargetGoal(this, TurtleEntity.class, 10, true, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER));
@@ -151,7 +140,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 	}
 
 	public static DefaultAttributeContainer.Builder createMurkAttributes() {
-		return AbstractSkeletonEntity.createAbstractSkeletonAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 16.0);
+		return AbstractSkeletonEntity.createAbstractSkeletonAttributes().add(EntityAttributes.MAX_HEALTH, 16.0);
 	}
 
 	@Override
@@ -277,46 +266,34 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		ItemStack itemStack = player.getStackInHand(hand);
 
 		if (itemStack.isOf(Items.SHEARS) && this.isShearable()) {
-			this.sheared(SoundCategory.PLAYERS);
-			this.emitGameEvent(GameEvent.SHEAR, player);
+			World world = this.getWorld();
 
-			if (this.getWorld().isClient() == false) {
-				itemStack.damage(1, player, PlayerEntity.getSlotForHand(hand));
+			if (world instanceof ServerWorld serverWorld) {
+				this.sheared(serverWorld, SoundCategory.PLAYERS, itemStack);
+				this.emitGameEvent(GameEvent.SHEAR, player);
+				itemStack.damage(1, player, getSlotForHand(hand));
 			}
 
-			return ActionResult.success(this.getWorld().isClient());
+			return ActionResult.SUCCESS;
 		} else {
 			return super.interactMob(player, hand);
 		}
 	}
 
 	@Override
-	public void sheared(SoundCategory shearedSoundCategory) {
-		this.getWorld().playSoundFromEntity(null, this, VariantsAndVenturesSoundEvents.ENTITY_MURK_SHEAR.get(), shearedSoundCategory, 1.0F, 1.0F);
-		this.dropShearedItems();
+	public void sheared(ServerWorld world, SoundCategory shearedSoundCategory, ItemStack shears) {
+		world.playSoundFromEntity(null, this, VariantsAndVenturesSoundEvents.ENTITY_MURK_SHEAR.get(), shearedSoundCategory, 1.0F, 1.0F);
+		this.dropShearedItems(world, shears);
 		this.setSheared(true);
 	}
 
-	private void dropShearedItems() {
-		World world = this.getWorld();
-
-		if (
-			world instanceof ServerWorld == false
-			|| world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT) == false
-		) {
-			return;
-		}
-
-		LootTable shearingLootTable = world.getServer().getReloadableRegistries().getLootTable(RegistryKey.of(RegistryKeys.LOOT_TABLE, VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))));
-		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
-			.add(LootContextParameters.ORIGIN, this.getPos())
-			.add(LootContextParameters.THIS_ENTITY, this)
-			.build(LootContextTypes.GIFT);
-		ObjectArrayList<ItemStack> shearingDrops = shearingLootTable.generateLoot(lootContextParameterSet);
-
-		for (ItemStack shearingDrop : shearingDrops) {
-			this.dropStack(shearingDrop);
-		}
+	private void dropShearedItems(ServerWorld world, ItemStack shears) {
+		var shearingLootTable = RegistryKey.of(RegistryKeys.LOOT_TABLE, VariantsAndVentures.makeID(String.format(Locale.ROOT, "shearing/murk_%s", this.getVariant().getName())));
+		VariantsAndVentures.getLogger().info(shearingLootTable.toString());
+		this.forEachShearedItem(world, shearingLootTable, shears, (worldx, stack) -> {
+			VariantsAndVentures.getLogger().info("yes");
+			this.dropStack(worldx, stack, this.getHeight());
+		});
 	}
 
 	@Override
@@ -353,7 +330,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 				float h = (float) (MathHelper.atan2(f, d) * 57.2957763671875) - 90.0F;
 				this.murk.setYaw(this.wrapDegrees(this.murk.getYaw(), h, 90.0F));
 				this.murk.bodyYaw = this.murk.getYaw();
-				float i = (float) (this.speed * this.murk.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED));
+				float i = (float) (this.speed * this.murk.getAttributeValue(EntityAttributes.MOVEMENT_SPEED));
 				float j = MathHelper.lerp(0.125F, this.murk.getMovementSpeed(), i);
 				this.murk.setMovementSpeed(j);
 				this.murk.setVelocity(this.murk.getVelocity().add((double) j * d * 0.005, (double) j * e * 0.1, (double) j * f * 0.005));
@@ -365,6 +342,14 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 				super.tick();
 			}
 
+		}
+	}
+
+	public boolean canAttackTarget(@Nullable LivingEntity target) {
+		if (target != null) {
+			return !this.getWorld().isDay() || target.isTouchingWater();
+		} else {
+			return false;
 		}
 	}
 

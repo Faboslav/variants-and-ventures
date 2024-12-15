@@ -1,6 +1,8 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
+import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.ai.GelidSnowballRangedAttackGoal;
+import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -13,6 +15,7 @@ import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -39,7 +42,12 @@ public final class GelidEntity extends ZombieEntity
 	}
 
 	public static DefaultAttributeContainer.Builder createGelidAttributes() {
-		return HostileEntity.createHostileAttributes().add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0).add(EntityAttributes.GENERIC_ARMOR, 2.0).add(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+		return HostileEntity.createHostileAttributes()
+			.add(EntityAttributes.FOLLOW_RANGE, 35.0)
+			.add(EntityAttributes.MOVEMENT_SPEED, 0.2)
+			.add(EntityAttributes.ATTACK_DAMAGE, 4.0)
+			.add(EntityAttributes.ARMOR, 2.0)
+			.add(EntityAttributes.SPAWN_REINFORCEMENTS);
 	}
 
 	@Override
@@ -84,7 +92,8 @@ public final class GelidEntity extends ZombieEntity
 
 		itemStack.decrement(1);
 
-		SnowballEntity snowballEntity = new SnowballEntity(this.getWorld(), this);
+		// TODO check stack
+		SnowballEntity snowballEntity = new SnowballEntity(this.getWorld(), this, itemStack);
 		double d = target.getEyeY() - 1.100000023841858;
 		double e = target.getX() - this.getX();
 		double f = d - snowballEntity.getY();
@@ -97,10 +106,10 @@ public final class GelidEntity extends ZombieEntity
 	}
 
 	@Override
-	public boolean tryAttack(Entity target) {
+	public boolean tryAttack(ServerWorld world, Entity target) {
 		this.getWorld().sendEntityStatus(this, EntityStatuses.PLAY_ATTACK_SOUND);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_GELID_ATTACK.get(), 1.0f, this.getSoundPitch());
-		boolean attackResult = super.tryAttack(target);
+		boolean attackResult = super.tryAttack(world, target);
 
 		if (
 			attackResult && this.getMainHandStack().isEmpty()
