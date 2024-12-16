@@ -1,11 +1,12 @@
 package com.faboslav.variantsandventures.common.entity.ai;
 
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
-import java.util.EnumSet;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.SnowballItem;
+
+import java.util.EnumSet;
 
 public final class GelidSnowballRangedAttackGoal extends Goal
 {

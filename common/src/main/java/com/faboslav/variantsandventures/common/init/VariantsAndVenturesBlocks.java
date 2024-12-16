@@ -10,8 +10,9 @@ import net.minecraft.world.level.block.Blocks;
 /**
  * @see Blocks
  */
-public final class VariantsAndVenturesBlocks {
-    public static final ResourcefulRegistry<Block> BLOCKS = ResourcefulRegistries.create(BuiltInRegistries.BLOCK, VariantsAndVentures.MOD_ID);
+public final class VariantsAndVenturesBlocks
+{
+	public static final ResourcefulRegistry<Block> BLOCKS = ResourcefulRegistries.create(BuiltInRegistries.BLOCK, VariantsAndVentures.MOD_ID);
 
 	private VariantsAndVenturesBlocks() {
 	}

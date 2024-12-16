@@ -1,10 +1,11 @@
 package com.faboslav.variantsandventures.common.events.lifecycle;
 
 import com.faboslav.variantsandventures.common.events.base.EventHandler;
-import java.util.function.BiConsumer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+
+import java.util.function.BiConsumer;
 
 /**
  * Event related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors

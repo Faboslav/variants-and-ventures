@@ -1,12 +1,12 @@
 package com.faboslav.variantsandventures.common.mixin;
 
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.SpawnEggItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Map;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.SpawnEggItem;
 
 @Mixin(SpawnEggItem.class)
 public interface SpawnEggItemAccessor

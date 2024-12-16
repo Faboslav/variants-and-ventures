@@ -1,14 +1,14 @@
 package com.faboslav.variantsandventures.common.events.client;
 
 import com.faboslav.variantsandventures.common.events.base.EventHandler;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.function.BiConsumer;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.function.BiConsumer;
 
 /**
  * Event related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors

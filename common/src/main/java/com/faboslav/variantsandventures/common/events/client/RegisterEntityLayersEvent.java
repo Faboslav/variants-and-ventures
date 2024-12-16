@@ -1,10 +1,11 @@
 package com.faboslav.variantsandventures.common.events.client;
 
 import com.faboslav.variantsandventures.common.events.base.EventHandler;
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 /**
  * Event related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors

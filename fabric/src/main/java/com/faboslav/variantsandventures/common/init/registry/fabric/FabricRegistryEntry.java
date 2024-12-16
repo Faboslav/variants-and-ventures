@@ -3,6 +3,7 @@ package com.faboslav.variantsandventures.common.init.registry.fabric;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+
 import java.util.function.Supplier;
 
 /**

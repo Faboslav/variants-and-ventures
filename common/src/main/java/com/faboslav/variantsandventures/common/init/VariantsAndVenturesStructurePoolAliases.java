@@ -6,13 +6,12 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.util.random.SimpleWeightedRandomList.Builder;
-import net.minecraft.util.random.WeightedEntry.Wrapper;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
 import net.minecraft.world.level.levelgen.structure.pools.alias.Random;
 import net.minecraft.world.level.levelgen.structure.pools.alias.RandomGroup;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,12 +31,12 @@ public final class VariantsAndVenturesStructurePoolAliases
 		List<PoolAliasBinding> newPoolAliasBindings = new ArrayList<>();
 
 		for (PoolAliasBinding originalPoolAliasBinding : originalPoolAliasBindings) {
-			if(originalPoolAliasBinding instanceof RandomGroup randomGroupStructurePoolAliasBinding) {
+			if (originalPoolAliasBinding instanceof RandomGroup randomGroupStructurePoolAliasBinding) {
 				RandomGroup newRandomGroupStructurePoolAliasBinding;
 				var dataPoolBuilder = SimpleWeightedRandomList.<List<PoolAliasBinding>>builder();
 				var groups = randomGroupStructurePoolAliasBinding.groups().unwrap();
 
-				for(var group : groups) {
+				for (var group : groups) {
 					dataPoolBuilder.add(group.data());
 				}
 
@@ -68,12 +67,12 @@ public final class VariantsAndVenturesStructurePoolAliases
 				);
 
 				newPoolAliasBindings.add(newRandomGroupStructurePoolAliasBinding);
-			} else if(originalPoolAliasBinding instanceof Random randomStructurePoolAliasBinding) {
+			} else if (originalPoolAliasBinding instanceof Random randomStructurePoolAliasBinding) {
 				Random newRandomStructurePoolAliasBinding;
 				var alias = randomStructurePoolAliasBinding.alias().location().getPath();
 				var registryKeys = randomStructurePoolAliasBinding.allTargets().toList();
 
-				if(Objects.equals(alias, "trial_chambers/spawner/contents/melee")) {
+				if (Objects.equals(alias, "trial_chambers/spawner/contents/melee")) {
 					var dataPoolBuilder = SimpleWeightedRandomList.<String>builder();
 
 					registryKeys.forEach(registryKey -> {

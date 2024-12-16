@@ -1,6 +1,7 @@
 package com.faboslav.variantsandventures.common.init.registry;
 
 import net.minecraft.resources.ResourceLocation;
+
 import java.util.function.Supplier;
 
 /**

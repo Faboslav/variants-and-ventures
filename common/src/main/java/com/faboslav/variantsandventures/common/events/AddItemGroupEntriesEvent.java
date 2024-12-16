@@ -1,12 +1,13 @@
 package com.faboslav.variantsandventures.common.events;
 
 import com.faboslav.variantsandventures.common.events.base.EventHandler;
-import java.util.function.Consumer;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+
+import java.util.function.Consumer;
 
 /**
  * Event related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors
@@ -16,7 +17,8 @@ import net.minecraft.world.level.ItemLike;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public record AddItemGroupEntriesEvent(Type type, CreativeModeTab itemGroup, boolean hasPermission, Consumer<ItemStack> adder)
+public record AddItemGroupEntriesEvent(Type type, CreativeModeTab itemGroup, boolean hasPermission,
+									   Consumer<ItemStack> adder)
 {
 
 	public static final EventHandler<AddItemGroupEntriesEvent> EVENT = new EventHandler<>();

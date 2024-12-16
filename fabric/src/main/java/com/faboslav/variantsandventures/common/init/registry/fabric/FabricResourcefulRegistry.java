@@ -6,6 +6,7 @@ import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+
 import java.util.Collection;
 import java.util.function.Supplier;
 

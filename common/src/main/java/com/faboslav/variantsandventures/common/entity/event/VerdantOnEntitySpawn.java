@@ -13,62 +13,63 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
-public final class VerdantOnEntitySpawn {
-    public static boolean handleEntitySpawn(EntitySpawnEvent event) {
-        Mob entity = event.entity();
+public final class VerdantOnEntitySpawn
+{
+	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
+		Mob entity = event.entity();
 
-        if (event.spawnReason() == MobSpawnType.NATURAL
-                || event.spawnReason() == MobSpawnType.SPAWNER
-                || event.spawnReason() == MobSpawnType.CHUNK_GENERATION
-                || event.spawnReason() == MobSpawnType.STRUCTURE
-        ) {
-            if (entity.getType() != EntityType.SKELETON) {
-                return false;
-            }
+		if (event.spawnReason() == MobSpawnType.NATURAL
+			|| event.spawnReason() == MobSpawnType.SPAWNER
+			|| event.spawnReason() == MobSpawnType.CHUNK_GENERATION
+			|| event.spawnReason() == MobSpawnType.STRUCTURE
+		) {
+			if (entity.getType() != EntityType.SKELETON) {
+				return false;
+			}
 
-            if (VariantsAndVentures.getConfig().enableVerdant == false || VariantsAndVentures.getConfig().enableVerdantSpawns == false) {
-                return false;
-            }
+			if (VariantsAndVentures.getConfig().enableVerdant == false || VariantsAndVentures.getConfig().enableVerdantSpawns == false) {
+				return false;
+			}
 
-            if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().verdantMinimumYLevel) {
-                return false;
-            }
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().verdantMinimumYLevel) {
+				return false;
+			}
 
-            if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().verdantSpawnChance) {
-                return false;
-            }
+			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().verdantSpawnChance) {
+				return false;
+			}
 
-            LevelAccessor worldAccess = event.worldAccess();
-            Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
+			LevelAccessor worldAccess = event.worldAccess();
+			Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
 
-            if (biome.is(VariantsAndVenturesTags.HAS_VERDANT) == false) {
-                return false;
-            }
+			if (biome.is(VariantsAndVenturesTags.HAS_VERDANT) == false) {
+				return false;
+			}
 
-            VerdantEntity verdant = VariantsAndVenturesEntityTypes.VERDANT.get().create(
-                    (ServerLevel) event.worldAccess(),
-                    null,
-                    event.entity().blockPosition(),
-                    event.spawnReason(),
-                    false,
-                    false
-            );
+			VerdantEntity verdant = VariantsAndVenturesEntityTypes.VERDANT.get().create(
+				(ServerLevel) event.worldAccess(),
+				null,
+				event.entity().blockPosition(),
+				event.spawnReason(),
+				false,
+				false
+			);
 
-            if (verdant == null) {
-                return false;
-            }
+			if (verdant == null) {
+				return false;
+			}
 
-            verdant.copyPosition(entity);
-            verdant.yBodyRotO = entity.yBodyRotO;
-            verdant.yBodyRot = entity.yBodyRot;
-            verdant.yHeadRotO = entity.yHeadRotO;
-            verdant.yHeadRot = entity.yHeadRot;
-            verdant.setBaby(event.isBaby());
-            worldAccess.addFreshEntity(verdant);
+			verdant.copyPosition(entity);
+			verdant.yBodyRotO = entity.yBodyRotO;
+			verdant.yBodyRot = entity.yBodyRot;
+			verdant.yHeadRotO = entity.yHeadRotO;
+			verdant.yHeadRot = entity.yHeadRot;
+			verdant.setBaby(event.isBaby());
+			worldAccess.addFreshEntity(verdant);
 
-            return true;
-        }
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 }

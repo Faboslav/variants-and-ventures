@@ -4,6 +4,7 @@ import com.faboslav.variantsandventures.common.init.registry.ReferenceRegistryEn
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
+
 import java.util.function.Supplier;
 
 /**

@@ -13,62 +13,63 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
-public final class ThicketOnEntitySpawn {
-    public static boolean handleEntitySpawn(EntitySpawnEvent event) {
-        Mob entity = event.entity();
+public final class ThicketOnEntitySpawn
+{
+	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
+		Mob entity = event.entity();
 
-        if (event.spawnReason() == MobSpawnType.NATURAL
-                || event.spawnReason() == MobSpawnType.SPAWNER
-                || event.spawnReason() == MobSpawnType.CHUNK_GENERATION
-                || event.spawnReason() == MobSpawnType.STRUCTURE
-        ) {
-            if (entity.getType() != EntityType.ZOMBIE) {
-                return false;
-            }
+		if (event.spawnReason() == MobSpawnType.NATURAL
+			|| event.spawnReason() == MobSpawnType.SPAWNER
+			|| event.spawnReason() == MobSpawnType.CHUNK_GENERATION
+			|| event.spawnReason() == MobSpawnType.STRUCTURE
+		) {
+			if (entity.getType() != EntityType.ZOMBIE) {
+				return false;
+			}
 
-            if (VariantsAndVentures.getConfig().enableThicket == false || VariantsAndVentures.getConfig().enableThicketSpawns == false) {
-                return false;
-            }
+			if (VariantsAndVentures.getConfig().enableThicket == false || VariantsAndVentures.getConfig().enableThicketSpawns == false) {
+				return false;
+			}
 
-            if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().thicketMinimumYLevel) {
-                return false;
-            }
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().thicketMinimumYLevel) {
+				return false;
+			}
 
-            if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().thicketSpawnChance) {
-                return false;
-            }
+			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().thicketSpawnChance) {
+				return false;
+			}
 
-            LevelAccessor worldAccess = event.worldAccess();
-            Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
+			LevelAccessor worldAccess = event.worldAccess();
+			Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
 
-            if (biome.is(VariantsAndVenturesTags.HAS_THICKET) == false) {
-                return false;
-            }
+			if (biome.is(VariantsAndVenturesTags.HAS_THICKET) == false) {
+				return false;
+			}
 
-            ThicketEntity thicket = VariantsAndVenturesEntityTypes.THICKET.get().create(
-                    (ServerLevel) event.worldAccess(),
-                    null,
-                    event.entity().blockPosition(),
-                    event.spawnReason(),
-                    false,
-                    false
-            );
+			ThicketEntity thicket = VariantsAndVenturesEntityTypes.THICKET.get().create(
+				(ServerLevel) event.worldAccess(),
+				null,
+				event.entity().blockPosition(),
+				event.spawnReason(),
+				false,
+				false
+			);
 
-            if (thicket == null) {
-                return false;
-            }
+			if (thicket == null) {
+				return false;
+			}
 
-            thicket.copyPosition(entity);
-            thicket.yBodyRotO = entity.yBodyRotO;
-            thicket.yBodyRot = entity.yBodyRot;
-            thicket.yHeadRotO = entity.yHeadRotO;
-            thicket.yHeadRot = entity.yHeadRot;
-            thicket.setBaby(event.isBaby());
-            worldAccess.addFreshEntity(thicket);
+			thicket.copyPosition(entity);
+			thicket.yBodyRotO = entity.yBodyRotO;
+			thicket.yBodyRot = entity.yBodyRot;
+			thicket.yHeadRotO = entity.yHeadRotO;
+			thicket.yHeadRot = entity.yHeadRot;
+			thicket.setBaby(event.isBaby());
+			worldAccess.addFreshEntity(thicket);
 
-            return true;
-        }
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 }
