@@ -1,10 +1,5 @@
 package com.faboslav.variantsandventures.common.init.registry;
 
-import net.minecraft.util.Identifier;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Collection;
-
 /**
  * Event/registry related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors
  *
@@ -13,19 +8,16 @@ import java.util.Collection;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public interface CustomRegistryLookup<T, K extends T> extends Iterable<T>
+public final class ResourcefulRegistryType<D, T extends ResourcefulRegistry<D>>
 {
-	boolean containsKey(Identifier id);
+	private final Class<T> type;
 
-	boolean containsValue(T value);
+	private ResourcefulRegistryType(Class<T> type) {
+		this.type = type;
+	}
 
-	@Nullable
-	T get(Identifier id);
-
-	@Nullable
-	Identifier getKey(T value);
-
-	Collection<T> getValues();
-
-	Collection<Identifier> getKeys();
+	@Override
+	public String toString() {
+		return "ResourcefulRegistryType{type=" + type + "}";
+	}
 }

@@ -7,7 +7,7 @@ import com.faboslav.variantsandventures.common.client.render.entity.VerdantEntit
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 
 /**
  * @see EntityRenderers

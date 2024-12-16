@@ -3,52 +3,52 @@ package com.faboslav.variantsandventures.common.client.render.entity;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.client.render.entity.feature.GelidOverlayFeatureRenderer;
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.ZombieBaseEntityRenderer;
-import net.minecraft.client.render.entity.model.DrownedEntityModel;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
+import net.minecraft.client.model.DrownedModel;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.entity.AbstractZombieRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
-public class GelidEntityRenderer extends ZombieBaseEntityRenderer<GelidEntity, DrownedEntityModel<GelidEntity>>
+public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, DrownedModel<GelidEntity>>
 {
-	public static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
+	public static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
 
-	public GelidEntityRenderer(EntityRendererFactory.Context context) {
-		super(context, new DrownedEntityModel<>(context.getPart(EntityModelLayers.DROWNED)), new DrownedEntityModel<>(context.getPart(EntityModelLayers.DROWNED_INNER_ARMOR)), new DrownedEntityModel<>(context.getPart(EntityModelLayers.DROWNED_OUTER_ARMOR)));
-		this.addFeature(new GelidOverlayFeatureRenderer<>(this, context.getModelLoader()));
+	public GelidEntityRenderer(EntityRendererProvider.Context context) {
+		super(context, new DrownedModel<>(context.bakeLayer(ModelLayers.DROWNED)), new DrownedModel<>(context.bakeLayer(ModelLayers.DROWNED_INNER_ARMOR)), new DrownedModel<>(context.bakeLayer(ModelLayers.DROWNED_OUTER_ARMOR)));
+		this.addLayer(new GelidOverlayFeatureRenderer<>(this, context.getModelSet()));
 	}
 
 	@Override
-	protected void scale(GelidEntity gelid, MatrixStack matrixStack, float f) {
+	protected void scale(GelidEntity gelid, PoseStack matrixStack, float f) {
 		matrixStack.scale(1.0625F, 1.0625F, 1.0625F);
 		super.scale(gelid, matrixStack, f);
 	}
 
 	@Override
-	public Identifier getTexture(GelidEntity gelid) {
+	public ResourceLocation getTextureLocation(GelidEntity gelid) {
 		return TEXTURE;
 	}
 
 	@Override
-	protected void setupTransforms(
+	protected void setupRotations(
 		GelidEntity gelid,
-		MatrixStack matrices,
+		PoseStack matrices,
 		float animationProgress,
 		float bodyYaw,
 		float tickDelta,
 		float scale
 	) {
-		super.setupTransforms(gelid, matrices, animationProgress, bodyYaw, tickDelta, scale);
+		super.setupRotations(gelid, matrices, animationProgress, bodyYaw, tickDelta, scale);
 
-		float i = gelid.getLeaningPitch(tickDelta);
+		float i = gelid.getSwimAmount(tickDelta);
 		if (i > 0.0F) {
-			matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.lerp(i, gelid.getPitch(), -10.0F - gelid.getPitch())));
+			matrices.mulPose(Axis.XP.rotationDegrees(Mth.lerp(i, gelid.getXRot(), -10.0F - gelid.getXRot())));
 		}
 	}
 }

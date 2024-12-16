@@ -1,12 +1,11 @@
 package com.faboslav.variantsandventures.common.init.registry.fabric;
 
-import com.faboslav.variantsandventures.common.init.registry.BasicRegistryEntry;
+import com.faboslav.variantsandventures.common.init.registry.ReferenceRegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntries;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import java.util.Collection;
 import java.util.function.Supplier;
 
@@ -18,20 +17,26 @@ import java.util.function.Supplier;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public final class FabricCustomResourcefulRegistry<T> implements ResourcefulRegistry<T>
+public class FabricResourcefulRegistry<T> implements ResourcefulRegistry<T>
 {
 	private final RegistryEntries<T> entries = new RegistryEntries<>();
 	private final Registry<T> registry;
 	private final String id;
 
-	public FabricCustomResourcefulRegistry(Registry<T> registry, String id) {
+	public FabricResourcefulRegistry(Registry<T> registry, String id) {
 		this.registry = registry;
 		this.id = id;
 	}
 
 	@Override
 	public <I extends T> RegistryEntry<I> register(String id, Supplier<I> supplier) {
-		return entries.add(new BasicRegistryEntry<>(Identifier.of(this.id, id), Registry.register(registry, Identifier.of(this.id, id), supplier.get())));
+		return entries.add(FabricRegistryEntry.of(this.registry, ResourceLocation.fromNamespaceAndPath(this.id, id), supplier));
+	}
+
+	@Override
+	public ReferenceRegistryEntry<T> registerReference(String id, Supplier<T> supplier) {
+		return entries.add(FabricHolderRegistryEntry.of(this.registry, ResourceLocation.fromNamespaceAndPath(this.id, id), supplier));
+
 	}
 
 	@Override

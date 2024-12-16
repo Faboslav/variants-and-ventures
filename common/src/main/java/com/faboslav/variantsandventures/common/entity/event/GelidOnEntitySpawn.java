@@ -5,23 +5,23 @@ import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 
 public final class GelidOnEntitySpawn
 {
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
-		MobEntity entity = event.entity();
+		Mob entity = event.entity();
 
-		if (event.spawnReason() == SpawnReason.NATURAL
-			|| event.spawnReason() == SpawnReason.SPAWNER
-			|| event.spawnReason() == SpawnReason.CHUNK_GENERATION
-			|| event.spawnReason() == SpawnReason.STRUCTURE
+		if (event.spawnReason() == MobSpawnType.NATURAL
+			|| event.spawnReason() == MobSpawnType.SPAWNER
+			|| event.spawnReason() == MobSpawnType.CHUNK_GENERATION
+			|| event.spawnReason() == MobSpawnType.STRUCTURE
 		) {
 			if (entity.getType() != EntityType.ZOMBIE) {
 				return false;
@@ -35,21 +35,21 @@ public final class GelidOnEntitySpawn
 				return false;
 			}
 
-			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().gelidMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().gelidMinimumYLevel) {
 				return false;
 			}
 
-			WorldAccess worldAccess = event.worldAccess();
-			RegistryEntry<Biome> biome = worldAccess.getBiome(entity.getBlockPos());
+			LevelAccessor worldAccess = event.worldAccess();
+			Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
 
-			if (biome.isIn(VariantsAndVenturesTags.HAS_GELID) == false) {
+			if (biome.is(VariantsAndVenturesTags.HAS_GELID) == false) {
 				return false;
 			}
 
 			GelidEntity gelid = VariantsAndVenturesEntityTypes.GELID.get().create(
-				(ServerWorld) event.worldAccess(),
+				(ServerLevel) event.worldAccess(),
 				null,
-				event.entity().getBlockPos(),
+				event.entity().blockPosition(),
 				event.spawnReason(),
 				false,
 				false
@@ -59,13 +59,13 @@ public final class GelidOnEntitySpawn
 				return false;
 			}
 
-			gelid.copyPositionAndRotation(entity);
-			gelid.prevBodyYaw = entity.prevBodyYaw;
-			gelid.bodyYaw = entity.bodyYaw;
-			gelid.prevHeadYaw = entity.prevHeadYaw;
-			gelid.headYaw = entity.headYaw;
+			gelid.copyPosition(entity);
+			gelid.yBodyRotO = entity.yBodyRotO;
+			gelid.yBodyRot = entity.yBodyRot;
+			gelid.yHeadRotO = entity.yHeadRotO;
+			gelid.yHeadRot = entity.yHeadRot;
 			gelid.setBaby(event.isBaby());
-			worldAccess.spawnEntity(gelid);
+			worldAccess.addFreshEntity(gelid);
 
 			return true;
 		}

@@ -5,17 +5,16 @@ import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.Registries;
-import net.minecraft.text.Text;
-
 import java.util.List;
 import java.util.stream.Stream;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 
 public class VariantsAndVenturesItemGroups
 {
@@ -26,20 +25,20 @@ public class VariantsAndVenturesItemGroups
 		VariantsAndVenturesItems.VERDANT_SPAWN_EGG
 	);
 
-	public static final ResourcefulRegistry<ItemGroup> ITEM_GROUPS = ResourcefulRegistries.create(Registries.ITEM_GROUP, VariantsAndVentures.MOD_ID);
+	public static final ResourcefulRegistry<CreativeModeTab> ITEM_GROUPS = ResourcefulRegistries.create(BuiltInRegistries.CREATIVE_MODE_TAB, VariantsAndVentures.MOD_ID);
 
-	public static final RegistryEntry<ItemGroup> MAIN_TAB = ITEM_GROUPS.register("main_tab", () ->
-		ItemGroup.create(ItemGroup.Row.TOP, 0)
-			.displayName((Text.translatable("item_group." + VariantsAndVentures.MOD_ID + ".main_tab")))
+	public static final RegistryEntry<CreativeModeTab> MAIN_TAB = ITEM_GROUPS.register("main_tab", () ->
+		CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+			.title((Component.translatable("item_group." + VariantsAndVentures.MOD_ID + ".main_tab")))
 			.icon(() -> {
-				ItemStack iconStack = VariantsAndVenturesItems.GELID_SPAWN_EGG.get().getDefaultStack();
-				NbtCompound nbtCompound = new NbtCompound();
+				ItemStack iconStack = VariantsAndVenturesItems.GELID_SPAWN_EGG.get().getDefaultInstance();
+				CompoundTag nbtCompound = new CompoundTag();
 				nbtCompound.putBoolean("isCreativeTabIcon", true);
-				iconStack.set(DataComponentTypes.CUSTOM_DATA, NbtComponent.of(nbtCompound));
+				iconStack.set(DataComponents.CUSTOM_DATA, CustomData.of(nbtCompound));
 				return iconStack;
 			})
-			.entries((itemDisplayParameters, entries) ->
-				CUSTOM_CREATIVE_TAB_ITEMS.stream().map(item -> item.get().getDefaultStack()).forEach(entries::add)
+			.displayItems((itemDisplayParameters, entries) ->
+				CUSTOM_CREATIVE_TAB_ITEMS.stream().map(item -> item.get().getDefaultInstance()).forEach(entries::accept)
 			).build());
 
 	public static void addItemGroupEntries(AddItemGroupEntriesEvent event) {
@@ -49,7 +48,7 @@ public class VariantsAndVenturesItemGroups
 				VariantsAndVenturesItems.MURK_SPAWN_EGG,
 				VariantsAndVenturesItems.THICKET_SPAWN_EGG,
 				VariantsAndVenturesItems.VERDANT_SPAWN_EGG
-			).map(item -> item.get().getDefaultStack()).forEach(event::add);
+			).map(item -> item.get().getDefaultInstance()).forEach(event::add);
 		}
 	}
 }

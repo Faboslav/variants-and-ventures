@@ -1,6 +1,6 @@
 plugins {
 	id "architectury-plugin" version "3.4-SNAPSHOT"
-	id 'dev.architectury.loom' version '1.7-SNAPSHOT' apply false
+	id 'dev.architectury.loom' version '1.9-SNAPSHOT' apply false
 }
 
 architectury {
@@ -12,10 +12,7 @@ subprojects {
 
 	dependencies {
 		minecraft "com.mojang:minecraft:${minecraft_version}"
-		mappings loom.layered {
-			it.mappings "net.fabricmc:yarn:${yarn_mappings}:v2"
-			it.mappings "dev.architectury:yarn-mappings-patch-neoforge:${yarn_mappings_patch}"
-		}
+		mappings loom.officialMojangMappings()
 	}
 }
 

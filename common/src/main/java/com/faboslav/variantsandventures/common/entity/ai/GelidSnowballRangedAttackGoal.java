@@ -1,12 +1,11 @@
 package com.faboslav.variantsandventures.common.entity.ai;
 
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.item.SnowballItem;
-import net.minecraft.util.math.MathHelper;
-
 import java.util.EnumSet;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.item.SnowballItem;
 
 public final class GelidSnowballRangedAttackGoal extends Goal
 {
@@ -20,16 +19,16 @@ public final class GelidSnowballRangedAttackGoal extends Goal
 		this.gelid = gelid;
 		this.maxShootRange = maxShootRange;
 		this.squaredMaxShootRange = maxShootRange * maxShootRange;
-		this.setControls(EnumSet.of(Control.MOVE, Control.LOOK));
+		this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
 	}
 
-	public boolean canStart() {
+	public boolean canUse() {
 		LivingEntity livingEntity = this.gelid.getTarget();
 
 		if (
 			livingEntity == null
 			|| livingEntity.isAlive() == false
-			|| this.gelid.getOffHandStack().getItem() instanceof SnowballItem == false
+			|| this.gelid.getOffhandItem().getItem() instanceof SnowballItem == false
 		) {
 			return false;
 		}
@@ -38,8 +37,8 @@ public final class GelidSnowballRangedAttackGoal extends Goal
 		return true;
 	}
 
-	public boolean shouldContinue() {
-		return this.canStart() || !this.gelid.getNavigation().isIdle();
+	public boolean canContinueToUse() {
+		return this.canUse() || !this.gelid.getNavigation().isDone();
 	}
 
 	public void stop() {
@@ -47,13 +46,13 @@ public final class GelidSnowballRangedAttackGoal extends Goal
 		this.seenTargetTicks = 0;
 	}
 
-	public boolean shouldRunEveryTick() {
+	public boolean requiresUpdateEveryTick() {
 		return true;
 	}
 
 	public void tick() {
-		double d = this.gelid.squaredDistanceTo(this.target.getX(), this.target.getY(), this.target.getZ());
-		boolean bl = this.gelid.getVisibilityCache().canSee(this.target);
+		double d = this.gelid.distanceToSqr(this.target.getX(), this.target.getY(), this.target.getZ());
+		boolean bl = this.gelid.getSensing().hasLineOfSight(this.target);
 		if (bl) {
 			++this.seenTargetTicks;
 		} else {
@@ -63,17 +62,17 @@ public final class GelidSnowballRangedAttackGoal extends Goal
 		if (!(d > (double) this.squaredMaxShootRange) && this.seenTargetTicks >= 5) {
 			this.gelid.getNavigation().stop();
 		} else {
-			this.gelid.getNavigation().startMovingTo(this.target, 1.0F);
+			this.gelid.getNavigation().moveTo(this.target, 1.0F);
 		}
 
-		this.gelid.getLookControl().lookAt(this.target, 30.0F, 30.0F);
+		this.gelid.getLookControl().setLookAt(this.target, 30.0F, 30.0F);
 
 		if (!bl) {
 			return;
 		}
 
 		float f = (float) Math.sqrt(d) / this.maxShootRange;
-		float g = MathHelper.clamp(f, 0.1F, 1.0F);
+		float g = Mth.clamp(f, 0.1F, 1.0F);
 		this.gelid.throwSnowball(this.target, g);
 	}
 }

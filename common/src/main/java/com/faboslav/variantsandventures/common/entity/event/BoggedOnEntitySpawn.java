@@ -3,24 +3,22 @@ package com.faboslav.variantsandventures.common.entity.event;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.BoggedEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 
 public final class BoggedOnEntitySpawn
 {
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
-		MobEntity entity = event.entity();
+		Mob entity = event.entity();
 
-		if (event.spawnReason() == SpawnReason.NATURAL
-			|| event.spawnReason() == SpawnReason.SPAWNER
-			|| event.spawnReason() == SpawnReason.CHUNK_GENERATION
-			|| event.spawnReason() == SpawnReason.STRUCTURE
+		if (event.spawnReason() == MobSpawnType.NATURAL
+			|| event.spawnReason() == MobSpawnType.SPAWNER
+			|| event.spawnReason() == MobSpawnType.CHUNK_GENERATION
+			|| event.spawnReason() == MobSpawnType.STRUCTURE
 		) {
 			if (entity.getType() != EntityType.SKELETON) {
 				return false;
@@ -30,7 +28,7 @@ public final class BoggedOnEntitySpawn
 				return false;
 			}
 
-			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().boggedMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().boggedMinimumYLevel) {
 				return false;
 			}
 
@@ -38,10 +36,10 @@ public final class BoggedOnEntitySpawn
 				return false;
 			}
 
-			WorldAccess worldAccess = event.worldAccess();
-			RegistryEntry<Biome> biome = worldAccess.getBiome(entity.getBlockPos());
+			LevelAccessor worldAccess = event.worldAccess();
+			Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
 
-			if (biome.isIn(VariantsAndVenturesTags.HAS_BOGGED) == false) {
+			if (biome.is(VariantsAndVenturesTags.HAS_BOGGED) == false) {
 				return false;
 			}
 

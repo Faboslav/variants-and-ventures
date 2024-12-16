@@ -13,7 +13,7 @@ import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.*;
 import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +23,8 @@ public final class VariantsAndVentures
 	private static final Logger LOGGER = LoggerFactory.getLogger(VariantsAndVentures.MOD_ID);
 	private static final VariantsAndVenturesConfig CONFIG = OmegaConfig.register(VariantsAndVenturesConfig.class);
 
-	public static Identifier makeID(String path) {
-		return Identifier.of(
+	public static ResourceLocation makeID(String path) {
+		return ResourceLocation.fromNamespaceAndPath(
 			MOD_ID,
 			path
 		);
@@ -34,8 +34,8 @@ public final class VariantsAndVentures
 		return MOD_ID + ":" + name;
 	}
 
-	public static Identifier makeNamespacedId(String id) {
-		return Identifier.tryParse(
+	public static ResourceLocation makeNamespacedId(String id) {
+		return ResourceLocation.tryParse(
 			id
 		);
 	}

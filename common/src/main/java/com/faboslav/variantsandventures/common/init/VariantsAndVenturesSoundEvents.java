@@ -4,18 +4,17 @@ import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
-import net.minecraft.registry.Registries;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-
 import java.util.function.Supplier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 
 /**
  * @see SoundEvents
  */
 public final class VariantsAndVenturesSoundEvents
 {
-	public static final ResourcefulRegistry<SoundEvent> SOUND_EVENTS = ResourcefulRegistries.create(Registries.SOUND_EVENT, VariantsAndVentures.MOD_ID);
+	public static final ResourcefulRegistry<SoundEvent> SOUND_EVENTS = ResourcefulRegistries.create(BuiltInRegistries.SOUND_EVENT, VariantsAndVentures.MOD_ID);
 
 	public static final Supplier<SoundEvent> ENTITY_GELID_AMBIENT = registerSoundEvent("entity.gelid.ambient");
 	public static final Supplier<SoundEvent> ENTITY_GELID_ATTACK = registerSoundEvent("entity.gelid.attack");
@@ -44,7 +43,7 @@ public final class VariantsAndVenturesSoundEvents
 	public static final Supplier<SoundEvent> ENTITY_VERDANT_STEP = registerSoundEvent("entity.verdant.step");
 
 	private static RegistryEntry<SoundEvent> registerSoundEvent(String path) {
-		return SOUND_EVENTS.register(path, () -> SoundEvent.of(VariantsAndVentures.makeID(path)));
+		return SOUND_EVENTS.register(path, () -> SoundEvent.createVariableRangeEvent(VariantsAndVentures.makeID(path)));
 	}
 
 	private VariantsAndVenturesSoundEvents() {

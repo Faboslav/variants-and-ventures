@@ -2,14 +2,15 @@ package com.faboslav.variantsandventures.neoforge;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
+import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesStructurePoolAliases;
 import com.faboslav.variantsandventures.common.init.registry.neoforge.ResourcefulRegistriesImpl;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -20,6 +21,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.event.entity.living.FinalizeSpawnEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 
 @Mod(VariantsAndVentures.MOD_ID)
@@ -28,7 +30,6 @@ public final class VariantsAndVenturesNeoForge
 	public VariantsAndVenturesNeoForge(IEventBus modEventBus) {
 		IEventBus eventBus = NeoForge.EVENT_BUS;
 
-		modEventBus.addListener(EventPriority.NORMAL, ResourcefulRegistriesImpl::onRegisterNeoForgeRegistries);
 		VariantsAndVentures.init();
 
 		if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -36,6 +37,7 @@ public final class VariantsAndVenturesNeoForge
 		}
 
 		eventBus.addListener(VariantsAndVenturesNeoForge::onServerAboutToStartEvent);
+		eventBus.addListener(VariantsAndVenturesNeoForge::onEntitySpawn);
 
 		modEventBus.addListener(VariantsAndVenturesNeoForge::onSetup);
 		modEventBus.addListener(VariantsAndVenturesNeoForge::onAddItemGroupEntries);
@@ -45,19 +47,19 @@ public final class VariantsAndVenturesNeoForge
 
 	private static void onSetup(FMLCommonSetupEvent event) {
 		SetupEvent.EVENT.invoke(new SetupEvent(event::enqueueWork));
+	}
 
-		event.enqueueWork(() -> {
-			VariantsAndVentures.lateInit();
-		});
+	private static void onEntitySpawn(FinalizeSpawnEvent event) {
+		EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(event.getEntity(), event.getLevel(), event.getEntity().isBaby(), event.getSpawnType()), event.isCanceled());
 	}
 
 	private static void onAddItemGroupEntries(BuildCreativeModeTabContentsEvent event) {
 		AddItemGroupEntriesEvent.EVENT.invoke(
 			new AddItemGroupEntriesEvent(
-				AddItemGroupEntriesEvent.Type.toType(Registries.ITEM_GROUP.getKey(event.getTab()).orElse(null)),
+				AddItemGroupEntriesEvent.Type.toType(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(event.getTab()).orElse(null)),
 				event.getTab(),
 				event.hasPermissions(),
-				event::add
+				event::accept
 			)
 		);
 	}
@@ -76,7 +78,7 @@ public final class VariantsAndVenturesNeoForge
 		return new RegisterEntitySpawnRestrictionsEvent.Registrar()
 		{
 			@Override
-			public <T extends MobEntity> void register(
+			public <T extends Mob> void register(
 				EntityType<T> type,
 				RegisterEntitySpawnRestrictionsEvent.Placement<T> placement
 			) {

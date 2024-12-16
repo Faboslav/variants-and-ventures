@@ -15,8 +15,7 @@
 		"PersistentProjectileEntityMixin",
 		"ProjectileEntityAccessor",
 		"ProjectileEntityMixin",
-		"SpawnEggItemAccessor",
-		"StructurePoolAccessor"
+		"SpawnEggItemAccessor"
 	],
 	"client": [
 		"IntegratedServerLoaderMixin"

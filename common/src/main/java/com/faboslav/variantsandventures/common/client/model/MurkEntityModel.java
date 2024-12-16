@@ -4,11 +4,16 @@ import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.BipedEntityModel;
-import net.minecraft.client.render.entity.model.SkeletonEntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 
 @Environment(EnvType.CLIENT)
-public class MurkEntityModel extends SkeletonEntityModel<MurkEntity>
+public class MurkEntityModel extends SkeletonModel<MurkEntity>
 {
 	private final ModelPart corals;
 
@@ -17,22 +22,22 @@ public class MurkEntityModel extends SkeletonEntityModel<MurkEntity>
 		this.corals = this.getHead().getChild("corals");
 	}
 
-	public static TexturedModelData getTexturedModelData() {
-		ModelData modelData = BipedEntityModel.getModelData(Dilation.NONE, 0.0F);
-		ModelPartData root = modelData.getRoot();
-		SkeletonEntityModel.addLimbs(root);
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition modelData = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
+		PartDefinition root = modelData.getRoot();
+		SkeletonModel.createDefaultSkeletonMesh(root);
 
-		ModelPartData head = root.getChild("head");
-		ModelPartData corals = head.addChild("corals", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -8.0F, 0.0F));
-		corals.addChild("coral1", ModelPartBuilder.create().uv(0, 36).cuboid(-1.0F, -15.0F, -4.0F, 9.0F, 9.0F, 0.0F, new Dilation(-0.01F)), ModelTransform.pivot(0.0F, 8.0F, 0.0F));
-		corals.addChild("coral2", ModelPartBuilder.create().uv(0, 32).cuboid(-1.0F, -6.0F, 5.0F, 6.0F, 4.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
+		PartDefinition head = root.getChild("head");
+		PartDefinition corals = head.addOrReplaceChild("corals", CubeListBuilder.create(), PartPose.offset(0.0F, -8.0F, 0.0F));
+		corals.addOrReplaceChild("coral1", CubeListBuilder.create().texOffs(0, 36).addBox(-1.0F, -15.0F, -4.0F, 9.0F, 9.0F, 0.0F, new CubeDeformation(-0.01F)), PartPose.offset(0.0F, 8.0F, 0.0F));
+		corals.addOrReplaceChild("coral2", CubeListBuilder.create().texOffs(0, 32).addBox(-1.0F, -6.0F, 5.0F, 6.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.5708F, 0.0F, 0.0F));
 
-		return TexturedModelData.of(modelData, 64, 64);
+		return LayerDefinition.create(modelData, 64, 64);
 	}
 
 	@Override
-	public void animateModel(MurkEntity murk, float f, float g, float h) {
+	public void prepareMobModel(MurkEntity murk, float f, float g, float h) {
 		this.corals.visible = !murk.isSheared();
-		super.animateModel(murk, f, g, h);
+		super.prepareMobModel(murk, f, g, h);
 	}
 }

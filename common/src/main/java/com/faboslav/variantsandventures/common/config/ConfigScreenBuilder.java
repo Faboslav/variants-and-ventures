@@ -4,8 +4,8 @@ import com.faboslav.variantsandventures.common.config.annotation.Category;
 import com.faboslav.variantsandventures.common.config.annotation.Description;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.annotation.Annotation;
@@ -15,7 +15,7 @@ public final class ConfigScreenBuilder
 {
 	public static Screen createConfigScreen(VariantsAndVenturesConfig config, Screen parent) {
 		ConfigBuilder builder = ConfigBuilder.create()
-			.setTitle(Text.literal("Variants & Ventures"))
+			.setTitle(Component.literal("Variants & Ventures"))
 			.setSavingRunnable(config::save)
 			.setParentScreen(parent);
 
@@ -26,7 +26,7 @@ public final class ConfigScreenBuilder
 				String categoryString = getFieldCategory(field);
 
 				if (categoryString != null) {
-					category = builder.getOrCreateCategory(Text.literal(getFieldCategory(field)));
+					category = builder.getOrCreateCategory(Component.literal(getFieldCategory(field)));
 				}
 
 				if (category == null) {
@@ -35,7 +35,7 @@ public final class ConfigScreenBuilder
 
 				if (field.getGenericType() == boolean.class) {
 					category.addEntry(builder.entryBuilder()
-						.startBooleanToggle(Text.literal(getFieldDescription(field)), field.getBoolean(config))
+						.startBooleanToggle(Component.literal(getFieldDescription(field)), field.getBoolean(config))
 						.setDefaultValue(field.getBoolean(new VariantsAndVenturesConfig()))
 						.setSaveConsumer((enabled) -> {
 							try {
@@ -48,7 +48,7 @@ public final class ConfigScreenBuilder
 					);
 				} else if (field.getGenericType() == int.class) {
 					category.addEntry(builder.entryBuilder()
-						.startIntField(Text.literal(getFieldDescription(field)), field.getInt(config))
+						.startIntField(Component.literal(getFieldDescription(field)), field.getInt(config))
 						.setDefaultValue(field.getInt(new VariantsAndVenturesConfig()))
 						.setSaveConsumer((enabled) -> {
 							try {

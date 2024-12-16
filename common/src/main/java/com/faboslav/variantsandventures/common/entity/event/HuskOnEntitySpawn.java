@@ -3,24 +3,24 @@ package com.faboslav.variantsandventures.common.entity.event;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.HuskEntity;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.monster.Husk;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 
 public final class HuskOnEntitySpawn
 {
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
-		MobEntity entity = event.entity();
+		Mob entity = event.entity();
 
-		if (event.spawnReason() == SpawnReason.NATURAL
-			|| event.spawnReason() == SpawnReason.SPAWNER
-			|| event.spawnReason() == SpawnReason.CHUNK_GENERATION
-			|| event.spawnReason() == SpawnReason.STRUCTURE
+		if (event.spawnReason() == MobSpawnType.NATURAL
+			|| event.spawnReason() == MobSpawnType.SPAWNER
+			|| event.spawnReason() == MobSpawnType.CHUNK_GENERATION
+			|| event.spawnReason() == MobSpawnType.STRUCTURE
 		) {
 			if (entity.getType() != EntityType.ZOMBIE) {
 				return false;
@@ -30,7 +30,7 @@ public final class HuskOnEntitySpawn
 				return false;
 			}
 
-			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().huskMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().huskMinimumYLevel) {
 				return false;
 			}
 
@@ -38,17 +38,17 @@ public final class HuskOnEntitySpawn
 				return false;
 			}
 
-			WorldAccess worldAccess = event.worldAccess();
-			RegistryEntry<Biome> biome = worldAccess.getBiome(entity.getBlockPos());
+			LevelAccessor worldAccess = event.worldAccess();
+			Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
 
-			if (biome.isIn(VariantsAndVenturesTags.HAS_HUSK) == false) {
+			if (biome.is(VariantsAndVenturesTags.HAS_HUSK) == false) {
 				return false;
 			}
 
-			HuskEntity husk = EntityType.HUSK.create(
-				(ServerWorld) event.worldAccess(),
+			Husk husk = EntityType.HUSK.create(
+				(ServerLevel) event.worldAccess(),
 				null,
-				event.entity().getBlockPos(),
+				event.entity().blockPosition(),
 				event.spawnReason(),
 				false,
 				false
@@ -58,13 +58,13 @@ public final class HuskOnEntitySpawn
 				return false;
 			}
 
-			husk.copyPositionAndRotation(entity);
-			husk.prevBodyYaw = entity.prevBodyYaw;
-			husk.bodyYaw = entity.bodyYaw;
-			husk.prevHeadYaw = entity.prevHeadYaw;
-			husk.headYaw = entity.headYaw;
+			husk.copyPosition(entity);
+			husk.yBodyRotO = entity.yBodyRotO;
+			husk.yBodyRot = entity.yBodyRot;
+			husk.yHeadRotO = entity.yHeadRotO;
+			husk.yHeadRot = entity.yHeadRot;
 			husk.setBaby(event.isBaby());
-			worldAccess.spawnEntity(husk);
+			worldAccess.addFreshEntity(husk);
 
 			return true;
 		}
