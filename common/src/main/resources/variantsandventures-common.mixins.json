@@ -8,27 +8,17 @@
 		"defaultRequire": 1
 	},
 	"mixins": [
-		"AbstractSkeletonEntityMixin",
-		"AddCustomEntityPoseMixin",
 		"BlockEntityTypeAccessor",
 		"DungeonFeatureMixin",
 		"ItemDispenserBehaviorInvoker",
-		"LivingEntityMixin",
+		"JigsawStructureAccessor",
 		"PersistentProjectileEntityMixin",
 		"ProjectileEntityAccessor",
 		"ProjectileEntityMixin",
-		"SkeletonEntityEntityMixin",
-		"SkeletonEntityLivingEntityMixin",
-		"SkeletonEntityMobEntityMixin",
 		"SpawnEggItemAccessor",
-		"ZombieEntityEntityMixin",
-		"ZombieEntityLivingEntityMixin",
-		"ZombieEntityMixin",
-		"ZombieEntityMobEntityMixin"
+		"StructurePoolAccessor"
 	],
 	"client": [
-		"AbstractZombieModelMixin",
-		"IntegratedServerLoaderMixin",
-		"SkeletonEntityModelMixin"
+		"IntegratedServerLoaderMixin"
 	]
 }

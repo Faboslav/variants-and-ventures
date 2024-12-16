@@ -1,6 +1,5 @@
 package com.faboslav.variantsandventures.common.items;
 
-
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.mixin.SpawnEggItemAccessor;
 import com.mojang.datafixers.util.Pair;

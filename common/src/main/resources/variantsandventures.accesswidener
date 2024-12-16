@@ -17,3 +17,11 @@ accessible    field    net/minecraft/item/ItemGroups    SPAWN_EGGS    Lnet/minec
 accessible    field    net/minecraft/item/ItemGroups    OPERATOR    Lnet/minecraft/registry/RegistryKey;
 accessible    field    net/minecraft/item/ItemGroups    INVENTORY    Lnet/minecraft/registry/RegistryKey;
 accessible    method    net/minecraft/entity/EntityPose    <init>    (Ljava/lang/String;II)V
+mutable    field    net/minecraft/world/gen/structure/JigsawStructure    poolAliasBindings    Ljava/util/List;
+accessible    field    net/minecraft/world/gen/structure/JigsawStructure    poolAliasBindings    Ljava/util/List;
+accessible    class    net/minecraft/structure/pool/alias/RandomStructurePoolAliasBinding
+extendable    class    net/minecraft/structure/pool/alias/RandomStructurePoolAliasBinding
+accessible    class    net/minecraft/structure/pool/alias/RandomGroupStructurePoolAliasBinding
+extendable    class    net/minecraft/structure/pool/alias/RandomGroupStructurePoolAliasBinding
+accessible    class    net/minecraft/structure/pool/alias/DirectStructurePoolAliasBinding
+extendable    class    net/minecraft/structure/pool/alias/DirectStructurePoolAliasBinding

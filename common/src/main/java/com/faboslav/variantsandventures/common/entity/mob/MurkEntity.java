@@ -115,10 +115,10 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		this.goalSelector.add(6, new TargetAboveWaterGoal(this, 1.0, this.getWorld().getSeaLevel()));
 		this.goalSelector.add(7, new WanderAroundGoal(this, 1.0));
 		this.targetSelector.add(1, new RevengeGoal(this));
-		this.targetSelector.add(2, new ActiveTargetGoal(this, PlayerEntity.class, 10, true, false, PLAYER_FILTER));
-		this.targetSelector.add(3, new ActiveTargetGoal(this, IronGolemEntity.class, true));
-		this.targetSelector.add(3, new ActiveTargetGoal(this, AxolotlEntity.class, true, false));
-		this.targetSelector.add(3, new ActiveTargetGoal(this, TurtleEntity.class, 10, true, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER));
+		this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, 10, true, false, PLAYER_FILTER));
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, IronGolemEntity.class, true));
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, AxolotlEntity.class, true, false));
+		this.targetSelector.add(3, new ActiveTargetGoal<>(this, TurtleEntity.class, 10, true, false, TurtleEntity.BABY_TURTLE_ON_LAND_FILTER));
 
 		super.initGoals();
 	}
@@ -183,7 +183,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 
 	@Override
 	public void tick() {
-		if (VariantsAndVentures.getConfig().enableMurk == false) {
+		if (!VariantsAndVentures.getConfig().enableMurk) {
 			this.discard();
 		}
 
@@ -280,7 +280,7 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 			this.sheared(SoundCategory.PLAYERS);
 			this.emitGameEvent(GameEvent.SHEAR, player);
 
-			if (this.getWorld().isClient() == false) {
+			if (!this.getWorld().isClient()) {
 				itemStack.damage(1, player, PlayerEntity.getSlotForHand(hand));
 			}
 
@@ -301,13 +301,13 @@ public final class MurkEntity extends AbstractSkeletonEntity implements Shearabl
 		World world = this.getWorld();
 
 		if (
-			world instanceof ServerWorld == false
-			|| world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT) == false
+			!(world instanceof ServerWorld)
+			|| !world.getGameRules().getBoolean(GameRules.DO_MOB_LOOT)
 		) {
 			return;
 		}
 
-		LootTable shearingLootTable = world.getServer().getReloadableRegistries().getLootTable(RegistryKey.of(RegistryKeys.LOOT_TABLE, VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName()))));
+		LootTable shearingLootTable = world.getServer().getReloadableRegistries().getLootTable(RegistryKey.of(RegistryKeys.LOOT_TABLE, VariantsAndVentures.makeID(String.format(Locale.ROOT, "shearing/murk_%s", this.getVariant().getName()))));
 		LootContextParameterSet lootContextParameterSet = new LootContextParameterSet.Builder((ServerWorld) world)
 			.add(LootContextParameters.ORIGIN, this.getPos())
 			.add(LootContextParameters.THIS_ENTITY, this)

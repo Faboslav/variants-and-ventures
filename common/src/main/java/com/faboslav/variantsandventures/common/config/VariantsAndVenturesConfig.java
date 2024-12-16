@@ -7,18 +7,6 @@ import com.faboslav.variantsandventures.common.config.omegaconfig.api.Config;
 
 public final class VariantsAndVenturesConfig implements Config
 {
-	@Category("General")
-	@Description("Check if the new update of mod is available (when enabled, info is in the console)")
-	public boolean checkForNewUpdates = true;
-
-	@Category("Zombies")
-	@Description("Enable experimental keyframe animations for zombie and its variants")
-	public boolean enableKeyframeAnimationsForZombieAndItsVariants = false;
-
-	@Category("Skeletons")
-	@Description("Enable experimental keyframe animations for skeleton and its variants")
-	public boolean enableKeyframeAnimationsForSkeletonAndItsVariants = false;
-
 	@Category("Stray")
 	@Description("Enable better Stray spawns")
 	public boolean enableBetterStraySpawns = true;
@@ -39,7 +27,7 @@ public final class VariantsAndVenturesConfig implements Config
 	@Description("Enable better Husk spawns")
 	public boolean enableBetterHuskSpawns = true;
 
-	@Description("Spawn chance of Husk (For example 0.8 means that husk will spawn in place of 80% of all skeletons spawned in cold biomes.")
+	@Description("Spawn chance of Husk (For example 0.8 means that husk will spawn in place of 80% of all skeletons spawned in desert biomes.")
 	public float huskSpawnChance = 0.8F;
 
 	@Description("Minimum Y level for Husk spawns (For example 62 means that husk will spawn only above the ocean Y level.")
@@ -48,8 +36,24 @@ public final class VariantsAndVenturesConfig implements Config
 	@Description("Enable spawners in dungeons")
 	public boolean enableHuskSpawners = true;
 
-	@Description("Chance of Husk spawner in dungeons (For example 0.8 means that husk spawner will be in place of 80% of all skeleton spawners in cold biomes.")
+	@Description("Chance of Husk spawner in dungeons (For example 0.8 means that husk spawner will be in place of 80% of all zombie spawners in desert biomes.")
 	public float huskSpawnerChance = 0.8F;
+
+	@Category("Bogged")
+	@Description("Enable better Bogged spawns")
+	public boolean enableBetterBoggedSpawns = true;
+
+	@Description("Spawn chance of Bogged (For example 0.8 means that bogged will spawn in place of 80% of all skeletons spawned in mushroom-like biomes.")
+	public float boggedSpawnChance = 0.8F;
+
+	@Description("Minimum Y level for Bogged spawns (For example 62 means that bogged will spawn only above the ocean Y level.")
+	public float boggedMinimumYLevel = -64;
+
+	@Description("Enable spawners in dungeons")
+	public boolean enableBoggedSpawners = true;
+
+	@Description("Chance of Bogged spawner in dungeons (For example 0.8 means that bogged spawner will be in place of 80% of all bogged spawners in mushroom-like biomes.")
+	public float boggedSpawnerChance = 0.8F;
 
 	@Category("Gelid (Frozen Zombie)")
 	@Description("Enable Gelid")
@@ -70,12 +74,16 @@ public final class VariantsAndVenturesConfig implements Config
 	@Description("Chance of Gelid spawner in dungeons (For example 0.8 means that gelid spawner will be in place of 80% of all zombie spawners in cold biomes.")
 	public float gelidSpawnerChance = 0.8F;
 
+	public boolean addGelidSpawnersToTrialChambers = true;
+
 	@Category("Murk (Sunken Skeleton)")
 	@Description("Enable Murk")
 	public boolean enableMurk = true;
 
 	@Description("Enable Murk spawns")
 	public boolean enableMurkSpawns = true;
+
+	public boolean addMurkSpawnersToTrialChambers = true;
 
 	@Category("Thicket (Jungle Zombie)")
 	@Description("Enable Thickets")
@@ -96,6 +104,8 @@ public final class VariantsAndVenturesConfig implements Config
 	@Description("Chance of Thicket spawner in dungeons (For example 0.8 means that thicket spawner will be in place of 80% of all zombie spawners in cold biomes.")
 	public float thicketSpawnerChance = 0.8F;
 
+	public boolean addThicketSpawnersToTrialChambers = true;
+
 	@Category("Verdant (Jungle Skeleton)")
 	@Description("Enable Verdant")
 	public boolean enableVerdant = true;
@@ -114,6 +124,8 @@ public final class VariantsAndVenturesConfig implements Config
 
 	@Description("Chance of Verdant spawner in dungeons (For example 0.8 means that verdant spawner will be in place of 80% of all skeleton spawners in jungle biomes.")
 	public float verdantSpawnerChance = 0.8F;
+
+	public boolean addVerdantSpawnersToTrialChambers = true;
 
 	@Override
 	public String getName() {

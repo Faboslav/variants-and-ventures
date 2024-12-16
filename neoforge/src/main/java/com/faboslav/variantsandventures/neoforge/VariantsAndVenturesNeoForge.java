@@ -5,6 +5,7 @@ import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
+import com.faboslav.variantsandventures.common.init.VariantsAndVenturesStructurePoolAliases;
 import com.faboslav.variantsandventures.common.init.registry.neoforge.ResourcefulRegistriesImpl;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.MobEntity;
@@ -19,6 +20,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 
 @Mod(VariantsAndVentures.MOD_ID)
 public final class VariantsAndVenturesNeoForge
@@ -32,6 +34,8 @@ public final class VariantsAndVenturesNeoForge
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			VariantsAndVenturesClientNeoForge.init(modEventBus, eventBus);
 		}
+
+		eventBus.addListener(VariantsAndVenturesNeoForge::onServerAboutToStartEvent);
 
 		modEventBus.addListener(VariantsAndVenturesNeoForge::onSetup);
 		modEventBus.addListener(VariantsAndVenturesNeoForge::onAddItemGroupEntries);
@@ -79,5 +83,9 @@ public final class VariantsAndVenturesNeoForge
 				event.register(type, placement.location(), placement.heightmap(), placement.predicate(), RegisterSpawnPlacementsEvent.Operation.AND);
 			}
 		};
+	}
+
+	public static void onServerAboutToStartEvent(ServerAboutToStartEvent event) {
+		VariantsAndVenturesStructurePoolAliases.init(event.getServer());
 	}
 }

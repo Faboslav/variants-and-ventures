@@ -4,10 +4,8 @@ import com.faboslav.variantsandventures.common.init.registry.BasicRegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntries;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
-import com.faboslav.variantsandventures.fabric.mixin.PointOfInterestTypesAccessor;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.poi.PointOfInterestType;
 
 import java.util.Collection;
 import java.util.function.Supplier;
@@ -33,14 +31,7 @@ public final class FabricCustomResourcefulRegistry<T> implements ResourcefulRegi
 
 	@Override
 	public <I extends T> RegistryEntry<I> register(String id, Supplier<I> supplier) {
-		I value = Registry.register(registry, Identifier.of(this.id, id), supplier.get());
-		if (value instanceof PointOfInterestType poiType) {
-			PointOfInterestTypesAccessor.callRegisterStates(
-				(net.minecraft.registry.entry.RegistryEntry<PointOfInterestType>) registry.entryOf(registry.getKey(value).orElseThrow()),
-				poiType.blockStates()
-			);
-		}
-		return entries.add(new BasicRegistryEntry<>(Identifier.of(this.id, id), value));
+		return entries.add(new BasicRegistryEntry<>(Identifier.of(this.id, id), Registry.register(registry, Identifier.of(this.id, id), supplier.get())));
 	}
 
 	@Override

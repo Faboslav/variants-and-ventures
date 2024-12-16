@@ -41,7 +41,7 @@ public class DungeonFeatureMixin
 			}
 
 			if (
-				biome.isIn(VariantsAndVenturesTags.HAS_GALID)
+				biome.isIn(VariantsAndVenturesTags.HAS_GELID)
 				&& VariantsAndVentures.getConfig().enableGelid
 				&& VariantsAndVentures.getConfig().enableGelidSpawners
 				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().gelidSpawnerChance
@@ -64,6 +64,14 @@ public class DungeonFeatureMixin
 				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().straySpawnerChance
 			) {
 				return EntityType.STRAY;
+			}
+
+			if (
+				biome.isIn(VariantsAndVenturesTags.HAS_BOGGED)
+				&& VariantsAndVentures.getConfig().enableBoggedSpawners
+				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().boggedSpawnerChance
+			) {
+				return EntityType.BOGGED;
 			}
 
 			if (

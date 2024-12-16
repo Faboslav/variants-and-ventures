@@ -10,6 +10,9 @@ merge-jars: ## Builds project
 refresh: ## Refresh dependencies
 	./gradlew --refresh-dependencies
 
+validate-aw: ## x
+	./gradlew fabric:validateAccessWidener
+
 clean-cache: ## Cleans cache
 	./gradlew --stop
 	rm -rf $GRADLE_HOME/caches/transforms-*

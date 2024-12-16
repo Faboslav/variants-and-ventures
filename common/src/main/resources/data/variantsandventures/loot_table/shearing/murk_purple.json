@@ -1,0 +1,34 @@
+{
+	"type": "minecraft:shearing",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"functions": [
+						{
+							"add": false,
+							"count": 1.0,
+							"function": "minecraft:set_count"
+						}
+					],
+					"name": "minecraft:bubble_coral"
+				},
+				{
+					"type": "minecraft:item",
+					"functions": [
+						{
+							"add": false,
+							"count": 1.0,
+							"function": "minecraft:set_count"
+						}
+					],
+					"name": "minecraft:dead_bubble_coral"
+				}
+			],
+			"rolls": 2.0
+		}
+	],
+	"random_sequence": "variantsandventures:shearing/murk_purple"
+}

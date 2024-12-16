@@ -6,8 +6,10 @@ import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeMod
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
+import com.faboslav.variantsandventures.common.init.VariantsAndVenturesStructurePoolAliases;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.entity.EntityType;
@@ -22,6 +24,7 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 	public void onInitialize() {
 		VariantsAndVentures.init();
 
+		addCustomStructurePoolElements();
 		initEvents();
 
 		VariantsAndVentures.lateInit();
@@ -52,5 +55,9 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 		RegisterEntitySpawnRestrictionsEvent.Placement<T> placement
 	) {
 		SpawnRestriction.register(type, placement.location(), placement.heightmap(), placement.predicate());
+	}
+
+	private static void addCustomStructurePoolElements() {
+		ServerLifecycleEvents.SERVER_STARTING.register(VariantsAndVenturesStructurePoolAliases::init);
 	}
 }

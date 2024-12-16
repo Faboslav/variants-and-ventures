@@ -34,6 +34,12 @@ public final class VariantsAndVentures
 		return MOD_ID + ":" + name;
 	}
 
+	public static Identifier makeNamespacedId(String id) {
+		return Identifier.tryParse(
+			id
+		);
+	}
+
 	public static VariantsAndVenturesConfig getConfig() {
 		return CONFIG;
 	}
@@ -56,6 +62,7 @@ public final class VariantsAndVentures
 		EntitySpawnEvent.EVENT.addListener(GelidOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(HuskOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(StrayOnEntitySpawn::handleEntitySpawn);
+		EntitySpawnEvent.EVENT.addListener(BoggedOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(ThicketOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(VerdantOnEntitySpawn::handleEntitySpawn);
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);
