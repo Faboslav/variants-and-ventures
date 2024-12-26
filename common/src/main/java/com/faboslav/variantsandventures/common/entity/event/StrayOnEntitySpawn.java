@@ -34,7 +34,7 @@ public final class StrayOnEntitySpawn
 				return false;
 			}
 
-			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().straySpawnChance) {
+			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().straySpawnChance) {
 				return false;
 			}
 

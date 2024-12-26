@@ -23,6 +23,7 @@ public final class VariantsAndVenturesStructurePoolAliases
 	}
 
 	private static void updateTrialChamberSpawners(MinecraftServer server) {
+		var config = VariantsAndVentures.getConfig();
 		Registry<Structure> structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
 		JigsawStructure structure = (JigsawStructure) structureRegistry.get(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
 		var structureAccessor = ((JigsawStructureAccessor) (Object) structure);
@@ -40,7 +41,8 @@ public final class VariantsAndVenturesStructurePoolAliases
 					dataPoolBuilder.add(group.data());
 				}
 
-				dataPoolBuilder.add(List.of(
+				if(config.enableMurkSpawnersToTrialChambers) {
+					dataPoolBuilder.add(List.of(
 						PoolAliasBinding.direct(
 							"trial_chambers/spawner/contents/ranged",
 							"trial_chambers/spawner/ranged/murk"
@@ -49,8 +51,11 @@ public final class VariantsAndVenturesStructurePoolAliases
 							"trial_chambers/spawner/contents/slow_ranged",
 							"trial_chambers/spawner/slow_ranged/murk"
 						)
-					))
-					.add(List.of(
+					));
+				}
+
+				if(config.enableVerdantSpawnersToTrialChambers) {
+					dataPoolBuilder.add(List.of(
 						PoolAliasBinding.direct(
 							"trial_chambers/spawner/contents/ranged",
 							"trial_chambers/spawner/ranged/verdant"
@@ -60,7 +65,7 @@ public final class VariantsAndVenturesStructurePoolAliases
 							"trial_chambers/spawner/slow_ranged/verdant"
 						)
 					));
-
+				}
 
 				newRandomGroupStructurePoolAliasBinding = PoolAliasBinding.randomGroup(
 					dataPoolBuilder.build()
@@ -80,8 +85,13 @@ public final class VariantsAndVenturesStructurePoolAliases
 						dataPoolBuilder.add(value);
 					});
 
-					dataPoolBuilder.add("trial_chambers/spawner/melee/gelid")
-						.add("trial_chambers/spawner/melee/thicket");
+					if(config.enableGelidSpawnersToTrialChambers) {
+						dataPoolBuilder.add("trial_chambers/spawner/melee/gelid");
+					}
+
+					if(config.enableThicketSpawnersToTrialChambers) {
+						dataPoolBuilder.add("trial_chambers/spawner/melee/thicket");
+					}
 
 					newRandomStructurePoolAliasBinding = PoolAliasBinding.random(
 						alias, dataPoolBuilder.build()

@@ -1,7 +1,6 @@
 package com.faboslav.variantsandventures.common;
 
 import com.faboslav.variantsandventures.common.config.VariantsAndVenturesConfig;
-import com.faboslav.variantsandventures.common.config.omegaconfig.OmegaConfig;
 import com.faboslav.variantsandventures.common.entity.event.*;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
@@ -21,7 +20,7 @@ public final class VariantsAndVentures
 {
 	public static final String MOD_ID = "variantsandventures";
 	private static final Logger LOGGER = LoggerFactory.getLogger(VariantsAndVentures.MOD_ID);
-	private static final VariantsAndVenturesConfig CONFIG = OmegaConfig.register(VariantsAndVenturesConfig.class);
+	private static final VariantsAndVenturesConfig CONFIG = new VariantsAndVenturesConfig();
 
 	public static ResourceLocation makeID(String path) {
 		return ResourceLocation.fromNamespaceAndPath(
@@ -50,6 +49,7 @@ public final class VariantsAndVentures
 
 
 	public static void init() {
+		VariantsAndVentures.getConfig().load();
 		VariantsAndVenturesTags.init();
 		initEvents();
 		initRegistries();

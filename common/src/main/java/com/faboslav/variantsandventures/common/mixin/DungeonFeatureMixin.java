@@ -35,7 +35,7 @@ public class DungeonFeatureMixin
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_HUSK)
 				&& VariantsAndVentures.getConfig().enableHuskSpawners
-				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().huskSpawnerChance
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().huskSpawnerChance
 			) {
 				return EntityType.HUSK;
 			}
@@ -44,7 +44,7 @@ public class DungeonFeatureMixin
 				biome.is(VariantsAndVenturesTags.HAS_GELID)
 				&& VariantsAndVentures.getConfig().enableGelid
 				&& VariantsAndVentures.getConfig().enableGelidSpawners
-				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().gelidSpawnerChance
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().gelidSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.GELID.get();
 			}
@@ -53,7 +53,7 @@ public class DungeonFeatureMixin
 				biome.is(VariantsAndVenturesTags.HAS_THICKET)
 				&& VariantsAndVentures.getConfig().enableThicket
 				&& VariantsAndVentures.getConfig().enableThicketSpawners
-				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().thicketSpawnerChance
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().thicketSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.THICKET.get();
 			}
@@ -61,7 +61,7 @@ public class DungeonFeatureMixin
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_STRAY)
 				&& VariantsAndVentures.getConfig().enableStraySpawners
-				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().straySpawnerChance
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().straySpawnerChance
 			) {
 				return EntityType.STRAY;
 			}
@@ -69,7 +69,7 @@ public class DungeonFeatureMixin
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_BOGGED)
 				&& VariantsAndVentures.getConfig().enableBoggedSpawners
-				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().boggedSpawnerChance
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().boggedSpawnerChance
 			) {
 				return EntityType.BOGGED;
 			}
@@ -78,7 +78,7 @@ public class DungeonFeatureMixin
 				biome.is(VariantsAndVenturesTags.HAS_VERDANT)
 				&& VariantsAndVentures.getConfig().enableVerdant
 				&& VariantsAndVentures.getConfig().enableVerdantSpawners
-				&& random.get().nextFloat() <= VariantsAndVentures.getConfig().verdantSpawnerChance
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().verdantSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.VERDANT.get();
 			}

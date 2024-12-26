@@ -34,7 +34,7 @@ public final class HuskOnEntitySpawn
 				return false;
 			}
 
-			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().huskSpawnChance) {
+			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().huskSpawnChance) {
 				return false;
 			}
 

@@ -35,7 +35,7 @@ public final class VerdantOnEntitySpawn
 				return false;
 			}
 
-			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().verdantSpawnChance) {
+			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().verdantSpawnChance) {
 				return false;
 			}
 
