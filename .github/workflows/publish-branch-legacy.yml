@@ -29,10 +29,10 @@ jobs:
 
             -   name: "Parse gradle properties"
                 id: gradle-properties
-                run: ./.github/scripts/parse-gradle-properties.sh
+                run: ./.github/scripts/legacy/parse-gradle-properties.sh
 
             -   name: "Parse changelog"
-                run: ./.github/scripts/parse-changelog.sh ${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                run: ./.github/scripts/legacy/parse-changelog.sh ${{ steps.gradle-properties.outputs.MOD_VERSION }}
 
             -   name: "Create github release"
                 continue-on-error: true
@@ -71,7 +71,7 @@ jobs:
 
             -   name: "Generate matrix for the run job"
                 id: set-matrix
-                run: ./.github/scripts/generate-publish-matrix.sh "${{ inputs.mod_loaders }}"
+                run: ./.github/scripts/legacy/generate-publish-matrix.sh "${{ inputs.mod_loaders }}"
 
     publish:
         runs-on: ubuntu-latest
@@ -96,7 +96,7 @@ jobs:
 
             -   name: "Parse gradle properties"
                 id: gradle-properties
-                run: ./.github/scripts/parse-gradle-properties.sh
+                run: ./.github/scripts/legacy/parse-gradle-properties.sh
 
             -   name: "Parse changelog"
                 run: ./.github/scripts/parse-changelog.sh ${{ steps.gradle-properties.outputs.MOD_VERSION }}
