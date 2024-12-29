@@ -15,7 +15,7 @@ public class PersistentProjectileEntityMixin
 		at = @At("HEAD"),
 		cancellable = true
 	)
-	public void variantsandventures$getDragInWater(
+	public void variantsandventures$getWaterInertia(
 		CallbackInfoReturnable<Float> cir
 	) {
 		if (((ProjectileEntityAccessor) this).getOwner() instanceof MurkEntity) {
