@@ -5,6 +5,9 @@
 - Fixed loot tables for all added mobs
 - Improved config
 - Removed experimental animations
+- Added de_de translations (Thanks to tristankechlo)
+- Updated zh_cn translations (Thanks to UDTakerBean)
+- Updated pt_br translations (Thanks to demorogabrtz)
 
 ## 1.0.6
 
