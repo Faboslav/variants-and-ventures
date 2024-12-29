@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractArrow.class)
-public class PersistentProjectileEntityMixin
+public abstract class PersistentProjectileEntityMixin
 {
 	@Inject(
 		method = "getWaterInertia",

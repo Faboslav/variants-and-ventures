@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(MonsterRoomFeature.class)
-public class DungeonFeatureMixin
+public abstract class DungeonFeatureMixin
 {
 	@ModifyExpressionValue(
 		method = "place",
