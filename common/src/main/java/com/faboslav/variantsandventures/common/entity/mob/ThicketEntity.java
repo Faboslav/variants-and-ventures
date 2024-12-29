@@ -1,20 +1,21 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityStatuses;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.ZombieEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityEvent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.level.Level;
 
-public final class ThicketEntity extends ZombieEntity
+public final class ThicketEntity extends Zombie
 {
-	public ThicketEntity(EntityType<? extends ZombieEntity> entityType, World world) {
+	public ThicketEntity(EntityType<? extends Zombie> entityType, Level world) {
 		super(entityType, world);
 	}
 
@@ -27,7 +28,7 @@ public final class ThicketEntity extends ZombieEntity
 	public void playAmbientSound() {
 		SoundEvent soundEvent = this.getAmbientSound();
 		if (soundEvent != null) {
-			this.playSound(soundEvent, 0.4F, this.getSoundPitch());
+			this.playSound(soundEvent, 0.4F, this.getVoicePitch());
 		}
 	}
 
@@ -40,7 +41,7 @@ public final class ThicketEntity extends ZombieEntity
 	protected void playHurtSound(DamageSource source) {
 		SoundEvent soundEvent = this.getHurtSound(source);
 		if (soundEvent != null) {
-			this.playSound(soundEvent, 0.75F, this.getSoundPitch());
+			this.playSound(soundEvent, 0.75F, this.getVoicePitch());
 		}
 	}
 
@@ -55,13 +56,22 @@ public final class ThicketEntity extends ZombieEntity
 	}
 
 	@Override
-	public boolean tryAttack(Entity target) {
-		this.getWorld().sendEntityStatus(this, EntityStatuses.PLAY_ATTACK_SOUND);
-		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 1.0f, this.getSoundPitch());
-		boolean attackResult = super.tryAttack(target);
+	/*? >=1.21.3 {*/
+	public boolean doHurtTarget(ServerLevel level, Entity source)
+	/*?} else {*/
+	/*public boolean doHurtTarget(Entity source)
+ 	*//*?}*/
+	{
+		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
+		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 1.0f, this.getVoicePitch());
+		/*? >=1.21.3 {*/
+		boolean attackResult = super.doHurtTarget(level, source);
+		/*?} else {*/
+		/*boolean attackResult = super.doHurtTarget(source);
+		*//*?}*/
 
-		if (attackResult && this.getMainHandStack().isEmpty() && target instanceof LivingEntity) {
-			((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100), this);
+		if (attackResult && this.getMainHandItem().isEmpty() && source instanceof LivingEntity) {
+			((LivingEntity) source).addEffect(new MobEffectInstance(MobEffects.POISON, 100), this);
 		}
 
 		return attackResult;

@@ -5,23 +5,25 @@ import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.Biome;
+import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
+import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ConversionParams;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 
 public final class GelidOnEntitySpawn
 {
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
-		MobEntity entity = event.entity();
+		Mob entity = event.entity();
 
-		if (event.spawnReason() == SpawnReason.NATURAL
-			|| event.spawnReason() == SpawnReason.SPAWNER
-			|| event.spawnReason() == SpawnReason.CHUNK_GENERATION
-			|| event.spawnReason() == SpawnReason.STRUCTURE
+		if (event.spawnReason() == VersionedEntitySpawnReason.NATURAL
+			|| event.spawnReason() == VersionedEntitySpawnReason.SPAWNER
+			|| event.spawnReason() == VersionedEntitySpawnReason.CHUNK_GENERATION
+			|| event.spawnReason() == VersionedEntitySpawnReason.STRUCTURE
 		) {
 			if (entity.getType() != EntityType.ZOMBIE) {
 				return false;
@@ -35,37 +37,26 @@ public final class GelidOnEntitySpawn
 				return false;
 			}
 
-			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().gelidMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().gelidMinimumYLevel) {
 				return false;
 			}
 
-			WorldAccess worldAccess = event.worldAccess();
-			RegistryEntry<Biome> biome = worldAccess.getBiome(entity.getBlockPos());
+			LevelAccessor worldAccess = event.worldAccess();
+			Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
 
-			if (biome.isIn(VariantsAndVenturesTags.HAS_GALID) == false) {
+			if (biome.is(VariantsAndVenturesTags.HAS_GELID) == false) {
 				return false;
 			}
 
-			GelidEntity gelid = VariantsAndVenturesEntityTypes.GELID.get().create(
-				(ServerWorld) event.worldAccess(),
-				null,
-				event.entity().getBlockPos(),
-				event.spawnReason(),
-				false,
-				false
-			);
-
-			if (gelid == null) {
-				return false;
-			}
-
-			gelid.copyPositionAndRotation(entity);
-			gelid.prevBodyYaw = entity.prevBodyYaw;
-			gelid.bodyYaw = entity.bodyYaw;
-			gelid.prevHeadYaw = entity.prevHeadYaw;
-			gelid.headYaw = entity.headYaw;
-			gelid.setBaby(event.isBaby());
-			worldAccess.spawnEntity(gelid);
+			/*? >=1.21.3 {*/
+			entity.convertTo(VariantsAndVenturesEntityTypes.GELID.get(), ConversionParams.single(entity, true, true), (convertedEntity) -> {
+				if (!entity.isSilent()) {
+					entity.level().levelEvent(null, 1048, entity.blockPosition(), 0);
+				}
+			});
+			/*?} else {*/
+			/*entity.convertTo(VariantsAndVenturesEntityTypes.GELID.get(), true);
+			 *//*?}*/
 
 			return true;
 		}

@@ -1,0 +1,7 @@
+{
+	"replace": false,
+	"values": [
+		"#variantsandventures:collections/mushrooms",
+		"#variantsandventures:collections/swamps"
+	]
+}

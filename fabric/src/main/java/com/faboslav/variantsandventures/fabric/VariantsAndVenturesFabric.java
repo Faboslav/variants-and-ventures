@@ -6,15 +6,17 @@ import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeMod
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
+import com.faboslav.variantsandventures.common.init.VariantsAndVenturesStructurePoolAliases;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnRestriction;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.BiomeTags;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.SpawnPlacements;
 
 public final class VariantsAndVenturesFabric implements ModInitializer
 {
@@ -22,9 +24,9 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 	public void onInitialize() {
 		VariantsAndVentures.init();
 
-		initEvents();
+		ServerLifecycleEvents.SERVER_STARTING.register(VariantsAndVenturesStructurePoolAliases::init);
 
-		VariantsAndVentures.lateInit();
+		initEvents();
 	}
 
 	private void initEvents() {
@@ -38,19 +40,19 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((itemGroup, entries) ->
 			AddItemGroupEntriesEvent.EVENT.invoke(
 				new AddItemGroupEntriesEvent(
-					AddItemGroupEntriesEvent.Type.toType(Registries.ITEM_GROUP.getKey(itemGroup).orElse(null)),
+					AddItemGroupEntriesEvent.Type.toType(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(itemGroup).orElse(null)),
 					itemGroup,
-					itemGroup.hasStacks(),
-					entries::add
+					itemGroup.hasAnyItems(),
+					entries::accept
 				)
 			)
 		);
 	}
 
-	private static <T extends MobEntity> void registerPlacement(
+	private static <T extends Mob> void registerPlacement(
 		EntityType<T> type,
 		RegisterEntitySpawnRestrictionsEvent.Placement<T> placement
 	) {
-		SpawnRestriction.register(type, placement.location(), placement.heightmap(), placement.predicate());
+		SpawnPlacements.register(type, placement.location(), placement.heightmap(), placement.predicate());
 	}
 }

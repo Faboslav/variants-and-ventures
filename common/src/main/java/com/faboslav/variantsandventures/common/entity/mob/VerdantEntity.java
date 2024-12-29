@@ -1,22 +1,21 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
-import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-public final class VerdantEntity extends AbstractSkeletonEntity
+public final class VerdantEntity extends AbstractSkeleton
 {
-	public VerdantEntity(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
+	public VerdantEntity(EntityType<? extends AbstractSkeleton> entityType, Level world) {
 		super(entityType, world);
 	}
 
@@ -29,7 +28,7 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 	public void playAmbientSound() {
 		SoundEvent soundEvent = this.getAmbientSound();
 		if (soundEvent != null) {
-			this.playSound(soundEvent, 0.25F, this.getSoundPitch());
+			this.playSound(soundEvent, 0.25F, this.getVoicePitch());
 		}
 	}
 
@@ -48,14 +47,14 @@ public final class VerdantEntity extends AbstractSkeletonEntity
 	}
 
 	@Override
-	protected PersistentProjectileEntity createArrowProjectile(
+	protected AbstractArrow getArrow(
 		ItemStack arrow,
 		float damageModifier,
 		@Nullable ItemStack shotFrom
 	) {
-		PersistentProjectileEntity persistentProjectileEntity = super.createArrowProjectile(arrow, damageModifier, shotFrom);
-		if (persistentProjectileEntity instanceof ArrowEntity) {
-			((ArrowEntity) persistentProjectileEntity).addEffect(new StatusEffectInstance(StatusEffects.POISON, 100));
+		AbstractArrow persistentProjectileEntity = super.getArrow(arrow, damageModifier, shotFrom);
+		if (persistentProjectileEntity instanceof Arrow) {
+			((Arrow) persistentProjectileEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 100));
 		}
 
 		return persistentProjectileEntity;

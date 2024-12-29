@@ -1,7 +1,7 @@
 <br>
 
 <p align="center" style="text-align: center;">
-	<img title="Variants & Ventures" src="https://raw.githubusercontent.com/Faboslav/variants-and-ventures/master/.github/assets/logo.png" alt="Variants ý Ventures" width="743" height="69">
+	<img title="Variants&Ventures" src="https://raw.githubusercontent.com/Faboslav/variants-and-ventures/master/.github/assets/logo.png" alt="Variants ý Ventures" width="743" height="69">
 </p>
 
 <br>
@@ -24,7 +24,7 @@
 <br>
 
 <p style="font-size: 18px;">
-	Variants & Ventures adds multiple new mob variants seamlessly integrated into your Minecraft world.
+	Variants&Ventures adds multiple new mob variants seamlessly integrated into your Minecraft world.
 </p>
 
 <p style="font-size: 18px;">
@@ -152,7 +152,7 @@
 <hr>
 
 <p style="font-size: 18px;">
-	Variants & Ventures is designed to be fully compatible with all mods, and should work out of the box with everything.
+	Variants&Ventures is designed to be fully compatible with all mods, and should work out of the box with everything.
 	For example mobs will spawn in modded biomes and will be affected by Fresh Animations.
 </p>
 

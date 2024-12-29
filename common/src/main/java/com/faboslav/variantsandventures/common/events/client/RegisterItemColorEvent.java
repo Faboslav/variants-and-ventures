@@ -1,11 +1,11 @@
 package com.faboslav.variantsandventures.common.events.client;
 
 import com.faboslav.variantsandventures.common.events.base.EventHandler;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.color.item.ItemColorProvider;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockRenderView;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
@@ -18,12 +18,12 @@ import java.util.function.BiConsumer;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertible[]> colors,
+public record RegisterItemColorEvent(BiConsumer<ItemColor, ItemLike[]> colors,
 									 BlockColorProvider blockColors)
 {
 	public static final EventHandler<RegisterItemColorEvent> EVENT = new EventHandler<>();
 
-	public void register(ItemColorProvider color, ItemConvertible... items) {
+	public void register(ItemColor color, ItemLike... items) {
 		colors.accept(color, items);
 	}
 
@@ -32,7 +32,7 @@ public record RegisterItemColorEvent(BiConsumer<ItemColorProvider, ItemConvertib
 	{
 		int getColor(
 			BlockState blockState,
-			@Nullable BlockRenderView blockRenderView,
+			@Nullable BlockAndTintGetter blockRenderView,
 			@Nullable BlockPos blockPos,
 			int i
 		);

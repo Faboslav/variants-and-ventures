@@ -1,28 +1,58 @@
 package com.faboslav.variantsandventures.common.client.render.entity;
 
+/*? >=1.21.3 {*/
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.entity.BipedEntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.feature.ArmorFeatureRenderer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.client.render.entity.model.SkeletonEntityModel;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
+import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class VerdantEntityRenderer extends BipedEntityRenderer<VerdantEntity, SkeletonEntityModel<VerdantEntity>>
+public final class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntity, SkeletonRenderState>
 {
-	public static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
+	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
 
-	public VerdantEntityRenderer(EntityRendererFactory.Context context) {
-		super(context, new SkeletonEntityModel<>(context.getPart(EntityModelLayers.SKELETON)), 0.5F);
-		this.addFeature(new ArmorFeatureRenderer<>(this, new SkeletonEntityModel(context.getPart(EntityModelLayers.SKELETON_INNER_ARMOR)), new SkeletonEntityModel(context.getPart(EntityModelLayers.SKELETON_OUTER_ARMOR)), context.getModelManager()));
+	public VerdantEntityRenderer(EntityRendererProvider.Context context) {
+		super(context, ModelLayers.SKELETON, ModelLayers.SKELETON_INNER_ARMOR, ModelLayers.SKELETON_OUTER_ARMOR);
+	}
+
+	public ResourceLocation getTextureLocation(SkeletonRenderState skeletonRenderState) {
+		return TEXTURE;
+	}
+
+	public SkeletonRenderState createRenderState() {
+		return new SkeletonRenderState();
+	}
+}
+/*?} else {*/
+/*import com.faboslav.variantsandventures.common.VariantsAndVentures;
+import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.SkeletonModel;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.resources.ResourceLocation;
+
+@Environment(EnvType.CLIENT)
+public final class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, SkeletonModel<VerdantEntity>>
+{
+	public static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
+
+	public VerdantEntityRenderer(EntityRendererProvider.Context context) {
+		super(context, new SkeletonModel<>(context.bakeLayer(ModelLayers.SKELETON)), 0.5F);
+		this.addLayer(new HumanoidArmorLayer<>(this, new SkeletonModel(context.bakeLayer(ModelLayers.SKELETON_INNER_ARMOR)), new SkeletonModel(context.bakeLayer(ModelLayers.SKELETON_OUTER_ARMOR)), context.getModelManager()));
 	}
 
 	@Override
-	public Identifier getTexture(VerdantEntity verdant) {
+	public ResourceLocation getTextureLocation(VerdantEntity verdant) {
 		return TEXTURE;
 	}
 }
+*//*?}*/

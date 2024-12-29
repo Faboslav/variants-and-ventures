@@ -1,11 +1,11 @@
 package com.faboslav.variantsandventures.common.entity.ai.goal;
 
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
-import net.minecraft.entity.ai.goal.MoveToTargetPosGoal;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
+import net.minecraft.world.level.LevelReader;
 
-public final class LeaveWaterGoal extends MoveToTargetPosGoal
+public final class LeaveWaterGoal extends MoveToBlockGoal
 {
 	private final MurkEntity murk;
 
@@ -14,17 +14,17 @@ public final class LeaveWaterGoal extends MoveToTargetPosGoal
 		this.murk = murk;
 	}
 
-	public boolean canStart() {
-		return super.canStart() && !this.murk.getWorld().isDay() && this.murk.isTouchingWater() && this.murk.getY() >= (double) (this.murk.getWorld().getSeaLevel() - 3);
+	public boolean canUse() {
+		return super.canUse() && !this.murk.level().isDay() && this.murk.isInWater() && this.murk.getY() >= (double) (this.murk.level().getSeaLevel() - 3);
 	}
 
-	public boolean shouldContinue() {
-		return super.shouldContinue();
+	public boolean canContinueToUse() {
+		return super.canContinueToUse();
 	}
 
-	protected boolean isTargetPos(WorldView world, BlockPos pos) {
-		BlockPos blockPos = pos.up();
-		return world.isAir(blockPos) && world.isAir(blockPos.up()) && world.getBlockState(pos).hasSolidTopSurface(world, pos, this.murk);
+	protected boolean isValidTarget(LevelReader world, BlockPos pos) {
+		BlockPos blockPos = pos.above();
+		return world.isEmptyBlock(blockPos) && world.isEmptyBlock(blockPos.above()) && world.getBlockState(pos).entityCanStandOn(world, pos, this.murk);
 	}
 
 	public void start() {

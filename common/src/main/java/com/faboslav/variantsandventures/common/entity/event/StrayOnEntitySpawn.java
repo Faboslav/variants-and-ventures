@@ -3,24 +3,23 @@ package com.faboslav.variantsandventures.common.entity.event;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.StrayEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.biome.Biome;
+import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
+import net.minecraft.core.Holder;
+import net.minecraft.world.entity.ConversionParams;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 
 public final class StrayOnEntitySpawn
 {
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
-		MobEntity entity = event.entity();
+		Mob entity = event.entity();
 
-		if (event.spawnReason() == SpawnReason.NATURAL
-			|| event.spawnReason() == SpawnReason.SPAWNER
-			|| event.spawnReason() == SpawnReason.CHUNK_GENERATION
-			|| event.spawnReason() == SpawnReason.STRUCTURE
+		if (event.spawnReason() == VersionedEntitySpawnReason.NATURAL
+			|| event.spawnReason() == VersionedEntitySpawnReason.SPAWNER
+			|| event.spawnReason() == VersionedEntitySpawnReason.CHUNK_GENERATION
+			|| event.spawnReason() == VersionedEntitySpawnReason.STRUCTURE
 		) {
 			if (entity.getType() != EntityType.SKELETON) {
 				return false;
@@ -30,41 +29,30 @@ public final class StrayOnEntitySpawn
 				return false;
 			}
 
-			if (event.entity().getBlockPos().getY() < VariantsAndVentures.getConfig().strayMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().strayMinimumYLevel) {
 				return false;
 			}
 
-			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().straySpawnChance) {
+			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().straySpawnChance) {
 				return false;
 			}
 
-			WorldAccess worldAccess = event.worldAccess();
-			RegistryEntry<Biome> biome = worldAccess.getBiome(entity.getBlockPos());
+			LevelAccessor worldAccess = event.worldAccess();
+			Holder<Biome> biome = worldAccess.getBiome(entity.blockPosition());
 
-			if (biome.isIn(VariantsAndVenturesTags.HAS_STRAY) == false) {
+			if (biome.is(VariantsAndVenturesTags.HAS_STRAY) == false) {
 				return false;
 			}
 
-			StrayEntity stray = EntityType.STRAY.create(
-				(ServerWorld) event.worldAccess(),
-				null,
-				event.entity().getBlockPos(),
-				event.spawnReason(),
-				false,
-				false
-			);
-
-			if (stray == null) {
-				return false;
-			}
-
-			stray.copyPositionAndRotation(entity);
-			stray.prevBodyYaw = entity.prevBodyYaw;
-			stray.bodyYaw = entity.bodyYaw;
-			stray.prevHeadYaw = entity.prevHeadYaw;
-			stray.headYaw = entity.headYaw;
-			stray.setBaby(event.isBaby());
-			worldAccess.spawnEntity(stray);
+			/*? >=1.21.3 {*/
+			entity.convertTo(EntityType.STRAY, ConversionParams.single(entity, true, true), (convertedEntity) -> {
+				if (!entity.isSilent()) {
+					entity.level().levelEvent(null, 1048, entity.blockPosition(), 0);
+				}
+			});
+			/*?} else {*/
+			/*entity.convertTo(EntityType.STRAY, true);
+			 *//*?}*/
 
 			return true;
 		}

@@ -1,7 +1,6 @@
 package com.faboslav.variantsandventures.common;
 
 import com.faboslav.variantsandventures.common.config.VariantsAndVenturesConfig;
-import com.faboslav.variantsandventures.common.config.omegaconfig.OmegaConfig;
 import com.faboslav.variantsandventures.common.entity.event.*;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
@@ -13,7 +12,7 @@ import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.*;
 import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,10 +20,10 @@ public final class VariantsAndVentures
 {
 	public static final String MOD_ID = "variantsandventures";
 	private static final Logger LOGGER = LoggerFactory.getLogger(VariantsAndVentures.MOD_ID);
-	private static final VariantsAndVenturesConfig CONFIG = OmegaConfig.register(VariantsAndVenturesConfig.class);
+	private static final VariantsAndVenturesConfig CONFIG = new VariantsAndVenturesConfig();
 
-	public static Identifier makeID(String path) {
-		return Identifier.of(
+	public static ResourceLocation makeID(String path) {
+		return ResourceLocation.fromNamespaceAndPath(
 			MOD_ID,
 			path
 		);
@@ -32,6 +31,12 @@ public final class VariantsAndVentures
 
 	public static String makeStringID(String name) {
 		return MOD_ID + ":" + name;
+	}
+
+	public static ResourceLocation makeNamespacedId(String id) {
+		return ResourceLocation.tryParse(
+			id
+		);
 	}
 
 	public static VariantsAndVenturesConfig getConfig() {
@@ -44,6 +49,7 @@ public final class VariantsAndVentures
 
 
 	public static void init() {
+		VariantsAndVentures.getConfig().load();
 		VariantsAndVenturesTags.init();
 		initEvents();
 		initRegistries();
@@ -56,6 +62,7 @@ public final class VariantsAndVentures
 		EntitySpawnEvent.EVENT.addListener(GelidOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(HuskOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(StrayOnEntitySpawn::handleEntitySpawn);
+		EntitySpawnEvent.EVENT.addListener(BoggedOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(ThicketOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(VerdantOnEntitySpawn::handleEntitySpawn);
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);

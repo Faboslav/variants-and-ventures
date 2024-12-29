@@ -1,54 +1,70 @@
 package com.faboslav.variantsandventures.fabric.mixin;
 
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
+import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.SpawnHelper;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.NaturalSpawner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(SpawnHelper.class)
+/*? >=1.21.3 {*/
+import net.minecraft.world.entity.EntitySpawnReason;
+/*?} else {*/
+/*import net.minecraft.world.entity.MobSpawnType;
+*//*?}*/
+
+@Mixin(NaturalSpawner.class)
 public final class SpawnHelperMixin
 {
 	@WrapOperation(
-		method = "spawnEntitiesInChunk(Lnet/minecraft/entity/SpawnGroup;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/world/chunk/Chunk;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/world/SpawnHelper$Checker;Lnet/minecraft/world/SpawnHelper$Runner;)V",
+		method = "spawnCategoryForPosition(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkAccess;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/SpawnHelper;isValidSpawn(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/mob/MobEntity;D)Z"
+			target = "Lnet/minecraft/world/level/NaturalSpawner;isValidPositionForMob(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;D)Z"
 		)
 	)
 	private static boolean variantsandventures$onEntitySpawn(
-		ServerWorld serverWorld,
-		MobEntity mob,
+		ServerLevel serverWorld,
+		Mob mob,
 		double d,
 		Operation<Boolean> operation
 	) {
-		if (EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(mob, serverWorld, mob.isBaby(), SpawnReason.NATURAL))) {
+		if (EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(mob, serverWorld, mob.isBaby(), VersionedEntitySpawnReason.NATURAL))) {
 			return false;
 		}
+
 		return operation.call(serverWorld, mob, d);
 	}
 
 	@WrapOperation(
-		method = "populateEntities",
+		method = "spawnMobsForChunkGeneration",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/entity/mob/MobEntity;canSpawn(Lnet/minecraft/world/WorldAccess;Lnet/minecraft/entity/SpawnReason;)Z"
+			/*? >=1.21.3 {*/
+			target = "Lnet/minecraft/world/entity/Mob;checkSpawnRules(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/EntitySpawnReason;)Z"
+			/*?} else {*/
+			/*target = "Lnet/minecraft/world/entity/Mob;checkSpawnRules(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/MobSpawnType;)Z"
+			*//*?}*/
 		)
 	)
 	private static boolean variantsandventures$onCheckEntitySpawn(
-		MobEntity instance,
-		WorldAccess worldAccess,
-		SpawnReason spawnReason,
+		Mob instance,
+		LevelAccessor worldAccess,
+		/*? >=1.21.3 {*/
+		EntitySpawnReason spawnReason,
+		/*?} else {*/
+		/*MobSpawnType spawnReason,
+		 *//*?}*/
 		Operation<Boolean> operation
 	) {
 		if (EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(instance, worldAccess, instance.isBaby(), spawnReason))) {
 			return false;
 		}
+
 		return operation.call(instance, worldAccess, spawnReason);
 	}
 }

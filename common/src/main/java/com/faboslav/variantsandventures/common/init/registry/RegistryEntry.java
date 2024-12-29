@@ -1,6 +1,6 @@
 package com.faboslav.variantsandventures.common.init.registry;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.function.Supplier;
 
@@ -17,5 +17,5 @@ public interface RegistryEntry<T> extends Supplier<T>
 	@Override
 	T get();
 
-	Identifier getId();
+	ResourceLocation getId();
 }

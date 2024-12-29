@@ -1,3 +1,11 @@
+## 1.0.7
+
+- Added mobs to trial chambers
+- Added bogged support
+- Fixed loot tables for all added mobs
+- Improved config
+- Removed experimental animations
+
 ## 1.0.6
 
 - Experimental animations are disabled by default

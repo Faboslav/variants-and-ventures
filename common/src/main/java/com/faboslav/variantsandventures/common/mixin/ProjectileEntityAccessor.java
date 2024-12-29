@@ -1,13 +1,13 @@
 package com.faboslav.variantsandventures.common.mixin;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.Projectile;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(ProjectileEntity.class)
+@Mixin(Projectile.class)
 public interface ProjectileEntityAccessor
 {
-	@Accessor
+	@Accessor("cachedOwner")
 	Entity getOwner();
 }

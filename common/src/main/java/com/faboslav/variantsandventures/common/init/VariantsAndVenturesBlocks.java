@@ -3,17 +3,16 @@ package com.faboslav.variantsandventures.common.init;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.enums.NoteBlockInstrument;
-import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.registry.Registries;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 /**
  * @see Blocks
  */
-public final class VariantsAndVenturesBlocks {
-    public static final ResourcefulRegistry<Block> BLOCKS = ResourcefulRegistries.create(Registries.BLOCK, VariantsAndVentures.MOD_ID);
+public final class VariantsAndVenturesBlocks
+{
+	public static final ResourcefulRegistry<Block> BLOCKS = ResourcefulRegistries.create(BuiltInRegistries.BLOCK, VariantsAndVentures.MOD_ID);
 
 	private VariantsAndVenturesBlocks() {
 	}

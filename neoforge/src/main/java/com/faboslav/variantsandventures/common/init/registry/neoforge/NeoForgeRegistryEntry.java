@@ -1,7 +1,7 @@
 package com.faboslav.variantsandventures.common.init.registry.neoforge;
 
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 /**
@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public final class NeoForgeRegistryEntry<R, T extends R> implements RegistryEntry<T>
+public class NeoForgeRegistryEntry<R, T extends R> implements RegistryEntry<T>
 {
 	private final DeferredHolder<R, T> object;
 
@@ -26,7 +26,7 @@ public final class NeoForgeRegistryEntry<R, T extends R> implements RegistryEntr
 	}
 
 	@Override
-	public Identifier getId() {
+	public ResourceLocation getId() {
 		return object.getId();
 	}
 }

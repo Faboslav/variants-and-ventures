@@ -1,81 +1,99 @@
 package com.faboslav.variantsandventures.common.items;
 
-
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.mixin.SpawnEggItemAccessor;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.Direction;
+import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.level.block.DispenserBlock;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class DispenserAddedSpawnEgg extends SpawnEggItem {
-    private static final MapCodec<EntityType<?>> ENTITY_TYPE_FIELD_CODEC = Registries.ENTITY_TYPE.getCodec().fieldOf("id");
-    private static final List<Pair<Supplier<? extends EntityType<? extends MobEntity>>, SpawnEggItem>> SPAWN_EGGS = new ArrayList<>();
-    private final Supplier<? extends EntityType<? extends MobEntity>> entityType;
+/*? >=1.21.3 {*/
+import net.minecraft.world.entity.EntitySpawnReason;
+/*?} else {*/
+/*import net.minecraft.world.entity.MobSpawnType;
+*//*?}*/
 
-    public DispenserAddedSpawnEgg(
-            Supplier<? extends EntityType<? extends MobEntity>> typeIn,
-            int primaryColorIn,
-            int secondaryColorIn,
-            Item.Settings builder
-    ) {
-        super(null, primaryColorIn, secondaryColorIn, builder);
-        this.entityType = typeIn;
+public class DispenserAddedSpawnEgg extends SpawnEggItem
+{
+	private static final MapCodec<EntityType<?>> ENTITY_TYPE_FIELD_CODEC = BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("id");
+	private static final List<Pair<Supplier<? extends EntityType<? extends Mob>>, SpawnEggItem>> SPAWN_EGGS = new ArrayList<>();
+	private final Supplier<? extends EntityType<? extends Mob>> entityType;
 
-        setupDispenserBehavior();
-        SPAWN_EGGS.add(new Pair<>(typeIn, this));
-    }
+	public DispenserAddedSpawnEgg(
+		Supplier<? extends EntityType<? extends Mob>> typeIn,
+		int primaryColorIn,
+		int secondaryColorIn,
+		Item.Properties builder
+	) {
+		super(null, primaryColorIn, secondaryColorIn, builder);
+		this.entityType = typeIn;
 
-    protected void setupDispenserBehavior() {
-        DispenserBlock.registerBehavior(
-                this,
-                new ItemDispenserBehavior() {
-                    public ItemStack execute(@NotNull BlockPointer source, @NotNull ItemStack stack) {
-                        Direction direction = source.state().get(DispenserBlock.FACING);
-                        EntityType<?> entitytype = ((SpawnEggItem) stack.getItem()).getEntityType(stack);
-                        entitytype.spawnFromItemStack(source.world(), stack, null, source.pos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
-                        stack.decrement(1);
-                        return stack;
-                    }
-                });
-    }
+		setupDispenserBehavior();
+		SPAWN_EGGS.add(new Pair<>(typeIn, this));
+	}
 
-    @Override
-    public EntityType<?> getEntityType(ItemStack stack) {
-        var customData = stack.getOrDefault(DataComponentTypes.ENTITY_DATA, NbtComponent.DEFAULT);
-        return !customData.isEmpty() ? customData.get(ENTITY_TYPE_FIELD_CODEC).result().orElse(this.entityType.get()) : this.entityType.get();
-    }
+	protected void setupDispenserBehavior() {
+		DispenserBlock.registerBehavior(
+			this,
+			new DefaultDispenseItemBehavior()
+			{
+				public ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
+					Direction direction = source.state().getValue(DispenserBlock.FACING);
+					EntityType<?> entitytype = ((SpawnEggItem) stack.getItem()).getType(stack);
+					entitytype.spawn(
+						source.level(),
+						stack,
+						null,
+						source.pos().relative(direction),
+						/*? >=1.21.3 {*/
+						EntitySpawnReason.DISPENSER,
+						/*?} else {*/
+						/*MobSpawnType.DISPENSER,
+						*//*?}*/
+						direction != Direction.UP,
+						false
+					);
+					stack.shrink(1);
+					return stack;
+				}
+			});
+	}
 
-    @Override
-    public FeatureSet getRequiredFeatures() {
-        return getEntityType(ItemStack.EMPTY).getRequiredFeatures();
-    }
+	@Override
+	public EntityType<?> getType(ItemStack stack) {
+		var customData = stack.getOrDefault(DataComponents.ENTITY_DATA, CustomData.EMPTY);
+		return !customData.isEmpty() ? customData.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(this.entityType.get()):this.entityType.get();
+	}
 
-    protected EntityType<?> getDefaultType() {
-        return this.entityType.get();
-    }
+	@Override
+	public FeatureFlagSet requiredFeatures() {
+		return getType(ItemStack.EMPTY).requiredFeatures();
+	}
 
-    public static void onSetup(SetupEvent event) {
-        var spawnEggMap = SpawnEggItemAccessor.variantsandventures$getSpawnEggs();
-        for (var entry : DispenserAddedSpawnEgg.SPAWN_EGGS) {
-            spawnEggMap.put(entry.getFirst().get(), entry.getSecond());
-        }
-    }
+	protected EntityType<?> getDefaultType() {
+		return this.entityType.get();
+	}
+
+	public static void onSetup(SetupEvent event) {
+		var spawnEggMap = SpawnEggItemAccessor.variantsandventures$getSpawnEggs();
+		for (var entry : DispenserAddedSpawnEgg.SPAWN_EGGS) {
+			spawnEggMap.put(entry.getFirst().get(), entry.getSecond());
+		}
+	}
 }
