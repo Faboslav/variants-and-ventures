@@ -69,6 +69,12 @@ jobs:
                 with:
                     fetch-depth: 0
 
+            - name: "Set up JDK"
+              uses: actions/setup-java@v4
+              with:
+                  java-version: 21
+                  distribution: temurin
+
             -   name: "Download Built JARs"
                 uses: actions/download-artifact@v4
                 with:
@@ -92,7 +98,6 @@ jobs:
                     regex: .*${{ matrix.mod_loader }}.*
                     mc-runtime-test: ${{ matrix.mod_loader_alias }}
                     java: ${{ steps.gradle-properties.outputs.MOD_JAVA_VERSION }}
-                    java-distribution: temurin
                     fabric-api: ${{ steps.gradle-properties.outputs.FABRIC_API_VERSION }}
                     xvfb: false
                     headlessmc-command: -lwjgl --retries 3 --jvm -Djava.awt.headless=true
