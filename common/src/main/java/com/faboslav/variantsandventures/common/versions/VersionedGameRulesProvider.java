@@ -4,7 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.GameRules;
 
-public class VersionedGameRulesProvider
+public final class VersionedGameRulesProvider
 {
 	public static GameRules getGameRules(Entity entity) {
 		GameRules gameRules;

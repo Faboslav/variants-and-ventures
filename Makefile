@@ -4,14 +4,11 @@ help: ## Prints help for targets with comments
 build-project: ## Builds project
 	./gradlew build
 
-merge-jars: ## Builds project
-	./gradlew mergeJars
+build-chiseled: ## Builds project
+	./gradlew chiseledBuild
 
 refresh: ## Refresh dependencies
 	./gradlew --refresh-dependencies
-
-validate-aw: ## x
-	./gradlew fabric:validateAccessWidener
 
 clean-cache: ## Cleans cache
 	./gradlew --stop

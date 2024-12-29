@@ -62,6 +62,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import java.util.Locale;
 import java.util.function.Predicate;
+import com.faboslav.variantsandventures.common.versions.VersionedGameRulesProvider;
 *//*?}*/
 
 import java.util.Arrays;

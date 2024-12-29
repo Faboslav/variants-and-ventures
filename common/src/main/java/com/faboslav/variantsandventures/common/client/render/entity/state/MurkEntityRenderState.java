@@ -1,3 +1,4 @@
+/*? if >=1.21.3 {*/
 package com.faboslav.variantsandventures.common.client.render.entity.state;
 
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
@@ -14,3 +15,4 @@ public class MurkEntityRenderState extends SkeletonRenderState
 	public MurkEntityRenderState() {
 	}
 }
+/*?}*/

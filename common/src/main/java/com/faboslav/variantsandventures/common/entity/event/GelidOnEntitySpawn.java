@@ -1,19 +1,19 @@
 package com.faboslav.variantsandventures.common.entity.event;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import net.minecraft.core.Holder;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.ConversionParams;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+
+/*? if >=1.21.3 {*/
+import net.minecraft.world.entity.ConversionParams;
+/*?}*/
 
 public final class GelidOnEntitySpawn
 {
