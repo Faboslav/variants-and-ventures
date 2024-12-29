@@ -3,12 +3,11 @@ package com.faboslav.variantsandventures.common.entity.event;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
+import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import net.minecraft.core.Holder;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ConversionParams;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.monster.Stray;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
@@ -17,10 +16,10 @@ public final class StrayOnEntitySpawn
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
 		Mob entity = event.entity();
 
-		if (event.spawnReason() == MobSpawnType.NATURAL
-			|| event.spawnReason() == MobSpawnType.SPAWNER
-			|| event.spawnReason() == MobSpawnType.CHUNK_GENERATION
-			|| event.spawnReason() == MobSpawnType.STRUCTURE
+		if (event.spawnReason() == VersionedEntitySpawnReason.NATURAL
+			|| event.spawnReason() == VersionedEntitySpawnReason.SPAWNER
+			|| event.spawnReason() == VersionedEntitySpawnReason.CHUNK_GENERATION
+			|| event.spawnReason() == VersionedEntitySpawnReason.STRUCTURE
 		) {
 			if (entity.getType() != EntityType.SKELETON) {
 				return false;
@@ -45,26 +44,15 @@ public final class StrayOnEntitySpawn
 				return false;
 			}
 
-			Stray stray = EntityType.STRAY.create(
-				(ServerLevel) event.worldAccess(),
-				null,
-				event.entity().blockPosition(),
-				event.spawnReason(),
-				false,
-				false
-			);
-
-			if (stray == null) {
-				return false;
-			}
-
-			stray.copyPosition(entity);
-			stray.yBodyRotO = entity.yBodyRotO;
-			stray.yBodyRot = entity.yBodyRot;
-			stray.yHeadRotO = entity.yHeadRotO;
-			stray.yHeadRot = entity.yHeadRot;
-			stray.setBaby(event.isBaby());
-			worldAccess.addFreshEntity(stray);
+			/*? >=1.21.3 {*/
+			entity.convertTo(EntityType.STRAY, ConversionParams.single(entity, true, true), (convertedEntity) -> {
+				if (!entity.isSilent()) {
+					entity.level().levelEvent(null, 1048, entity.blockPosition(), 0);
+				}
+			});
+			/*?} else {*/
+			/*entity.convertTo(EntityType.STRAY, true);
+			 *//*?}*/
 
 			return true;
 		}

@@ -3,12 +3,11 @@ package com.faboslav.variantsandventures.common.entity.event;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
+import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import net.minecraft.core.Holder;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ConversionParams;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.monster.Husk;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
@@ -17,10 +16,10 @@ public final class HuskOnEntitySpawn
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
 		Mob entity = event.entity();
 
-		if (event.spawnReason() == MobSpawnType.NATURAL
-			|| event.spawnReason() == MobSpawnType.SPAWNER
-			|| event.spawnReason() == MobSpawnType.CHUNK_GENERATION
-			|| event.spawnReason() == MobSpawnType.STRUCTURE
+		if (event.spawnReason() == VersionedEntitySpawnReason.NATURAL
+			|| event.spawnReason() == VersionedEntitySpawnReason.SPAWNER
+			|| event.spawnReason() == VersionedEntitySpawnReason.CHUNK_GENERATION
+			|| event.spawnReason() == VersionedEntitySpawnReason.STRUCTURE
 		) {
 			if (entity.getType() != EntityType.ZOMBIE) {
 				return false;
@@ -45,26 +44,15 @@ public final class HuskOnEntitySpawn
 				return false;
 			}
 
-			Husk husk = EntityType.HUSK.create(
-				(ServerLevel) event.worldAccess(),
-				null,
-				event.entity().blockPosition(),
-				event.spawnReason(),
-				false,
-				false
-			);
-
-			if (husk == null) {
-				return false;
-			}
-
-			husk.copyPosition(entity);
-			husk.yBodyRotO = entity.yBodyRotO;
-			husk.yBodyRot = entity.yBodyRot;
-			husk.yHeadRotO = entity.yHeadRotO;
-			husk.yHeadRot = entity.yHeadRot;
-			husk.setBaby(event.isBaby());
-			worldAccess.addFreshEntity(husk);
+			/*? >=1.21.3 {*/
+			entity.convertTo(EntityType.HUSK, ConversionParams.single(entity, true, true), (convertedEntity) -> {
+				if (!entity.isSilent()) {
+					entity.level().levelEvent(null, 1048, entity.blockPosition(), 0);
+				}
+			});
+			/*?} else {*/
+			/*entity.convertTo(EntityType.HUSK, true);
+			 *//*?}*/
 
 			return true;
 		}

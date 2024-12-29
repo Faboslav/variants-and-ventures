@@ -5,11 +5,13 @@ import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
+import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.ConversionParams;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
@@ -18,10 +20,10 @@ public final class GelidOnEntitySpawn
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
 		Mob entity = event.entity();
 
-		if (event.spawnReason() == MobSpawnType.NATURAL
-			|| event.spawnReason() == MobSpawnType.SPAWNER
-			|| event.spawnReason() == MobSpawnType.CHUNK_GENERATION
-			|| event.spawnReason() == MobSpawnType.STRUCTURE
+		if (event.spawnReason() == VersionedEntitySpawnReason.NATURAL
+			|| event.spawnReason() == VersionedEntitySpawnReason.SPAWNER
+			|| event.spawnReason() == VersionedEntitySpawnReason.CHUNK_GENERATION
+			|| event.spawnReason() == VersionedEntitySpawnReason.STRUCTURE
 		) {
 			if (entity.getType() != EntityType.ZOMBIE) {
 				return false;
@@ -46,26 +48,15 @@ public final class GelidOnEntitySpawn
 				return false;
 			}
 
-			GelidEntity gelid = VariantsAndVenturesEntityTypes.GELID.get().create(
-				(ServerLevel) event.worldAccess(),
-				null,
-				event.entity().blockPosition(),
-				event.spawnReason(),
-				false,
-				false
-			);
-
-			if (gelid == null) {
-				return false;
-			}
-
-			gelid.copyPosition(entity);
-			gelid.yBodyRotO = entity.yBodyRotO;
-			gelid.yBodyRot = entity.yBodyRot;
-			gelid.yHeadRotO = entity.yHeadRotO;
-			gelid.yHeadRot = entity.yHeadRot;
-			gelid.setBaby(event.isBaby());
-			worldAccess.addFreshEntity(gelid);
+			/*? >=1.21.3 {*/
+			entity.convertTo(VariantsAndVenturesEntityTypes.GELID.get(), ConversionParams.single(entity, true, true), (convertedEntity) -> {
+				if (!entity.isSilent()) {
+					entity.level().levelEvent(null, 1048, entity.blockPosition(), 0);
+				}
+			});
+			/*?} else {*/
+			/*entity.convertTo(VariantsAndVenturesEntityTypes.GELID.get(), true);
+			 *//*?}*/
 
 			return true;
 		}

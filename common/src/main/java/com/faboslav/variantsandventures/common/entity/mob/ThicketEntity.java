@@ -1,6 +1,7 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -55,13 +56,22 @@ public final class ThicketEntity extends Zombie
 	}
 
 	@Override
-	public boolean doHurtTarget(Entity target) {
+	/*? >=1.21.3 {*/
+	public boolean doHurtTarget(ServerLevel level, Entity source)
+	/*?} else {*/
+	/*public boolean doHurtTarget(Entity source)
+ 	*//*?}*/
+	{
 		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 1.0f, this.getVoicePitch());
-		boolean attackResult = super.doHurtTarget(target);
+		/*? >=1.21.3 {*/
+		boolean attackResult = super.doHurtTarget(level, source);
+		/*?} else {*/
+		/*boolean attackResult = super.doHurtTarget(source);
+		*//*?}*/
 
-		if (attackResult && this.getMainHandItem().isEmpty() && target instanceof LivingEntity) {
-			((LivingEntity) target).addEffect(new MobEffectInstance(MobEffects.POISON, 100), this);
+		if (attackResult && this.getMainHandItem().isEmpty() && source instanceof LivingEntity) {
+			((LivingEntity) source).addEffect(new MobEffectInstance(MobEffects.POISON, 100), this);
 		}
 
 		return attackResult;

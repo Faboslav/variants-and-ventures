@@ -2,11 +2,9 @@ package com.faboslav.variantsandventures.common.init;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.mixin.JigsawStructureAccessor;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
 import net.minecraft.world.level.levelgen.structure.pools.alias.Random;
 import net.minecraft.world.level.levelgen.structure.pools.alias.RandomGroup;
@@ -24,8 +22,13 @@ public final class VariantsAndVenturesStructurePoolAliases
 
 	private static void updateTrialChamberSpawners(MinecraftServer server) {
 		var config = VariantsAndVentures.getConfig();
-		Registry<Structure> structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
-		JigsawStructure structure = (JigsawStructure) structureRegistry.get(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
+		/*? >=1.21.3 {*/
+		var structureRegistry = server.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+		var structure = (JigsawStructure) structureRegistry.getValue(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
+		/*?} else {*/
+		/*var structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
+		var structure = (JigsawStructure) structureRegistry.get(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
+		*//*?}*/
 		var structureAccessor = ((JigsawStructureAccessor) (Object) structure);
 
 		List<PoolAliasBinding> originalPoolAliasBindings = structureAccessor.getPoolAliasBindings();

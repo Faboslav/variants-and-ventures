@@ -2,7 +2,9 @@ package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.entity.ai.GelidSnowballRangedAttackGoal;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
+import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -26,16 +28,6 @@ public final class GelidEntity extends Zombie
 {
 	public GelidEntity(EntityType<? extends Zombie> entityType, Level world) {
 		super(entityType, world);
-	}
-
-	public static boolean canSpawn(
-		EntityType<Stray> type,
-		ServerLevelAccessor world,
-		MobSpawnType spawnReason,
-		BlockPos pos,
-		RandomSource random
-	) {
-		return checkMonsterSpawnRules(type, world, spawnReason, pos, random) && (spawnReason == MobSpawnType.SPAWNER || world.canSeeSky(pos));
 	}
 
 	public static AttributeSupplier.Builder createGelidAttributes() {
@@ -84,31 +76,44 @@ public final class GelidEntity extends Zombie
 
 		itemStack.shrink(1);
 
-		Snowball snowballEntity = new Snowball(this.level(), this);
+		/*? >=1.21.3 {*/
+		Snowball snowball = new Snowball(this.level(), this, itemStack);
+		/*?} else {*/
+		/*Snowball snowball = new Snowball(this.level(), this);
+		*//*?}*/
 		double d = target.getEyeY() - 1.100000023841858;
 		double e = target.getX() - this.getX();
-		double f = d - snowballEntity.getY();
+		double f = d - snowball.getY();
 		double g = target.getZ() - this.getZ();
 		double h = Math.sqrt(e * e + g * g) * 0.20000000298023224;
-		snowballEntity.shoot(e, f + h, g, 1.6F, 7.0F);
+		snowball.shoot(e, f + h, g, 1.6F, 7.0F);
 		this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 		this.swing(InteractionHand.OFF_HAND);
-		this.level().addFreshEntity(snowballEntity);
+		this.level().addFreshEntity(snowball);
 	}
 
 	@Override
-	public boolean doHurtTarget(Entity target) {
+	/*? >=1.21.3 {*/
+	public boolean doHurtTarget(ServerLevel level, Entity source)
+	/*?} else {*/
+	/*public boolean doHurtTarget(Entity source)
+	 *//*?}*/
+	{
 		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_GELID_ATTACK.get(), 1.0f, this.getVoicePitch());
-		boolean attackResult = super.doHurtTarget(target);
+		/*? >=1.21.3 {*/
+		boolean attackResult = super.doHurtTarget(level, source);
+		/*?} else {*/
+		/*boolean attackResult = super.doHurtTarget(source);
+		*//*?}*/
 
 		if (
 			attackResult && this.getMainHandItem().isEmpty()
-			&& target instanceof LivingEntity
-			&& target.canFreeze()
+			&& source instanceof LivingEntity
+			&& source.canFreeze()
 		) {
 			float difficulty = this.level().getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
-			target.setTicksFrozen(140 * (int) difficulty);
+			source.setTicksFrozen(140 * (int) difficulty);
 		}
 
 		return attackResult;

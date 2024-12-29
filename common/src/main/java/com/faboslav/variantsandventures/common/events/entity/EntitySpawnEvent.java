@@ -2,9 +2,13 @@ package com.faboslav.variantsandventures.common.events.entity;
 
 import com.faboslav.variantsandventures.common.events.base.CancellableEventHandler;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.LevelAccessor;
 
+/*? >=1.21.3 {*/
+import net.minecraft.world.entity.EntitySpawnReason;
+/*?} else {*/
+/*import net.minecraft.world.entity.MobSpawnType;
+*//*?}*/
 /**
  * Event related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors
  *
@@ -13,7 +17,11 @@ import net.minecraft.world.level.LevelAccessor;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, MobSpawnType spawnReason)
+/*? >=1.21.3 {*/
+public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, EntitySpawnReason spawnReason)
+/*?} else {*/
+/*public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, MobSpawnType spawnReason)
+*//*?}*/
 {
 	public static final CancellableEventHandler<EntitySpawnEvent> EVENT = new CancellableEventHandler<>();
 }

@@ -1,6 +1,35 @@
 package com.faboslav.variantsandventures.common.client.render.entity;
 
+/*? >=1.21.3 {*/
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
+import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.geom.ModelLayers;
+import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
+import net.minecraft.resources.ResourceLocation;
+
+@Environment(EnvType.CLIENT)
+public final class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntity, SkeletonRenderState>
+{
+	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
+
+	public VerdantEntityRenderer(EntityRendererProvider.Context context) {
+		super(context, ModelLayers.SKELETON, ModelLayers.SKELETON_INNER_ARMOR, ModelLayers.SKELETON_OUTER_ARMOR);
+	}
+
+	public ResourceLocation getTextureLocation(SkeletonRenderState skeletonRenderState) {
+		return TEXTURE;
+	}
+
+	public SkeletonRenderState createRenderState() {
+		return new SkeletonRenderState();
+	}
+}
+/*?} else {*/
+/*import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,7 +41,7 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 
 @Environment(EnvType.CLIENT)
-public class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, SkeletonModel<VerdantEntity>>
+public final class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, SkeletonModel<VerdantEntity>>
 {
 	public static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
 
@@ -26,3 +55,4 @@ public class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, Sk
 		return TEXTURE;
 	}
 }
+*//*?}*/

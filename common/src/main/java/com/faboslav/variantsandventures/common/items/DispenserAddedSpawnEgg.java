@@ -11,7 +11,6 @@ import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,6 +22,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+
+/*? >=1.21.3 {*/
+import net.minecraft.world.entity.EntitySpawnReason;
+/*?} else {*/
+/*import net.minecraft.world.entity.MobSpawnType;
+*//*?}*/
 
 public class DispenserAddedSpawnEgg extends SpawnEggItem
 {
@@ -51,7 +56,19 @@ public class DispenserAddedSpawnEgg extends SpawnEggItem
 				public ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
 					Direction direction = source.state().getValue(DispenserBlock.FACING);
 					EntityType<?> entitytype = ((SpawnEggItem) stack.getItem()).getType(stack);
-					entitytype.spawn(source.level(), stack, null, source.pos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
+					entitytype.spawn(
+						source.level(),
+						stack,
+						null,
+						source.pos().relative(direction),
+						/*? >=1.21.3 {*/
+						EntitySpawnReason.DISPENSER,
+						/*?} else {*/
+						/*MobSpawnType.DISPENSER,
+						*//*?}*/
+						direction != Direction.UP,
+						false
+					);
 					stack.shrink(1);
 					return stack;
 				}

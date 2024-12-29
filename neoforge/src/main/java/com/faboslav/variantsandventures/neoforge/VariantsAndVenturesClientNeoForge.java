@@ -1,8 +1,7 @@
 package com.faboslav.variantsandventures.neoforge;
 
-import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
-import com.faboslav.variantsandventures.common.config.ConfigScreenBuilder;
+import com.faboslav.variantsandventures.common.config.client.gui.VariantsAndVenturesConfigScreen;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityLayersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterItemColorEvent;
@@ -30,9 +29,9 @@ public final class VariantsAndVenturesClientNeoForge
 
 	private static void onClientSetup(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
-			if (ModList.get().isLoaded("cloth_config")) {
+			if (ModList.get().isLoaded("yet_another_config_lib_v3")) {
 				ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (client, screen) -> {
-					return ConfigScreenBuilder.createConfigScreen(VariantsAndVentures.getConfig(), screen);
+					return new VariantsAndVenturesConfigScreen(screen);
 				});
 			}
 		});

@@ -9,13 +9,18 @@ import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import java.lang.reflect.Field;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
 import static org.lwjgl.opengl.GL20.*;
+
+/*? >=1.21.3 {*/
+import net.minecraft.util.ARGB;
+/*?} else {*/
+/*import net.minecraft.util.FastColor;
+*//*?}*/
 
 public class ImageButtonWidget extends AbstractWidget
 {
@@ -95,10 +100,13 @@ public class ImageButtonWidget extends AbstractWidget
 			}
 		}
 
-		int greyColor = FastColor.ABGR32.color((int) (alphaScale * 255), 0, 0, 0);
+		/*? >=1.21.3 {*/
+		int greyColor = ARGB.color((int) (alphaScale * 255), 0, 0, 0);
+		/*?} else {*/
+		/*int greyColor = FastColor.ABGR32.color((int) (alphaScale * 255), 0, 0, 0);
+		*//*?}*/
 		context.fill(getX(), getY(), getX() + width, getY() + height, greyColor);
 
-		// Draw text.
 		var client = Minecraft.getInstance();
 
 		float fontScaling = 1.24f;
@@ -119,7 +127,6 @@ public class ImageButtonWidget extends AbstractWidget
 
 		context.pose().popPose();
 
-		// Draw border.
 		context.renderOutline(getX(), getY(), width, height, 0x0FFFFFFF);
 		context.disableScissor();
 	}
