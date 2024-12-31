@@ -4,16 +4,20 @@ import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
 import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
-import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
+import com.faboslav.variantsandventures.common.mixin.SpawnEggItemAccessor;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.function.Supplier;
+
+/*? >=1.21.3 {*/
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+/*?}*/
 
 /**
  * @see Items
@@ -24,7 +28,7 @@ public final class VariantsAndVenturesItems
 
 	public final static RegistryEntry<Item> GELID_SPAWN_EGG = registerSpawnEgg("gelid_spawn_egg", VariantsAndVenturesEntityTypes.GELID, 0xFF108E9C, 0xFFDEF7F7);
 	public final static RegistryEntry<Item> MURK_SPAWN_EGG = registerSpawnEgg("murk_spawn_egg", VariantsAndVenturesEntityTypes.MURK, 0xFFC1B1E1, 0xFFA276A9);
-	public final static RegistryEntry<Item> THICKET_SPAWN_EGG = registerSpawnEgg("thicket_spawn_egg", VariantsAndVenturesEntityTypes.THICKET, 0xFF005B57, 0xFF2B4913);
+		public final static RegistryEntry<Item> THICKET_SPAWN_EGG = registerSpawnEgg("thicket_spawn_egg", VariantsAndVenturesEntityTypes.THICKET, 0xFF005B57, 0xFF2B4913);
 	public final static RegistryEntry<Item> VERDANT_SPAWN_EGG = registerSpawnEgg("verdant_spawn_egg", VariantsAndVenturesEntityTypes.VERDANT, 0xFF8B8A75, 0xFF4A5D21);
 
 	private static RegistryEntry<Item> registerSpawnEgg(
@@ -35,10 +39,14 @@ public final class VariantsAndVenturesItems
 	) {
 		return ITEMS.register(id, () -> {
 			/*? >=1.21.3 {*/
-			return new DispenserAddedSpawnEgg(typeIn, primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
+			var spawnEgg = new SpawnEggItem(typeIn.get(), new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
 			/*?} else {*/
-			/*return new DispenserAddedSpawnEgg(typeIn, primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
-			 *//*?}*/
+			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
+			*//*?}*/
+			var spawnEggMap = SpawnEggItemAccessor.variantsandventures$getSpawnEggs();
+			spawnEggMap.put(typeIn.get(), spawnEgg);
+
+			return spawnEgg;
 		});
 	}
 

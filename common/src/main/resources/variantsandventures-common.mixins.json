@@ -9,7 +9,6 @@
 	},
 	"mixins": [
 		"DungeonFeatureMixin",
-		"ItemDispenserBehaviorInvoker",
 		"JigsawStructureAccessor",
 		"PersistentProjectileEntityMixin",
 		"ProjectileEntityAccessor",

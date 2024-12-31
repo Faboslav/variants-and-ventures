@@ -63,6 +63,7 @@ processResources {
 	}
 
 	inputs.properties(expandProps)
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 java {
@@ -75,6 +76,10 @@ java {
 tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = 'UTF-8'
 	it.options.getRelease().set(prop('mod_java_version') as Integer)
+}
+
+tasks.withType(Jar).configureEach {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 repositories {

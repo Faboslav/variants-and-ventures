@@ -8,9 +8,7 @@ import com.faboslav.variantsandventures.common.events.entity.ProjectileHitEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
-import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.*;
-import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
@@ -69,7 +67,6 @@ public final class VariantsAndVentures
 		RegisterEntityAttributesEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntityAttributes);
 		RegisterEntitySpawnRestrictionsEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::registerEntitySpawnRestrictions);
 		AddSpawnBiomeModificationsEvent.EVENT.addListener(VariantsAndVenturesEntityTypes::addSpawnBiomeModifications);
-		SetupEvent.EVENT.addListener(DispenserAddedSpawnEgg::onSetup);
 		AddItemGroupEntriesEvent.EVENT.addListener(VariantsAndVenturesItemGroups::addItemGroupEntries);
 	}
 

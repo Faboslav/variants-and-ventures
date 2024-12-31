@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/Faboslav/variants-and-ventures/blob/master/.github/assets/logo.png?raw=true" title="Variants & Ventures" alt="Variants & Ventures">
+    <img src="https://github.com/Faboslav/variants-and-ventures/blob/master/.github/assets/logo.png?raw=true" title="Variants&Ventures" alt="Variants&Ventures">
 </p>
 
 ---
