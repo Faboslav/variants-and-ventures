@@ -38,9 +38,13 @@ public final class VariantsAndVenturesItems
 		int secondaryColorIn
 	) {
 		return ITEMS.register(id, () -> {
-			/*? >=1.21.3 {*/
-			var spawnEgg = new SpawnEggItem(typeIn.get(), new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
-			/*?} else {*/
+			/*? =1.21.4 {*/
+			/*var spawnEgg = new SpawnEggItem(typeIn.get(), new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
+			*//*?}*/
+			/*? =1.21.3 {*/
+			var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
+			/*?}*/
+			/*? <=1.21.1 {*/
 			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
 			*//*?}*/
 			var spawnEggMap = SpawnEggItemAccessor.variantsandventures$getSpawnEggs();
