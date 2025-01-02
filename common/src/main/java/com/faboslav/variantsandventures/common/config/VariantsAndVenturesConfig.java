@@ -3,9 +3,8 @@ package com.faboslav.variantsandventures.common.config;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
+import dev.isxander.yacl3.config.v2.api.autogen.*;
 import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
-import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 
 import java.nio.file.Path;
@@ -16,6 +15,8 @@ public final class VariantsAndVenturesConfig
 		.id(VariantsAndVentures.makeID(VariantsAndVentures.MOD_ID))
 		.serializer(config -> GsonConfigSerializerBuilder.create(config).setPath(Path.of("config", VariantsAndVentures.MOD_ID + ".json")).build())
 		.build();
+
+	private static final String PERCENT_FORMAT = "%.0f%%";
 
 	private static final String MOD_MOBS_CATEGORY = "mod_mobs";
 	private static final String VANILLA_MOBS_CATEGORY = "vanilla_mobs";
@@ -36,8 +37,8 @@ public final class VariantsAndVenturesConfig
 	// @Description("Spawn chance of Stray (For example 0.8 means that stray will spawn in place of 80% of all skeletons spawned in cold biomes.")
 	@SerialEntry()
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = STRAY_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int straySpawnChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double straySpawnChance = 80;
 
 	// @Description("Minimum Y level for Stray spawns (For example 62 means that stray will spawn only above the ocean Y level.")
 	@SerialEntry()
@@ -54,8 +55,8 @@ public final class VariantsAndVenturesConfig
 	// @Description("Chance of Stray spawner in dungeons (For example 0.8 means that stray spawner will be in place of 80% of all skeleton spawners in cold biomes.")
 	@SerialEntry()
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = STRAY_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int straySpawnerChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double straySpawnerChance = 80;
 	
 	// @Description("Enable better Husk spawns")
 	@SerialEntry()
@@ -66,8 +67,8 @@ public final class VariantsAndVenturesConfig
 	// @Description("Spawn chance of Husk (For example 0.8 means that husk will spawn in place of 80% of all skeletons spawned in desert biomes.")
 	@SerialEntry()
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = HUSK_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int huskSpawnChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double huskSpawnChance = 80;
 
 	// @Description("Minimum Y level for Husk spawns (For example 62 means that husk will spawn only above the ocean Y level.")
 	@SerialEntry()
@@ -84,8 +85,8 @@ public final class VariantsAndVenturesConfig
 	// @Description("Chance of Husk spawner in dungeons (For example 0.8 means that husk spawner will be in place of 80% of all zombie spawners in desert biomes.")
 	@SerialEntry()
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = HUSK_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int huskSpawnerChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double huskSpawnerChance = 80;
 
 	// @Description("Enable better Bogged spawns")
 	@SerialEntry()
@@ -96,8 +97,8 @@ public final class VariantsAndVenturesConfig
 	// @Description("Spawn chance of Bogged (For example 0.8 means that bogged will spawn in place of 80% of all skeletons spawned in mushroom-like biomes.")
 	@SerialEntry()
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int boggedSpawnChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double boggedSpawnChance = 80;
 
 	// @Description("Minimum Y level for Bogged spawns (For example 62 means that bogged will spawn only above the ocean Y level.")
 	@SerialEntry()
@@ -114,10 +115,9 @@ public final class VariantsAndVenturesConfig
 	// @Description("Chance of Bogged spawner in dungeons (For example 0.8 means that bogged spawner will be in place of 80% of all bogged spawners in mushroom-like biomes.")
 	@SerialEntry()
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int boggedSpawnerChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double boggedSpawnerChance = 80;
 
-	// @Category("Gelid (Frozen Zombie)")
 	// @Description("Enable Gelid")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
@@ -133,8 +133,8 @@ public final class VariantsAndVenturesConfig
 	// @Description("Spawn chance of Gelid (For example 0.8 means that gelid will spawn in place of 80% of all zombies spawned in cold biomes.")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int gelidSpawnChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double gelidSpawnChance = 80;
 
 	// @Description("Minimum Y level for Gelid spawns (For example 62 means that gelid will spawn only above the ocean Y level.")
 	@SerialEntry()
@@ -151,15 +151,14 @@ public final class VariantsAndVenturesConfig
 	// @Description("Chance of Gelid spawner in dungeons (For example 0.8 means that gelid spawner will be in place of 80% of all zombie spawners in cold biomes.")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int gelidSpawnerChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double gelidSpawnerChance = 80;
 
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableGelidSpawnersToTrialChambers = true;
+	public boolean enableGelidSpawnersInTrialChambers = true;
 
-	// @Category("Murk (Sunken Skeleton)")
 	// @Description("Enable Murk")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
@@ -175,9 +174,8 @@ public final class VariantsAndVenturesConfig
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableMurkSpawnersToTrialChambers = true;
+	public boolean enableMurkSpawnersInTrialChambers = true;
 
-	// @Category("Thicket (Jungle Zombie)")
 	// @Description("Enable Thickets")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
@@ -193,8 +191,8 @@ public final class VariantsAndVenturesConfig
 	// @Description("Spawn chance of Thicket (For example 0.8 means that thicket will spawn in place of 80% of all zombies spawned in cold biomes.")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int thicketSpawnChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double thicketSpawnChance = 80;
 
 	// @Description("Minimum Y level for Thicket spawns (For example 62 means that thicket will spawn only above the ocean Y level.")
 	@SerialEntry()
@@ -211,15 +209,14 @@ public final class VariantsAndVenturesConfig
 	// @Description("Chance of Thicket spawner in dungeons (For example 0.8 means that thicket spawner will be in place of 80% of all zombie spawners in cold biomes.")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int thicketSpawnerChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double thicketSpawnerChance = 80;
 
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableThicketSpawnersToTrialChambers = true;
+	public boolean enableThicketSpawnersInTrialChambers = true;
 
-	// @Category("Verdant (Jungle Skeleton)")
 	// @Description("Enable Verdant")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
@@ -235,8 +232,8 @@ public final class VariantsAndVenturesConfig
 	// @Description("Spawn chance of Verdant (For example 0.8 means that verdant will spawn in place of 80% of all skeletons spawned in jungle biomes.")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int verdantSpawnChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double verdantSpawnChance = 80;
 
 	// @Description("Minimum Y level for Verdant spawns (For example 62 means that verdant will spawn only above the ocean Y level.")
 	@SerialEntry()
@@ -253,13 +250,13 @@ public final class VariantsAndVenturesConfig
 	// @Description("Chance of Verdant spawner in dungeons (For example 0.8 means that verdant spawner will be in place of 80% of all skeleton spawners in jungle biomes.")
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int verdantSpawnerChance = 80;
+	@DoubleSlider(min = 0, max = 100, step = 1, format = PERCENT_FORMAT)
+	public double verdantSpawnerChance = 80;
 
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableVerdantSpawnersToTrialChambers = true;
+	public boolean enableVerdantSpawnersInTrialChambers = true;
 
 	public void load() {
 		HANDLER.load();

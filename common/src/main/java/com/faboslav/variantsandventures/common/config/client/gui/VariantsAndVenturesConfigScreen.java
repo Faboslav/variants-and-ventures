@@ -16,7 +16,8 @@ import org.jetbrains.annotations.Nullable;
 public class VariantsAndVenturesConfigScreen extends Screen
 {
 	private final Screen parent;
-	private Screen mainConfigScreen = VariantsAndVenturesConfig.HANDLER.generateGui().generateScreen(null);
+	@Nullable
+	private Screen mainConfigScreen = null;
 
 	public VariantsAndVenturesConfigScreen(@Nullable Screen parent) {
 		super(Component.translatable("variantsandventures"));
@@ -47,11 +48,19 @@ public class VariantsAndVenturesConfigScreen extends Screen
 
 		grid.setPadding(3);
 
-		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/mobs.webp"), btn -> {
+		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.vanilla_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/vanilla_mobs.webp"), btn -> {
+			if(this.mainConfigScreen == null) {
+				this.mainConfigScreen = VariantsAndVenturesConfig.HANDLER.generateGui().generateScreen(this);
+			}
+
 			this.minecraft.setScreen(this.mainConfigScreen);
 		}), 2, 1);
 
-		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.general"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/general.webp"), btn -> {
+		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.mod_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/mod_mobs.webp"), btn -> {
+			if(this.mainConfigScreen == null) {
+				this.mainConfigScreen = VariantsAndVenturesConfig.HANDLER.generateGui().generateScreen(this);
+			}
+
 			this.minecraft.setScreen(this.mainConfigScreen);
 		}), 2, 1);
 

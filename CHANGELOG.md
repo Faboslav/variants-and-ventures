@@ -2,8 +2,9 @@
 
 - Added mobs to trial chambers
 - Added bogged support
+- Fixed murk attack sound
 - Fixed loot tables for all added mobs
-- Improved config
+- Reworked config
 - Removed experimental animations
 - Added de_de translations (Thanks to tristankechlo)
 - Updated zh_cn translations (Thanks to UDTakerBean)

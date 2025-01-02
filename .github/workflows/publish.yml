@@ -6,12 +6,12 @@ on:
             mod_loaders:
                 description: 'List of mod loaders to be published'
                 required: true
-                default: "['fabric', 'forge', 'neoforge']"
+                default: "['fabric', 'neoforge']"
                 type: string
             versions:
                 description: 'List of versions to be published'
                 required: true
-                default: "['1.20.1', '1.21.1', '1.21.3', '1.21.4']"
+                default: "['1.21.1', '1.21.3', '1.21.4']"
                 type: string
 
 jobs:

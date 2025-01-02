@@ -41,6 +41,14 @@
 		],
 		"subtitle": "subtitles.block.generic.footsteps"
 	},
+	"entity.murk.attack": {
+		"sounds": [
+			"variantsandventures:entity/murk/attack1",
+			"variantsandventures:entity/murk/attack2",
+			"variantsandventures:entity/murk/attack3"
+		],
+		"subtitle": "subtitles.entity.variantsandventures.murk.attack"
+	},
 	"entity.murk.ambient": {
 		"sounds": [
 			"variantsandventures:entity/murk/ambient1",
