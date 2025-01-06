@@ -1,5 +1,6 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
+import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -53,6 +54,15 @@ public final class ThicketEntity extends Zombie
 	@Override
 	protected SoundEvent getStepSound() {
 		return VariantsAndVenturesSoundEvents.ENTITY_THICKET_STEP.get();
+	}
+
+	@Override
+	public void tick() {
+		if (!VariantsAndVentures.getConfig().modMobs.enableThicket) {
+			this.discard();
+		}
+
+		super.tick();
 	}
 
 	@Override

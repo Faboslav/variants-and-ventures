@@ -4,11 +4,13 @@
 - Added bogged support
 - Fixed murk attack sound
 - Fixed loot tables for all added mobs
-- Reworked config
+- Reworked configs
 - Removed experimental animations
 - Added de_de translations (Thanks to tristankechlo)
 - Updated zh_cn translations (Thanks to UDTakerBean)
 - Updated pt_br translations (Thanks to demorogabrtz)
+
+There is a breaking change with configs, configs are now separated and located under the `variantsandventures` directory.
 
 ## 1.0.6
 

@@ -28,15 +28,15 @@ public final class StrayOnEntitySpawn
 				return false;
 			}
 
-			if (VariantsAndVentures.getConfig().enableBetterStraySpawns == false) {
+			if (VariantsAndVentures.getConfig().vanillaMobs.enableBetterStraySpawns == false) {
 				return false;
 			}
 
-			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().strayMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().vanillaMobs.strayMinimumYLevel) {
 				return false;
 			}
 
-			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().straySpawnChance) {
+			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().vanillaMobs.straySpawnChance) {
 				return false;
 			}
 

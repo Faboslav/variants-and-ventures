@@ -1,5 +1,6 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
+import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.ai.GelidSnowballRangedAttackGoal;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
@@ -64,6 +65,15 @@ public final class GelidEntity extends Zombie
 	@Override
 	protected SoundEvent getStepSound() {
 		return VariantsAndVenturesSoundEvents.ENTITY_GELID_STEP.get();
+	}
+
+	@Override
+	public void tick() {
+		if (!VariantsAndVentures.getConfig().modMobs.enableGelid) {
+			this.discard();
+		}
+
+		super.tick();
 	}
 
 	public void throwSnowball(LivingEntity target, float pullProgress) {

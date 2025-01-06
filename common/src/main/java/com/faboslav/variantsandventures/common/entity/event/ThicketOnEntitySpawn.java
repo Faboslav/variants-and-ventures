@@ -29,15 +29,15 @@ public final class ThicketOnEntitySpawn
 				return false;
 			}
 
-			if (VariantsAndVentures.getConfig().enableThicket == false || VariantsAndVentures.getConfig().enableThicketSpawns == false) {
+			if (VariantsAndVentures.getConfig().modMobs.enableThicket == false || VariantsAndVentures.getConfig().modMobs.enableThicketSpawns == false) {
 				return false;
 			}
 
-			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().thicketMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().modMobs.thicketMinimumYLevel) {
 				return false;
 			}
 
-			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().thicketSpawnChance) {
+			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().modMobs.thicketSpawnChance) {
 				return false;
 			}
 

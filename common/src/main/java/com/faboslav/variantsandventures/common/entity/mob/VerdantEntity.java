@@ -1,5 +1,6 @@
 package com.faboslav.variantsandventures.common.entity.mob;
 
+import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -52,6 +53,15 @@ public final class VerdantEntity extends AbstractSkeleton
 
 	public SoundEvent getStepSound() {
 		return VariantsAndVenturesSoundEvents.ENTITY_VERDANT_STEP.get();
+	}
+
+	@Override
+	public void tick() {
+		if (!VariantsAndVentures.getConfig().modMobs.enableVerdant) {
+			this.discard();
+		}
+
+		super.tick();
 	}
 
 	@Override

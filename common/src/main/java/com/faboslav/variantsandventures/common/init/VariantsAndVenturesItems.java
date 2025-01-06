@@ -28,7 +28,7 @@ public final class VariantsAndVenturesItems
 
 	public final static RegistryEntry<Item> GELID_SPAWN_EGG = registerSpawnEgg("gelid_spawn_egg", VariantsAndVenturesEntityTypes.GELID, 0xFF108E9C, 0xFFDEF7F7);
 	public final static RegistryEntry<Item> MURK_SPAWN_EGG = registerSpawnEgg("murk_spawn_egg", VariantsAndVenturesEntityTypes.MURK, 0xFFC1B1E1, 0xFFA276A9);
-		public final static RegistryEntry<Item> THICKET_SPAWN_EGG = registerSpawnEgg("thicket_spawn_egg", VariantsAndVenturesEntityTypes.THICKET, 0xFF005B57, 0xFF2B4913);
+	public final static RegistryEntry<Item> THICKET_SPAWN_EGG = registerSpawnEgg("thicket_spawn_egg", VariantsAndVenturesEntityTypes.THICKET, 0xFF005B57, 0xFF2B4913);
 	public final static RegistryEntry<Item> VERDANT_SPAWN_EGG = registerSpawnEgg("verdant_spawn_egg", VariantsAndVenturesEntityTypes.VERDANT, 0xFF8B8A75, 0xFF4A5D21);
 
 	private static RegistryEntry<Item> registerSpawnEgg(

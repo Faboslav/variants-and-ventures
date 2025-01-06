@@ -29,15 +29,15 @@ public final class GelidOnEntitySpawn
 				return false;
 			}
 
-			if (VariantsAndVentures.getConfig().enableGelid == false || VariantsAndVentures.getConfig().enableGelidSpawns == false) {
+			if (VariantsAndVentures.getConfig().modMobs.enableGelid == false || VariantsAndVentures.getConfig().modMobs.enableGelidSpawns == false) {
 				return false;
 			}
 
-			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().gelidSpawnChance) {
+			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().modMobs.gelidSpawnChance) {
 				return false;
 			}
 
-			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().gelidMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().modMobs.gelidMinimumYLevel) {
 				return false;
 			}
 

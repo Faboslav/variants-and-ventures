@@ -44,7 +44,7 @@ public final class VariantsAndVenturesStructurePoolAliases
 					dataPoolBuilder.add(group.data());
 				}
 
-				if(config.enableMurkSpawnersInTrialChambers) {
+				if(config.modMobs.enableMurkSpawnersInTrialChambers) {
 					dataPoolBuilder.add(List.of(
 						PoolAliasBinding.direct(
 							"trial_chambers/spawner/contents/ranged",
@@ -57,7 +57,7 @@ public final class VariantsAndVenturesStructurePoolAliases
 					));
 				}
 
-				if(config.enableVerdantSpawnersInTrialChambers) {
+				if(config.modMobs.enableVerdantSpawnersInTrialChambers) {
 					dataPoolBuilder.add(List.of(
 						PoolAliasBinding.direct(
 							"trial_chambers/spawner/contents/ranged",
@@ -88,11 +88,11 @@ public final class VariantsAndVenturesStructurePoolAliases
 						dataPoolBuilder.add(value);
 					});
 
-					if(config.enableGelidSpawnersInTrialChambers) {
+					if(config.modMobs.enableGelidSpawnersInTrialChambers) {
 						dataPoolBuilder.add("trial_chambers/spawner/melee/gelid");
 					}
 
-					if(config.enableThicketSpawnersInTrialChambers) {
+					if(config.modMobs.enableThicketSpawnersInTrialChambers) {
 						dataPoolBuilder.add("trial_chambers/spawner/melee/thicket");
 					}
 

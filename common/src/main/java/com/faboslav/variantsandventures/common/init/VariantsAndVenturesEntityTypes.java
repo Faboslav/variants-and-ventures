@@ -55,7 +55,7 @@ public final class VariantsAndVenturesEntityTypes
 	}
 
 	public static void addSpawnBiomeModifications(AddSpawnBiomeModificationsEvent event) {
-		if (VariantsAndVentures.getConfig().enableMurk && VariantsAndVentures.getConfig().enableMurkSpawns) {
+		if (VariantsAndVentures.getConfig().modMobs.enableMurk && VariantsAndVentures.getConfig().modMobs.enableMurkSpawns) {
 			event.add(VariantsAndVenturesTags.HAS_MURK, MobCategory.MONSTER, MURK.get(), 4, 1, 1);
 		}
 	}

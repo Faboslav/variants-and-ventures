@@ -28,15 +28,15 @@ public final class BoggedOnEntitySpawn
 				return false;
 			}
 
-			if (VariantsAndVentures.getConfig().enableBetterBoggedSpawns == false) {
+			if (VariantsAndVentures.getConfig().vanillaMobs.enableBetterBoggedSpawns == false) {
 				return false;
 			}
 
-			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().boggedMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().vanillaMobs.boggedMinimumYLevel) {
 				return false;
 			}
 
-			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().boggedSpawnChance) {
+			if (event.entity().getRandom().nextFloat() >= VariantsAndVentures.getConfig().vanillaMobs.boggedSpawnChance) {
 				return false;
 			}
 

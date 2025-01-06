@@ -29,15 +29,15 @@ public final class VerdantOnEntitySpawn
 				return false;
 			}
 
-			if (VariantsAndVentures.getConfig().enableVerdant == false || VariantsAndVentures.getConfig().enableVerdantSpawns == false) {
+			if (VariantsAndVentures.getConfig().modMobs.enableVerdant == false || VariantsAndVentures.getConfig().modMobs.enableVerdantSpawns == false) {
 				return false;
 			}
 
-			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().verdantMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().modMobs.verdantMinimumYLevel) {
 				return false;
 			}
 
-			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().verdantSpawnChance) {
+			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().modMobs.verdantSpawnChance) {
 				return false;
 			}
 

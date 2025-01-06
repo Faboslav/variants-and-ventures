@@ -28,15 +28,15 @@ public final class HuskOnEntitySpawn
 				return false;
 			}
 
-			if (VariantsAndVentures.getConfig().enableBetterHuskSpawns == false) {
+			if (VariantsAndVentures.getConfig().vanillaMobs.enableBetterHuskSpawns == false) {
 				return false;
 			}
 
-			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().huskMinimumYLevel) {
+			if (event.entity().blockPosition().getY() < VariantsAndVentures.getConfig().vanillaMobs.huskMinimumYLevel) {
 				return false;
 			}
 
-			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().huskSpawnChance) {
+			if (event.entity().getRandom().nextInt(100) >= VariantsAndVentures.getConfig().vanillaMobs.huskSpawnChance) {
 				return false;
 			}
 

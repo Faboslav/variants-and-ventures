@@ -1,7 +1,8 @@
 package com.faboslav.variantsandventures.common.config.client.gui;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import com.faboslav.variantsandventures.common.config.VariantsAndVenturesConfig;
+import com.faboslav.variantsandventures.common.config.ModMobsConfig;
+import com.faboslav.variantsandventures.common.config.VanillaMobsConfig;
 import com.faboslav.variantsandventures.common.config.client.gui.widget.DynamicGridWidget;
 import com.faboslav.variantsandventures.common.config.client.gui.widget.ImageButtonWidget;
 import net.minecraft.ChatFormatting;
@@ -17,7 +18,9 @@ public class VariantsAndVenturesConfigScreen extends Screen
 {
 	private final Screen parent;
 	@Nullable
-	private Screen mainConfigScreen = null;
+	private Screen modMobsConfigScreen = null;
+	@Nullable
+	private Screen vanillaMobsConfigScreen = null;
 
 	public VariantsAndVenturesConfigScreen(@Nullable Screen parent) {
 		super(Component.translatable("variantsandventures"));
@@ -48,20 +51,20 @@ public class VariantsAndVenturesConfigScreen extends Screen
 
 		grid.setPadding(3);
 
-		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.vanilla_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/vanilla_mobs.webp"), btn -> {
-			if(this.mainConfigScreen == null) {
-				this.mainConfigScreen = VariantsAndVenturesConfig.HANDLER.generateGui().generateScreen(this);
+		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.mod_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/mod_mobs.webp"), btn -> {
+			if(this.modMobsConfigScreen == null) {
+				this.modMobsConfigScreen = ModMobsConfig.HANDLER.generateGui().generateScreen(this);
 			}
 
-			this.minecraft.setScreen(this.mainConfigScreen);
+			this.minecraft.setScreen(this.modMobsConfigScreen);
 		}), 2, 1);
 
-		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.mod_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/mod_mobs.webp"), btn -> {
-			if(this.mainConfigScreen == null) {
-				this.mainConfigScreen = VariantsAndVenturesConfig.HANDLER.generateGui().generateScreen(this);
+		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.vanilla_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/vanilla_mobs.webp"), btn -> {
+			if(this.vanillaMobsConfigScreen == null) {
+				this.vanillaMobsConfigScreen = VanillaMobsConfig.HANDLER.generateGui().generateScreen(this);
 			}
 
-			this.minecraft.setScreen(this.mainConfigScreen);
+			this.minecraft.setScreen(this.vanillaMobsConfigScreen);
 		}), 2, 1);
 
 		grid.calculateLayout();
