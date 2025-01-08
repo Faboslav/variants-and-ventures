@@ -101,3 +101,4 @@ jobs:
                     fabric-api: ${{ steps.gradle-properties.outputs.FABRIC_API_VERSION }}
                     xvfb: false
                     headlessmc-command: -lwjgl --retries 3 --jvm -Djava.awt.headless=true
+                    dummy-assets: false

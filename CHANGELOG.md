@@ -10,7 +10,7 @@
 - Updated zh_cn translations (Thanks to UDTakerBean)
 - Updated pt_br translations (Thanks to demorogabrtz)
 
-There is a breaking change with configs, configs are now separated and located under the `variantsandventures` directory.
+There release is contains a breaking change with configs, configs are now separated and located under the `variantsandventures` directory in separate json files.
 
 ## 1.0.6
 
