@@ -11,10 +11,10 @@
 		<img src="https://img.shields.io/static/v1?label=Support me on&message=Ko-fi&color=5b9c51&labelColor=5b9c51&logoColor=ffffff&style=for-the-badge&logo=ko-fi" alt="Ko-fi">
 	</a>
 	<a style="text-decoration: none;" href="https://www.patreon.com/Faboslav">
-		<img src="https://img.shields.io/endpoint.svg?color=5b9c51&label=Support me on&labelColor=5b9c51&logoColor=ffffff&url=https://shieldsio-patreon.vercel.app/api?username=Faboslav&type=patrons&style=for-the-badge" alt="Patreon">
+		<img src="https://img.shields.io/static/v1?label=Support me on&message=Patreon&color=5b9c51&labelColor=5b9c51&logoColor=ffffff&style=for-the-badge&logo=patreon" alt="Ko-fi">
 	</a>
 	<a style="text-decoration: none;" href="https://discord.gg/QGwFvvMQCn">
-		<img src="https://img.shields.io/discord/924964658169913404?style=for-the-badge&logo=discord&logoColor=ffffff&label=Community&labelColor=5b9c51&color=5b9c51" alt="Discord">
+		<img src="https://img.shields.io/discord/924964658169913404?style=for-the-badge&logo=discord&logoColor=ffffff&label=Join discord&labelColor=5b9c51&color=5b9c51" alt="Discord">
 	</a>
 	<a style="text-decoration: none;" href="https://github.com/Faboslav/variants-and-ventures/wiki">
 		<img src="https://img.shields.io/static/v1?label=&message=Wiki&logoColor=ffffff&style=for-the-badge&logo=github&labelColor=5b9c51&color=5b9c51" alt="Wiki">
@@ -25,6 +25,10 @@
 
 <p style="font-size: 18px;">
 	Variants&Ventures adds multiple new mob variants seamlessly integrated into your Minecraft world.
+</p>
+
+<p style="font-size: 18px;">
+	Each mob variant spawns naturally in relevant biomes. You may also encounter their spawners in dungeons and trial chamber structures, adding an extra layer of challenge and exploration.
 </p>
 
 <p style="font-size: 18px;">
@@ -50,8 +54,8 @@
 	Other features related to the gelid:
 </p>
 <ul style="font-size: 18px;">
-	<li><a href="https://github.com/Faboslav/variants-and-ventures/wiki/Gelid-Head">Gelid Head</a> block/item</li>
-	<li>Possibility of Gelid monster spawner in the cold biomes</li>
+	<li>Possibility of Gelid monster spawners in the Dungeons under cold biomes</li>
+	<li>Possibility of Gelid trial spawners in the Trial Chambers</li>
 </ul>
 
 <br>
@@ -72,8 +76,8 @@
 	Other features related to the thicket:
 </p>
 <ul style="font-size: 18px;">
-	<li><a href="https://github.com/Faboslav/variants-and-ventures/wiki/Thicket-Head">Thicket Head</a> block/item</li>
-	<li>Possibility of Thicket monster spawner in the jungle biomes</li>
+	<li>Possibility of Thicket monster spawners in the Dungeons under jungle biomes</li>
+	<li>Possibility of Thicket trial spawners in the Trial Chambers</li>
 </ul>
 
 <br>
@@ -95,8 +99,8 @@
 	Other features related to the verdant:
 </p>
 <ul style="font-size: 18px;">
-	<li><a href="https://github.com/Faboslav/variants-and-ventures/wiki/Verdant-Head">Verdant Head</a> block/item</li>
-	<li>Possibility of Verdant monster spawner in the jungle biomes</li>
+	<li>Possibility of Verdant monster spawners in the Dungeons under jungle biomes</li>
+	<li>Possibility of Verdant trial spawners in the Trial Chambers</li>
 </ul>
 
 <br>
@@ -119,8 +123,8 @@
 	Other features related to the murk:
 </p>
 <ul style="font-size: 18px;">
-	<li><a href="https://github.com/Faboslav/variants-and-ventures/wiki/Murk-Skull">Murk Skull</a> block/item</li>
-	<li>Can be sheader for live and/or dead corals</li>
+	<li>Can be sheared for live and/or dead corals</li>
+	<li>Possibility of Murk trial spawners in the Trial Chambers</li>
 </ul>
 
 <br>
@@ -133,7 +137,8 @@
 	<li>Possibility of Stray monster spawners</li>
 	<li>Improved Husk spawning logic</li>
 	<li>Possibility of Husk monster spawners</li>
-	<li>Experimental keyframe animations for all zombie and skeleton variants</li>
+	<li>Improved Bogged spawning logic</li>
+	<li>Possibility of Bogged monster spawners</li>
 </ul>
 
 <br>
