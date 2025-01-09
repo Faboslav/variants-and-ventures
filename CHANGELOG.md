@@ -1,3 +1,7 @@
+## 1.0.8
+
+- Fixed crash related to world generation of trial chambers
+
 ## 1.0.7
 
 - Added mobs to trial chambers
