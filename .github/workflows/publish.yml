@@ -34,13 +34,15 @@ jobs:
                     java-version: 21
                     distribution: temurin
 
-            -   name: "Setup Gradle and run build"
+            -   name: "Setup gradle"
                 uses: gradle/actions/setup-gradle@v3
                 with:
                     cache-read-only: false
                     generate-job-summary: false
                     gradle-version: wrapper
-                    arguments: build
+
+            - name: "Run chiseled build"
+              run: ./gradlew chiseledBuild
 
             -   name: "Generate matrix for the run job"
                 id: set-matrix
