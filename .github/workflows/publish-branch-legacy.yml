@@ -1,4 +1,4 @@
-name: "Publish branch"
+name: "Publish branch legacy"
 
 on:
     workflow_call:
