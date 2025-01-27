@@ -21,7 +21,7 @@ config = "variantsandventures-neoforge.mixins.json"
 
 [[dependencies."${modId}"]]
 modId = "yet_another_config_lib_v3"
-mandatory = false
+mandatory = true
 versionRange = "*"
 ordering = "NONE"
 side = "BOTH"

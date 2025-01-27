@@ -38,11 +38,11 @@
 	"depends": {
 		"minecraft": ">=${minMinecraftVersion}-",
 		"fabricloader": "*",
-		"fabric": "*"
+		"fabric": "*",
+		"yet_another_config_lib_v3": "*"
 	},
 	"suggests": {
-		"modmenu": "*",
-		"yet_another_config_lib_v3": "*"
+		"modmenu": "*"
 	},
 	"custom": {
 		"modmenu": {
@@ -64,7 +64,7 @@
 		"mc-publish": {
 			"dependencies": [
 				"fabric(required){curseforge:306612}{modrinth:P7dR8mSH}",
-				"yet_another_config_lib_v3(optional){curseforge:667299}{modrinth:1eAoo2KR}",
+				"yet_another_config_lib_v3(required){curseforge:667299}{modrinth:1eAoo2KR}",
 				"modmenu(optional){curseforge:308702}{modrinth:mOgUt4GM}"
 			]
 		}

@@ -1,3 +1,8 @@
+## 1.0.9
+
+- Removed default resource pack adding custom animations to murk
+- Fixed bug related to duplicate entity spawns (mostly visible in logs)
+
 ## 1.0.8
 
 - Fixed crash related to world generation of trial chambers
