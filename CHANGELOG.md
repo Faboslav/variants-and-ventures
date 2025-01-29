@@ -1,3 +1,7 @@
+## 1.0.10
+
+- Fixed server crash related to entity spawns
+
 ## 1.0.9
 
 - Fixed bug/log spam related to entity spawns

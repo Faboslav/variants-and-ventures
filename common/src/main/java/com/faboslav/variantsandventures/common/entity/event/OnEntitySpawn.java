@@ -50,17 +50,21 @@ public final class OnEntitySpawn
 			}
 
 			Mob entityToSpawn = entityTypeToSpawn.create(
-				(ServerLevel) world,
-				null,
-				event.entity().blockPosition(),
-				event.spawnReason(),
-				false,
-				false
+				entity.level(),
+				event.spawnReason()
 			);
 
 			if (entityToSpawn == null) {
 				return false;
 			}
+
+			entityToSpawn.moveTo(
+				entity.getX(),
+				entity.getY(),
+				entity.getZ(),
+				entityToSpawn.getRandom().nextFloat() * 360.0F,
+				0.0F
+			);
 
 			entityToSpawn.copyPosition(entity);
 			entityToSpawn.yBodyRotO = entity.yBodyRotO;
