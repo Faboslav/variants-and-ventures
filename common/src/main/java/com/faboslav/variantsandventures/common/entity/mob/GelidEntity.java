@@ -3,8 +3,6 @@ package com.faboslav.variantsandventures.common.entity.mob;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.ai.GelidSnowballRangedAttackGoal;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
-import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -16,14 +14,12 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Stray;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 
 public final class GelidEntity extends Zombie
 {

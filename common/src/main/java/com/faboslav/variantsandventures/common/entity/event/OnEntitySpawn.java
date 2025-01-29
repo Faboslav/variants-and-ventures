@@ -3,7 +3,6 @@ package com.faboslav.variantsandventures.common.entity.event;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import net.minecraft.core.Holder;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
@@ -49,10 +48,7 @@ public final class OnEntitySpawn
 				return false;
 			}
 
-			Mob entityToSpawn = entityTypeToSpawn.create(
-				entity.level(),
-				event.spawnReason()
-			);
+			Mob entityToSpawn = entityTypeToSpawn.create(entity.level()/*? >=1.21.3 {*/, event.spawnReason()/*?}*/);
 
 			if (entityToSpawn == null) {
 				return false;
