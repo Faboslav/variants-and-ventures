@@ -78,7 +78,7 @@ public final class ModMobsConfig
 	public boolean enableMurkSpawnersInTrialChambers = true;
 
 	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
+	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
 	public boolean enableThicket = true;
 
