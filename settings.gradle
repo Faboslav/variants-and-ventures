@@ -11,7 +11,7 @@ pluginManagement {
 }
 
 plugins {
-	id "dev.kikugie.stonecutter" version "0.6-alpha.1"
+	id "dev.kikugie.stonecutter" version "0.6-alpha.11"
 }
 
 rootProject.name = mod_id

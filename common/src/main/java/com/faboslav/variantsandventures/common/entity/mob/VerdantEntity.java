@@ -93,6 +93,7 @@ public final class VerdantEntity extends AbstractSkeleton
 		@Nullable ItemStack shotFrom
 	) {
 		AbstractArrow persistentProjectileEntity = super.getArrow(arrow, damageModifier, shotFrom);
+
 		if (persistentProjectileEntity instanceof Arrow) {
 			((Arrow) persistentProjectileEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 100));
 		}

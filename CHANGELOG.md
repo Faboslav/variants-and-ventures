@@ -1,3 +1,7 @@
+## 1.0.11
+
+- Fixed mod crash related to latest YACL
+
 ## 1.0.10
 
 - Fixed server crash related to entity spawns

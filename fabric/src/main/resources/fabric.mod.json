@@ -38,8 +38,8 @@
 	"depends": {
 		"minecraft": ">=${minMinecraftVersion}-",
 		"fabricloader": "*",
-		"fabric-api": "*",
-		"yet_another_config_lib_v3": "*"
+		"fabric": "*",
+		"yet_another_config_lib_v3": ">=${yaclVersion}"
 	},
 	"suggests": {
 		"modmenu": "*"

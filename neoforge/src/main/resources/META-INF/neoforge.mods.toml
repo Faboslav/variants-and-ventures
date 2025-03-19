@@ -19,17 +19,32 @@ config = "variantsandventures-common.mixins.json"
 [[mixins]]
 config = "variantsandventures-neoforge.mixins.json"
 
-[[dependencies."${modId}"]]
-modId = "yet_another_config_lib_v3"
-mandatory = true
+[[dependencies.${ modId }]]
+modId = "neoforge"
+type = "required"
 versionRange = "*"
 ordering = "NONE"
 side = "BOTH"
-	[[dependencies."${modId}".mc-publish]]
-		curseforge=667299
-		modrinth="1eAoo2KR"
 
-[modproperties."${modId}"]
+[[dependencies.${ modId }]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minMinecraftVersion},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ modId }]]
+modId = "yet_another_config_lib_v3"
+type = "required"
+versionRange = "[${yaclVersion},)"
+ordering = "NONE"
+side = "BOTH"
+[dependencies.${modId}.mc-publish]
+	ignore=false
+	modrinth="yacl"
+	curseforge="yacl"
+
+[modproperties.${ modId }]
 catalogueImageIcon = "catalogue_icon.png"
 catalogueBackground = "catalogue_background.png"
 configuredBackground = "catalogue_background.png"

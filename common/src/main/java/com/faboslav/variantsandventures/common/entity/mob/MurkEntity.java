@@ -105,7 +105,7 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 		EntitySpawnReason spawnReason,
 		/*?} else {*/
 		/*MobSpawnType spawnReason,
-		 *//*?}*/
+		*//*?}*/
 		@Nullable SpawnGroupData entityData
 	) {
 		this.setVariant(Variant.getRandom(random));
