@@ -66,17 +66,28 @@ public final class VerdantEntity extends AbstractSkeleton
 
 	@Override
 	public void performRangedAttack(LivingEntity target, float velocity) {
-		ItemStack itemStack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, Items.BOW));
-		ItemStack itemStack2 = this.getProjectile(itemStack);
-		AbstractArrow abstractArrow = this.getArrow(itemStack2, velocity, itemStack);
+		ItemStack possibleBow = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, Items.BOW));
+
+		if(!possibleBow.is(Items.BOW)) {
+			return;
+		}
+
+		ItemStack possibleProjectile = this.getProjectile(possibleBow);
+
+		if(possibleProjectile == ItemStack.EMPTY) {
+			return;
+		}
+
+		AbstractArrow abstractArrow = this.getArrow(possibleProjectile, velocity, possibleBow);
 		double d = target.getX() - this.getX();
 		double e = target.getY(0.3333333333333333) - abstractArrow.getY();
 		double f = target.getZ() - this.getZ();
 		double g = Math.sqrt(d * d + f * f);
+
 		/*? >=1.21.3 {*/
 		Level var15 = this.level();
 		if (var15 instanceof ServerLevel serverLevel) {
-			Projectile.spawnProjectileUsingShoot(abstractArrow, serverLevel, itemStack2, d, e + g * 0.20000000298023224, f, 1.6F, (float)(14 - serverLevel.getDifficulty().getId() * 4));
+			Projectile.spawnProjectileUsingShoot(abstractArrow, serverLevel, possibleProjectile, d, e + g * 0.20000000298023224, f, 1.6F, (float)(14 - serverLevel.getDifficulty().getId() * 4));
 		}
 		/*?} else {*/
 		/*abstractArrow.shoot(d, e + g * 0.20000000298023224, f, 1.6F, (float)(14 - this.level().getDifficulty().getId() * 4));

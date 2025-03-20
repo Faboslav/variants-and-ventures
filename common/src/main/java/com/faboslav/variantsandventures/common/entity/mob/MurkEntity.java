@@ -41,6 +41,7 @@ import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -222,17 +223,36 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 	}
 
 	@Override
-	public void performRangedAttack(LivingEntity target, float pullProgress) {
-		ItemStack itemStack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, Items.BOW));
-		ItemStack itemStack2 = this.getProjectile(itemStack);
-		AbstractArrow persistentProjectileEntity = this.getArrow(itemStack2, pullProgress, itemStack);
+	public void performRangedAttack(LivingEntity target, float velocity) {
+		ItemStack possibleBow = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, Items.BOW));
+
+		if(!possibleBow.is(Items.BOW)) {
+			return;
+		}
+
+		ItemStack possibleProjectile = this.getProjectile(possibleBow);
+
+		if(possibleProjectile == ItemStack.EMPTY) {
+			return;
+		}
+
+		AbstractArrow abstractArrow = this.getArrow(possibleProjectile, velocity, possibleBow);
 		double d = target.getX() - this.getX();
-		double e = target.getY(0.3333333333333333) - persistentProjectileEntity.getY();
+		double e = target.getY(0.3333333333333333) - abstractArrow.getY();
 		double f = target.getZ() - this.getZ();
 		double g = Math.sqrt(d * d + f * f);
-		persistentProjectileEntity.shoot(d, e + g * 0.20000000298023224, f, 1.6F, (float) (14 - this.level().getDifficulty().getId() * 4));
+
+		/*? >=1.21.3 {*/
+		Level var15 = this.level();
+		if (var15 instanceof ServerLevel serverLevel) {
+			Projectile.spawnProjectileUsingShoot(abstractArrow, serverLevel, possibleProjectile, d, e + g * 0.20000000298023224, f, 1.6F, (float)(14 - serverLevel.getDifficulty().getId() * 4));
+		}
+		/*?} else {*/
+		/*abstractArrow.shoot(d, e + g * 0.20000000298023224, f, 1.6F, (float)(14 - this.level().getDifficulty().getId() * 4));
+		this.level().addFreshEntity(abstractArrow);
+		*//*?}*/
+
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_MURK_ATTACK.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-		this.level().addFreshEntity(persistentProjectileEntity);
 	}
 
 	@Override

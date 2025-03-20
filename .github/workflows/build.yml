@@ -96,11 +96,6 @@ jobs:
             -   name: "Copy mod jar to run/mods"
                 run: mkdir -p run/mods && cp artifacts/${{ steps.gradle-properties.outputs.MOD_ID }}-${{ matrix.mod_loader }}-mc${{ matrix.version }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}.jar run/mods
 
-            -   name: "Download ResourcefulLib"
-                run: |
-                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "resourceful-lib" "${{ steps.gradle-properties.outputs.RESOURCEFUL_LIB_LIB_VERSION }}" "${{ matrix.mod_loader }}")
-                    wget -P run/mods "$MOD_URL"
-
             -   name: "Download YACL"
                 run: |
                     MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "yacl" "${{ steps.gradle-properties.outputs.YACL_VERSION }}-${{ matrix.mod_loader }}" "${{ matrix.mod_loader }}")
