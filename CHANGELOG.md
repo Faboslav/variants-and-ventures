@@ -2,7 +2,8 @@
 
 - Fixed mod crash related to latest YACL
 - Fixed crash related to shooting arrows from a non bow weapons (caused by other mods, should be also fixed on their side)
-- Improved general spawn replacement logic
+- Improved general spawn replacement logic (mobs should be able to spawn with armor/items as the original mobs)
+- Lowered thicket sound effect volume
 
 ## 1.0.10
 
