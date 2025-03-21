@@ -1,6 +1,8 @@
 ## 1.0.11
 
 - Fixed mod crash related to latest YACL
+- Fixed crash related to shooting arrows from a non bow weapons (caused by other mods, should be also fixed on their side)
+- Improved general spawn replacement logic
 
 ## 1.0.10
 

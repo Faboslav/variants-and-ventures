@@ -6,7 +6,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
@@ -67,7 +69,28 @@ public final class OnEntitySpawn
 			entityToSpawn.yBodyRot = entity.yBodyRot;
 			entityToSpawn.yHeadRotO = entity.yHeadRotO;
 			entityToSpawn.yHeadRot = entity.yHeadRot;
-			entityToSpawn.setBaby(event.isBaby());
+			entityToSpawn.setBaby(entity.isBaby());
+			entityToSpawn.setNoAi(entity.isNoAi());
+			entityToSpawn.setInvulnerable(entity.isInvulnerable());
+
+			if(entity.hasCustomName()) {
+				entityToSpawn.setCustomName(entity.getCustomName());
+				entityToSpawn.setCustomNameVisible(entity.isCustomNameVisible());
+			}
+
+			if (entity.isPersistenceRequired()) {
+				entityToSpawn.setPersistenceRequired();
+			}
+
+			entityToSpawn.setCanPickUpLoot(entity.canPickUpLoot());
+
+			for(EquipmentSlot equipmentSlot : EquipmentSlot.values()) {
+				ItemStack itemStack = entity.getItemBySlot(equipmentSlot);
+				if (!itemStack.isEmpty()) {
+					entityToSpawn.setItemSlot(equipmentSlot, itemStack.copyAndClear());
+					entityToSpawn.setDropChance(equipmentSlot, entity.getEquipmentDropChance(equipmentSlot));
+				}
+			}
 
 			entityToSpawn.finalizeSpawn(
 				(ServerLevelAccessor) world,
@@ -76,7 +99,13 @@ public final class OnEntitySpawn
 				null
 			);
 
-			world.addFreshEntity(entityToSpawn);
+			boolean spawnResult = world.addFreshEntity(entityToSpawn);
+
+			if(!spawnResult) {
+				entity.discard();
+				return false;
+			}
+
 			return true;
 		}
 

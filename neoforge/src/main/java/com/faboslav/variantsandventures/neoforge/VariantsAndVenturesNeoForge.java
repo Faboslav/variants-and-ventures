@@ -48,6 +48,10 @@ public final class VariantsAndVenturesNeoForge
 	}
 
 	private static void onEntitySpawn(FinalizeSpawnEvent event) {
+		if(event.isCanceled()) {
+			return;
+		}
+
 		boolean spawn = EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(event.getEntity(), event.getLevel(), event.getEntity().isBaby(), event.getSpawnType()), event.isCanceled());
 
 		if(spawn) {

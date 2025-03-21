@@ -24,3 +24,4 @@ accessible class net/minecraft/world/level/levelgen/structure/pools/alias/Random
 extendable class net/minecraft/world/level/levelgen/structure/pools/alias/RandomGroup
 accessible class net/minecraft/world/level/levelgen/structure/pools/alias/Direct
 extendable class net/minecraft/world/level/levelgen/structure/pools/alias/Direct
+accessible method net/minecraft/world/entity/Mob getEquipmentDropChance (Lnet/minecraft/world/entity/EquipmentSlot;)F

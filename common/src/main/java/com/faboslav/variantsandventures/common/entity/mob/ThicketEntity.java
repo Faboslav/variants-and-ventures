@@ -29,7 +29,7 @@ public final class ThicketEntity extends Zombie
 	public void playAmbientSound() {
 		SoundEvent soundEvent = this.getAmbientSound();
 		if (soundEvent != null) {
-			this.playSound(soundEvent, 0.4F, this.getVoicePitch());
+			this.playSound(soundEvent, 0.35F, this.getVoicePitch());
 		}
 	}
 
@@ -42,7 +42,7 @@ public final class ThicketEntity extends Zombie
 	protected void playHurtSound(DamageSource source) {
 		SoundEvent soundEvent = this.getHurtSound(source);
 		if (soundEvent != null) {
-			this.playSound(soundEvent, 0.75F, this.getVoicePitch());
+			this.playSound(soundEvent, 0.6F, this.getVoicePitch());
 		}
 	}
 
@@ -73,7 +73,7 @@ public final class ThicketEntity extends Zombie
  	*//*?}*/
 	{
 		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
-		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 1.0f, this.getVoicePitch());
+		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 0.6f, this.getVoicePitch());
 		/*? >=1.21.3 {*/
 		boolean attackResult = super.doHurtTarget(level, source);
 		/*?} else {*/

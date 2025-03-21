@@ -19,6 +19,7 @@ import java.util.Locale;
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
+
 public class MurkEntityRenderer extends AbstractSkeletonRenderer<MurkEntity, MurkEntityRenderState>
 {
 	public static final Map<MurkEntity.Variant, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (textures) -> {
@@ -57,18 +58,21 @@ import com.google.common.collect.Maps;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.Util;
+import net.minecraft.client.model.BoggedModel;
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.client.renderer.entity.layers.SkeletonClothingLayer;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Locale;
 import java.util.Map;
 
 @Environment(EnvType.CLIENT)
-public class MurkEntityRenderer extends HumanoidMobRenderer<MurkEntity, MurkEntityModel>
+public class MurkEntityRenderer extends SkeletonRenderer<MurkEntity>
 {
 	public static final Map<MurkEntity.Variant, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (textures) -> {
 		for (MurkEntity.Variant variant : MurkEntity.Variant.VARIANTS) {
@@ -77,8 +81,12 @@ public class MurkEntityRenderer extends HumanoidMobRenderer<MurkEntity, MurkEnti
 	});
 
 	public MurkEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK)), 0.5F);
-		this.addLayer(new HumanoidArmorLayer<>(this, new SkeletonModel(context.bakeLayer(ModelLayers.SKELETON_INNER_ARMOR)), new SkeletonModel(context.bakeLayer(ModelLayers.SKELETON_OUTER_ARMOR)), context.getModelManager()));
+		super(context, ModelLayers.BOGGED_INNER_ARMOR, ModelLayers.BOGGED_OUTER_ARMOR, new MurkEntityModel(context.bakeLayer(ModelLayers.BOGGED)));
+		//this.addLayer(new SkeletonClothingLayer<>(this, context.getModelSet(), ModelLayers.BOGGED_OUTER_LAYER, BOGGED_OUTER_LAYER_LOCATION));
+
+		/^
+		super(context, new MurkEntityModel(context.bakeLayer(ModelLayers.BOGGED)), 0.5F);
+		this.addLayer(new HumanoidArmorLayer<>(this, new SkeletonModel(context.bakeLayer(ModelLayers.SKELETON_INNER_ARMOR)), new SkeletonModel(context.bakeLayer(ModelLayers.SKELETON_OUTER_ARMOR)), context.getModelManager()));^/
 	}
 
 	@Override
