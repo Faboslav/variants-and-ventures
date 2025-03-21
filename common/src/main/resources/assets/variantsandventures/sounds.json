@@ -101,7 +101,7 @@
 		"sounds": [
 			"variantsandventures:entity/murk/shear"
 		],
-		"subtitle": "subtitles.item.shear"
+		"subtitle": "subtitles.entity.variantsandventures.murk.shear"
 	},
 	"entity.murk.step": {
 		"sounds": [
