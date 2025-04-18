@@ -1,3 +1,8 @@
+## 1.0.12
+
+- Fixed not working config
+- Fixed main menu blur (on 1.21.4)
+
 ## 1.0.11
 
 - Fixed mod crash related to latest YACL

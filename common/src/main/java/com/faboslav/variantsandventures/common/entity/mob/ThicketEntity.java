@@ -58,7 +58,7 @@ public final class ThicketEntity extends Zombie
 
 	@Override
 	public void tick() {
-		if (!VariantsAndVentures.getConfig().modMobs.enableThicket) {
+		if (!VariantsAndVentures.getConfig().getModMobsConfig().enableThicket) {
 			this.discard();
 		}
 

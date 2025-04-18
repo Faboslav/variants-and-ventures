@@ -12,9 +12,9 @@ public final class BoggedOnEntitySpawn
 			event,
 			EntityType.SKELETON,
 			EntityType.BOGGED,
-			VariantsAndVentures.getConfig().vanillaMobs.enableBetterBoggedSpawns,
-			VariantsAndVentures.getConfig().vanillaMobs.boggedSpawnChance,
-			VariantsAndVentures.getConfig().vanillaMobs.boggedMinimumYLevel,
+			VariantsAndVentures.getConfig().getVanillaMobsConfig().enableBetterBoggedSpawns,
+			VariantsAndVentures.getConfig().getVanillaMobsConfig().boggedSpawnChance,
+			VariantsAndVentures.getConfig().getVanillaMobsConfig().boggedMinimumYLevel,
 			VariantsAndVenturesTags.HAS_BOGGED
 		);
 	}

@@ -146,4 +146,8 @@ public final class ModMobsConfig
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
 	public boolean enableVerdantSpawnersInTrialChambers = true;
+
+	public void load() {
+		HANDLER.load();
+	}
 }

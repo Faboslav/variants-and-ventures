@@ -100,4 +100,8 @@ public final class VanillaMobsConfig
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
 	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
 	public double boggedSpawnerChance = 80;
+
+	public void load() {
+		HANDLER.load();
+	}
 }

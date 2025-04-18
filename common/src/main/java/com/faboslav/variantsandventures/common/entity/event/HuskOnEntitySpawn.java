@@ -12,9 +12,9 @@ public final class HuskOnEntitySpawn
 			event,
 			EntityType.ZOMBIE,
 			EntityType.HUSK,
-			VariantsAndVentures.getConfig().vanillaMobs.enableBetterHuskSpawns,
-			VariantsAndVentures.getConfig().vanillaMobs.huskSpawnChance,
-			VariantsAndVentures.getConfig().vanillaMobs.huskMinimumYLevel,
+			VariantsAndVentures.getConfig().getVanillaMobsConfig().enableBetterHuskSpawns,
+			VariantsAndVentures.getConfig().getVanillaMobsConfig().huskSpawnChance,
+			VariantsAndVentures.getConfig().getVanillaMobsConfig().huskMinimumYLevel,
 			VariantsAndVenturesTags.HAS_HUSK
 		);
 	}

@@ -12,9 +12,9 @@ public final class GelidOnEntitySpawn
 			event,
 			EntityType.ZOMBIE,
 			VariantsAndVenturesEntityTypes.GELID.get(),
-			VariantsAndVentures.getConfig().modMobs.enableGelid || VariantsAndVentures.getConfig().modMobs.enableGelidSpawns,
-			VariantsAndVentures.getConfig().modMobs.gelidSpawnChance,
-			VariantsAndVentures.getConfig().modMobs.gelidMinimumYLevel,
+			VariantsAndVentures.getConfig().getModMobsConfig().enableGelid || VariantsAndVentures.getConfig().getModMobsConfig().enableGelidSpawns,
+			VariantsAndVentures.getConfig().getModMobsConfig().gelidSpawnChance,
+			VariantsAndVentures.getConfig().getModMobsConfig().gelidMinimumYLevel,
 			VariantsAndVenturesTags.HAS_GELID
 		);
 	}
