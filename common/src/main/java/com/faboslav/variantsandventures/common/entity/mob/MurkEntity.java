@@ -5,6 +5,7 @@ import com.faboslav.variantsandventures.common.entity.ai.goal.LeaveWaterGoal;
 import com.faboslav.variantsandventures.common.entity.ai.goal.TargetAboveWaterGoal;
 import com.faboslav.variantsandventures.common.entity.ai.goal.WanderAroundOnSurfaceGoal;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
+import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import com.faboslav.variantsandventures.common.versions.VersionedInteractionResult;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
@@ -126,7 +127,7 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 		RandomSource random
 	) {
 		if(
-			spawnReason == EntitySpawnReason.NATURAL
+			spawnReason == VersionedEntitySpawnReason.NATURAL
 		) {
 			return world.getFluidState(pos.below()).is(FluidTags.WATER)
 				   && isValidSpawnDepth(world, pos)
