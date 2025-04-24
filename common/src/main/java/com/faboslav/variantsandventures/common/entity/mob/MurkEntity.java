@@ -125,9 +125,15 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 		BlockPos pos,
 		RandomSource random
 	) {
-		return world.getFluidState(pos.below()).is(FluidTags.WATER)
-			   && isValidSpawnDepth(world, pos)
-			   && random.nextInt(40) == 0;
+		if(
+			spawnReason == EntitySpawnReason.NATURAL
+		) {
+			return world.getFluidState(pos.below()).is(FluidTags.WATER)
+				   && isValidSpawnDepth(world, pos)
+				   && random.nextInt(40) == 0;
+		}
+
+		return true;
 	}
 
 	private static boolean isValidSpawnDepth(LevelAccessor world, BlockPos pos) {

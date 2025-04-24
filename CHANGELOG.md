@@ -1,3 +1,7 @@
+## 1.0.13
+
+- Fixed Murk spawns in trial chambers
+
 ## 1.0.12
 
 - Fixed not working config
