@@ -1,6 +1,6 @@
 ## 1.0.14
 
-- Fixed Murk spawns in trial chambers
+- Fixed vanilla advancements
 
 ## 1.0.13
 
