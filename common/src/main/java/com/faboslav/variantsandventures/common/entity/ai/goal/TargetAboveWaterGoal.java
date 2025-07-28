@@ -19,7 +19,12 @@ public class TargetAboveWaterGoal extends Goal
 	}
 
 	public boolean canUse() {
-		return !this.murk.level().isDay() && this.murk.isInWater() && this.murk.getY() < (double) (this.minY - 2);
+		//? if >=1.21.5 {
+		var isDay = this.murk.level().isBrightOutside();
+		//?} else {
+		/*var isDay = this.murk.level().isDay();
+		*///?}
+		return !isDay && this.murk.isInWater() && this.murk.getY() < (double) (this.minY - 2);
 	}
 
 	public boolean canContinueToUse() {

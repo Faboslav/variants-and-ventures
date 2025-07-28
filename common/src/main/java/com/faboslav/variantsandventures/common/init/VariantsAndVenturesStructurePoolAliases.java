@@ -4,11 +4,18 @@ import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.mixin.JigsawStructureAccessor;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.random.SimpleWeightedRandomList;
-import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
-import net.minecraft.world.level.levelgen.structure.pools.alias.Random;
-import net.minecraft.world.level.levelgen.structure.pools.alias.RandomGroup;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
+
+//? >=1.21.5 {
+import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
+import net.minecraft.world.level.levelgen.structure.pools.alias.RandomGroupPoolAlias;
+import net.minecraft.world.level.levelgen.structure.pools.alias.RandomPoolAlias;
+//?} else {
+/*import net.minecraft.world.level.levelgen.structure.pools.alias.Random;
+import net.minecraft.world.level.levelgen.structure.pools.alias.RandomGroup;
+import net.minecraft.util.random.SimpleWeightedRandomList;
+*///?}
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,16 +42,30 @@ public final class VariantsAndVenturesStructurePoolAliases
 		List<PoolAliasBinding> newPoolAliasBindings = new ArrayList<>();
 
 		for (PoolAliasBinding originalPoolAliasBinding : originalPoolAliasBindings) {
-			if (originalPoolAliasBinding instanceof RandomGroup randomGroupStructurePoolAliasBinding) {
-				RandomGroup newRandomGroupStructurePoolAliasBinding;
+			//? >=1.21.5 {
+			if (originalPoolAliasBinding instanceof RandomGroupPoolAlias randomGroupStructurePoolAliasBinding)
+			//?} else {
+			/*if (originalPoolAliasBinding instanceof RandomGroup randomGroupStructurePoolAliasBinding)
+			*///?}
+			{
+				//? >=1.21.5 {
+				RandomGroupPoolAlias newRandomGroupStructurePoolAliasBinding;
+				var dataPoolBuilder = WeightedList.<List<PoolAliasBinding>>builder();
+				//?} else {
+				/*RandomGroup newRandomGroupStructurePoolAliasBinding;
 				var dataPoolBuilder = SimpleWeightedRandomList.<List<PoolAliasBinding>>builder();
+				*///?}
 				var groups = randomGroupStructurePoolAliasBinding.groups().unwrap();
 
 				for (var group : groups) {
-					dataPoolBuilder.add(group.data());
+					//? >=1.21.5 {
+					dataPoolBuilder.add(group.value());
+					//?} else {
+					/*dataPoolBuilder.add(group.data());
+					 *///?}
 				}
 
-				if(config.getModMobsConfig().enableMurkSpawnersInTrialChambers) {
+				if (config.getModMobsConfig().enableMurkSpawnersInTrialChambers) {
 					dataPoolBuilder.add(List.of(
 						PoolAliasBinding.direct(
 							"trial_chambers/spawner/contents/ranged",
@@ -57,7 +78,7 @@ public final class VariantsAndVenturesStructurePoolAliases
 					));
 				}
 
-				if(config.getModMobsConfig().enableVerdantSpawnersInTrialChambers) {
+				if (config.getModMobsConfig().enableVerdantSpawnersInTrialChambers) {
 					dataPoolBuilder.add(List.of(
 						PoolAliasBinding.direct(
 							"trial_chambers/spawner/contents/ranged",
@@ -75,13 +96,27 @@ public final class VariantsAndVenturesStructurePoolAliases
 				);
 
 				newPoolAliasBindings.add(newRandomGroupStructurePoolAliasBinding);
-			} else if (originalPoolAliasBinding instanceof Random randomStructurePoolAliasBinding) {
-				Random newRandomStructurePoolAliasBinding;
+			}
+			//? >=1.21.5 {
+			else if (originalPoolAliasBinding instanceof RandomPoolAlias randomStructurePoolAliasBinding)
+			//?} else {
+			/*else if (originalPoolAliasBinding instanceof Random randomStructurePoolAliasBinding)
+			*///?}
+			{
+				//? >=1.21.5 {
+				RandomPoolAlias newRandomStructurePoolAliasBinding;
+				//?} else {
+				/*Random newRandomStructurePoolAliasBinding;
+				*///?}
 				var alias = randomStructurePoolAliasBinding.alias().location().getPath();
 				var registryKeys = randomStructurePoolAliasBinding.allTargets().toList();
 
 				if (Objects.equals(alias, "trial_chambers/spawner/contents/melee")) {
-					var dataPoolBuilder = SimpleWeightedRandomList.<String>builder();
+					//? >=1.21.5 {
+					var dataPoolBuilder = WeightedList.<String>builder();
+					//?} else {
+					/*var dataPoolBuilder = SimpleWeightedRandomList.<String>builder();
+					*///?}
 
 					registryKeys.forEach(registryKey -> {
 						var value = registryKey.location().getPath();

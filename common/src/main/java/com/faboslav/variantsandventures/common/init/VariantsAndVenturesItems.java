@@ -1,10 +1,10 @@
 package com.faboslav.variantsandventures.common.init;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
-import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
-import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
 import com.faboslav.variantsandventures.common.mixin.SpawnEggItemAccessor;
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
+import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
+import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -38,15 +38,15 @@ public final class VariantsAndVenturesItems
 		int secondaryColorIn
 	) {
 		return ITEMS.register(id, () -> {
-			/*? =1.21.4 {*/
+			//? >=1.21.4 {
 			var spawnEgg = new SpawnEggItem(typeIn.get(), new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
-			/*?}*/
-			/*? =1.21.3 {*/
-			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
-			*//*?}*/
-			/*? <=1.21.1 {*/
+			 /*?}*/
+			//? =1.21.3 {
+			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeId(id))));
+			 *///?}
+			//? <=1.21.1 {
 			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
-			*//*?}*/
+			*///?}
 			var spawnEggMap = SpawnEggItemAccessor.variantsandventures$getSpawnEggs();
 			spawnEggMap.put(typeIn.get(), spawnEgg);
 

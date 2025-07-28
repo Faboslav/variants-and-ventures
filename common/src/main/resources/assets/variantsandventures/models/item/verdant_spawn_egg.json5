@@ -1,0 +1,7 @@
+{
+	//? >=1.21.5 {
+	"parent": "variantsandventures:item/template_spawn_egg"
+	//?} else {
+	/*"parent": "item/template_spawn_egg",
+	*///?}
+}

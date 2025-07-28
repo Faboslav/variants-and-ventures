@@ -39,4 +39,4 @@ mod, incorporate snippets into your own. Get inspired, but please don't just cop
 
 [Ko-fi]: https://ko-fi.com/faboslav
 
-[CC BY-NC-ND 4.0]: https://github.com/Faboslav/friends-and-foes/blob/master/LICENSE.txt
+[CC BY-NC-ND 4.0]: https://github.com/Faboslav/variants-and-ventures/blob/master/LICENSE.txt

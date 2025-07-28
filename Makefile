@@ -4,26 +4,14 @@ help: ## Prints help for targets with comments
 build-project: ## Builds project
 	./gradlew build
 
-build-chiseled: ## Builds project
-	./gradlew chiseledBuild
-
 refresh: ## Refresh dependencies
 	./gradlew --refresh-dependencies
-
-clean-cache: ## Cleans cache
-	./gradlew --stop
-	rm -rf $GRADLE_HOME/caches/transforms-*
-	rm -rf $GRADLE_HOME/caches/build-cache-*
-	./gradlew clean
-
-stop: ## Stops all deamons
-	./gradlew --stop
 
 gen-sources: ## Generate sources
 	./gradlew genSources
 
 run-fabric-client: ## Runs fabric client
-	./gradlew neoforge:1.21.4:runClient
+	./gradlew fabric:1.21.4:runClient
 
 run-forge-client: ## Runs forge client
 	./gradlew forge:runClient
@@ -32,10 +20,19 @@ run-neoforge-client: ## Runs neoforge client
 	./gradlew neoforge:runClient
 
 run-fabric-server: ## Runs fabric server
-	./gradlew fabric:runServer
+	./gradlew fabric:1.21.4:runServer
 
 run-forge-server: ## Runs forge server
 	./gradlew forge:runServer
 
 run-neoforge-server: ## Runs neoforge server
-	./gradlew neoforge:runServer
+	./gradlew neoforge:1.21.4:runServer
+
+run-data: ## Runs datagen
+	./gradlew runData
+
+nuke: ## Nuke the project
+	./gradlew --stop
+	rm -rf $GRADLE_HOME/caches/transforms-*
+	rm -rf $GRADLE_HOME/caches/build-cache-*
+	find . -type d \( -name ".idea" -o -name ".kotlin" -o -name ".gradle" -o -name "build" -o -name "run" \) -exec rm -rf {} +

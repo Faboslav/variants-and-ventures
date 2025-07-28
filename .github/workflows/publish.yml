@@ -11,14 +11,14 @@ on:
             versions:
                 description: 'List of versions to be published'
                 required: true
-                default: "['1.21.1', '1.21.3', '1.21.4']"
+                default: "['1.21.1', '1.21.4', '1.21.5', '1.21.6']"
                 type: string
 
 jobs:
     build:
         name: "Build project"
         runs-on: ubuntu-latest
-        timeout-minutes: 15
+        timeout-minutes: 30
         outputs:
             matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -35,18 +35,17 @@ jobs:
                     distribution: temurin
 
             -   name: "Setup gradle"
-                uses: gradle/actions/setup-gradle@v3
+                uses: gradle/actions/setup-gradle@v4
                 with:
                     cache-read-only: false
-                    generate-job-summary: false
                     gradle-version: wrapper
 
-            - name: "Run chiseled build"
-              run: ./gradlew chiseledBuild
+            - name: "Run build"
+              run: ./gradlew build
 
             -   name: "Generate matrix for the run job"
                 id: set-matrix
-                run: ./.github/scripts/generate-publish-matrix.sh "${{ inputs.mod_loaders }}" "${{ inputs.versions }}"
+                run: ./.github/scripts/generate-publish-matrix.sh "${{ inputs.mod_loaders }}" "${{ inputs.versions }}" ${{ vars.CURSEFORGE_FABRIC_PROJECT_ID }} ${{ vars.CURSEFORGE_FORGE_PROJECT_ID }} ${{ vars.MODRINTH_FABRIC_PROJECT_ID }} ${{ vars.MODRINTH_FORGE_PROJECT_ID }}
 
     publish:
         runs-on: ubuntu-latest
@@ -59,71 +58,70 @@ jobs:
             matrix: ${{ fromJson(needs.build.outputs.matrix) }}
 
         steps:
-        -   name: "Checkout repository"
-            uses: actions/checkout@v4
-            with:
-                fetch-depth: 0
+            -   name: "Checkout repository"
+                uses: actions/checkout@v4
+                with:
+                    fetch-depth: 0
 
-        -   name: "Parse gradle properties"
-            id: gradle-properties
-            run: ./.github/scripts/parse-gradle-properties.sh ${{ matrix.version }}
+            -   name: "Parse gradle properties"
+                id: gradle-properties
+                run: ./.github/scripts/parse-gradle-properties.sh ${{ matrix.version }}
 
-        -   name: "Parse changelog"
-            run: ./.github/scripts/parse-changelog.sh ${{ steps.gradle-properties.outputs.MOD_VERSION }}
+            -   name: "Parse changelog"
+                run: ./.github/scripts/parse-changelog.sh ${{ steps.gradle-properties.outputs.MOD_VERSION }}
 
-        -   name: "Create github release"
-            continue-on-error: true
-            uses: ncipollo/release-action@v1
-            with:
-                skipIfReleaseExists: true
-                allowUpdates: true
-                omitNameDuringUpdate: true
-                omitBodyDuringUpdate: true
-                tag: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }} for Minecraft ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
-                bodyFile: RELEASE_CHANGELOG.md
+            -   name: "Create github release"
+                continue-on-error: true
+                uses: ncipollo/release-action@v1
+                with:
+                    skipIfReleaseExists: true
+                    allowUpdates: true
+                    omitNameDuringUpdate: true
+                    omitBodyDuringUpdate: true
+                    tag: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }} for Minecraft ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
+                    bodyFile: RELEASE_CHANGELOG.md
 
-        -   name: "Set up JDK"
-            uses: actions/setup-java@v4
-            with:
-                java-version: 21
-                distribution: temurin
+            -   name: "Set up JDK"
+                uses: actions/setup-java@v4
+                with:
+                    java-version: 21
+                    distribution: temurin
 
-        -   name: "Setup Gradle"
-            uses: gradle/actions/setup-gradle@v3
-            with:
-                generate-job-summary: false
-                cache-read-only: true
-                gradle-version: wrapper
+            -   name: "Setup Gradle"
+                uses: gradle/actions/setup-gradle@v4
+                with:
+                    cache-read-only: true
+                    gradle-version: wrapper
 
-        -   name: "Switch active versions"
-            run: ./gradlew "Set active project to ${{ matrix.version }}"
+            -   name: "Switch active versions"
+                run: ./gradlew "Set active project to ${{ matrix.version }}"
 
-        -   name: "Run build"
-            run: ./gradlew ${{ matrix.mod_loader }}:${{ matrix.version }}:build
+            -   name: "Run build"
+                run: ./gradlew ${{ matrix.mod_loader }}:${{ matrix.version }}:build
 
-        -   name: Publish ${{ matrix.mod_loader }}
-            uses: Kir-Antipov/mc-publish@v3.3.0
-            with:
-                github-token: ${{ secrets.GITHUB_TOKEN }}
-                github-tag: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                github-commitish: ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
+            -   name: Publish ${{ matrix.mod_loader }}
+                uses: Kir-Antipov/mc-publish@v3.3.0
+                with:
+                    github-token: ${{ secrets.GITHUB_TOKEN }}
+                    github-tag: mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    github-commitish: ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
 
-                curseforge-id: ${{ vars.CURSEFORGE_PROJECT_ID }}
-                curseforge-token: ${{ secrets.CURSEFORGE_RELEASE_TOKEN }}
+                    curseforge-id: ${{ matrix.curseforge_project_id }}
+                    curseforge-token: ${{ secrets.CURSEFORGE_RELEASE_TOKEN }}
 
-                modrinth-id: ${{ vars.MODRINTH_PROJECT_ID }}
-                modrinth-featured: true
-                modrinth-token: ${{ secrets.MODRINTH_RELEASE_TOKEN}}
+                    modrinth-featured: true
+                    modrinth-id: ${{ matrix.modrinth_project_id }}
+                    modrinth-token: ${{ secrets.MODRINTH_RELEASE_TOKEN }}
 
-                name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                version: ${{ matrix.mod_loader }}-mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}
-                loaders: ${{ join(matrix.supported_mod_loaders, ' ') }}
-                game-versions: |
-                    ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
-                changelog-file: RELEASE_CHANGELOG.md
-                files: |
-                    ${{ matrix.mod_loader }}/versions/${{ matrix.version }}/build/libs/!(*-@(dev|dev-shadow|sources|javadoc)).jar
+                    name: ${{ steps.gradle-properties.outputs.MOD_NAME }} ${{ steps.gradle-properties.outputs.MOD_VERSION }}
+                    version: ${{ matrix.mod_loader }}-${{ steps.gradle-properties.outputs.MOD_VERSION }}+mc${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
+                    loaders: ${{ join(matrix.supported_mod_loaders, ' ') }}
+                    game-versions: |
+                        ${{ steps.gradle-properties.outputs.MINECRAFT_VERSION }}
+                    changelog-file: RELEASE_CHANGELOG.md
+                    files: |
+                        ${{ matrix.mod_loader }}/versions/${{ matrix.version }}/build/libs/!(*-@(dev|dev-shadow|sources|javadoc)).jar
 
     clear-cache:
         needs: publish

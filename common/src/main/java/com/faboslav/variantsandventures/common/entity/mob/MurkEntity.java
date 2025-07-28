@@ -7,10 +7,10 @@ import com.faboslav.variantsandventures.common.entity.ai.goal.WanderAroundOnSurf
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
 import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import com.faboslav.variantsandventures.common.versions.VersionedInteractionResult;
+import com.faboslav.variantsandventures.common.versions.VersionedNbt;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -52,6 +52,13 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
+
+//? >=1.21.6 {
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+//?} else {
+/*import net.minecraft.nbt.CompoundTag;
+*///?}
 
 /*? >=1.21.3 {*/
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -170,7 +177,12 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag nbt) {
+	//? >= 1.21.6 {
+	public void addAdditionalSaveData(ValueOutput nbt)
+	//?} else {
+	/*public void addAdditionalSaveData(CompoundTag nbt)
+	*///?}
+	{
 		super.addAdditionalSaveData(nbt);
 		nbt.putInt(VARIANT_NBT_KEY, this.getVariant().getId());
 		nbt.putBoolean(SHEARED_NBT_KEY, this.isSheared());
@@ -178,10 +190,15 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag nbt) {
+	//? >= 1.21.6 {
+	public void readAdditionalSaveData(ValueInput nbt)
+	//?} else {
+	/*public void readAdditionalSaveData(CompoundTag nbt)
+	*///?}
+	{
 		super.readAdditionalSaveData(nbt);
-		this.setVariant(Variant.VARIANTS[nbt.getInt(VARIANT_NBT_KEY)]);
-		this.setSheared(nbt.getBoolean(SHEARED_NBT_KEY));
+		this.setVariant(Variant.VARIANTS[VersionedNbt.getInt(nbt, VARIANT_NBT_KEY, Variant.PURPLE.ordinal())]);
+		this.setSheared(VersionedNbt.getBoolean(nbt, SHEARED_NBT_KEY, false));
 	}
 
 	@Override
@@ -405,7 +422,13 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 
 	public boolean canAttackTarget(@Nullable LivingEntity target) {
 		if (target != null) {
-			return !this.level().isDay() || target.isInWater();
+			//? if >=1.21.5 {
+			var isDay = this.level().isBrightOutside();
+			//?} else {
+			/*var isDay = this.level().isDay();
+			*///?}
+
+			return !isDay || target.isInWater();
 		} else {
 			return false;
 		}

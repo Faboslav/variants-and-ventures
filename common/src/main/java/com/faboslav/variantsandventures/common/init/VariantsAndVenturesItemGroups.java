@@ -2,9 +2,9 @@ package com.faboslav.variantsandventures.common.init;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
-import com.faboslav.variantsandventures.common.init.registry.RegistryEntry;
-import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistries;
-import com.faboslav.variantsandventures.common.init.registry.ResourcefulRegistry;
+import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
+import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
+import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;

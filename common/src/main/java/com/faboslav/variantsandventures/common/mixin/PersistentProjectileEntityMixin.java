@@ -3,6 +3,7 @@ package com.faboslav.variantsandventures.common.mixin;
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -14,7 +15,12 @@ public abstract class PersistentProjectileEntityMixin
 		at = @At("RETURN")
 	)
 	protected float variantsandventures$getWaterInertia(float originalWaterInertia) {
-		if (((ProjectileEntityAccessor) this).getOwner() instanceof MurkEntity) {
+		//? >=1.21.6 {
+		var owner = ((Projectile) (Object) this).getOwner();
+		//?} else {
+		/*var owner = ((ProjectileEntityAccessor) this).getOwner();
+		*///?}
+		if (owner instanceof MurkEntity) {
 			return 0.99F;
 		}
 

@@ -1,6 +1,7 @@
 package com.faboslav.variantsandventures.common.entity.event;
 
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
+import com.faboslav.variantsandventures.common.mixin.MobAccessor;
 import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
@@ -56,13 +57,11 @@ public final class OnEntitySpawn
 				return false;
 			}
 
-			entityToSpawn.moveTo(
-				entity.getX(),
-				entity.getY(),
-				entity.getZ(),
-				entityToSpawn.getRandom().nextFloat() * 360.0F,
-				0.0F
-			);
+			//? if >=1.21.5 {
+			entityToSpawn.snapTo(entity.getX(), entity.getY(), entity.getZ(), entityToSpawn.getRandom().nextFloat() * 360.0F, 0.0F);
+			//?} else {
+			/*entityToSpawn.moveTo(entity.getX(), entity.getY(), entity.getZ(), entityToSpawn.getRandom().nextFloat() * 360.0F, 0.0F);
+			*///?}
 
 			entityToSpawn.copyPosition(entity);
 			entityToSpawn.yBodyRotO = entity.yBodyRotO;
@@ -88,7 +87,14 @@ public final class OnEntitySpawn
 				ItemStack itemStack = entity.getItemBySlot(equipmentSlot);
 				if (!itemStack.isEmpty()) {
 					entityToSpawn.setItemSlot(equipmentSlot, itemStack.copyAndClear());
-					entityToSpawn.setDropChance(equipmentSlot, entity.getEquipmentDropChance(equipmentSlot));
+					float dropChance;
+
+					//? >= 1.21.5 {
+					dropChance = entity.getDropChances().byEquipment(equipmentSlot);
+					//?} else {
+					/*dropChance = ((MobAccessor) entity).variantsandventures$getEquipmentDropChance(equipmentSlot);
+					*///?}
+					entityToSpawn.setDropChance(equipmentSlot, dropChance);
 				}
 			}
 
