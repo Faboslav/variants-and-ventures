@@ -1,0 +1,20 @@
+accessWidener v2 named
+
+accessible class net/minecraft/world/entity/monster/AbstractSkeleton
+accessible field net/minecraft/world/item/CreativeModeTabs BUILDING_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs COLORED_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs COMBAT Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs FOOD_AND_DRINKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs FUNCTIONAL_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs HOTBAR Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs INGREDIENTS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs INVENTORY Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs NATURAL_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs OP_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs REDSTONE_BLOCKS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs SEARCH Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs SPAWN_EGGS Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/item/CreativeModeTabs TOOLS_AND_UTILITIES Lnet/minecraft/resources/ResourceKey;
+accessible field net/minecraft/world/level/levelgen/structure/structures/JigsawStructure poolAliases Ljava/util/List;
+accessible method net/minecraft/world/entity/monster/AbstractSkeleton getStepSound ()Lnet/minecraft/sounds/SoundEvent;
+mutable field net/minecraft/world/level/levelgen/structure/structures/JigsawStructure poolAliases Ljava/util/List;

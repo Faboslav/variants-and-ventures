@@ -3,8 +3,6 @@ package com.faboslav.variantsandventures.common.client.render.entity.feature;
 /*? >=1.21.3 {*/
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.DrownedModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -14,7 +12,6 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.ZombieRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
 public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, DrownedModel>
 {
 	private static final ResourceLocation OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid_overlay.png");
@@ -36,8 +33,6 @@ public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, 
 /*import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.DrownedModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -46,7 +41,6 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
 public class GelidOverlayFeatureRenderer<T extends GelidEntity> extends RenderLayer<T, DrownedModel<T>>
 {
 	private static final ResourceLocation OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid_overlay.png");

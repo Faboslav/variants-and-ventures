@@ -6,8 +6,6 @@ import com.faboslav.variantsandventures.common.client.render.entity.feature.Geli
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.DrownedModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.AbstractZombieRenderer;
@@ -17,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
-@Environment(EnvType.CLIENT)
 public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, ZombieRenderState, DrownedModel>
 {
 	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
@@ -54,8 +51,6 @@ import com.faboslav.variantsandventures.common.client.render.entity.feature.Geli
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.DrownedModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.AbstractZombieRenderer;
@@ -63,7 +58,6 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-@Environment(EnvType.CLIENT)
 public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, DrownedModel<GelidEntity>>
 {
 	public static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");

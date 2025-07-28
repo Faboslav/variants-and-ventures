@@ -5,14 +5,11 @@ import com.faboslav.variantsandventures.common.client.render.entity.MurkEntityRe
 import com.faboslav.variantsandventures.common.client.render.entity.ThicketEntityRenderer;
 import com.faboslav.variantsandventures.common.client.render.entity.VerdantEntityRenderer;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 
 /**
  * @see EntityRenderers
  */
-@Environment(EnvType.CLIENT)
 public final class VariantsAndVenturesEntityRenderers
 {
 	public static void init(RegisterEntityRenderersEvent event) {

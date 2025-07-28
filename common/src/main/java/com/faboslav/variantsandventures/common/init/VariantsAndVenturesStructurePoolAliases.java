@@ -4,13 +4,13 @@ import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.mixin.JigsawStructureAccessor;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
+import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
 
 //? >=1.21.5 {
-import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
 import net.minecraft.world.level.levelgen.structure.pools.alias.RandomGroupPoolAlias;
 import net.minecraft.world.level.levelgen.structure.pools.alias.RandomPoolAlias;
+import net.minecraft.util.random.WeightedList;
 //?} else {
 /*import net.minecraft.world.level.levelgen.structure.pools.alias.Random;
 import net.minecraft.world.level.levelgen.structure.pools.alias.RandomGroup;

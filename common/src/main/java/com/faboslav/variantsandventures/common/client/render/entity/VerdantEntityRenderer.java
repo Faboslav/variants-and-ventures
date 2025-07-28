@@ -3,15 +3,12 @@ package com.faboslav.variantsandventures.common.client.render.entity;
 /*? >=1.21.3 {*/
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
 public final class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntity, SkeletonRenderState>
 {
 	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
@@ -31,8 +28,6 @@ public final class VerdantEntityRenderer extends AbstractSkeletonRenderer<Verdan
 /*?} else {*/
 /*import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -40,7 +35,6 @@ import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 
-@Environment(EnvType.CLIENT)
 public final class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, SkeletonModel<VerdantEntity>>
 {
 	public static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");

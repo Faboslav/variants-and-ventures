@@ -35,8 +35,7 @@ dependencies {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${mod.id}.accesswidener")
-	//accessWidenerPath = project(":common:${stonecutter.current.project}").loom.accessWidenerPath
+	accessWidenerPath = common.project.file("../../src/main/resources/versions/${commonMod.mc}/${mod.id}.accesswidener")
 
 	runs {
 		getByName("client") {
@@ -53,5 +52,11 @@ loom {
 
 	mixin {
 		defaultRefmapName = "${mod.id}.refmap.json"
+	}
+}
+
+tasks {
+	processResources {
+		exclude("META-INF/accesstransformer.cfg")
 	}
 }

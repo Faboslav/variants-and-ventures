@@ -2,13 +2,24 @@ plugins {
 	id("multiloader-common")
 	id("fabric-loom")
 	id("dev.kikugie.j52j") version "2.0"
+	id("accessconverter")
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/${mod.id}.accesswidener")
+	accessWidenerPath = common.project.file("../../src/main/resources/versions/${commonMod.mc}/${mod.id}.accesswidener")
 
 	mixin {
 		useLegacyMixinAp = false
+	}
+}
+
+accessConverter {
+	mcVersion(commonMod.mc)
+
+	convertAW {
+		this.sortInput(true)
+		this.fileToConvert(common.project.file("../../src/main/resources/versions/${commonMod.mc}/${mod.id}.accesswidener"))
+		this.fileOutput(common.project.file("../../src/main/resources/versions/${commonMod.mc}/accesstransformer.cfg"))
 	}
 }
 

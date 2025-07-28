@@ -2,15 +2,12 @@ package com.faboslav.variantsandventures.common.client.model;
 
 /*? >=1.21.3 {*/
 import com.faboslav.variantsandventures.common.client.render.entity.state.MurkEntityRenderState;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-@Environment(EnvType.CLIENT)
 public class MurkEntityModel extends SkeletonModel<MurkEntityRenderState>
 {
 	private final ModelPart corals;
@@ -41,15 +38,12 @@ public class MurkEntityModel extends SkeletonModel<MurkEntityRenderState>
 }
 /*?} else {*/
 /*import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 
-@Environment(EnvType.CLIENT)
 public class MurkEntityModel extends SkeletonModel<MurkEntity>
 {
 	private final ModelPart corals;

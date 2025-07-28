@@ -7,8 +7,6 @@ import com.faboslav.variantsandventures.common.client.render.entity.state.MurkEn
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
 import com.google.common.collect.Maps;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.Util;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
@@ -17,8 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.Locale;
 import java.util.Map;
-
-@Environment(EnvType.CLIENT)
 
 public class MurkEntityRenderer extends AbstractSkeletonRenderer<MurkEntity, MurkEntityRenderState>
 {
@@ -55,8 +51,6 @@ import com.faboslav.variantsandventures.common.client.model.MurkEntityModel;
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
 import com.google.common.collect.Maps;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.Util;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -66,7 +60,6 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Locale;
 import java.util.Map;
 
-@Environment(EnvType.CLIENT)
 public class MurkEntityRenderer extends SkeletonRenderer<MurkEntity>
 {
 	public static final Map<MurkEntity.Variant, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (textures) -> {
