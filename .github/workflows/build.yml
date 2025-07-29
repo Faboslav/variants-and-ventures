@@ -54,7 +54,7 @@ jobs:
 
     generate-build-matrix:
         runs-on: ubuntu-latest
-        name: Run build
+        name: Generate build matrix
         outputs:
             matrix: ${{ steps.set-matrix.outputs.matrix }}
         steps:
