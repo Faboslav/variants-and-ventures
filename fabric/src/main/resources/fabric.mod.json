@@ -12,7 +12,7 @@
 		"sources": "https://github.com/Faboslav/variants-and-ventures",
 		"issues": "https://github.com/Faboslav/variants-and-ventures/issues",
 		"wiki": "https://github.com/Faboslav/variants-and-ventures/wiki",
-		"discord": "https://discord.com/invite/QGwFvvMQCn"
+		"discord": "https://discord.gg/faboland"
 	},
 	"license": "CC BY-NC-ND 4.0",
 	"icon": "icon.png",
@@ -40,7 +40,8 @@
 		"minecraft": ">=${minMinecraftVersion}-",
 		"fabricloader": "*",
 		"fabric": "*",
-		"yet_another_config_lib_v3": ">=${yaclVersion}"
+		"yet_another_config_lib_v3": ">=${yaclVersion}-",
+		"resourcefullib": ">=${resourcefulLibLibVersion}-"
 	},
 	"suggests": {
 		"modmenu": "*"
@@ -48,7 +49,7 @@
 	"custom": {
 		"modmenu": {
 			"links": {
-				"Discord": "https://discord.com/invite/QGwFvvMQCn",
+				"Discord": "https://discord.gg/faboland",
 				"Wiki": "https://github.com/Faboslav/variants-and-ventures/wiki",
 				"CurseForge": "https://www.curseforge.com/minecraft/mc-mods/variants-and-ventures",
 				"Modrinth": "https://modrinth.com/mod/variants-and-ventures"
@@ -66,6 +67,7 @@
 			"dependencies": [
 				"fabric-api(required){curseforge:306612}{modrinth:P7dR8mSH}",
 				"yet_another_config_lib_v3(required){curseforge:667299}{modrinth:1eAoo2KR}",
+				"resourcefullib(required){curseforge:570073}{modrinth:G1hIVOrD}",
 				"modmenu(optional){curseforge:308702}{modrinth:mOgUt4GM}"
 			]
 		}

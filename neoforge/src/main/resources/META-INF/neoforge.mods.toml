@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "*"
-license = "CC-BY-NC-ND-4.0"
+license = "${modLicense}"
 issueTrackerURL = "https://github.com/Faboslav/variants-and-ventures/issues"
 
 [[mods]]
@@ -11,13 +11,13 @@ authors = "${modAuthor}"
 description = "${modDescription}"
 logoFile = "icon.png"
 logoBlur = false
-displayURL = "https://www.curseforge.com/minecraft/mc-mods/variants-and-ventures"
+displayURL = "https://github.com/Faboslav/variants-and-ventures"
 
 [[mixins]]
-config = "variantsandventures-common.mixins.json"
+config = "${modId}-neoforge.mixins.json"
 
 [[mixins]]
-config = "variantsandventures-neoforge.mixins.json"
+config = "${modId}-common.mixins.json"
 
 [[dependencies.${ modId }]]
 modId = "neoforge"
@@ -39,10 +39,21 @@ type = "required"
 versionRange = "[${yaclVersion},)"
 ordering = "NONE"
 side = "BOTH"
-[dependencies.${modId}.mc-publish]
-	ignore=false
-	modrinth="yacl"
-	curseforge="yacl"
+[dependencies.${ modId }.mc-publish]
+ignore = false
+modrinth = "yacl"
+curseforge = "yacl"
+
+[[dependencies.${ modId }]]
+modId = "resourcefullib"
+type = "required"
+versionRange = "[${resourcefulLibLibVersion},)"
+ordering = "NONE"
+side = "BOTH"
+[dependencies.${ modId }.mc-publish]
+ignore = false
+modrinth = "resourceful-lib"
+curseforge = "resourceful-lib"
 
 [modproperties.${ modId }]
 catalogueImageIcon = "catalogue_icon.png"
