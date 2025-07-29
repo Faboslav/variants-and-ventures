@@ -35,7 +35,7 @@ dependencies {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/versions/${commonMod.mc}/${mod.id}.accesswidener")
+	accessWidenerPath = common.project.file("../../src/main/resources/accesswideners/${commonMod.mc}-${mod.id}.accesswidener")
 
 	runs {
 		getByName("client") {
@@ -55,8 +55,16 @@ loom {
 	}
 }
 
-tasks {
-	processResources {
-		exclude("META-INF/accesstransformer.cfg")
+tasks.named<ProcessResources>("processResources") {
+	exclude("accesstransformers/**", "accesswideners/**")
+
+	val awFile = project(":common").file("src/main/resources/accesswideners/${commonMod.mc}-${mod.id}.accesswidener")
+
+	if (awFile.exists()) {
+		from(awFile.parentFile) {
+			include(awFile.name)
+			rename { "${mod.id}.accesswidener" }
+			into("")
+		}
 	}
 }

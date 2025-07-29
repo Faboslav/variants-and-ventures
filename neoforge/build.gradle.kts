@@ -59,9 +59,17 @@ sourceSets.main {
 	resources.srcDir("src/generated/resources")
 }
 
-tasks {
-	processResources {
-		exclude("${mod.id}.accesswidener")
+tasks.named<ProcessResources>("processResources") {
+	exclude("accesstransformers/**", "accesswideners/**")
+
+	val awFile = project(":common").file("src/main/resources/accesstransformers/${commonMod.mc}-accesstransformer.cfg")
+
+	if (awFile.exists()) {
+		from(awFile.parentFile) {
+			include(awFile.name)
+			rename { "accesstransformer.cfg" }
+			into("META-INF")
+		}
 	}
 }
 

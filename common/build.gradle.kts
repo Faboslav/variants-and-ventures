@@ -6,7 +6,7 @@ plugins {
 }
 
 loom {
-	accessWidenerPath = common.project.file("../../src/main/resources/versions/${commonMod.mc}/${mod.id}.accesswidener")
+	accessWidenerPath = common.project.file("../../src/main/resources/accesswideners/${commonMod.mc}-${mod.id}.accesswidener")
 
 	mixin {
 		useLegacyMixinAp = false
@@ -18,8 +18,8 @@ accessConverter {
 
 	convertAW {
 		this.sortInput(true)
-		this.fileToConvert(common.project.file("../../src/main/resources/versions/${commonMod.mc}/${mod.id}.accesswidener"))
-		this.fileOutput(common.project.file("../../src/main/resources/versions/${commonMod.mc}/accesstransformer.cfg"))
+		this.fileToConvert(common.project.file("../../src/main/resources/accesswideners/${commonMod.mc}-${mod.id}.accesswidener"))
+		this.fileOutput(common.project.file("../../src/main/resources/accesstransformers/${commonMod.mc}-accesstransformer.cfg"))
 	}
 }
 
