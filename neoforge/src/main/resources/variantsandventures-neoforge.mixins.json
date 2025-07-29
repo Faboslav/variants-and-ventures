@@ -1,7 +1,8 @@
 {
 	"required": true,
 	"package": "com.faboslav.variantsandventures.neoforge.mixin",
-	"compatibilityLevel": "JAVA_17",
+	"refmap": "${modId}.refmap.json",
+	"compatibilityLevel": "JAVA_${javaVersion}",
 	"minVersion": "0.8",
 	"injectors": {
 		"defaultRequire": 1

@@ -1,22 +1,23 @@
 {
-  "required": true,
-  "package": "com.faboslav.variantsandventures.common.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "minVersion": "0.8",
-  "plugin": "com.faboslav.variantsandventures.common.mixin.plugin.VariantsAndVenturesMixinPlugin",
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "mixins": [
-    "DungeonFeatureMixin",
-    "JigsawStructureAccessor",
-    "MobAccessor",
-    "PersistentProjectileEntityMixin",
-    "ProjectileEntityAccessor",
-    "ProjectileEntityMixin",
-    "SpawnEggItemAccessor"
-  ],
-  "client": [
-    "IntegratedServerLoaderMixin"
+	"required": true,
+	"package": "com.faboslav.variantsandventures.common.mixin",
+	"refmap": "${modId}.refmap.json",
+	"compatibilityLevel": "JAVA_${javaVersion}",
+	"minVersion": "0.8",
+	"plugin": "com.faboslav.variantsandventures.common.mixin.plugin.VariantsAndVenturesMixinPlugin",
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"mixins": [
+		"DungeonFeatureMixin",
+		"JigsawStructureAccessor",
+		"MobAccessor",
+		"PersistentProjectileEntityMixin",
+		"ProjectileEntityAccessor",
+		"ProjectileEntityMixin",
+		"SpawnEggItemAccessor"
+	],
+	"client": [
+		"IntegratedServerLoaderMixin"
 	]
 }

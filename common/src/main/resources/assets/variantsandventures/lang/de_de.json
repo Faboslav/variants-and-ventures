@@ -1,16 +1,13 @@
 {
 	"item_group.variantsandventures.main_tab": "Variants&Ventures",
-
 	"entity.variantsandventures.gelid": "Frostzombie",
 	"entity.variantsandventures.murk": "Ozeanskelett",
 	"entity.variantsandventures.thicket": "Urwaldzombie",
 	"entity.variantsandventures.verdant": "Urwaldskelett",
-
 	"item.variantsandventures.gelid_spawn_egg": "Frostzombie-Spawn-Ei",
 	"item.variantsandventures.murk_spawn_egg": "Ozeanskelett-Spawn-Ei",
 	"item.variantsandventures.thicket_spawn_egg": "Urwaldzombie-Spawn-Ei",
 	"item.variantsandventures.verdant_spawn_egg": "Urwaldskelett-Spawn-Ei",
-
 	"subtitles.entity.variantsandventures.snowball.impact": "Schneeballtreffer",
 	"subtitles.entity.variantsandventures.gelid.ambient": "Frostzombie stöhnt",
 	"subtitles.entity.variantsandventures.gelid.attack": "Frostzombie greift an",
