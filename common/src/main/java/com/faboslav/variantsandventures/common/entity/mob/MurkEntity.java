@@ -39,7 +39,7 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.animal.axolotl.Axolotl;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -47,6 +47,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.level.pathfinder.PathType;
@@ -62,6 +63,7 @@ import net.minecraft.world.level.storage.ValueOutput;
 
 /*? >=1.21.3 {*/
 import net.minecraft.world.entity.EntitySpawnReason;
+import org.jetbrains.annotations.VisibleForTesting;
 /*?} else {*/
 /*import net.minecraft.world.entity.MobSpawnType;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -78,7 +80,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Locale;
 
-public final class MurkEntity extends AbstractSkeleton implements Shearable
+@SuppressWarnings({"deprecation", "unchecked"})
+public final class MurkEntity extends Skeleton implements Shearable
 {
 	private static final EntityDataAccessor<Integer> VARIANT;
 	private static final EntityDataAccessor<Boolean> SHEARED;
@@ -98,7 +101,7 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 	};
 	*//*?}*/
 
-	public MurkEntity(EntityType<? extends AbstractSkeleton> entityType, Level world) {
+	public MurkEntity(EntityType<? extends Skeleton> entityType, Level world) {
 		super(entityType, world);
 		this.moveControl = new MurkMoveControl(this);
 		this.setPathfindingMalus(PathType.WATER, 0.0F);
@@ -207,7 +210,7 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 	}
 
 	public static AttributeSupplier.Builder createMurkAttributes() {
-		return AbstractSkeleton.createAttributes().add(Attributes.MAX_HEALTH, 16.0);
+		return Skeleton.createAttributes().add(Attributes.MAX_HEALTH, 16.0);
 	}
 
 	@Override
@@ -233,8 +236,9 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 		return this.isInWater() ? VariantsAndVenturesSoundEvents.ENTITY_MURK_DEATH_WATER.get():VariantsAndVenturesSoundEvents.ENTITY_MURK_DEATH.get();
 	}
 
-	public SoundEvent getStepSound() {
-		return this.isInWater() ? VariantsAndVenturesSoundEvents.ENTITY_MURK_STEP.get():SoundEvents.SKELETON_STEP;
+	@Override
+	protected void playStepSound(BlockPos blockPos, BlockState blockState) {
+		this.playSound(this.isInWater() ? VariantsAndVenturesSoundEvents.ENTITY_MURK_STEP.get():SoundEvents.SKELETON_STEP, 0.15F, 1.0F);
 	}
 
 	@Override
@@ -418,6 +422,25 @@ public final class MurkEntity extends AbstractSkeleton implements Shearable
 	@Override
 	public boolean readyForShearing() {
 		return !this.isSheared() && this.isAlive();
+	}
+
+	@Override
+	public boolean isFreezeConverting() {
+		return false;
+	}
+
+	@Override
+	public boolean isShaking() {
+		return false;
+	}
+
+	@Override
+	protected void doFreezeConversion() {
+	}
+
+	@Override
+	public boolean canFreeze() {
+		return false;
 	}
 
 	public boolean canAttackTarget(@Nullable LivingEntity target) {

@@ -2,29 +2,35 @@ package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 /*? >=1.21.3 {*/
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.server.level.ServerLevel;
+import org.jetbrains.annotations.VisibleForTesting;
 /*?}*/
 
-public final class VerdantEntity extends AbstractSkeleton
+public final class VerdantEntity extends Skeleton
 {
-	public VerdantEntity(EntityType<? extends AbstractSkeleton> entityType, Level world) {
+	public VerdantEntity(EntityType<? extends Skeleton> entityType, Level world) {
 		super(entityType, world);
 	}
 
@@ -51,8 +57,9 @@ public final class VerdantEntity extends AbstractSkeleton
 		return VariantsAndVenturesSoundEvents.ENTITY_VERDANT_DEATH.get();
 	}
 
-	public SoundEvent getStepSound() {
-		return VariantsAndVenturesSoundEvents.ENTITY_VERDANT_STEP.get();
+	@Override
+	protected void playStepSound(BlockPos blockPos, BlockState blockState) {
+		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_VERDANT_STEP.get(), 0.15F, 1.0F);
 	}
 
 	@Override
@@ -110,5 +117,24 @@ public final class VerdantEntity extends AbstractSkeleton
 		}
 
 		return persistentProjectileEntity;
+	}
+
+	@Override
+	public boolean isFreezeConverting() {
+		return false;
+	}
+
+	@Override
+	public boolean isShaking() {
+		return false;
+	}
+
+	@Override
+	protected void doFreezeConversion() {
+	}
+
+	@Override
+	public boolean canFreeze() {
+		return false;
 	}
 }

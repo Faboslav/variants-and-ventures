@@ -1,3 +1,7 @@
+## 1.0.16
+
+- Fixed invalid accesstransformer
+
 ## 1.0.15
 
 - Ported to 1.21.5 and 1.21.6

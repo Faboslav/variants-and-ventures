@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.Snowball;
 
+@SuppressWarnings("deprecation")
 public final class GelidOnSnowballHitEvent
 {
 	public static void handleSnowballHit(ProjectileHitEvent event) {

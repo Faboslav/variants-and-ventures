@@ -22,6 +22,7 @@ import net.minecraft.resources.ResourceKey;
 /**
  * @see Items
  */
+@SuppressWarnings({"deprecation"})
 public final class VariantsAndVenturesItems
 {
 	public static final ResourcefulRegistry<Item> ITEMS = ResourcefulRegistries.create(BuiltInRegistries.ITEM, VariantsAndVentures.MOD_ID);

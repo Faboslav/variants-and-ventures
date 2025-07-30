@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
 import net.minecraft.resources.ResourceLocation;
 
+@SuppressWarnings({"unchecked"})
 public final class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntity, SkeletonRenderState>
 {
 	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
@@ -35,6 +36,7 @@ import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 
+@SuppressWarnings({"unchecked"})
 public final class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, SkeletonModel<VerdantEntity>>
 {
 	public static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");

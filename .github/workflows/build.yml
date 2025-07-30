@@ -19,7 +19,7 @@ jobs:
             -   name: "Checkout repository"
                 uses: actions/checkout@v4
                 with:
-                    fetch-depth: 0
+                    fetch-depth: 1
 
             -   name: "Set up JDK"
                 uses: actions/setup-java@v4
@@ -61,7 +61,7 @@ jobs:
             -   name: "Checkout repository"
                 uses: actions/checkout@v4
                 with:
-                    fetch-depth: 0
+                    fetch-depth: 1
 
             -   name: "Generate matrix for the run job"
                 id: set-matrix
@@ -81,7 +81,7 @@ jobs:
             -   name: "Checkout repository"
                 uses: actions/checkout@v4
                 with:
-                    fetch-depth: 0
+                    fetch-depth: 1
 
             -   name: "Set up JDK"
                 uses: actions/setup-java@v4
@@ -139,7 +139,7 @@ jobs:
             -   name: "Checkout repository"
                 uses: actions/checkout@v4
                 with:
-                    fetch-depth: 0
+                    fetch-depth: 1
 
             -   name: "Set up JDK"
                 uses: actions/setup-java@v4

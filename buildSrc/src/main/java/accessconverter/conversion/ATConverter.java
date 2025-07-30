@@ -141,9 +141,9 @@ public class ATConverter
 		@Override
 		public String toString() {
 			if (signature.isEmpty()) {
-				return modifier + " " + clazz + (name.isEmpty() ? "":" " + name);
+				return modifier + " " + clazz + (name.isEmpty() ? "" : " " + name);
 			} else {
-				return modifier + " " + clazz + " " + name + " " + signature;
+				return modifier + " " + clazz + " " + name + signature;
 			}
 		}
 
