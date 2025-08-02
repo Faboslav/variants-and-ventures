@@ -1,3 +1,8 @@
+## 1.0.17
+
+- Ported to 1.21.7/1.21.8
+- Internal refactor
+
 ## 1.0.16
 
 - Fixed invalid accesstransformer
