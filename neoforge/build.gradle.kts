@@ -1,7 +1,15 @@
 plugins {
 	`multiloader-loader`
 	id("net.neoforged.moddev")
-	id("dev.kikugie.j52j") version "2.0"
+	kotlin("jvm") version "2.2.0"
+	id("com.google.devtools.ksp") version "2.2.0-2.0.2"
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.14"
+}
+
+fletchingTable {
+	j52j.register("main") {
+		extension("json", "**/*.json5")
+	}
 }
 
 neoForge {

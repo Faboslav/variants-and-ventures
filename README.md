@@ -5,7 +5,6 @@
 ---
 
 Ventures & Variants adds multiple new mob variants seamlessly integrated into your Minecraft world.
-You can check [wiki] for a detailed overview of implemented features. Also feel free to [report crash/bug, share your ideas or give some feedback].
 
 ## Important links
 

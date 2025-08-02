@@ -8,13 +8,13 @@
 		"${modAuthor}"
 	],
 	"contact": {
-		"homepage": "https://github.com/Faboslav/variants-and-ventures",
-		"sources": "https://github.com/Faboslav/variants-and-ventures",
-		"issues": "https://github.com/Faboslav/variants-and-ventures/issues",
-		"wiki": "https://github.com/Faboslav/variants-and-ventures/wiki",
-		"discord": "https://discord.gg/faboland"
+		"homepage": "${modGitHub}",
+		"sources": "${modGitHub}",
+		"issues": "${modGitHub}/issues",
+		"wiki": "${modGitHub}/wiki",
+		"discord": "${modDiscord}"
 	},
-	"license": "CC BY-NC-ND 4.0",
+	"license": "${modLicense}",
 	"icon": "icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -37,11 +37,11 @@
 	],
 	"accessWidener": "${modId}.accesswidener",
 	"depends": {
-		"minecraft": ">=${minMinecraftVersion}-",
+		"minecraft": ">=${minMinecraftVersion}",
 		"fabricloader": "*",
 		"fabric": "*",
-		"yet_another_config_lib_v3": ">=${yaclVersion}-",
-		"resourcefullib": ">=${resourcefulLibLibVersion}-"
+		"yet_another_config_lib_v3": ">=${yaclVersion}",
+		"resourcefullib": ">=${resourcefulLibLibVersion}"
 	},
 	"suggests": {
 		"modmenu": "*"
@@ -49,8 +49,8 @@
 	"custom": {
 		"modmenu": {
 			"links": {
-				"Discord": "https://discord.gg/faboland",
-				"Wiki": "https://github.com/Faboslav/variants-and-ventures/wiki",
+				"Discord": "${modDiscord}",
+				"Wiki": "${modGitHub}/wiki",
 				"CurseForge": "https://www.curseforge.com/minecraft/mc-mods/variants-and-ventures",
 				"Modrinth": "https://modrinth.com/mod/variants-and-ventures"
 			}
