@@ -1,3 +1,8 @@
+## 1.0.18
+
+- Fixed thicket trial chamber spawners
+- Added zh_tw translations (Thanks to xz123456xz)
+
 ## 1.0.17
 
 - Ported to 1.21.7/1.21.8

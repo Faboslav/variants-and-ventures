@@ -35,7 +35,12 @@ public class VariantsAndVenturesConfigScreen extends Screen
 
 	@Override
 	public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-		super.renderBackground(context, mouseX, mouseY, delta);
+		//? <1.20.2 {
+		/*super.renderBackground(context);
+		 *///?} else if <=1.21.5 {
+		/*super.renderBackground(context, mouseX, mouseY, delta);
+		 *///?}
+
 		super.render(context, mouseX, mouseY, delta);
 
 		assert this.minecraft != null;
