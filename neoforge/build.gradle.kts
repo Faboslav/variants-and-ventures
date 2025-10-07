@@ -69,10 +69,10 @@ sourceSets.main {
 	resources.srcDir("src/generated/resources")
 }
 
-tasks.named<ProcessResources>("processResources") {
-	//exclude("accesswideners/**")
-}
-
 tasks.named("createMinecraftArtifacts") {
 	dependsOn(":neoforge:${commonMod.propOrNull("minecraft_version")}:processResources")
+}
+
+tasks.withType<Jar>().configureEach {
+	exclude("accesswideners/**")
 }

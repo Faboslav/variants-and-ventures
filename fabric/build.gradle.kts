@@ -69,8 +69,6 @@ loom {
 }
 
 tasks.named<ProcessResources>("processResources") {
-	exclude("accesswideners/**")
-
 	val awFile = project(":common").file("src/main/resources/accesswideners/${commonMod.mc}-${mod.id}.accesswidener")
 
 	if (awFile.exists()) {
@@ -80,4 +78,8 @@ tasks.named<ProcessResources>("processResources") {
 			into("")
 		}
 	}
+}
+
+tasks.withType<Jar>().configureEach {
+	exclude("accesswideners/**")
 }
