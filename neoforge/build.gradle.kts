@@ -70,7 +70,7 @@ sourceSets.main {
 }
 
 tasks.named<ProcessResources>("processResources") {
-	exclude("accesswideners/**")
+	//exclude("accesswideners/**")
 }
 
 tasks.named("createMinecraftArtifacts") {
