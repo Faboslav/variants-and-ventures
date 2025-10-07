@@ -45,7 +45,6 @@ public final class VariantsAndVentures
 		return LOGGER;
 	}
 
-
 	public static void init() {
 		VariantsAndVentures.getConfig().load();
 		VariantsAndVenturesTags.init();

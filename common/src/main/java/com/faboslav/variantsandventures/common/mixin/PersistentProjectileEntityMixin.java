@@ -15,7 +15,7 @@ public abstract class PersistentProjectileEntityMixin
 		at = @At("RETURN")
 	)
 	protected float variantsandventures$getWaterInertia(float originalWaterInertia) {
-		//? >=1.21.6 {
+		//? if >=1.21.6 {
 		var owner = ((Projectile) (Object) this).getOwner();
 		//?} else {
 		/*var owner = ((ProjectileEntityAccessor) this).getOwner();

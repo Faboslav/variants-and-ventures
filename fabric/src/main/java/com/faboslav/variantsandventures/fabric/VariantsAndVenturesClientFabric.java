@@ -4,15 +4,12 @@ import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityLayersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 
 public final class VariantsAndVenturesClientFabric implements ClientModInitializer
 {
 	@Override
-	@Environment(EnvType.CLIENT)
 	public void onInitializeClient() {
 		VariantsAndVenturesClient.init();
 

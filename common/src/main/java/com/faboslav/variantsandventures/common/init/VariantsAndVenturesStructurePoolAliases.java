@@ -7,7 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasBinding;
 
-//? >=1.21.5 {
+//? if >=1.21.5 {
 import net.minecraft.world.level.levelgen.structure.pools.alias.RandomGroupPoolAlias;
 import net.minecraft.world.level.levelgen.structure.pools.alias.RandomPoolAlias;
 import net.minecraft.util.random.WeightedList;
@@ -29,7 +29,7 @@ public final class VariantsAndVenturesStructurePoolAliases
 
 	private static void updateTrialChamberSpawners(MinecraftServer server) {
 		var config = VariantsAndVentures.getConfig();
-		/*? >=1.21.3 {*/
+		//? if >=1.21.3 {
 		var structureRegistry = server.registryAccess().lookupOrThrow(Registries.STRUCTURE);
 		var structure = (JigsawStructure) structureRegistry.getValue(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
 		/*?} else {*/
@@ -42,13 +42,13 @@ public final class VariantsAndVenturesStructurePoolAliases
 		List<PoolAliasBinding> newPoolAliasBindings = new ArrayList<>();
 
 		for (PoolAliasBinding originalPoolAliasBinding : originalPoolAliasBindings) {
-			//? >=1.21.5 {
+			//? if >=1.21.5 {
 			if (originalPoolAliasBinding instanceof RandomGroupPoolAlias randomGroupStructurePoolAliasBinding)
 			//?} else {
 			/*if (originalPoolAliasBinding instanceof RandomGroup randomGroupStructurePoolAliasBinding)
 			*///?}
 			{
-				//? >=1.21.5 {
+				//? if >=1.21.5 {
 				RandomGroupPoolAlias newRandomGroupStructurePoolAliasBinding;
 				var dataPoolBuilder = WeightedList.<List<PoolAliasBinding>>builder();
 				//?} else {
@@ -58,7 +58,7 @@ public final class VariantsAndVenturesStructurePoolAliases
 				var groups = randomGroupStructurePoolAliasBinding.groups().unwrap();
 
 				for (var group : groups) {
-					//? >=1.21.5 {
+					//? if >=1.21.5 {
 					dataPoolBuilder.add(group.value());
 					//?} else {
 					/*dataPoolBuilder.add(group.data());
@@ -97,13 +97,13 @@ public final class VariantsAndVenturesStructurePoolAliases
 
 				newPoolAliasBindings.add(newRandomGroupStructurePoolAliasBinding);
 			}
-			//? >=1.21.5 {
+			//? if >=1.21.5 {
 			else if (originalPoolAliasBinding instanceof RandomPoolAlias randomStructurePoolAliasBinding)
 			//?} else {
 			/*else if (originalPoolAliasBinding instanceof Random randomStructurePoolAliasBinding)
 			*///?}
 			{
-				//? >=1.21.5 {
+				//? if >=1.21.5 {
 				RandomPoolAlias newRandomStructurePoolAliasBinding;
 				//?} else {
 				/*Random newRandomStructurePoolAliasBinding;
@@ -112,7 +112,7 @@ public final class VariantsAndVenturesStructurePoolAliases
 				var registryKeys = randomStructurePoolAliasBinding.allTargets().toList();
 
 				if (Objects.equals(alias, "trial_chambers/spawner/contents/melee")) {
-					//? >=1.21.5 {
+					//? if >=1.21.5 {
 					var dataPoolBuilder = WeightedList.<String>builder();
 					//?} else {
 					/*var dataPoolBuilder = SimpleWeightedRandomList.<String>builder();

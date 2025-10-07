@@ -1,16 +1,21 @@
 package com.faboslav.variantsandventures.common.client.render.entity.feature;
 
-/*? >=1.21.3 {*/
+//? if >=1.21.3 {
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.DrownedModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.entity.state.ZombieRenderState;
 import net.minecraft.resources.ResourceLocation;
+
+//? if >= 1.21.9 {
+import net.minecraft.client.renderer.SubmitNodeCollector;
+//?} else {
+/*import net.minecraft.client.renderer.MultiBufferSource;
+*///?}
 
 public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, DrownedModel>
 {
@@ -24,9 +29,18 @@ public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, 
 		this.babyModel = new DrownedModel(modelSet.bakeLayer(ModelLayers.DROWNED_BABY_OUTER_LAYER));
 	}
 
-	public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ZombieRenderState renderState, float yRot, float xRot) {
+	//? if >= 1.21.9 {
+	public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, ZombieRenderState renderState, float yRot, float xRot)
+	//?} else {
+	/*public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ZombieRenderState renderState, float yRot, float xRot)
+	*///?}
+	{
 		DrownedModel drownedModel = renderState.isBaby ? this.babyModel : this.model;
-		coloredCutoutModelCopyLayerRender(drownedModel, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, renderState, -1);
+		//? if >= 1.21.9 {
+		coloredCutoutModelCopyLayerRender(drownedModel, OVERLAY_TEXTURE, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
+		//?} else {
+		/*coloredCutoutModelCopyLayerRender(drownedModel, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, renderState, -1);
+		*///?}
 	}
 }
 /*?} else {*/

@@ -82,7 +82,7 @@ public final class GelidEntity extends Zombie
 
 		itemStack.shrink(1);
 
-		/*? >=1.21.3 {*/
+		//? if >=1.21.3 {
 		Snowball snowball = new Snowball(this.level(), this, itemStack);
 		/*?} else {*/
 		/*Snowball snowball = new Snowball(this.level(), this);
@@ -99,7 +99,7 @@ public final class GelidEntity extends Zombie
 	}
 
 	@Override
-	/*? >=1.21.3 {*/
+	//? if >=1.21.3 {
 	public boolean doHurtTarget(ServerLevel level, Entity source)
 	/*?} else {*/
 	/*public boolean doHurtTarget(Entity source)
@@ -107,7 +107,7 @@ public final class GelidEntity extends Zombie
 	{
 		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_GELID_ATTACK.get(), 1.0f, this.getVoicePitch());
-		/*? >=1.21.3 {*/
+		//? if >=1.21.3 {
 		boolean attackResult = super.doHurtTarget(level, source);
 		/*?} else {*/
 		/*boolean attackResult = super.doHurtTarget(source);
@@ -119,7 +119,8 @@ public final class GelidEntity extends Zombie
 			&& source.canFreeze()
 		) {
 			float difficulty = this.level().getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
-			source.setTicksFrozen(140 * (int) difficulty);
+			int frozenTicks = 140 * Math.min(2, Math.max(1, (int) difficulty));
+			source.setTicksFrozen(frozenTicks);
 		}
 
 		return attackResult;

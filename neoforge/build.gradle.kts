@@ -1,14 +1,16 @@
 plugins {
 	`multiloader-loader`
 	id("net.neoforged.moddev")
-	kotlin("jvm") version "2.2.0"
-	id("com.google.devtools.ksp") version "2.2.0-2.0.2"
-	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.14"
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
 }
 
 fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
+	}
+
+	accessConverter.register("main") {
+		add("accesswideners/${commonMod.mc}-variantsandventures.accesswidener", "META-INF/accesstransformer.cfg")
 	}
 }
 
@@ -31,11 +33,11 @@ dependencies {
 }
 
 neoForge {
-	val at = common.project.file("../../src/main/resources/accesstransformers/${commonMod.mc}-accesstransformer.cfg");
+	val at = project.file("../../src/main/resources/META-INF/accesstransformer.cfg");
 
-	if (at.exists()) {
+	if(at.exists()) {
 		accessTransformers.from(at.absolutePath)
-		validateAccessTransformers = false
+		validateAccessTransformers = true
 	}
 
 	runs {
@@ -68,19 +70,9 @@ sourceSets.main {
 }
 
 tasks.named<ProcessResources>("processResources") {
-	exclude("accesstransformers/**", "accesswideners/**")
-
-	val awFile = project(":common").file("src/main/resources/accesstransformers/${commonMod.mc}-accesstransformer.cfg")
-
-	if (awFile.exists()) {
-		from(awFile.parentFile) {
-			include(awFile.name)
-			rename { "accesstransformer.cfg" }
-			into("META-INF")
-		}
-	}
+	exclude("accesswideners/**")
 }
 
 tasks.named("createMinecraftArtifacts") {
-	dependsOn(":neoforge:${commonMod.propOrNull("minecraft_version")}:stonecutterGenerate")
+	dependsOn(":neoforge:${commonMod.propOrNull("minecraft_version")}:processResources")
 }

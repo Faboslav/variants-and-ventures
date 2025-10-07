@@ -1,6 +1,10 @@
 package com.faboslav.variantsandventures.common.client.render.entity;
 
-/*? >=1.21.3 {*/
+//? if >= 1.21.9 {
+import net.minecraft.client.renderer.entity.ArmorModelSet;
+//?}
+
+//? if >= 1.21.3 {
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.client.render.entity.feature.GelidOverlayFeatureRenderer;
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
@@ -20,7 +24,12 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Zom
 	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
 
 	public GelidEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, new DrownedModel(context.bakeLayer(ModelLayers.DROWNED)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_BABY)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_INNER_ARMOR)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_OUTER_ARMOR)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_BABY_INNER_ARMOR)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_BABY_OUTER_ARMOR)));
+		//? if >= 1.21.9 {
+		super(context, new DrownedModel(context.bakeLayer(ModelLayers.DROWNED)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_BABY)), ArmorModelSet.bake(ModelLayers.DROWNED_ARMOR, context.getModelSet(), DrownedModel::new), ArmorModelSet.bake(ModelLayers.DROWNED_BABY_ARMOR, context.getModelSet(), DrownedModel::new));
+		//?} else {
+		/*super(context, new DrownedModel(context.bakeLayer(ModelLayers.DROWNED)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_BABY)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_INNER_ARMOR)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_OUTER_ARMOR)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_BABY_INNER_ARMOR)), new DrownedModel(context.bakeLayer(ModelLayers.DROWNED_BABY_OUTER_ARMOR)));
+		 *///?}
+
 		this.addLayer(new GelidOverlayFeatureRenderer(this, context.getModelSet()));
 	}
 
@@ -45,7 +54,7 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Zom
 		}
 	}
 }
-/*?} else {*/
+//?} else {
 /*import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.client.render.entity.feature.GelidOverlayFeatureRenderer;
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
@@ -95,4 +104,4 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Dro
 		}
 	}
 }
-*//*?}*/
+*///?}

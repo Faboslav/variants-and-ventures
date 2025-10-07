@@ -1,9 +1,7 @@
 plugins {
 	id("fabric-loom")
 	`multiloader-loader`
-	kotlin("jvm") version "2.2.0"
-	id("com.google.devtools.ksp") version "2.2.0-2.0.2"
-	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.14"
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
 fletchingTable {
@@ -12,6 +10,9 @@ fletchingTable {
 	}
 }
 
+stonecutter {
+	constants["modmenu"] = commonMod.depOrNull("modmenu") != null
+}
 
 dependencies {
 	minecraft("com.mojang:minecraft:${commonMod.mc}")
@@ -36,7 +37,10 @@ dependencies {
 	modImplementation("dev.isxander:yet-another-config-lib:${commonMod.dep("yacl")}-fabric")
 
 	// Optional dependencies
-	modImplementation("com.terraformersmc:modmenu:${commonMod.dep("modmenu")}")
+	// Mod Menu (https://www.curseforge.com/minecraft/mc-mods/modmenu)
+	commonMod.depOrNull("modmenu")?.let { modmenuVersion ->
+		modImplementation("com.terraformersmc:modmenu:${modmenuVersion}")
+	}
 
 	commonMod.depOrNull("devauth")?.let { devauthVersion ->
 		modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${devauthVersion}")
@@ -65,14 +69,14 @@ loom {
 }
 
 tasks.named<ProcessResources>("processResources") {
-	exclude("accesstransformers/**", "accesswideners/**")
+	exclude("accesswideners/**")
 
 	val awFile = project(":common").file("src/main/resources/accesswideners/${commonMod.mc}-${mod.id}.accesswidener")
 
 	if (awFile.exists()) {
 		from(awFile.parentFile) {
 			include(awFile.name)
-			rename { "${mod.id}.accesswidener" }
+			rename(awFile.name, "${mod.id}.accesswidener")
 			into("")
 		}
 	}

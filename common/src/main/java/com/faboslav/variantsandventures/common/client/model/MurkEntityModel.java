@@ -1,6 +1,6 @@
 package com.faboslav.variantsandventures.common.client.model;
 
-/*? >=1.21.3 {*/
+//? if >=1.21.3 {
 import com.faboslav.variantsandventures.common.client.render.entity.state.MurkEntityRenderState;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.SkeletonModel;

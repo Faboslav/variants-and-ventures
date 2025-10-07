@@ -66,7 +66,13 @@ public final class ThicketEntity extends Zombie
 	}
 
 	@Override
-	/*? >=1.21.3 {*/
+	public boolean canBeAffected(MobEffectInstance mobEffectInstance) {
+		return !mobEffectInstance.is(MobEffects.POISON) && super.canBeAffected(mobEffectInstance);
+	}
+
+
+	@Override
+	//? if >=1.21.3 {
 	public boolean doHurtTarget(ServerLevel level, Entity source)
 	/*?} else {*/
 	/*public boolean doHurtTarget(Entity source)
@@ -74,7 +80,7 @@ public final class ThicketEntity extends Zombie
 	{
 		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 0.6f, this.getVoicePitch());
-		/*? >=1.21.3 {*/
+		//? if >=1.21.3 {
 		boolean attackResult = super.doHurtTarget(level, source);
 		/*?} else {*/
 		/*boolean attackResult = super.doHurtTarget(source);

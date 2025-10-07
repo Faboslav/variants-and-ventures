@@ -1,6 +1,6 @@
 package com.faboslav.variantsandventures.common.client.render.entity;
 
-/*? >=1.21.3 {*/
+//? if >=1.21.3 {
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -15,7 +15,11 @@ public final class VerdantEntityRenderer extends AbstractSkeletonRenderer<Verdan
 	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
 
 	public VerdantEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, ModelLayers.SKELETON, ModelLayers.SKELETON_INNER_ARMOR, ModelLayers.SKELETON_OUTER_ARMOR);
+		//? if >= 1.21.9 {
+		super(context, ModelLayers.SKELETON, ModelLayers.SKELETON_ARMOR);
+		//?} else {
+		/*super(context, ModelLayers.SKELETON, ModelLayers.SKELETON_INNER_ARMOR, ModelLayers.SKELETON_OUTER_ARMOR);
+		*///?}
 	}
 
 	public ResourceLocation getTextureLocation(SkeletonRenderState skeletonRenderState) {

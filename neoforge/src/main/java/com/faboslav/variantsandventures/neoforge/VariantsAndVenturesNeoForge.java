@@ -30,7 +30,12 @@ public final class VariantsAndVenturesNeoForge
 
 		VariantsAndVentures.init();
 
-		if (FMLEnvironment.dist == Dist.CLIENT) {
+		//? if >= 1.21.9 {
+		if (FMLEnvironment.getDist() == Dist.CLIENT)
+		//?} else {
+		/*if (FMLEnvironment.dist == Dist.CLIENT)
+		*///?}
+		{
 			VariantsAndVenturesClientNeoForge.init(modEventBus, eventBus);
 		}
 

@@ -148,7 +148,6 @@
 
 <p style="font-size: 18px;">
 	Variants&Ventures is designed to be fully compatible with all mods, and should work out of the box with everything.
-	For example mobs will spawn in modded biomes and will be affected by Fresh Animations.
 </p>
 
 <p style="font-size: 18px;">

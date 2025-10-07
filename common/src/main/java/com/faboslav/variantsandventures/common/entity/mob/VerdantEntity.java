@@ -22,7 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-/*? >=1.21.3 {*/
+//? if >=1.21.3 {
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.VisibleForTesting;
@@ -91,7 +91,7 @@ public final class VerdantEntity extends Skeleton
 		double f = target.getZ() - this.getZ();
 		double g = Math.sqrt(d * d + f * f);
 
-		/*? >=1.21.3 {*/
+		//? if >=1.21.3 {
 		Level var15 = this.level();
 		if (var15 instanceof ServerLevel serverLevel) {
 			Projectile.spawnProjectileUsingShoot(abstractArrow, serverLevel, possibleProjectile, d, e + g * 0.20000000298023224, f, 1.6F, (float)(14 - serverLevel.getDifficulty().getId() * 4));

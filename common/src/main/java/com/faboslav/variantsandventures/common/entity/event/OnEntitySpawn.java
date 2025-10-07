@@ -51,7 +51,7 @@ public final class OnEntitySpawn
 				return false;
 			}
 
-			Mob entityToSpawn = entityTypeToSpawn.create(entity.level()/*? >=1.21.3 {*/, event.spawnReason()/*?}*/);
+			Mob entityToSpawn = entityTypeToSpawn.create(entity.level()/*? if >=1.21.3 {*/, event.spawnReason()/*?}*/);
 
 			if (entityToSpawn == null) {
 				return false;
@@ -89,7 +89,7 @@ public final class OnEntitySpawn
 					entityToSpawn.setItemSlot(equipmentSlot, itemStack.copyAndClear());
 					float dropChance;
 
-					//? >= 1.21.5 {
+					//? if >= 1.21.5 {
 					dropChance = entity.getDropChances().byEquipment(equipmentSlot);
 					//?} else {
 					/*dropChance = ((MobAccessor) entity).variantsandventures$getEquipmentDropChance(equipmentSlot);

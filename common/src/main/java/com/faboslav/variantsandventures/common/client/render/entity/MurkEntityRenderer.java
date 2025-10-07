@@ -1,6 +1,6 @@
 package com.faboslav.variantsandventures.common.client.render.entity;
 
-/*? >=1.21.3 {*/
+//? if >=1.21.3 {
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.client.model.MurkEntityModel;
 import com.faboslav.variantsandventures.common.client.render.entity.state.MurkEntityRenderState;
@@ -25,7 +25,11 @@ public class MurkEntityRenderer extends AbstractSkeletonRenderer<MurkEntity, Mur
 	});
 
 	public MurkEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, ModelLayers.BOGGED_INNER_ARMOR, ModelLayers.BOGGED_OUTER_ARMOR, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK)));
+		//? if >= 1.21.9 {
+		super(context, ModelLayers.BOGGED_ARMOR, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK)));
+		//?} else {
+		/*super(context, ModelLayers.BOGGED_INNER_ARMOR, ModelLayers.BOGGED_OUTER_ARMOR, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK)));
+		*///?}
 	}
 
 	@Override

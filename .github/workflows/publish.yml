@@ -61,7 +61,7 @@ jobs:
 
     publish:
         runs-on: ubuntu-latest
-        needs: [build, generate-publish-matrix]
+        needs: [ build, generate-publish-matrix ]
         name: Publish ${{ matrix.mod_loader }} ${{ matrix.version }}
         timeout-minutes: 60
         strategy:

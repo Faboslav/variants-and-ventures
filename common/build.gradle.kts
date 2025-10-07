@@ -1,10 +1,7 @@
 plugins {
 	id("multiloader-common")
 	id("fabric-loom")
-	id("accessconverter")
-	kotlin("jvm") version "2.2.0"
-	id("com.google.devtools.ksp") version "2.2.0-2.0.2"
-	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.14"
+	id("dev.kikugie.fletching-table.fabric") version "0.1.0-alpha.22"
 }
 
 loom {
@@ -18,16 +15,6 @@ loom {
 fletchingTable {
 	j52j.register("main") {
 		extension("json", "**/*.json5")
-	}
-}
-
-accessConverter {
-	mcVersion(commonMod.mc)
-
-	convertAW {
-		this.sortInput(true)
-		this.fileToConvert(common.project.file("../../src/main/resources/accesswideners/${commonMod.mc}-${mod.id}.accesswidener"))
-		this.fileOutput(common.project.file("../../src/main/resources/accesstransformers/${commonMod.mc}-accesstransformer.cfg"))
 	}
 }
 

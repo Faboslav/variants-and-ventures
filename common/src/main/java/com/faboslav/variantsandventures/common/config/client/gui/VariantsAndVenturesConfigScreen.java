@@ -35,7 +35,7 @@ public class VariantsAndVenturesConfigScreen extends Screen
 
 	@Override
 	public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-		//? <1.20.2 {
+		//? if <1.20.2 {
 		/*super.renderBackground(context);
 		 *///?} else if <=1.21.5 {
 		/*super.renderBackground(context, mouseX, mouseY, delta);
@@ -56,7 +56,7 @@ public class VariantsAndVenturesConfigScreen extends Screen
 
 		grid.setPadding(3);
 
-		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.mod_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/mod_mobs.webp"), btn -> {
+		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.mod_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/mod_mobs.png"), btn -> {
 			if(this.modMobsConfigScreen == null) {
 				this.modMobsConfigScreen = ModMobsConfig.HANDLER.generateGui().generateScreen(this);
 			}
@@ -64,7 +64,8 @@ public class VariantsAndVenturesConfigScreen extends Screen
 			this.minecraft.setScreen(this.modMobsConfigScreen);
 		}), 2, 1);
 
-		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.vanilla_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/vanilla_mobs.webp"), btn -> {
+		grid.addChild(new ImageButtonWidget(0, 0, 0, 0, Component.translatable("yacl3.config.variantsandventures:variantsandventures.category.vanilla_mobs"), VariantsAndVentures.makeID("textures/gui/config/images/buttons/vanilla_mobs.png"), btn -> {
+			VariantsAndVentures.getLogger().info("now2");
 			if(this.vanillaMobsConfigScreen == null) {
 				this.vanillaMobsConfigScreen = VanillaMobsConfig.HANDLER.generateGui().generateScreen(this);
 			}

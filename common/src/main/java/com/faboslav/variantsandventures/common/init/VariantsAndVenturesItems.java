@@ -14,7 +14,7 @@ import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.function.Supplier;
 
-/*? >=1.21.3 {*/
+//? if >=1.21.3 {
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 /*?}*/
@@ -39,13 +39,13 @@ public final class VariantsAndVenturesItems
 		int secondaryColorIn
 	) {
 		return ITEMS.register(id, () -> {
-			//? >=1.21.4 {
-			var spawnEgg = new SpawnEggItem(typeIn.get(), new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
-			 /*?}*/
-			//? =1.21.3 {
+			//? if >= 1.21.9 {
+			var spawnEgg = new SpawnEggItem(new Item.Properties().spawnEgg(typeIn.get()).stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
+			//?} else if >=1.21.4 {
+			/*var spawnEgg = new SpawnEggItem(typeIn.get(), new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
+			*///?} else =1.21.3 {
 			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeId(id))));
-			 *///?}
-			//? <=1.21.1 {
+			/*///?} else <=1.21.1 {
 			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
 			*///?}
 			var spawnEggMap = SpawnEggItemAccessor.variantsandventures$getSpawnEggs();
