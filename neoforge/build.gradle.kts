@@ -10,7 +10,7 @@ fletchingTable {
 	}
 
 	accessConverter.register("main") {
-		add("accesswideners/${commonMod.mc}-variantsandventures.accesswidener", "META-INF/accesstransformer.cfg")
+		add("accesswideners/${commonMod.mc}-variantsandventures.accesswidener", "META-INF/${commonMod.mc}-accesstransformer.cfg")
 	}
 }
 
@@ -33,7 +33,7 @@ dependencies {
 }
 
 neoForge {
-	val at = project.file("../../src/main/resources/META-INF/accesstransformer.cfg");
+	val at = project.file("../../src/main/resources/META-INF/${commonMod.mc}-accesstransformer.cfg");
 
 	if(at.exists()) {
 		accessTransformers.from(at.absolutePath)
