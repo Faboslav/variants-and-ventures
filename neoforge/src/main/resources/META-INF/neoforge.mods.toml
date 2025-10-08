@@ -20,7 +20,7 @@ config = "${modId}-neoforge.mixins.json"
 config = "${modId}-common.mixins.json"
 
 [[accessTransformers]]
-file="META-INF/${minecraftVersion}-accesstransformer.cfg"
+file="META-INF/accesstransformer.cfg"
 
 [[dependencies.${ modId }]]
 modId = "neoforge"
