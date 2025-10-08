@@ -73,6 +73,7 @@ tasks.named("createMinecraftArtifacts") {
 	dependsOn(":neoforge:${commonMod.propOrNull("minecraft_version")}:processResources")
 }
 
+/*
 tasks.withType<Jar>().configureEach {
 	exclude("accesswideners/**")
-}
+}*/

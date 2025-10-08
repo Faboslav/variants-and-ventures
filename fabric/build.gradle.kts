@@ -80,6 +80,7 @@ tasks.named<ProcessResources>("processResources") {
 	}
 }
 
+/*
 tasks.withType<Jar>().configureEach {
 	exclude("accesswideners/**")
-}
+}*/
