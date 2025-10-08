@@ -176,7 +176,7 @@ jobs:
             -   name: "Download ModMenu"
                 if: ${{ matrix.mod_loader == 'fabric' }}
                 run: |
-                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "modmenu" "${{ steps.gradle-properties.outputs.DEPS_MOD_MENU }}" "${{ matrix.mod_loader }}")
+                    MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "mod_menu" "${{ steps.gradle-properties.outputs.DEPS_MOD_MENU }}" "${{ matrix.mod_loader }}")
                     wget -P run/mods "$MOD_URL"
 
             -   name: "Download Repurposed Structures"

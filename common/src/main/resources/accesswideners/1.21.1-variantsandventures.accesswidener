@@ -22,4 +22,7 @@ accessible field net/minecraft/world/item/CreativeModeTabs SPAWN_EGGS Lnet/minec
 accessible field net/minecraft/world/item/CreativeModeTabs TOOLS_AND_UTILITIES Lnet/minecraft/resources/ResourceKey;
 accessible field net/minecraft/world/level/levelgen/structure/structures/JigsawStructure poolAliases Ljava/util/List;
 accessible method net/minecraft/world/entity/Mob getEquipmentDropChance (Lnet/minecraft/world/entity/EquipmentSlot;)F
+extendable class net/minecraft/world/level/levelgen/structure/pools/alias/Direct
+extendable class net/minecraft/world/level/levelgen/structure/pools/alias/Random
+extendable class net/minecraft/world/level/levelgen/structure/pools/alias/RandomGroup
 mutable field net/minecraft/world/level/levelgen/structure/structures/JigsawStructure poolAliases Ljava/util/List;

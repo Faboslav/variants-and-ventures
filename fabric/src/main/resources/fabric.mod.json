@@ -27,7 +27,7 @@
 		"preLaunch": [
 			"com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
 		],
-		"modmenu": [
+		"mod_menu": [
 			"com.faboslav.variantsandventures.fabric.integrations.ModMenuIntegration"
 		]
 	},
@@ -44,10 +44,10 @@
 		"resourcefullib": ">=${resourcefulLibLibVersion}"
 	},
 	"suggests": {
-		"modmenu": "*"
+		"mod_menu": "*"
 	},
 	"custom": {
-		"modmenu": {
+		"mod_menu": {
 			"links": {
 				"Discord": "${modDiscord}",
 				"Wiki": "${modGitHub}/wiki",

@@ -11,7 +11,7 @@ fletchingTable {
 }
 
 stonecutter {
-	constants["modmenu"] = commonMod.depOrNull("modmenu") != null
+	constants["modMenu"] = commonMod.depOrNull("mod_menu") != null
 }
 
 dependencies {
@@ -38,12 +38,12 @@ dependencies {
 
 	// Optional dependencies
 	// Mod Menu (https://www.curseforge.com/minecraft/mc-mods/modmenu)
-	commonMod.depOrNull("modmenu")?.let { modmenuVersion ->
-		modImplementation("com.terraformersmc:modmenu:${modmenuVersion}")
+	commonMod.depOrNull("mod_menu")?.let { modMenuVersion ->
+		modImplementation("com.terraformersmc:modmenu:${modMenuVersion}")
 	}
 
-	commonMod.depOrNull("devauth")?.let { devauthVersion ->
-		modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${devauthVersion}")
+	commonMod.depOrNull("devauth")?.let { devAuthVersion ->
+		modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${devAuthVersion}")
 	}
 }
 

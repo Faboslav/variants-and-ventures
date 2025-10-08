@@ -1,6 +1,6 @@
 package com.faboslav.variantsandventures.fabric.integrations;
 
-//? modmenu {
+//? if modMenu {
 /*import com.faboslav.variantsandventures.common.config.client.gui.VariantsAndVenturesConfigScreen;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
