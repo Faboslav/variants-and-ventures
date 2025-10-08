@@ -10,7 +10,7 @@ fletchingTable {
 	}
 
 	accessConverter.register("main") {
-		add("accesswideners/${commonMod.mc}-variantsandventures.accesswidener", "META-INF/${commonMod.mc}-accesstransformer.cfg")
+		add("accesswideners/${commonMod.mc}-variantsandventures.accesswidener")
 	}
 }
 
@@ -33,12 +33,10 @@ dependencies {
 }
 
 neoForge {
-	val at = project.file("../../src/main/resources/META-INF/${commonMod.mc}-accesstransformer.cfg");
+	val at = project.file("build/resources/main/META-INF/accesstransformer.cfg");
 
-	if(at.exists()) {
-		accessTransformers.from(at.absolutePath)
-		validateAccessTransformers = true
-	}
+	accessTransformers.from(at.absolutePath)
+	validateAccessTransformers = true
 
 	runs {
 		register("client") {
@@ -72,8 +70,3 @@ sourceSets.main {
 tasks.named("createMinecraftArtifacts") {
 	dependsOn(":neoforge:${commonMod.propOrNull("minecraft_version")}:processResources")
 }
-
-/*
-tasks.withType<Jar>().configureEach {
-	exclude("accesswideners/**")
-}*/
