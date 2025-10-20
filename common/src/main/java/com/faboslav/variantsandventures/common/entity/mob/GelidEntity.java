@@ -65,7 +65,7 @@ public final class GelidEntity extends Zombie
 
 	@Override
 	public void tick() {
-		if (!VariantsAndVentures.getConfig().getModMobsConfig().enableGelid) {
+		if (!VariantsAndVentures.getConfig().enableGelid) {
 			this.discard();
 		}
 

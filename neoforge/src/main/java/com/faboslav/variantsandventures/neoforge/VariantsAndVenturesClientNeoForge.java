@@ -1,8 +1,6 @@
 package com.faboslav.variantsandventures.neoforge;
 
 import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
-import com.faboslav.variantsandventures.common.config.ModMobsConfig;
-import com.faboslav.variantsandventures.common.config.client.gui.VariantsAndVenturesConfigScreen;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityLayersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
 import net.neoforged.bus.api.IEventBus;
@@ -26,8 +24,7 @@ public final class VariantsAndVenturesClientNeoForge
 		event.enqueueWork(() -> {
 			if (ModList.get().isLoaded("yet_another_config_lib_v3")) {
 				ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class, () -> (client, screen) -> {
-					return new VariantsAndVenturesConfigScreen(screen);
-					//return ModMobsConfig.HANDLER.generateGui().generateScreen(screen);
+					return VariantsAndVenturesClient.getConfigScreen(screen);
 				});
 			}
 		});

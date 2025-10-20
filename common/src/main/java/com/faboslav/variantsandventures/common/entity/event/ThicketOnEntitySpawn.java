@@ -13,9 +13,9 @@ public final class ThicketOnEntitySpawn
 			event,
 			EntityType.ZOMBIE,
 			VariantsAndVenturesEntityTypes.THICKET.get(),
-			VariantsAndVentures.getConfig().getModMobsConfig().enableThicket || VariantsAndVentures.getConfig().getModMobsConfig().enableThicketSpawns,
-			VariantsAndVentures.getConfig().getModMobsConfig().thicketSpawnChance,
-			VariantsAndVentures.getConfig().getModMobsConfig().thicketMinimumYLevel,
+			VariantsAndVentures.getConfig().enableThicket || VariantsAndVentures.getConfig().enableThicketSpawns,
+			VariantsAndVentures.getConfig().thicketSpawnChance,
+			VariantsAndVentures.getConfig().thicketMinimumYLevel,
 			VariantsAndVenturesTags.HAS_THICKET
 		);
 	}

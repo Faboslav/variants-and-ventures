@@ -1,6 +1,6 @@
 package com.faboslav.variantsandventures.fabric.integrations;
 
-import com.faboslav.variantsandventures.common.config.client.gui.VariantsAndVenturesConfigScreen;
+import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.minecraft.client.gui.screens.Screen;
@@ -15,6 +15,6 @@ public final class CatalogueIntegration
 			return null;
 		}
 
-		return new VariantsAndVenturesConfigScreen(screen);
+		return VariantsAndVenturesClient.getConfigScreen(screen);
 	}
 }

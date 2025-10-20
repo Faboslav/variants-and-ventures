@@ -1,7 +1,7 @@
 package com.faboslav.variantsandventures.fabric.integrations;
 
 //? if modMenu {
-/*import com.faboslav.variantsandventures.common.config.client.gui.VariantsAndVenturesConfigScreen;
+import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import net.fabricmc.loader.api.FabricLoader;
@@ -15,8 +15,8 @@ public final class ModMenuIntegration implements ModMenuApi
 				return null;
 			}
 
-			return new VariantsAndVenturesConfigScreen(screen);
+			return VariantsAndVenturesClient.getConfigScreen(screen);
 		};
 	}
 }
-*///?}
+//?}

@@ -11,9 +11,9 @@ public final class StrayOnEntitySpawn
 			event,
 			EntityType.SKELETON,
 			EntityType.STRAY,
-			VariantsAndVentures.getConfig().getVanillaMobsConfig().enableBetterStraySpawns,
-			VariantsAndVentures.getConfig().getVanillaMobsConfig().straySpawnChance,
-			VariantsAndVentures.getConfig().getVanillaMobsConfig().strayMinimumYLevel,
+			VariantsAndVentures.getConfig().enableBetterStraySpawns,
+			VariantsAndVentures.getConfig().straySpawnChance,
+			VariantsAndVentures.getConfig().strayMinimumYLevel,
 			VariantsAndVenturesTags.HAS_STRAY
 		);
 	}

@@ -243,7 +243,7 @@ public final class MurkEntity extends Skeleton implements Shearable
 
 	@Override
 	public void tick() {
-		if (!VariantsAndVentures.getConfig().getModMobsConfig().enableMurk) {
+		if (!VariantsAndVentures.getConfig().enableMurk) {
 			this.discard();
 		}
 

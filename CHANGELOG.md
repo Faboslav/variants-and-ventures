@@ -1,3 +1,10 @@
+## 1.0.19
+
+- Port to 1.21.9/1.21.10
+- Internal cleanup and changes
+
+There release is contains a breaking change with configs, configs are now connected to one `variantsandventures` json file  
+
 ## 1.0.18
 
 - Fixed thicket trial chamber spawners

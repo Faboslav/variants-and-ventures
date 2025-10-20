@@ -34,51 +34,51 @@ public abstract class DungeonFeatureMixin
 		if (original == EntityType.ZOMBIE) {
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_HUSK)
-				&& VariantsAndVentures.getConfig().getVanillaMobsConfig().enableHuskSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().getVanillaMobsConfig().huskSpawnerChance
+				&& VariantsAndVentures.getConfig().enableHuskSpawners
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().huskSpawnerChance
 			) {
 				return EntityType.HUSK;
 			}
 
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_GELID)
-				&& VariantsAndVentures.getConfig().getModMobsConfig().enableGelid
-				&& VariantsAndVentures.getConfig().getModMobsConfig().enableGelidSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().getModMobsConfig().gelidSpawnerChance
+				&& VariantsAndVentures.getConfig().enableGelid
+				&& VariantsAndVentures.getConfig().enableGelidSpawners
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().gelidSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.GELID.get();
 			}
 
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_THICKET)
-				&& VariantsAndVentures.getConfig().getModMobsConfig().enableThicket
-				&& VariantsAndVentures.getConfig().getModMobsConfig().enableThicketSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().getModMobsConfig().thicketSpawnerChance
+				&& VariantsAndVentures.getConfig().enableThicket
+				&& VariantsAndVentures.getConfig().enableThicketSpawners
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().thicketSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.THICKET.get();
 			}
 		} else if (original == EntityType.SKELETON) {
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_STRAY)
-				&& VariantsAndVentures.getConfig().getVanillaMobsConfig().enableStraySpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().getVanillaMobsConfig().straySpawnerChance
+				&& VariantsAndVentures.getConfig().enableStraySpawners
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().straySpawnerChance
 			) {
 				return EntityType.STRAY;
 			}
 
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_BOGGED)
-				&& VariantsAndVentures.getConfig().getVanillaMobsConfig().enableBoggedSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().getVanillaMobsConfig().boggedSpawnerChance
+				&& VariantsAndVentures.getConfig().enableBoggedSpawners
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().boggedSpawnerChance
 			) {
 				return EntityType.BOGGED;
 			}
 
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_VERDANT)
-				&& VariantsAndVentures.getConfig().getModMobsConfig().enableVerdant
-				&& VariantsAndVentures.getConfig().getModMobsConfig().enableVerdantSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().getModMobsConfig().verdantSpawnerChance
+				&& VariantsAndVentures.getConfig().enableVerdant
+				&& VariantsAndVentures.getConfig().enableVerdantSpawners
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().verdantSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.VERDANT.get();
 			}

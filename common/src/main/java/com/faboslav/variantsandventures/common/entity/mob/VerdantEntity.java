@@ -64,7 +64,7 @@ public final class VerdantEntity extends Skeleton
 
 	@Override
 	public void tick() {
-		if (!VariantsAndVentures.getConfig().getModMobsConfig().enableVerdant) {
+		if (!VariantsAndVentures.getConfig().enableVerdant) {
 			this.discard();
 		}
 

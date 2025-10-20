@@ -13,9 +13,9 @@ public final class VerdantOnEntitySpawn
 			event,
 			EntityType.SKELETON,
 			VariantsAndVenturesEntityTypes.VERDANT.get(),
-			VariantsAndVentures.getConfig().getModMobsConfig().enableVerdant || VariantsAndVentures.getConfig().getModMobsConfig().enableVerdantSpawns,
-			VariantsAndVentures.getConfig().getModMobsConfig().verdantSpawnChance,
-			VariantsAndVentures.getConfig().getModMobsConfig().verdantMinimumYLevel,
+			VariantsAndVentures.getConfig().enableVerdant || VariantsAndVentures.getConfig().enableVerdantSpawns,
+			VariantsAndVentures.getConfig().verdantSpawnChance,
+			VariantsAndVentures.getConfig().verdantMinimumYLevel,
 			VariantsAndVenturesTags.HAS_VERDANT
 		);
 	}
