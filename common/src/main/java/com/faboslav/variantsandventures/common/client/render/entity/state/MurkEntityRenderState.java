@@ -12,4 +12,4 @@ public class MurkEntityRenderState extends SkeletonRenderState
 	public MurkEntityRenderState() {
 	}
 }
-/*?}*/
+//?}

@@ -1,3 +1,11 @@
+## 1.0.20
+
+- Port to 1.21.11
+- Backport to 1.20.1
+- Zombie will now be converted to Gelid in powder snow
+- Mobs should now properly trigger Monster Hunter vanilla advancements when killed
+- Separated all models/layers from the vanilla mobs to prevent model and animation problems
+
 ## 1.0.19
 
 - Port to 1.21.9/1.21.10

@@ -2,6 +2,7 @@ package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
+import com.faboslav.variantsandventures.common.util.AdvancementHelper;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -67,30 +68,41 @@ public final class ThicketEntity extends Zombie
 
 	@Override
 	public boolean canBeAffected(MobEffectInstance mobEffectInstance) {
-		return !mobEffectInstance.is(MobEffects.POISON) && super.canBeAffected(mobEffectInstance);
-	}
+		//? >= 1.21.1 {
+		var isPoison = mobEffectInstance.is(MobEffects.POISON);
+		//?} else {
+		/*var isPoison = mobEffectInstance.getEffect() == MobEffects.POISON;
+		*///?}
 
+		return !isPoison && super.canBeAffected(mobEffectInstance);
+	}
 
 	@Override
 	//? if >=1.21.3 {
 	public boolean doHurtTarget(ServerLevel level, Entity source)
-	/*?} else {*/
+	//?} else {
 	/*public boolean doHurtTarget(Entity source)
- 	*//*?}*/
+ 	*///?}
 	{
 		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 0.6f, this.getVoicePitch());
 		//? if >=1.21.3 {
 		boolean attackResult = super.doHurtTarget(level, source);
-		/*?} else {*/
+		//?} else {
 		/*boolean attackResult = super.doHurtTarget(source);
-		*//*?}*/
+		*///?}
 
 		if (attackResult && this.getMainHandItem().isEmpty() && source instanceof LivingEntity) {
 			((LivingEntity) source).addEffect(new MobEffectInstance(MobEffects.POISON, 100), this);
 		}
 
 		return attackResult;
+	}
+
+	@Override
+	public void die(DamageSource damageSource) {
+		super.die(damageSource);
+		AdvancementHelper.triggerMonsterHunter(this.level(), damageSource);
 	}
 }
 

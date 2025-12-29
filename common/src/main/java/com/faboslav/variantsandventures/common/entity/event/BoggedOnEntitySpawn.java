@@ -1,3 +1,4 @@
+//? if >= 1.20.6 {
 package com.faboslav.variantsandventures.common.entity.event;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
@@ -19,3 +20,4 @@ public final class BoggedOnEntitySpawn
 		);
 	}
 }
+//?}

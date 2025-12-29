@@ -1,3 +1,4 @@
+//? if >= 1.21 {
 package com.faboslav.variantsandventures.common.init;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
@@ -150,3 +151,4 @@ public final class VariantsAndVenturesStructurePoolAliases
 	private VariantsAndVenturesStructurePoolAliases() {
 	}
 }
+//?}

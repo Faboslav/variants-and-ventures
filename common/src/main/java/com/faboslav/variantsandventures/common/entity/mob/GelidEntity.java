@@ -3,7 +3,13 @@ package com.faboslav.variantsandventures.common.entity.mob;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.ai.GelidSnowballRangedAttackGoal;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
+import com.faboslav.variantsandventures.common.util.AdvancementHelper;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.advancements.Criterion;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -14,12 +20,15 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
 
 public final class GelidEntity extends Zombie
 {
@@ -84,9 +93,9 @@ public final class GelidEntity extends Zombie
 
 		//? if >=1.21.3 {
 		Snowball snowball = new Snowball(this.level(), this, itemStack);
-		/*?} else {*/
+		//?} else {
 		/*Snowball snowball = new Snowball(this.level(), this);
-		*//*?}*/
+		*///?}
 		double d = target.getEyeY() - 1.100000023841858;
 		double e = target.getX() - this.getX();
 		double f = d - snowball.getY();
@@ -101,17 +110,17 @@ public final class GelidEntity extends Zombie
 	@Override
 	//? if >=1.21.3 {
 	public boolean doHurtTarget(ServerLevel level, Entity source)
-	/*?} else {*/
+	//?} else {
 	/*public boolean doHurtTarget(Entity source)
-	 *//*?}*/
+	 *///?}
 	{
 		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_GELID_ATTACK.get(), 1.0f, this.getVoicePitch());
 		//? if >=1.21.3 {
 		boolean attackResult = super.doHurtTarget(level, source);
-		/*?} else {*/
+		//?} else {
 		/*boolean attackResult = super.doHurtTarget(source);
-		*//*?}*/
+		*///?}
 
 		if (
 			attackResult && this.getMainHandItem().isEmpty()
@@ -124,6 +133,12 @@ public final class GelidEntity extends Zombie
 		}
 
 		return attackResult;
+	}
+
+	@Override
+	public void die(DamageSource damageSource) {
+		super.die(damageSource);
+		AdvancementHelper.triggerMonsterHunter(this.level(), damageSource);
 	}
 }
 

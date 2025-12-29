@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 //? if >=1.21.3 {
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-/*?}*/
+//?}
 
 /**
  * @see Items

@@ -10,13 +10,13 @@ import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAt
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import com.faboslav.variantsandventures.common.versions.VersionedEntityTypeResourceId;
+import com.faboslav.variantsandventures.common.versions.VersionedSpawnPlacementType;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 
@@ -37,10 +37,10 @@ public final class VariantsAndVenturesEntityTypes
 
 	static {
 		SharedConstants.CHECK_DATA_FIXER_SCHEMA = false;
-		GELID = ENTITY_TYPES.register("gelid", () -> EntityType.Builder.of(GelidEntity::new, MobCategory.MONSTER).sized(0.6F, 1.95F).immuneTo(Blocks.POWDER_SNOW).eyeHeight(1.74F).passengerAttachments(2.075F).ridingOffset(-0.7F).clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("gelid")));
-		MURK = ENTITY_TYPES.register("murk", () -> EntityType.Builder.of(MurkEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F).eyeHeight(1.74F).ridingOffset(-0.7F).clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("murk")));
-		THICKET = ENTITY_TYPES.register("thicket", () -> EntityType.Builder.of(ThicketEntity::new, MobCategory.MONSTER).sized(0.6F, 1.95F).eyeHeight(1.74F).passengerAttachments(2.075F).ridingOffset(-0.7F).clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("thicket")));
-		VERDANT = ENTITY_TYPES.register("verdant", () -> EntityType.Builder.of(VerdantEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F).eyeHeight(1.74F).ridingOffset(-0.7F).clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("verdant")));
+		GELID = ENTITY_TYPES.register("gelid", () -> EntityType.Builder.of(GelidEntity::new, MobCategory.MONSTER).sized(0.6F, 1.95F).immuneTo(Blocks.POWDER_SNOW)/*? if >=1.21 {*/.eyeHeight(1.74F).passengerAttachments(2.075F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("gelid")));
+		MURK = ENTITY_TYPES.register("murk", () -> EntityType.Builder.of(MurkEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F)/*? if >=1.21 {*/.eyeHeight(1.74F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("murk")));
+		THICKET = ENTITY_TYPES.register("thicket", () -> EntityType.Builder.of(ThicketEntity::new, MobCategory.MONSTER).sized(0.6F, 1.95F)/*? if >=1.21 {*/.eyeHeight(1.74F).passengerAttachments(2.075F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("thicket")));
+		VERDANT = ENTITY_TYPES.register("verdant", () -> EntityType.Builder.of(VerdantEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F)/*? if >=1.21 {*/.eyeHeight(1.74F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("verdant")));
 		SharedConstants.CHECK_DATA_FIXER_SCHEMA = previousUseChoiceTypeRegistrations;
 	}
 	public static void registerEntityAttributes(RegisterEntityAttributesEvent event) {
@@ -51,7 +51,12 @@ public final class VariantsAndVenturesEntityTypes
 	}
 
 	public static void registerEntitySpawnRestrictions(RegisterEntitySpawnRestrictionsEvent event) {
-		event.register(MURK.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, MurkEntity::canSpawn);
+		event.register(
+			MURK.get(),
+			VersionedSpawnPlacementType.IN_WATER,
+			Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+			MurkEntity::canSpawn
+		);
 	}
 
 	public static void addSpawnBiomeModifications(AddSpawnBiomeModificationsEvent event) {

@@ -28,7 +28,7 @@ public final class GelidOnSnowballHitEvent
 			return;
 		}
 
-		target.playSound(getImpactSound(), 1.0F, 0.4F / (target.getRandom().nextFloat() * 0.4F + 0.8F));
+		target.playSound(getImpactSound(), 1.0F, 0.4F / (((LivingEntity) target).getRandom().nextFloat() * 0.4F + 0.8F));
 		float difficulty = target.level().getCurrentDifficultyAt(target.blockPosition()).getEffectiveDifficulty();
 		target.hurt(projectile.getOwner().damageSources().thrown(projectile, projectile.getOwner()), 2 * difficulty);
 		target.setTicksFrozen(140 * (int) difficulty);

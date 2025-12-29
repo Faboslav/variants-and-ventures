@@ -30,7 +30,9 @@ public final class VariantsAndVenturesConfig
 	private static final String VANILLA_MOBS_CATEGORY = "vanilla_mobs";
 	private static final String STRAY_GROUP = "stray";
 	private static final String HUSK_GROUP = "husk";
+	//? if >= 1.20.6 {
 	private static final String BOGGED_GROUP = "bogged";
+	//?}
 
 
 	@SerialEntry()
@@ -63,10 +65,12 @@ public final class VariantsAndVenturesConfig
 	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
 	public double gelidSpawnerChance = 80;
 
+	//? if >= 1.21 {
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
 	public boolean enableGelidSpawnersInTrialChambers = true;
+	//?}
 
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
@@ -78,10 +82,12 @@ public final class VariantsAndVenturesConfig
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
 	public boolean enableMurkSpawns = true;
 
+	//? if >= 1.21 {
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
 	public boolean enableMurkSpawnersInTrialChambers = true;
+	//?}
 
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
@@ -204,6 +210,7 @@ public final class VariantsAndVenturesConfig
 	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
 	public double huskSpawnerChance = 80;
 
+	//? if >= 1.20.6 {
 	@SerialEntry()
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
@@ -228,6 +235,7 @@ public final class VariantsAndVenturesConfig
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
 	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
 	public double boggedSpawnerChance = 80;
+	//?}
 
 	public void load() {
 		HANDLER.load();

@@ -11,9 +11,9 @@ public final class VersionedEntityTypeResourceId
 	public static ResourceKey<EntityType<?>> create(String id) {
 		return ResourceKey.create(Registries.ENTITY_TYPE, VariantsAndVentures.makeID(id));
 	}
-	/*?} else {*/
+	//?} else {
 	/*public static String create(String id) {
 		return id;
 	}
-	*//*?}*/
+	*///?}
 }

@@ -2,15 +2,13 @@ package com.faboslav.variantsandventures.common.entity.mob;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEvents;
+import com.faboslav.variantsandventures.common.util.AdvancementHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -20,13 +18,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+
+//? if >=1.21 {
 import org.jetbrains.annotations.Nullable;
+//?}
 
 //? if >=1.21.3 {
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.VisibleForTesting;
-/*?}*/
+//?}
 
 public final class VerdantEntity extends Skeleton
 {
@@ -85,7 +86,13 @@ public final class VerdantEntity extends Skeleton
 			return;
 		}
 
-		AbstractArrow abstractArrow = this.getArrow(possibleProjectile, velocity, possibleBow);
+		AbstractArrow abstractArrow = this.getArrow(
+			possibleProjectile,
+			velocity
+			//? if >= 1.21 {
+			, possibleBow
+			//?}
+		);
 		double d = target.getX() - this.getX();
 		double e = target.getY(0.3333333333333333) - abstractArrow.getY();
 		double f = target.getZ() - this.getZ();
@@ -96,10 +103,10 @@ public final class VerdantEntity extends Skeleton
 		if (var15 instanceof ServerLevel serverLevel) {
 			Projectile.spawnProjectileUsingShoot(abstractArrow, serverLevel, possibleProjectile, d, e + g * 0.20000000298023224, f, 1.6F, (float)(14 - serverLevel.getDifficulty().getId() * 4));
 		}
-		/*?} else {*/
+		//?} else {
 		/*abstractArrow.shoot(d, e + g * 0.20000000298023224, f, 1.6F, (float)(14 - this.level().getDifficulty().getId() * 4));
 		this.level().addFreshEntity(abstractArrow);
-		*//*?}*/
+		*///?}
 
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_VERDANT_ATTACK.get(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
 	}
@@ -107,10 +114,18 @@ public final class VerdantEntity extends Skeleton
 	@Override
 	protected AbstractArrow getArrow(
 		ItemStack arrow,
-		float damageModifier,
-		@Nullable ItemStack shotFrom
+		float damageModifier
+		//? if >= 1.21 {
+		, @Nullable ItemStack shotFrom
+		//?}
 	) {
-		AbstractArrow persistentProjectileEntity = super.getArrow(arrow, damageModifier, shotFrom);
+		AbstractArrow persistentProjectileEntity = super.getArrow(
+			arrow,
+			damageModifier
+			//? if >= 1.21 {
+			, shotFrom
+			//?}
+		);
 
 		if (persistentProjectileEntity instanceof Arrow) {
 			((Arrow) persistentProjectileEntity).addEffect(new MobEffectInstance(MobEffects.POISON, 100));
@@ -136,5 +151,11 @@ public final class VerdantEntity extends Skeleton
 	@Override
 	public boolean canFreeze() {
 		return false;
+	}
+
+	@Override
+	public void die(DamageSource damageSource) {
+		super.die(damageSource);
+		AdvancementHelper.triggerMonsterHunter(this.level(), damageSource);
 	}
 }

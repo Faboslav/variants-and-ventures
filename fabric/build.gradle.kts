@@ -64,6 +64,7 @@ loom {
 	}
 
 	mixin {
+		useLegacyMixinAp = true
 		defaultRefmapName = "${mod.id}.refmap.json"
 	}
 }

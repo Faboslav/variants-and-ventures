@@ -15,9 +15,19 @@
 		"PersistentProjectileEntityMixin",
 		"ProjectileEntityAccessor",
 		"ProjectileEntityMixin",
-		"SpawnEggItemAccessor"
+		"SpawnEggItemAccessor",
+		"ZombieLivingEntityMixin",
+		"ZombieMixin",
+		"ZombieMobMixin",
+		"ZombieMonsterMixin",
+		"ZombiePathfinderMobMixin"
 	],
 	"client": [
-		"IntegratedServerLoaderMixin"
+		"IntegratedServerLoaderMixin",
+		"ZombieAbstractZombieRendererMixin",
+		"ZombieHumanoidMobRendererMixin",
+		"ZombieLivingEntityRendererMixin",
+		"ZombieMobRendererMixin",
+		"ZombieRendererMixin"
 	]
 }

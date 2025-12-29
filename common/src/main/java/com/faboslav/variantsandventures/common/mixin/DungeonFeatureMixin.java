@@ -66,6 +66,7 @@ public abstract class DungeonFeatureMixin
 				return EntityType.STRAY;
 			}
 
+			//? if >= 1.20.6 {
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_BOGGED)
 				&& VariantsAndVentures.getConfig().enableBoggedSpawners
@@ -73,6 +74,7 @@ public abstract class DungeonFeatureMixin
 			) {
 				return EntityType.BOGGED;
 			}
+			//?}
 
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_VERDANT)

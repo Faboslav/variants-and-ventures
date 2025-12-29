@@ -30,7 +30,7 @@ public final class VerdantEntityRenderer extends AbstractSkeletonRenderer<Verdan
 		return new SkeletonRenderState();
 	}
 }
-/*?} else {*/
+//?} else {
 /*import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
 import net.minecraft.client.model.SkeletonModel;
@@ -55,4 +55,4 @@ public final class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEnti
 		return TEXTURE;
 	}
 }
-*//*?}*/
+*///?}

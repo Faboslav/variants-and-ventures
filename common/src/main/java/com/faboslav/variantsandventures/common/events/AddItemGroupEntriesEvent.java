@@ -17,10 +17,8 @@ import java.util.function.Consumer;
  * @author ThatGravyBoat
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
-public record AddItemGroupEntriesEvent(Type type, CreativeModeTab itemGroup, boolean hasPermission,
-									   Consumer<ItemStack> adder)
+public record AddItemGroupEntriesEvent(Type type, CreativeModeTab itemGroup, boolean hasPermission, Consumer<ItemStack> adder)
 {
-
 	public static final EventHandler<AddItemGroupEntriesEvent> EVENT = new EventHandler<>();
 
 	public void add(ItemStack stack) {

@@ -8,7 +8,9 @@ import com.faboslav.variantsandventures.common.events.entity.ProjectileHitEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.AddSpawnBiomeModificationsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
+import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.*;
+import com.faboslav.variantsandventures.common.network.MessageHandler;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
@@ -20,21 +22,34 @@ public final class VariantsAndVentures
 	private static final Logger LOGGER = LoggerFactory.getLogger(VariantsAndVentures.MOD_ID);
 	private static final VariantsAndVenturesConfig CONFIG = new VariantsAndVenturesConfig();
 
-	public static ResourceLocation makeID(String path) {
-		return ResourceLocation.fromNamespaceAndPath(
-			MOD_ID,
-			path
-		);
-	}
-
 	public static String makeStringID(String name) {
 		return MOD_ID + ":" + name;
 	}
 
+	public static ResourceLocation makeID(String path) {
+		//? if >=1.21 {
+		return ResourceLocation.tryBuild(
+			MOD_ID,
+			path
+		);
+		//?} else {
+		/*return new ResourceLocation(
+			MOD_ID,
+			path
+		);
+		*///?}
+	}
+
 	public static ResourceLocation makeNamespacedId(String id) {
-		return ResourceLocation.tryParse(
+		//? if >=1.21 {
+		return ResourceLocation.parse(
 			id
 		);
+		//?} else {
+		/*return new ResourceLocation(
+			id
+		);
+		*///?}
 	}
 
 	public static VariantsAndVenturesConfig getConfig() {
@@ -56,10 +71,13 @@ public final class VariantsAndVentures
 	}
 
 	private static void initEvents() {
+		SetupEvent.EVENT.addListener(VariantsAndVentures::setup);
 		EntitySpawnEvent.EVENT.addListener(GelidOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(HuskOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(StrayOnEntitySpawn::handleEntitySpawn);
+		//? if >= 1.20.6 {
 		EntitySpawnEvent.EVENT.addListener(BoggedOnEntitySpawn::handleEntitySpawn);
+		//?}
 		EntitySpawnEvent.EVENT.addListener(ThicketOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(VerdantOnEntitySpawn::handleEntitySpawn);
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);
@@ -75,5 +93,9 @@ public final class VariantsAndVentures
 		VariantsAndVenturesEntityTypes.ENTITY_TYPES.init();
 		VariantsAndVenturesItemGroups.ITEM_GROUPS.init();
 		VariantsAndVenturesSoundEvents.SOUND_EVENTS.init();
+	}
+
+	private static void setup(final SetupEvent event) {
+		MessageHandler.init();
 	}
 }

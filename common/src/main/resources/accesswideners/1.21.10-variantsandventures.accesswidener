@@ -16,3 +16,6 @@ accessible field net/minecraft/world/item/CreativeModeTabs SPAWN_EGGS Lnet/minec
 accessible field net/minecraft/world/item/CreativeModeTabs TOOLS_AND_UTILITIES Lnet/minecraft/resources/ResourceKey;
 accessible field net/minecraft/world/level/levelgen/structure/structures/JigsawStructure poolAliases Ljava/util/List;
 mutable field net/minecraft/world/level/levelgen/structure/structures/JigsawStructure poolAliases Ljava/util/List;
+accessible method net/minecraft/client/model/geom/ModelLayers registerArmorSet (Ljava/lang/String;)Lnet/minecraft/client/renderer/entity/ArmorModelSet;
+accessible field net/minecraft/client/model/geom/LayerDefinitions INNER_ARMOR_DEFORMATION Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+accessible field net/minecraft/client/model/geom/LayerDefinitions OUTER_ARMOR_DEFORMATION Lnet/minecraft/client/model/geom/builders/CubeDeformation;

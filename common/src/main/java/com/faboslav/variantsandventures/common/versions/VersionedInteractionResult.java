@@ -10,9 +10,9 @@ public class VersionedInteractionResult
 
 		//? if >=1.21.3 {
 		interactionResult = InteractionResult.SUCCESS;
-		/*?} else {*/
+		//?} else {
 		/*interactionResult = InteractionResult.sidedSuccess(entity.level().isClientSide());
-		 *//*?}*/
+		 *///?}
 
 		return interactionResult;
 	}

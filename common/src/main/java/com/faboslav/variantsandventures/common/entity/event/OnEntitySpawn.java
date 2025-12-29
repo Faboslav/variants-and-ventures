@@ -103,6 +103,9 @@ public final class OnEntitySpawn
 				world.getCurrentDifficultyAt(entity.blockPosition()),
 				event.spawnReason(),
 				null
+				//? < 1.21.1 {
+				/*, null
+				*///?}
 			);
 
 			boolean spawnResult = world.addFreshEntity(entityToSpawn);

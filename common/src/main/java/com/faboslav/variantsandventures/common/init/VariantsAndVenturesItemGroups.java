@@ -5,14 +5,17 @@ import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.teamresourceful.resourcefullib.common.registry.RegistryEntry;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistries;
 import com.teamresourceful.resourcefullib.common.registry.ResourcefulRegistry;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+
+//? if >= 1.21 {
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.nbt.CompoundTag;
+//?}
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -33,9 +36,14 @@ public class VariantsAndVenturesItemGroups
 			.title((Component.translatable("item_group." + VariantsAndVentures.MOD_ID + ".main_tab")))
 			.icon(() -> {
 				ItemStack iconStack = VariantsAndVenturesItems.GELID_SPAWN_EGG.get().getDefaultInstance();
+				//? if >= 1.21 {
 				CompoundTag nbtCompound = new CompoundTag();
 				nbtCompound.putBoolean("isCreativeTabIcon", true);
 				iconStack.set(DataComponents.CUSTOM_DATA, CustomData.of(nbtCompound));
+				//?} else if >= 1.20.2 {
+				/*iconStack.getOrCreateNbt().putBoolean("isCreativeTabIcon", true);
+				*///?}
+
 				return iconStack;
 			})
 			.displayItems((itemDisplayParameters, entries) ->
