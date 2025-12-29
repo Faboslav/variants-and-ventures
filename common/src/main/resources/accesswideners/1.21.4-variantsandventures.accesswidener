@@ -1,8 +1,11 @@
 accessWidener v2 named
 
 accessible class net/minecraft/world/level/levelgen/structure/pools/alias/Direct
+accessible method net/minecraft/world/level/levelgen/structure/pools/alias/Direct <init> (Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceKey;)V
 accessible class net/minecraft/world/level/levelgen/structure/pools/alias/Random
+accessible method net/minecraft/world/level/levelgen/structure/pools/alias/Random <init> (Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/util/random/SimpleWeightedRandomList;)V
 accessible class net/minecraft/world/level/levelgen/structure/pools/alias/RandomGroup
+accessible method net/minecraft/world/level/levelgen/structure/pools/alias/RandomGroup <init> (Lnet/minecraft/util/random/SimpleWeightedRandomList;)V
 accessible field net/minecraft/world/item/CreativeModeTabs BUILDING_BLOCKS Lnet/minecraft/resources/ResourceKey;
 accessible field net/minecraft/world/item/CreativeModeTabs COLORED_BLOCKS Lnet/minecraft/resources/ResourceKey;
 accessible field net/minecraft/world/item/CreativeModeTabs COMBAT Lnet/minecraft/resources/ResourceKey;
