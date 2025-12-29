@@ -7,14 +7,14 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-//? if >= 1.21.5 {
+//? if >= 1.21.4 {
 import net.minecraft.world.entity.ConversionParams;
 //?}
 
 @Mixin(Mob.class)
 public abstract class ZombieMobMixin extends ZombieLivingEntityMixin
 {
-	//? if >= 1.21.5 {
+	//? if >= 1.21.4 {
 	@Shadow
 	@Nullable
 	public abstract <T extends Mob> T convertTo(
