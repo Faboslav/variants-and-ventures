@@ -63,7 +63,6 @@ public record SyncZombieIsShakingPacketFromServer(int zombieId, boolean isShakin
 				Entity entity = Minecraft.getInstance().level.getEntity(packet.zombieId());
 
 				if (entity instanceof Zombie zombie) {
-					VariantsAndVentures.getLogger().info("setting for: " + zombie.getId() + " to " + packet.isShaking());
 					((ZombieApi)zombie).variantsandventures$setFreezeConverting(packet.isShaking());
 				}
 			};

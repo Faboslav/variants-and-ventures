@@ -1,58 +1,59 @@
 package com.faboslav.variantsandventures.common.client.render.entity;
 
-//? if >=1.21.3 {
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
 import net.minecraft.resources.ResourceLocation;
+import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
+import com.faboslav.variantsandventures.common.client.model.VerdantEntityModel;
 
-@SuppressWarnings({"unchecked"})
-public final class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntity, SkeletonRenderState>
+
+//? if >= 1.21.3 {
+import net.minecraft.client.renderer.entity.state.SkeletonRenderState;
+import net.minecraft.client.renderer.entity.AbstractSkeletonRenderer;
+//?} else {
+//?}
+
+//? if >= 1.21.9 {
+import net.minecraft.client.renderer.entity.ArmorModelSet;
+//?} else {
+/*import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+*///?}
+
+//? if >= 1.21.3 {
+public class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntity, SkeletonRenderState>
+//? } else {
+/*public class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, VerdantEntityModel>
+*///?}
 {
 	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
 
 	public VerdantEntityRenderer(EntityRendererProvider.Context context) {
 		//? if >= 1.21.9 {
-		super(context, ModelLayers.SKELETON, ModelLayers.SKELETON_ARMOR);
-		//?} else {
-		/*super(context, ModelLayers.SKELETON, ModelLayers.SKELETON_INNER_ARMOR, ModelLayers.SKELETON_OUTER_ARMOR);
+		super(context, VariantsAndVenturesModelLayers.VERDANT_ARMOR, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT)));
+		//?} else if >= 1.21.3 {
+		/*super(context, VariantsAndVenturesModelLayers.VERDANT_INNER_ARMOR, VariantsAndVenturesModelLayers.VERDANT_OUTER_ARMOR, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT)));
+		 *///?} else {
+		/*super(context, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT)), 0.5F);
+		this.addLayer(new HumanoidArmorLayer<>(this, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT_INNER_ARMOR)), new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT_OUTER_ARMOR)), context.getModelManager()));
 		*///?}
 	}
 
-	public ResourceLocation getTextureLocation(SkeletonRenderState skeletonRenderState) {
-		return TEXTURE;
-	}
-
+	//? if >= 1.21.3 {
+	@Override
 	public SkeletonRenderState createRenderState() {
 		return new SkeletonRenderState();
 	}
-}
-//?} else {
-/*import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
-import net.minecraft.client.model.SkeletonModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
-import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
-import net.minecraft.resources.ResourceLocation;
-
-@SuppressWarnings({"unchecked"})
-public final class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, SkeletonModel<VerdantEntity>>
-{
-	public static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
-
-	public VerdantEntityRenderer(EntityRendererProvider.Context context) {
-		super(context, new SkeletonModel<>(context.bakeLayer(ModelLayers.SKELETON)), 0.5F);
-		this.addLayer(new HumanoidArmorLayer<>(this, new SkeletonModel(context.bakeLayer(ModelLayers.SKELETON_INNER_ARMOR)), new SkeletonModel(context.bakeLayer(ModelLayers.SKELETON_OUTER_ARMOR)), context.getModelManager()));
-	}
 
 	@Override
+	public ResourceLocation getTextureLocation(SkeletonRenderState renderState) {
+		return TEXTURE;
+	}
+	//?} else {
+	/*@Override
 	public ResourceLocation getTextureLocation(VerdantEntity verdant) {
 		return TEXTURE;
 	}
+	*///?}
 }
-*///?}
