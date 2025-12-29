@@ -67,11 +67,9 @@ public final class VariantsAndVentures
 		initRegistries();
 	}
 
-	public static void lateInit() {
-	}
-
 	private static void initEvents() {
 		SetupEvent.EVENT.addListener(VariantsAndVentures::setup);
+		SetupEvent.EVENT.addListener(VariantsAndVenturesItems::registerSpawnEggs);
 		EntitySpawnEvent.EVENT.addListener(GelidOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(HuskOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(StrayOnEntitySpawn::handleEntitySpawn);

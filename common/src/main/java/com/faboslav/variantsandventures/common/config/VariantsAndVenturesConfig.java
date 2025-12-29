@@ -154,11 +154,12 @@ public final class VariantsAndVenturesConfig
 	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
 	public double verdantSpawnerChance = 80;
 
+	//? if >= 1.21 {
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
 	public boolean enableVerdantSpawnersInTrialChambers = true;
-
+	//?}
 
 	@SerialEntry()
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = STRAY_GROUP)

@@ -44,12 +44,12 @@ public class GelidEntityModel<T extends ZombieRenderState> extends ZombieModel<T
 	//?} else {
 	/*public static LayerDefinition createInnerArmorLayer() {
 		MeshDefinition mesh = HumanoidModel.createMesh(new CubeDeformation(0.5F), 0.0F);
-		return LayerDefinition.create(mesh, 64, 64);
+		return LayerDefinition.create(mesh, 64, 32);
 	}
 
 	public static LayerDefinition createOuterArmorLayer() {
 		MeshDefinition mesh = HumanoidModel.createMesh(new CubeDeformation(1.0F), 0.0F);
-		return LayerDefinition.create(mesh, 64, 64);
+		return LayerDefinition.create(mesh, 64, 32);
 	}
 	*///?}
 }

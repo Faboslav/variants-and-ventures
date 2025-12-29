@@ -14,31 +14,28 @@ logoBlur = false
 displayURL = "${modGitHub}"
 
 [[mixins]]
-config = "${modId}-neoforge.mixins.json"
+config = "${modId}-forge.mixins.json"
 
 [[mixins]]
 config = "${modId}-common.mixins.json"
 
-[[accessTransformers]]
-file="META-INF/accesstransformer.cfg"
-
 [[dependencies.${ modId }]]
-modId = "neoforge"
-type = "required"
+modId = "forge"
+mandatory = true
 versionRange = "*"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${ modId }]]
 modId = "minecraft"
-type = "required"
+mandatory = true
 versionRange = "[${minMinecraftVersion},)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.${ modId }]]
 modId = "yet_another_config_lib_v3"
-type = "required"
+mandatory = false
 versionRange = "[${yaclVersion},)"
 ordering = "NONE"
 side = "BOTH"
@@ -49,7 +46,7 @@ curseforge = "yacl"
 
 [[dependencies.${ modId }]]
 modId = "resourcefullib"
-type = "required"
+mandatory = true
 versionRange = "[${resourcefulLibLibVersion},)"
 ordering = "NONE"
 side = "BOTH"
