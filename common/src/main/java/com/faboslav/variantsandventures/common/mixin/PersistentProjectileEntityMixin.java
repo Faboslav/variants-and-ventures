@@ -2,7 +2,7 @@ package com.faboslav.variantsandventures.common.mixin;
 
 import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

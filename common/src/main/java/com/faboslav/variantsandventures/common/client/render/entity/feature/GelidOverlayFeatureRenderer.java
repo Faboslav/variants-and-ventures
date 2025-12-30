@@ -8,7 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 
@@ -28,7 +28,7 @@ public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, 
 /*public class GelidOverlayFeatureRenderer<T extends GelidEntity> extends RenderLayer<T, GelidEntityModel<T>>
 *///?}
 {
-	private static final ResourceLocation OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid_overlay.png");
+	private static final Identifier OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid_overlay.png");
 	private final GelidEntityModel model;
 	//? if >=1.21.3 {
 	private final GelidEntityModel babyModel;

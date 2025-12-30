@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.Snowball;
 
 @SuppressWarnings("deprecation")
 public final class GelidOnSnowballHitEvent
@@ -29,9 +29,8 @@ public final class GelidOnSnowballHitEvent
 		}
 
 		target.playSound(getImpactSound(), 1.0F, 0.4F / (((LivingEntity) target).getRandom().nextFloat() * 0.4F + 0.8F));
-		float difficulty = target.level().getCurrentDifficultyAt(target.blockPosition()).getEffectiveDifficulty();
-		target.hurt(projectile.getOwner().damageSources().thrown(projectile, projectile.getOwner()), 2 * difficulty);
-		target.setTicksFrozen(140 * (int) difficulty);
+		target.hurt(projectile.getOwner().damageSources().thrown(projectile, projectile.getOwner()), 4);
+		target.setTicksFrozen(240);
 	}
 
 	private static SoundEvent getImpactSound() {

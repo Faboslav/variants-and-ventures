@@ -2,11 +2,11 @@ package com.faboslav.variantsandventures.common.mixin;
 
 import com.faboslav.variantsandventures.common.api.ZombieApi;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import net.minecraft.client.model.ZombieModel;
+import net.minecraft.client.model.monster.zombie.ZombieModel;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 import org.spongepowered.asm.mixin.Mixin;
 
 //? if >= 1.21.3 {

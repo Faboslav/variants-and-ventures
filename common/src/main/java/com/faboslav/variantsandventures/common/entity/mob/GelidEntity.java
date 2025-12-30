@@ -7,7 +7,7 @@ import com.faboslav.variantsandventures.common.util.AdvancementHelper;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -20,9 +20,9 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Zombie;
-import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.entity.monster.skeleton.Skeleton;
+import net.minecraft.world.entity.monster.zombie.Zombie;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.Snowball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -114,7 +114,11 @@ public final class GelidEntity extends Zombie
 	/*public boolean doHurtTarget(Entity source)
 	 *///?}
 	{
-		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
+		//? if < 1.21.3 {
+		/*var level = this.level();
+		*///?}
+
+		level.broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_GELID_ATTACK.get(), 1.0f, this.getVoicePitch());
 		//? if >=1.21.3 {
 		boolean attackResult = super.doHurtTarget(level, source);
@@ -127,9 +131,7 @@ public final class GelidEntity extends Zombie
 			&& source instanceof LivingEntity
 			&& source.canFreeze()
 		) {
-			float difficulty = this.level().getCurrentDifficultyAt(this.blockPosition()).getEffectiveDifficulty();
-			int frozenTicks = 140 * Math.min(2, Math.max(1, (int) difficulty));
-			source.setTicksFrozen(frozenTicks);
+			source.setTicksFrozen(240);
 		}
 
 		return attackResult;

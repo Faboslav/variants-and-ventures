@@ -7,9 +7,9 @@ import com.teamresourceful.resourcefullib.common.network.Packet;
 import com.teamresourceful.resourcefullib.common.network.base.ClientboundPacketType;
 import com.teamresourceful.resourcefullib.common.network.base.PacketType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.zombie.Zombie;
 
 //? if >= 1.21.1 {
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -19,7 +19,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 
 public record SyncZombieIsShakingPacketFromServer(int zombieId, boolean isShaking) implements Packet<SyncZombieIsShakingPacketFromServer> {
 
-	public static final ResourceLocation ID = VariantsAndVentures.makeID("sync_horse_owner_uuid_from_server");
+	public static final Identifier ID = VariantsAndVentures.makeID("sync_horse_owner_uuid_from_server");
 	public static final ClientboundPacketType<SyncZombieIsShakingPacketFromServer> TYPE = new Handler();
 
 	public static void sendToClient(Entity entity, int zombieId, boolean isShaking) {
@@ -76,7 +76,7 @@ public record SyncZombieIsShakingPacketFromServer(int zombieId, boolean isShakin
 		*///?}
 
 		@Override
-		public ResourceLocation id() {
+		public Identifier id() {
 			return ID;
 		}
 	}

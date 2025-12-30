@@ -109,7 +109,11 @@ public final class VariantsAndVenturesStructurePoolAliases
 				//?} else {
 				/*Random newRandomStructurePoolAliasBinding;
 				*///?}
-				var alias = randomStructurePoolAliasBinding.alias().location().getPath();
+				//? if >= 1.21.11 {
+				var alias = randomStructurePoolAliasBinding.alias().identifier().getPath();
+				//?} else {
+				/*var alias = randomStructurePoolAliasBinding.alias().location().getPath();
+				*///?}
 				var registryKeys = randomStructurePoolAliasBinding.allTargets().toList();
 
 				if (Objects.equals(alias, "trial_chambers/spawner/contents/melee")) {
@@ -120,7 +124,11 @@ public final class VariantsAndVenturesStructurePoolAliases
 					*///?}
 
 					registryKeys.forEach(registryKey -> {
-						var value = registryKey.location().getPath();
+						//? if >= 1.21.11 {
+						var value = registryKey.identifier().getPath();
+						//?} else {
+						/*var value = registryKey.location().getPath();
+						*///?}
 						dataPoolBuilder.add(value);
 					});
 

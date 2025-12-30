@@ -1,7 +1,7 @@
 package com.faboslav.variantsandventures.common.client.model;
 
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.ZombieModel;
+import net.minecraft.client.model.monster.zombie.ZombieModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.*;
 //? if >= 1.21.9 {

@@ -6,7 +6,7 @@ import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
 import com.faboslav.variantsandventures.common.client.model.GelidEntityModel;
@@ -28,7 +28,7 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Zom
 /*public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, GelidEntityModel<GelidEntity>>
 *///?}
 {
-	public static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
+	public static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
 
 	public GelidEntityRenderer(EntityRendererProvider.Context context) {
 		//? if >= 1.21.9 {
@@ -67,7 +67,7 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Zom
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(ZombieRenderState state) {
+	public Identifier getTextureLocation(ZombieRenderState state) {
 		return TEXTURE;
 	}
 	//?} else {

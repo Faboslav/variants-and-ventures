@@ -2,7 +2,7 @@ package com.faboslav.variantsandventures.common.util;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.level.Level;
@@ -20,7 +20,7 @@ public final class AdvancementHelper
 			return;
 		}
 
-		ResourceLocation advancementId = VariantsAndVentures.makeNamespacedId("minecraft:adventure/kill_a_mob");
+		Identifier advancementId = VariantsAndVentures.makeNamespacedId("minecraft:adventure/kill_a_mob");
 
 		//? if >= 1.21.1 {
 		var advancement = server.getAdvancements().get(advancementId);

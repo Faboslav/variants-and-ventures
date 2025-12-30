@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 //? if >= 1.21.9 {
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -27,7 +27,7 @@ public class ThicketOverlayFeatureRenderer extends RenderLayer<ZombieRenderState
 /*public class ThicketOverlayFeatureRenderer<T extends ThicketEntity> extends RenderLayer<T, ThicketEntityModel<T>>
 *///?}
 {
-	private static final ResourceLocation OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/thicket/thicket_overlay.png");
+	private static final Identifier OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/thicket/thicket_overlay.png");
 	private final ThicketEntityModel model;
 	//? if >=1.21.3 {
 	private final ThicketEntityModel babyModel;

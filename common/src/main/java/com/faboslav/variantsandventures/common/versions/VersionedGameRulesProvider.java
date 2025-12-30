@@ -2,7 +2,7 @@ package com.faboslav.variantsandventures.common.versions;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.gamerules.GameRules;
 
 public final class VersionedGameRulesProvider
 {

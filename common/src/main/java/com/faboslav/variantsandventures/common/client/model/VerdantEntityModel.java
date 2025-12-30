@@ -1,6 +1,6 @@
 package com.faboslav.variantsandventures.common.client.model;
 
-import net.minecraft.client.model.SkeletonModel;
+import net.minecraft.client.model.monster.skeleton.SkeletonModel;
 import net.minecraft.client.model.geom.ModelPart;
 
 //? if >=1.21.3 {

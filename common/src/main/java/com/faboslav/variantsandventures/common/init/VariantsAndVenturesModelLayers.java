@@ -16,7 +16,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 //?}
 
 //? if >= 1.21.3 {
-import net.minecraft.client.model.ZombieModel;
+import net.minecraft.client.model.monster.zombie.ZombieModel;
 //?}
 
 /**

@@ -3,7 +3,7 @@ package com.faboslav.variantsandventures.common.client.render.entity;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.entity.mob.VerdantEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
 import com.faboslav.variantsandventures.common.client.model.VerdantEntityModel;
 
@@ -27,7 +27,7 @@ public class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntit
 /*public class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, VerdantEntityModel>
 *///?}
 {
-	private static final ResourceLocation TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
+	private static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
 
 	public VerdantEntityRenderer(EntityRendererProvider.Context context) {
 		//? if >= 1.21.9 {
@@ -47,7 +47,7 @@ public class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntit
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(SkeletonRenderState renderState) {
+	public Identifier getTextureLocation(SkeletonRenderState renderState) {
 		return TEXTURE;
 	}
 	//?} else {
