@@ -11,7 +11,23 @@ mixin {
 	config("${mod.id}-forge.mixins.json")
 }
 
+fletchingTable {
+	j52j.register("main") {
+		extension("json", "**/*.json5")
+	}
+
+	accessConverter.register("main") {
+		add("accesswideners/${commonMod.mc}-variantsandventures.accesswidener")
+	}
+}
+
+
 legacyForge {
+	val at = project.file("build/resources/main/META-INF/accesstransformer.cfg");
+
+	accessTransformers.from(at.absolutePath)
+	validateAccessTransformers = false
+
 	enable {
 		forgeVersion = "${mod.mc}-${commonMod.dep("forge")}"
 	}
@@ -87,4 +103,8 @@ tasks {
 
 if (stonecutter.current.isActive) tasks.register("buildActive") {
 	dependsOn("build")
+}
+
+tasks.named("createMinecraftArtifacts") {
+	dependsOn(":forge:${commonMod.propOrNull("minecraft_version")}:processResources")
 }

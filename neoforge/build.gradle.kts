@@ -10,7 +10,7 @@ fletchingTable {
 	}
 
 	accessConverter.register("main") {
-		add("accesswideners/${commonMod.mc}-variantsandventures.accesswidener")
+		add("accesswideners/${commonMod.mc}-${commonMod.id}.accesswidener")
 	}
 }
 
@@ -66,6 +66,7 @@ neoForge {
 sourceSets.main {
 	resources.srcDir("src/generated/resources")
 }
+
 
 tasks.named("createMinecraftArtifacts") {
 	dependsOn(":neoforge:${commonMod.propOrNull("minecraft_version")}:processResources")

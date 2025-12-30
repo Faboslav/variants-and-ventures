@@ -28,4 +28,8 @@ tasks {
         dependsOn(commonResources)
         from(commonResources)
     }
+
+	jar {
+		exclude("accesswideners/**")
+	}
 }

@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "variantsandventures:item/spawn_egg",
-        "layer1": "variantsandventures:item/spawn_egg_overlay"
-    }
-}
