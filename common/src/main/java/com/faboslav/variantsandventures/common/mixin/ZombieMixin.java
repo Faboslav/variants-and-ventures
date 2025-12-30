@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-//? if >= 1.21.5 {
+//? if >= 1.21.4 {
 import net.minecraft.world.entity.ConversionParams;
 //?}
 
@@ -92,7 +92,7 @@ public abstract class ZombieMixin extends ZombieMonsterMixin implements ZombieAp
 
 	@Unique
 	protected void variantsandventures$doFreezeConversion() {
-		//? if >= 1.21.5 {
+		//? if >= 1.21.4 {
 		this.convertTo(VariantsAndVenturesEntityTypes.GELID.get(), ConversionParams.single((Zombie) (Object) this, true, true), gelid -> {
 			if (!this.isSilent()) {
 				this.level().levelEvent(null, 1048, this.blockPosition(), 0);
