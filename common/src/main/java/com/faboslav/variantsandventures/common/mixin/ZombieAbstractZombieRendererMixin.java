@@ -25,7 +25,11 @@ public abstract class ZombieAbstractZombieRendererMixin<T extends Zombie, S exte
 
 	//? if >= 1.21.3 {
 	@WrapMethod(
+		//? if >= 1.21.11 {
 		method = "extractRenderState(Lnet/minecraft/world/entity/monster/zombie/Zombie;Lnet/minecraft/client/renderer/entity/state/ZombieRenderState;F)V"
+		//?} else {
+		/*method = "extractRenderState(Lnet/minecraft/world/entity/monster/Zombie;Lnet/minecraft/client/renderer/entity/state/ZombieRenderState;F)V"
+		*///?}
 	)
 	public void variantsandventures$extractRenderState(
 		Zombie zombie,
