@@ -1,7 +1,7 @@
+//? if modMenu {
 package com.faboslav.variantsandventures.fabric.integrations;
 
-//? if modMenu {
-/*import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
+import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import net.fabricmc.loader.api.FabricLoader;
@@ -19,4 +19,4 @@ public final class ModMenuIntegration implements ModMenuApi
 		};
 	}
 }
-*///?}
+//?}

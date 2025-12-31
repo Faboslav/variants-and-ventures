@@ -41,10 +41,6 @@ dependencies {
 	commonMod.depOrNull("mod_menu")?.let { modMenuVersion ->
 		modImplementation("com.terraformersmc:modmenu:${modMenuVersion}")
 	}
-
-	commonMod.depOrNull("devauth")?.let { devAuthVersion ->
-		modRuntimeOnly("me.djtheredstoner:DevAuth-fabric:${devAuthVersion}")
-	}
 }
 
 loom {

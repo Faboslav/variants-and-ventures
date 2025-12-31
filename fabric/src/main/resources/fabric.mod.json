@@ -27,7 +27,7 @@
 		"preLaunch": [
 			"com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
 		],
-		"mod_menu": [
+		"modmenu": [
 			"com.faboslav.variantsandventures.fabric.integrations.ModMenuIntegration"
 		]
 	},
