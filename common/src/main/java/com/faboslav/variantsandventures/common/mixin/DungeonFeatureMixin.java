@@ -76,6 +76,16 @@ public abstract class DungeonFeatureMixin
 			}
 			//?}
 
+			//? if >= 1.21.11 {
+			if (
+				biome.is(VariantsAndVenturesTags.HAS_PARCHED)
+				&& VariantsAndVentures.getConfig().enableParchedSpawners
+				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().parchedSpawnerChance
+			) {
+				return EntityType.PARCHED;
+			}
+			//?}
+
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_VERDANT)
 				&& VariantsAndVentures.getConfig().enableVerdant

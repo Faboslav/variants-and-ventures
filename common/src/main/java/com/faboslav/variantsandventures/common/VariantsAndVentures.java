@@ -76,6 +76,9 @@ public final class VariantsAndVentures
 		//? if >= 1.20.6 {
 		EntitySpawnEvent.EVENT.addListener(BoggedOnEntitySpawn::handleEntitySpawn);
 		//?}
+		//? if >= 1.21.11 {
+		EntitySpawnEvent.EVENT.addListener(ParchedOnEntitySpawn::handleEntitySpawn);
+		//?}
 		EntitySpawnEvent.EVENT.addListener(ThicketOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(VerdantOnEntitySpawn::handleEntitySpawn);
 		ProjectileHitEvent.EVENT.addListener(GelidOnSnowballHitEvent::handleSnowballHit);

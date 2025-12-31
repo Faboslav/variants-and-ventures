@@ -33,6 +33,9 @@ public final class VariantsAndVenturesConfig
 	//? if >= 1.20.6 {
 	private static final String BOGGED_GROUP = "bogged";
 	//?}
+	//? if >= 1.21.11 {
+	private static final String PARCHED_GROUP = "parched";
+	//?}
 
 
 	@SerialEntry()
@@ -236,6 +239,33 @@ public final class VariantsAndVenturesConfig
 	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
 	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
 	public double boggedSpawnerChance = 80;
+	//?}
+
+	//? if >= 1.21.11 {
+	@SerialEntry()
+	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
+	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
+	public boolean enableBetterParchedSpawns = true;
+
+	@SerialEntry()
+	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
+	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
+	public double parchedSpawnChance = 80;
+
+	@SerialEntry()
+	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
+	@IntSlider(min = -256, max = 256, step = 1)
+	public int parchedMinimumYLevel = -64;
+
+	@SerialEntry()
+	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
+	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
+	public boolean enableParchedSpawners = true;
+
+	@SerialEntry()
+	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
+	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
+	public double parchedSpawnerChance = 80;
 	//?}
 
 	public void load() {
