@@ -25,6 +25,19 @@ public abstract class ZombieRendererMixin<S extends LivingEntityRenderState> ext
 		super(context);
 	}
 
+	//? if >= 1.21.3 {
+	@Override
+	public void variantsandventures$extractRenderState(
+		Zombie zombie,
+		ZombieRenderState zombieRenderState,
+		float f,
+		Operation<Void> original
+	) {
+		original.call(zombie, zombieRenderState, f);
+		((ZombieApi)zombieRenderState).variantsandventures$setFreezeConverting(((ZombieApi)zombie).variantsandventures$isShaking());
+	}
+	//?}
+
 	@Override
 	//? if >= 1.21.3 {
 	public boolean variantsandventures$isShaking(ZombieRenderState zombieRenderState, Operation<Boolean> original)
