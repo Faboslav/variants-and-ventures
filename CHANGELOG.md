@@ -1,6 +1,7 @@
 ## 1.0.21
 
 - Fixed mobs not burning in daylight
+- Updated ru_ru translations (Thanks to mpustovoi)
 
 ## 1.0.20
 
