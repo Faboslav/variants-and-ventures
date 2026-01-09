@@ -3,7 +3,9 @@ package com.faboslav.variantsandventures.forge;
 import com.faboslav.variantsandventures.common.VariantsAndVenturesClient;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityLayersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
+import com.faboslav.variantsandventures.common.events.item.RegisterItemColorEvent;
 import net.minecraftforge.client.ConfigScreenHandler;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -19,6 +21,7 @@ public final class VariantsAndVenturesClientForge
 		modEventBus.addListener(VariantsAndVenturesClientForge::onClientSetup);
 		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterEntityRenderers);
 		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterEntityLayers);
+		modEventBus.addListener(VariantsAndVenturesClientForge::onRegisterItemColors);
 	}
 
 	private static void onClientSetup(final FMLClientSetupEvent event) {
@@ -39,5 +42,9 @@ public final class VariantsAndVenturesClientForge
 
 	private static void onRegisterEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		RegisterEntityLayersEvent.EVENT.invoke(new RegisterEntityLayersEvent(event::registerLayerDefinition));
+	}
+
+	private static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
+		RegisterItemColorEvent.EVENT.invoke(new RegisterItemColorEvent(event::register));
 	}
 }

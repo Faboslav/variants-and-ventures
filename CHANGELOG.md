@@ -1,3 +1,8 @@
+## 1.0.22
+
+- Fixed spawn eggs colors
+- Updated translations
+
 ## 1.0.21
 
 - Fixed mobs not burning in daylight

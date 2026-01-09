@@ -11,7 +11,7 @@ gen-sources: ## Generate sources
 	./gradlew genSources
 
 run-fabric-client: ## Runs fabric client
-	./gradlew fabric:1.21.11:runClient
+	./gradlew fabric:1.21.1:runClient
 
 run-forge-client: ## Runs forge client
 	./gradlew forge:runClient

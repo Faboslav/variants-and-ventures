@@ -27,6 +27,10 @@ import net.minecraft.resources.ResourceKey;
 /*import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
 *///?}
 
+//? if < 1.21.4 {
+/*import com.faboslav.variantsandventures.common.events.item.RegisterItemColorEvent;
+*///?}
+
 /**
  * @see Items
  */
@@ -65,6 +69,14 @@ public final class VariantsAndVenturesItems
 			return spawnEgg;
 		});
 	}
+
+	//? if < 1.21.4 {
+	/*public static void registerItemColors(RegisterItemColorEvent event) {
+		for (var entry : VariantsAndVenturesItems.SPAWN_EGGS) {
+			event.register(	(stack, tintIndex) -> entry.getSecond().getColor(tintIndex), entry.getSecond());
+		}
+	}
+	*///?}
 
 	public static void registerSpawnEggs(SetupEvent event) {
 		var spawnEggMap = SpawnEggItemAccessor.variantsandventures$getSpawnEggs();

@@ -10,6 +10,11 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
+//? if < 1.21.4 {
+/*import com.faboslav.variantsandventures.common.events.item.RegisterItemColorEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+*///?}
+
 public final class VariantsAndVenturesClientNeoForge
 {
 	public static void init(IEventBus modEventBus, IEventBus eventBus) {
@@ -18,6 +23,9 @@ public final class VariantsAndVenturesClientNeoForge
 		modEventBus.addListener(VariantsAndVenturesClientNeoForge::onClientSetup);
 		modEventBus.addListener(VariantsAndVenturesClientNeoForge::onRegisterEntityRenderers);
 		modEventBus.addListener(VariantsAndVenturesClientNeoForge::onRegisterEntityLayers);
+		//? if < 1.21.4 {
+		/*modEventBus.addListener(VariantsAndVenturesClientNeoForge::onRegisterItemColors);
+		*///?}
 	}
 
 	private static void onClientSetup(final FMLClientSetupEvent event) {
@@ -37,4 +45,10 @@ public final class VariantsAndVenturesClientNeoForge
 	private static void onRegisterEntityLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		RegisterEntityLayersEvent.EVENT.invoke(new RegisterEntityLayersEvent(event::registerLayerDefinition));
 	}
+
+	//? if < 1.21.4 {
+	/*private static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
+		RegisterItemColorEvent.EVENT.invoke(new RegisterItemColorEvent(event::register));
+	}
+	*///?}
 }
