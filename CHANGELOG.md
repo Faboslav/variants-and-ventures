@@ -1,3 +1,7 @@
+## 1.0.23
+
+- Fixed projectile owner incompatibility with vanilla /execute on origin command
+
 ## 1.0.22
 
 - Fixed spawn eggs colors
