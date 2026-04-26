@@ -18,26 +18,30 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import net.minecraft.world.entity.EntitySpawnReason;
 //?} else {
 /*import net.minecraft.world.entity.MobSpawnType;
-*///?}
+ *///?}
 
 @Mixin(StructureTemplate.class)
 public class StructureTemplateEntitySpawnMixin
 {
-    @Inject(
-		method = "method_17917",
-            at = @At(
-				value = "INVOKE",
-				//? if >=1.21.3 {
-				target = "Lnet/minecraft/world/entity/Mob;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;"
-				//?} else if >= 1.21.1 {
-				/*target = "Lnet/minecraft/world/entity/Mob;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;"
-				*///?} else {
-				/*target = "Lnet/minecraft/world/entity/Mob;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;"
-				*///?}
-			),
-            cancellable = true
+	@Inject(
+		//? if >= 26.1 {
+		method = "lambda$placeEntities$0",
+		//?} else {
+		/*method = "method_17917",
+		*///?}
+		at = @At(
+			value = "INVOKE",
+			//? if >=1.21.3 {
+			target = "Lnet/minecraft/world/entity/Mob;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;"
+			//?} else if >= 1.21.1 {
+			/*target = "Lnet/minecraft/world/entity/Mob;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;"
+			*///?} else {
+			/*target = "Lnet/minecraft/world/entity/Mob;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/world/entity/SpawnGroupData;"
+			*///?}
+		),
+		cancellable = true
 	)
-    private static void variantsandventures$onEntitySpawn(
+	private static void variantsandventures$onEntitySpawn(
 		Rotation rotation,
 		Mirror mirror,
 		Vec3 vec3,
@@ -45,12 +49,11 @@ public class StructureTemplateEntitySpawnMixin
 		ServerLevelAccessor serverLevel,
 		//? if < 1.21.1 {
 		/*CompoundTag compoundTag,
-		*///?}
+		 *///?}
 		Entity entity,
 		CallbackInfo ci
-	)
-    {
-        if (
+	) {
+		if (
 			entity instanceof Mob mob
 			&& EntitySpawnEvent.EVENT.invoke(
 				new EntitySpawnEvent(
@@ -64,7 +67,7 @@ public class StructureTemplateEntitySpawnMixin
 					*///?}
 				)
 			)) {
-            ci.cancel();
-        }
-    }
+			ci.cancel();
+		}
+	}
 }

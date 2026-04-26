@@ -67,7 +67,7 @@ public class MurkEntityRenderer extends AbstractSkeletonRenderer<MurkEntity, Mur
 	}
 	//?} else {
 	/*@Override
-	public ResourceLocation getTextureLocation(MurkEntity murk) {
+	public Identifier getTextureLocation(MurkEntity murk) {
 		return TEXTURES.get(murk.getVariant());
 	}
 	*///?}

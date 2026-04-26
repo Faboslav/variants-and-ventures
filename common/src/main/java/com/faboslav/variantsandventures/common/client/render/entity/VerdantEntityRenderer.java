@@ -52,7 +52,7 @@ public class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntit
 	}
 	//?} else {
 	/*@Override
-	public ResourceLocation getTextureLocation(VerdantEntity verdant) {
+	public Identifier getTextureLocation(VerdantEntity verdant) {
 		return TEXTURE;
 	}
 	*///?}

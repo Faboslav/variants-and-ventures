@@ -72,7 +72,7 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Zom
 	}
 	//?} else {
 	/*@Override
-	public ResourceLocation getTextureLocation(GelidEntity gelid) {
+	public Identifier getTextureLocation(GelidEntity gelid) {
 		return TEXTURE;
 	}
 	*///?}

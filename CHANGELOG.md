@@ -1,3 +1,8 @@
+## 1.0.24
+
+- Ported to 26.1
+- Fixed armor rendering on all mobs
+
 ## 1.0.23
 
 - Fixed projectile owner incompatibility with vanilla /execute on origin command

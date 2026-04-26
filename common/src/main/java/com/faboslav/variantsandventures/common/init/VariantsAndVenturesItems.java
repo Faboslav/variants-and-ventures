@@ -78,13 +78,15 @@ public final class VariantsAndVenturesItems
 	}
 	*///?}
 
-	public static void registerSpawnEggs(SetupEvent event) {
+	//? if <= 1.21.11 {
+	/*public static void registerSpawnEggs(SetupEvent event) {
 		var spawnEggMap = SpawnEggItemAccessor.variantsandventures$getSpawnEggs();
 
 		for (var entry : VariantsAndVenturesItems.SPAWN_EGGS) {
 			spawnEggMap.put(entry.getFirst().get(), entry.getSecond());
 		}
 	}
+	*///?}
 
 	private VariantsAndVenturesItems() {
 	}

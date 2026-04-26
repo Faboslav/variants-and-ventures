@@ -8,7 +8,7 @@ import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySp
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.BiomeTags;
@@ -42,7 +42,7 @@ public final class VariantsAndVenturesFabric implements ModInitializer
 		}));
 		SetupEvent.EVENT.invoke(new SetupEvent(Runnable::run));
 
-		ItemGroupEvents.MODIFY_ENTRIES_ALL.register((itemGroup, entries) ->
+		CreativeModeTabEvents.MODIFY_OUTPUT_ALL.register((itemGroup, entries) ->
 			AddItemGroupEntriesEvent.EVENT.invoke(
 				new AddItemGroupEntriesEvent(
 					AddItemGroupEntriesEvent.Type.toType(BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(itemGroup).orElse(null)),

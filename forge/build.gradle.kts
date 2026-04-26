@@ -1,7 +1,7 @@
 plugins {
-	`multiloader-loader`
+	id("multiloader-loader")
 	id("net.neoforged.moddev.legacyforge")
-	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.23"
 }
 
 mixin {
@@ -49,9 +49,9 @@ dependencies {
 
 	// Required dependencies
 	modImplementation(
-		"com.teamresourceful.resourcefullib:resourcefullib-forge-${commonMod.dep("resourceful-lib.mc")}:${
+		"com.teamresourceful.resourcefullib:resourcefullib-forge-${commonMod.dep("resourceful_lib.mc")}:${
 			commonMod.dep(
-				"resourceful-lib.lib"
+				"resourceful_lib.lib"
 			)
 		}"
 	)
@@ -62,10 +62,12 @@ legacyForge {
 	runs {
 		register("client") {
 			client()
+			ideFolderName = "Forge"
 			ideName = "Forge Client (${project.path})"
 		}
 		register("server") {
 			server()
+			ideFolderName = "Forge"
 			ideName = "Forge Server (${project.path})"
 		}
 	}

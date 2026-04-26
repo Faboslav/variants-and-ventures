@@ -8,7 +8,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.model.geom.LayerDefinitions;
 //?} else {
-/*import net.minecraft.world.entity.monster.Zombie;
+/*import net.minecraft.world.entity.monster.zombie.Zombie;
 *///?}
 
 //? if >= 1.21.3 {
@@ -38,7 +38,7 @@ public class ThicketEntityModel<T extends ZombieRenderState> extends ZombieModel
 	//? if >=1.21.9 {
 	public static ArmorModelSet<LayerDefinition> createArmorLayers() {
 		ArmorModelSet<MeshDefinition> mesh = HumanoidModel.createArmorMeshSet(LayerDefinitions.INNER_ARMOR_DEFORMATION, LayerDefinitions.OUTER_ARMOR_DEFORMATION);
-		return mesh.map((meshDefinition) -> LayerDefinition.create(meshDefinition, 64, 64));
+		return mesh.map((meshDefinition) -> LayerDefinition.create(meshDefinition, 64, 32));
 	}
 	//?} else {
 	/*public static LayerDefinition createInnerArmorLayer() {

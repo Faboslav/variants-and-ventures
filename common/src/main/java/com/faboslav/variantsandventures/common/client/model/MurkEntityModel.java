@@ -71,17 +71,17 @@ public class MurkEntityModel extends SkeletonModel<MurkEntityRenderState>
 	//? if >=1.21.9 {
 	public static ArmorModelSet<LayerDefinition> createArmorLayers() {
 		ArmorModelSet<MeshDefinition> mesh = HumanoidModel.createArmorMeshSet(LayerDefinitions.INNER_ARMOR_DEFORMATION, LayerDefinitions.OUTER_ARMOR_DEFORMATION);
-		return mesh.map((meshDefinition) -> LayerDefinition.create(meshDefinition, 64, 64));
+		return mesh.map((meshDefinition) -> LayerDefinition.create(meshDefinition, 64, 32));
 	}
 	//?} else {
 	/*public static LayerDefinition createInnerArmorLayer() {
 		MeshDefinition mesh = createDefaultMesh(new CubeDeformation(0.5F));
-		return LayerDefinition.create(mesh, 64, 64);
+		return LayerDefinition.create(mesh, 64, 32);
 	}
 
 	public static LayerDefinition createOuterArmorLayer() {
 		MeshDefinition mesh = createDefaultMesh(new CubeDeformation(1.0F));
-		return LayerDefinition.create(mesh, 64, 64);
+		return LayerDefinition.create(mesh, 64, 32);
 	}
 	*///?}
 }

@@ -22,7 +22,7 @@ public abstract class ZombieRenderStateMixin implements ZombieApi
 	}
 }
 //?} else {
-/*import net.minecraft.world.entity.monster.Zombie;
+/*import net.minecraft.world.entity.monster.zombie.Zombie;
 
 @Mixin(Zombie.class)
 public abstract class ZombieRenderStateMixin {

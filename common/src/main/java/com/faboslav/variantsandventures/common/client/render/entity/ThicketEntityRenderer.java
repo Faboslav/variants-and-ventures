@@ -72,7 +72,7 @@ public class ThicketEntityRenderer extends AbstractZombieRenderer<ThicketEntity,
 	}
 	//?} else {
 	/*@Override
-	public ResourceLocation getTextureLocation(ThicketEntity thicket) {
+	public Identifier getTextureLocation(ThicketEntity thicket) {
 		return TEXTURE;
 	}
 	*///?}

@@ -33,7 +33,7 @@ public final class VariantsAndVentures
 			path
 		);
 		//?} else {
-		/*return new ResourceLocation(
+		/*return new Identifier(
 			MOD_ID,
 			path
 		);
@@ -46,7 +46,7 @@ public final class VariantsAndVentures
 			id
 		);
 		//?} else {
-		/*return new ResourceLocation(
+		/*return new Identifier(
 			id
 		);
 		*///?}
@@ -69,7 +69,9 @@ public final class VariantsAndVentures
 
 	private static void initEvents() {
 		SetupEvent.EVENT.addListener(VariantsAndVentures::setup);
-		SetupEvent.EVENT.addListener(VariantsAndVenturesItems::registerSpawnEggs);
+		//? if <= 1.21.11 {
+		/*SetupEvent.EVENT.addListener(VariantsAndVenturesItems::registerSpawnEggs);
+		 *///?}
 		EntitySpawnEvent.EVENT.addListener(GelidOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(HuskOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(StrayOnEntitySpawn::handleEntitySpawn);

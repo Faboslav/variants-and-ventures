@@ -1,7 +1,7 @@
 plugins {
-	`multiloader-loader`
+	id("multiloader-loader")
 	id("net.neoforged.moddev")
-	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.22"
+	id("dev.kikugie.fletching-table.neoforge") version "0.1.0-alpha.23"
 }
 
 fletchingTable {
@@ -23,9 +23,9 @@ neoForge {
 dependencies {
 	// Required dependencies
 	implementation(
-		"com.teamresourceful.resourcefullib:resourcefullib-neoforge-${commonMod.dep("resourceful-lib.mc")}:${
+		"com.teamresourceful.resourcefullib:resourcefullib-neoforge-${commonMod.dep("resourceful_lib.mc")}:${
 			commonMod.dep(
-				"resourceful-lib.lib"
+				"resourceful_lib.lib"
 			)
 		}"
 	)
@@ -41,10 +41,12 @@ neoForge {
 	runs {
 		register("client") {
 			client()
+			ideFolderName = "NeoForge"
 			ideName = "NeoForge Client (${project.path})"
 		}
 		register("server") {
 			server()
+			ideFolderName = "NeoForge"
 			ideName = "NeoForge Server (${project.path})"
 		}
 	}

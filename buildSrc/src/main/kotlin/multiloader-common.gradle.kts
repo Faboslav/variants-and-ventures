@@ -1,7 +1,6 @@
 plugins {
 	id("java")
 	id("idea")
-	id("java-library")
 }
 
 version = "${loader}-${commonMod.version}+mc${stonecutterBuild.current.version}"
@@ -11,9 +10,11 @@ base {
 }
 
 java {
-	toolchain.languageVersion = JavaLanguageVersion.of(commonProject.prop("java.version")!!)
-	// withSourcesJar()
-	// withJavadocJar()
+	val javaVersion = commonProject.prop("java.version")!!.toInt()
+
+	toolchain.languageVersion = JavaLanguageVersion.of(javaVersion)
+	sourceCompatibility = JavaVersion.toVersion(javaVersion)
+	targetCompatibility = JavaVersion.toVersion(javaVersion)
 }
 
 repositories {
@@ -77,8 +78,8 @@ tasks {
 			"fabricApiVersion" to commonMod.depOrNull("fabric-api"),
 			"neoForgeVersion" to commonMod.depOrNull("neoforge"),
 			"yaclVersion" to commonMod.depOrNull("yacl"),
-			"resourcefulLibMcVersion" to commonMod.depOrNull("resourceful-lib.mc"),
-			"resourcefulLibLibVersion" to commonMod.depOrNull("resourceful-lib.lib"),
+			"resourcefulLibMcVersion" to commonMod.depOrNull("resourceful_lib.mc"),
+			"resourcefulLibLibVersion" to commonMod.depOrNull("resourceful_lib.lib"),
 		).filterValues { it?.isNotEmpty() == true }.mapValues { (_, v) -> v!! }
 
 		val jsonExpandProps = expandProps.mapValues { (_, v) -> v.replace("\n", "\\\\n") }
