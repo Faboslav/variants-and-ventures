@@ -22,7 +22,7 @@ jobs:
             matrix: ${{ steps.set-matrix.outputs.matrix }}
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v4
+                uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
                 with:
                     fetch-depth: 1
 
@@ -35,7 +35,7 @@ jobs:
         name: Create github release
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v4
+                uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
                 with:
                     fetch-depth: 1
 
@@ -48,7 +48,7 @@ jobs:
 
             -   name: "Create github release"
                 continue-on-error: true
-                uses: ncipollo/release-action@v1
+                uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
                 with:
                     skipIfReleaseExists: true
                     allowUpdates: true
@@ -72,18 +72,18 @@ jobs:
 
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v4
+                uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
                 with:
                     fetch-depth: 1
 
             -   name: "Set up JDK"
-                uses: actions/setup-java@v4
+                uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
                 with:
                     java-version: 21
                     distribution: temurin
 
             -   name: "Setup Gradle"
-                uses: gradle/actions/setup-gradle@v4
+                uses: gradle/actions/setup-gradle@50e97c2cd7a37755bbfafc9c5b7cafaece252f6e # v6.1.0
                 with:
                     cache-read-only: true
                     gradle-version: wrapper
@@ -100,7 +100,7 @@ jobs:
                 run: ./.github/scripts/parse-changelog.sh ${{ steps.gradle-properties.outputs.MOD_VERSION }}
 
             -   name: Publish ${{ matrix.mod_loader }}
-                uses: Kir-Antipov/mc-publish@v3.3.0
+                uses: Kir-Antipov/mc-publish@995edadc13559a8b28d0b7e6571229f067ec7659 # v3.3.0
                 with:
                     github-token: ${{ secrets.GITHUB_TOKEN }}
                     github-tag: ${{ steps.gradle-properties.outputs.MOD_VERSION }}

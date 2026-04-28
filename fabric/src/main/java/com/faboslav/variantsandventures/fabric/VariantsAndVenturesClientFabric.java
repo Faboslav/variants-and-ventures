@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 *///?}
 
+@SuppressWarnings({"deprecation"})
 public final class VariantsAndVenturesClientFabric implements ClientModInitializer
 {
 	@Override
