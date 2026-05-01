@@ -32,13 +32,6 @@ dependencies {
 		})
 	}
 
-    compileOnly("org.spongepowered:mixin:0.8.5")
-
-    "io.github.llamalad7:mixinextras-common:0.3.5".let {
-        compileOnly(it)
-        annotationProcessor(it)
-    }
-
 	modCompileOnly("net.fabricmc:fabric-loader:${commonMod.dep("fabric_loader")}")
 	modCompileOnly("com.teamresourceful.resourcefullib:resourcefullib-common-${commonMod.dep("resourceful_lib.mc")}:${commonMod.dep("resourceful_lib.lib")}")
 	modCompileOnly("dev.isxander:yet-another-config-lib:${commonMod.dep("yacl")}-fabric")
