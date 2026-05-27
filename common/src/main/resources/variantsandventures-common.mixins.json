@@ -1,34 +1,35 @@
 {
-	"required": true,
-	"package": "com.faboslav.variantsandventures.common.mixin",
-	"refmap": "${modId}.refmap.json",
-	"compatibilityLevel": "JAVA_${javaVersion}",
-	"minVersion": "0.8",
-	"plugin": "com.faboslav.variantsandventures.common.mixin.plugin.VariantsAndVenturesMixinPlugin",
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"mixins": [
-		"AbstractArrowProjectileMixin",
-		"DungeonFeatureMixin",
-		"JigsawStructureAccessor",
-		"MobAccessor",
-		"AbstractArrowMixin",
-		"ProjectileEntityMixin",
-		"SpawnEggItemAccessor",
-		"ZombieLivingEntityMixin",
-		"ZombieMixin",
-		"ZombieMobMixin",
-		"ZombieMonsterMixin",
-		"ZombiePathfinderMobMixin"
-	],
-	"client": [
-		"IntegratedServerLoaderMixin",
-		"ZombieAbstractZombieRendererMixin",
-		"ZombieHumanoidMobRendererMixin",
-		"ZombieLivingEntityRendererMixin",
-		"ZombieMobRendererMixin",
-		"ZombieRendererMixin",
-		"ZombieRenderStateMixin"
+  "required": true,
+  "package": "com.faboslav.variantsandventures.common.mixin",
+  "refmap": "${modId}.refmap.json",
+  "compatibilityLevel": "JAVA_${javaVersion}",
+  "minVersion": "0.8",
+  "plugin": "com.faboslav.variantsandventures.common.mixin.plugin.VariantsAndVenturesMixinPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "AbstractArrowMixin",
+    "AbstractArrowProjectileMixin",
+    "DungeonFeatureMixin",
+    "JigsawStructureAccessor",
+    "MobAccessor",
+    "ProjectileEntityMixin",
+    "SpawnEggItemAccessor",
+    "VillagerHostilesSensorMixin",
+    "ZombieLivingEntityMixin",
+    "ZombieMixin",
+    "ZombieMobMixin",
+    "ZombieMonsterMixin",
+    "ZombiePathfinderMobMixin"
+  ],
+  "client": [
+    "IntegratedServerLoaderMixin",
+    "ZombieAbstractZombieRendererMixin",
+    "ZombieHumanoidMobRendererMixin",
+    "ZombieLivingEntityRendererMixin",
+    "ZombieMobRendererMixin",
+    "ZombieRendererMixin",
+    "ZombieRenderStateMixin"
 	]
 }

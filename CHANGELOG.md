@@ -1,3 +1,7 @@
+## 1.0.25
+
+- Villagers should now flee from Gelid and Thicket
+
 ## 1.0.24
 
 - Ported to 26.1
