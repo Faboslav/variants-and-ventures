@@ -32,12 +32,17 @@ public final class VariantsAndVenturesStructurePoolAliases
 		var config = VariantsAndVentures.getConfig();
 		//? if >=1.21.3 {
 		var structureRegistry = server.registryAccess().lookupOrThrow(Registries.STRUCTURE);
-		var structure = (JigsawStructure) structureRegistry.getValue(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
+		var structure = structureRegistry.getValue(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
 		/*?} else {*/
 		/*var structureRegistry = server.registryAccess().registryOrThrow(Registries.STRUCTURE);
-		var structure = (JigsawStructure) structureRegistry.get(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
+		var structure = structureRegistry.get(VariantsAndVentures.makeNamespacedId("minecraft:trial_chambers"));
 		*//*?}*/
-		var structureAccessor = ((JigsawStructureAccessor) (Object) structure);
+
+		if(!(structure instanceof JigsawStructure jigsawStructure)) {
+			return;
+		}
+
+		var structureAccessor = ((JigsawStructureAccessor) (Object) jigsawStructure);
 
 		List<PoolAliasBinding> originalPoolAliasBindings = structureAccessor.getPoolAliasBindings();
 		List<PoolAliasBinding> newPoolAliasBindings = new ArrayList<>();

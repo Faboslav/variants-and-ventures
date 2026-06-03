@@ -1,3 +1,7 @@
+## 1.0.26
+
+- Fixed crash related to "Not Enough Trials" mod
+
 ## 1.0.25
 
 - Villagers should now flee from Gelid and Thicket
