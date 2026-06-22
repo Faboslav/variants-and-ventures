@@ -4,14 +4,14 @@ import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
-import net.minecraft.world.entity.EntityType;
+import com.faboslav.variantsandventures.common.versions.VersionedEntityType;
 
 public final class VerdantOnEntitySpawn
 {
 	public static boolean handleEntitySpawn(EntitySpawnEvent event) {
 		return OnEntitySpawn.handleOnEntitySpawn(
 			event,
-			EntityType.SKELETON,
+			VersionedEntityType.SKELETON,
 			VariantsAndVenturesEntityTypes.VERDANT.get(),
 			VariantsAndVentures.getConfig().enableVerdant || VariantsAndVentures.getConfig().enableVerdantSpawns,
 			VariantsAndVentures.getConfig().verdantSpawnChance,

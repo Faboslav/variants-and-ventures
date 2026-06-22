@@ -1,6 +1,5 @@
 package com.faboslav.variantsandventures.common.versions;
 
-
 //? if >= 1.21 {
 import net.minecraft.world.entity.SpawnPlacementType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
@@ -8,8 +7,7 @@ import net.minecraft.world.entity.SpawnPlacementTypes;
 /*import net.minecraft.world.entity.SpawnPlacements;
 *///?}
 
-
-public class VersionedSpawnPlacementType
+public final class VersionedSpawnPlacementType
 {
 	//? if >=1.21 {
 	public static final SpawnPlacementType IN_WATER = SpawnPlacementTypes.IN_WATER;

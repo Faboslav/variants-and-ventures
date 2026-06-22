@@ -2,11 +2,9 @@ package com.faboslav.variantsandventures.common.client.render.entity.feature;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.client.model.ThicketEntityModel;
-import com.faboslav.variantsandventures.common.entity.mob.ThicketEntity;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLayers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.Identifier;
@@ -14,12 +12,14 @@ import net.minecraft.resources.Identifier;
 //? if >= 1.21.9 {
 import net.minecraft.client.renderer.SubmitNodeCollector;
 //?} else {
-
-//?}
+/*import net.minecraft.client.renderer.MultiBufferSource;
+*///?}
 
 //? if >= 1.21.3 {
 import net.minecraft.client.renderer.entity.state.ZombieRenderState;
-//?}
+//?} else {
+/*import com.faboslav.variantsandventures.common.entity.mob.ThicketEntity;
+*///?}
 
 //? if >= 1.21.3 {
 public class ThicketOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, ThicketEntityModel<ZombieRenderState>>

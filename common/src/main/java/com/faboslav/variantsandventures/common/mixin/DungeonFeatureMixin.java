@@ -3,6 +3,7 @@ package com.faboslav.variantsandventures.common.mixin;
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityTypes;
 import com.faboslav.variantsandventures.common.tag.VariantsAndVenturesTags;
+import com.faboslav.variantsandventures.common.versions.VersionedEntityType;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
@@ -31,13 +32,13 @@ public abstract class DungeonFeatureMixin
 	) {
 		Holder<Biome> biome = structureWorldAccess.get().getBiome(blockPos.get());
 
-		if (original == EntityType.ZOMBIE) {
+		if (original == VersionedEntityType.ZOMBIE) {
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_HUSK)
 				&& VariantsAndVentures.getConfig().enableHuskSpawners
 				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().huskSpawnerChance
 			) {
-				return EntityType.HUSK;
+				return VersionedEntityType.HUSK;
 			}
 
 			if (
@@ -57,13 +58,13 @@ public abstract class DungeonFeatureMixin
 			) {
 				return VariantsAndVenturesEntityTypes.THICKET.get();
 			}
-		} else if (original == EntityType.SKELETON) {
+		} else if (original == VersionedEntityType.SKELETON) {
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_STRAY)
 				&& VariantsAndVentures.getConfig().enableStraySpawners
 				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().straySpawnerChance
 			) {
-				return EntityType.STRAY;
+				return VersionedEntityType.STRAY;
 			}
 
 			//? if >= 1.20.6 {
@@ -72,7 +73,7 @@ public abstract class DungeonFeatureMixin
 				&& VariantsAndVentures.getConfig().enableBoggedSpawners
 				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().boggedSpawnerChance
 			) {
-				return EntityType.BOGGED;
+				return VersionedEntityType.BOGGED;
 			}
 			//?}
 
@@ -82,7 +83,7 @@ public abstract class DungeonFeatureMixin
 				&& VariantsAndVentures.getConfig().enableParchedSpawners
 				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().parchedSpawnerChance
 			) {
-				return EntityType.PARCHED;
+				return VersionedEntityType.PARCHED;
 			}
 			//?}
 

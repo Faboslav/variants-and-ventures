@@ -17,14 +17,14 @@ import net.minecraft.SharedConstants;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
+
+//? if < 26.2 {
+/*import net.minecraft.world.level.block.Blocks;
+*///?}
 
 import java.util.function.Supplier;
 
-/**
- * @see EntityType
- */
 public final class VariantsAndVenturesEntityTypes
 {
 	public static final ResourcefulRegistry<EntityType<?>> ENTITY_TYPES = ResourcefulRegistries.create(BuiltInRegistries.ENTITY_TYPE, VariantsAndVentures.MOD_ID);
@@ -37,7 +37,7 @@ public final class VariantsAndVenturesEntityTypes
 
 	static {
 		SharedConstants.CHECK_DATA_FIXER_SCHEMA = false;
-		GELID = ENTITY_TYPES.register("gelid", () -> EntityType.Builder.of(GelidEntity::new, MobCategory.MONSTER).sized(0.6F, 1.95F).immuneTo(Blocks.POWDER_SNOW)/*? if >=1.21 {*/.eyeHeight(1.74F).passengerAttachments(2.075F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("gelid")));
+		GELID = ENTITY_TYPES.register("gelid", () -> EntityType.Builder.of(GelidEntity::new, MobCategory.MONSTER).sized(0.6F, 1.95F).immuneTo(/*? if >= 26.2 {*/VariantsAndVenturesTags.GELID_IMMUNE_TO/*?} else {*//*Blocks.POWDER_SNOW*//*?}*/)/*? if >=1.21 {*/.eyeHeight(1.74F).passengerAttachments(2.075F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("gelid")));
 		MURK = ENTITY_TYPES.register("murk", () -> EntityType.Builder.of(MurkEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F)/*? if >=1.21 {*/.eyeHeight(1.74F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("murk")));
 		THICKET = ENTITY_TYPES.register("thicket", () -> EntityType.Builder.of(ThicketEntity::new, MobCategory.MONSTER).sized(0.6F, 1.95F)/*? if >=1.21 {*/.eyeHeight(1.74F).passengerAttachments(2.075F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("thicket")));
 		VERDANT = ENTITY_TYPES.register("verdant", () -> EntityType.Builder.of(VerdantEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F)/*? if >=1.21 {*/.eyeHeight(1.74F).ridingOffset(-0.7F)/*?}*/.clientTrackingRange(8).build(VersionedEntityTypeResourceId.create("verdant")));

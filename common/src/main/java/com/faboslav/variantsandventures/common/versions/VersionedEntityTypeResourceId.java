@@ -1,9 +1,11 @@
 package com.faboslav.variantsandventures.common.versions;
 
+//? if >=1.21.3 {
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
+//?}
 
 public final class VersionedEntityTypeResourceId
 {

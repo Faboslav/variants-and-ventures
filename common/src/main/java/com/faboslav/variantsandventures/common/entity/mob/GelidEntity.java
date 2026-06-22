@@ -6,7 +6,7 @@ import com.faboslav.variantsandventures.common.init.VariantsAndVenturesSoundEven
 import com.faboslav.variantsandventures.common.util.AdvancementHelper;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.triggers.Criterion;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

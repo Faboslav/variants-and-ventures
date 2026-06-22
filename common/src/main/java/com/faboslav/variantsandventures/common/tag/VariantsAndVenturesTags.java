@@ -4,6 +4,7 @@ import com.faboslav.variantsandventures.common.VariantsAndVentures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 
 public final class VariantsAndVenturesTags
 {
@@ -20,8 +21,14 @@ public final class VariantsAndVenturesTags
 	public static final TagKey<Biome> HAS_THICKET = biomeTag("has_thicket");
 	public static final TagKey<Biome> HAS_VERDANT = biomeTag("has_verdant");
 
+	public static final TagKey<Block> GELID_IMMUNE_TO = blockTag("gelid_immune_to");
+
 	private static TagKey<Biome> biomeTag(String name) {
 		return TagKey.create(Registries.BIOME, VariantsAndVentures.makeID(name));
+	}
+
+	private static TagKey<Block> blockTag(String name) {
+		return TagKey.create(Registries.BLOCK, VariantsAndVentures.makeID(name));
 	}
 
 	public static void init() {

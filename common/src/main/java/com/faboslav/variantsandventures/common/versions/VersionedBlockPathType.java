@@ -5,7 +5,8 @@ import net.minecraft.world.level.pathfinder.PathType;
 //?} else {
 /*import net.minecraft.world.level.pathfinder.BlockPathTypes;
 *///?}
-public class VersionedBlockPathType
+
+public final class VersionedBlockPathType
 {
 	//? if >=1.21 {
 	public static final PathType WATER = PathType.WATER;

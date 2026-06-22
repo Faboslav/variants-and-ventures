@@ -6,7 +6,7 @@ import net.minecraft.world.entity.EntitySpawnReason;
 /*import net.minecraft.world.entity.MobSpawnType;
 *///?}
 
-public class VersionedEntitySpawnReason
+public final class VersionedEntitySpawnReason
 {
 	//? if >=1.21.3 {
 	public static final EntitySpawnReason NATURAL = EntitySpawnReason.NATURAL;

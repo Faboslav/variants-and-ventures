@@ -19,7 +19,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 
 public record SyncZombieIsShakingPacketFromServer(int zombieId, boolean isShaking) implements Packet<SyncZombieIsShakingPacketFromServer> {
 
-	public static final Identifier ID = VariantsAndVentures.makeID("sync_horse_owner_uuid_from_server");
+	public static final Identifier ID = VariantsAndVentures.makeID("sync_zombie_is_shaking_from_server");
 	public static final ClientboundPacketType<SyncZombieIsShakingPacketFromServer> TYPE = new Handler();
 
 	public static void sendToClient(Entity entity, int zombieId, boolean isShaking) {

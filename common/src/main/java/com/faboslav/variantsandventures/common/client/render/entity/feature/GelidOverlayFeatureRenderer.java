@@ -9,8 +9,6 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.Identifier;
-import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
-import net.minecraft.client.renderer.MultiBufferSource;
 
 //? if >= 1.21.9 {
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -20,7 +18,9 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 
 //? if >= 1.21.3 {
 import net.minecraft.client.renderer.entity.state.ZombieRenderState;
-//?}
+//?} else {
+/*import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
+*///?}
 
 //? if >= 1.21.3 {
 public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, GelidEntityModel<ZombieRenderState>>
