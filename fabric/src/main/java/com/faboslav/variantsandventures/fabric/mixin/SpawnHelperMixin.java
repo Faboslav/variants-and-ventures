@@ -4,12 +4,16 @@ import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.NaturalSpawner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 //? if >=1.21.3 {
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -20,24 +24,45 @@ import net.minecraft.world.entity.EntitySpawnReason;
 @Mixin(NaturalSpawner.class)
 public final class SpawnHelperMixin
 {
-	@WrapOperation(
+	@Inject(
 		method = "spawnCategoryForPosition(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkAccess;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/level/NaturalSpawner;isValidPositionForMob(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/Mob;D)Z"
-		)
+			//? if >=1.21.5 {
+			target = "Lnet/minecraft/world/entity/Mob;snapTo(DDDFF)V",
+			//?} else {
+			/*target = "Lnet/minecraft/world/entity/Mob;moveTo(DDDFF)V",
+			*///?}
+			shift = At.Shift.AFTER
+		),
+		cancellable = true
 	)
-	private static boolean variantsandventures$onEntitySpawn(
-		ServerLevel serverWorld,
-		Mob mob,
-		double d,
-		Operation<Boolean> operation
+	private static void variantsandventures$onEntitySpawn(
+		CallbackInfo ci,
+		@Local(ordinal = 0) LocalRef<Mob> mobRef
 	) {
-		if (EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(mob, serverWorld, mob.isBaby(), VersionedEntitySpawnReason.NATURAL))) {
-			return false;
+		Mob mob = mobRef.get();
+		Mob[] replacement = new Mob[1];
+
+		if (!EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(
+			mob,
+			mob.level(),
+			mob.isBaby(),
+			VersionedEntitySpawnReason.NATURAL,
+			entity -> {
+				replacement[0] = entity;
+				return true;
+			}
+		))) {
+			return;
 		}
 
-		return operation.call(serverWorld, mob, d);
+		if (replacement[0] == null) {
+			ci.cancel();
+			return;
+		}
+
+		mobRef.set(replacement[0]);
 	}
 
 	@WrapOperation(

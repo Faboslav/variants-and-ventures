@@ -11,7 +11,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 
 public final class OnEntitySpawn
@@ -98,17 +97,7 @@ public final class OnEntitySpawn
 				}
 			}
 
-			entityToSpawn.finalizeSpawn(
-				(ServerLevelAccessor) world,
-				((ServerLevelAccessor)world).getCurrentDifficultyAt(entity.blockPosition()),
-				event.spawnReason(),
-				null
-				//? < 1.21.1 {
-				/*, null
-				*///?}
-			);
-
-			boolean spawnResult = world.addFreshEntity(entityToSpawn);
+			boolean spawnResult = event.replaceWith(entityToSpawn);
 
 			if(!spawnResult) {
 				entity.discard();
