@@ -29,6 +29,9 @@ public class ThicketEntityRenderer extends AbstractZombieRenderer<ThicketEntity,
 //?}
 {
 	public static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/thicket/thicket.png");
+	//? if >= 26.1 {
+	public static final Identifier BABY_TEXTURE = VariantsAndVentures.makeID("textures/entity/thicket/thicket_baby.png");
+	//?}
 
 	public ThicketEntityRenderer(EntityRendererProvider.Context context) {
 		//? if >= 1.21.9 {
@@ -68,7 +71,11 @@ public class ThicketEntityRenderer extends AbstractZombieRenderer<ThicketEntity,
 
 	@Override
 	public Identifier getTextureLocation(ZombieRenderState state) {
-		return TEXTURE;
+		//? if >= 26.1 {
+		return state.isBaby ? BABY_TEXTURE : TEXTURE;
+		//?} else {
+		//return TEXTURE;
+		//?}
 	}
 	//?} else {
 	/*@Override

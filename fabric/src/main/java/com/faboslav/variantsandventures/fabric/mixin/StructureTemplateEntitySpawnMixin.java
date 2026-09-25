@@ -1,5 +1,6 @@
 package com.faboslav.variantsandventures.fabric.mixin;
 
+import com.faboslav.variantsandventures.common.entity.event.OnEntitySpawn;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
@@ -61,10 +62,11 @@ public class StructureTemplateEntitySpawnMixin
 					serverLevel,
 					mob.isBaby(),
 					//? if >=1.21.3 {
-					EntitySpawnReason.STRUCTURE
+					EntitySpawnReason.STRUCTURE,
 					//?} else {
-					//MobSpawnType.STRUCTURE
+					//MobSpawnType.STRUCTURE,
 					//?}
+					OnEntitySpawn::spawnEntity
 				)
 			)) {
 			ci.cancel();

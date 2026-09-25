@@ -15,6 +15,11 @@ import net.minecraft.client.model.geom.LayerDefinitions;
 import net.minecraft.client.renderer.entity.state.ZombieRenderState;
  //?}
 
+//? if >= 26.1 {
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.monster.zombie.BabyZombieModel;
+//?}
+
 //? if >= 1.21.3 {
 public class ThicketEntityModel<T extends ZombieRenderState> extends ZombieModel<T>
  //? } else {
@@ -51,4 +56,19 @@ public class ThicketEntityModel<T extends ZombieRenderState> extends ZombieModel
 		return LayerDefinition.create(mesh, 64, 32);
 	}
 	*///?}
+
+	//? if >= 26.1 {
+	public static LayerDefinition createBabyBodyLayer() {
+		return BabyZombieModel.createBodyLayer(CubeDeformation.NONE);
+	}
+
+	public static LayerDefinition createBabyOuterLayer() {
+		return BabyZombieModel.createBodyLayer(new CubeDeformation(0.25F));
+	}
+
+	public static ArmorModelSet<LayerDefinition> createBabyArmorLayers() {
+		ArmorModelSet<MeshDefinition> mesh = HumanoidModel.createBabyArmorMeshSet(LayerDefinitions.BABY_INNER_ARMOR_DEFORMATION, LayerDefinitions.BABY_OUTER_ARMOR_DEFORMATION, PartPose.ZERO);
+		return mesh.map((meshDefinition) -> LayerDefinition.create(meshDefinition, 64, 64));
+	}
+	//?}
 }

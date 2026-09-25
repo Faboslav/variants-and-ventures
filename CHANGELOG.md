@@ -1,6 +1,8 @@
 ## 1.0.27
 
 - Added murk spawn config options
+- Added new baby models and textures for gelid and thicket
+- Improved natural spawning of mob variants
 
 ## 1.0.26
 

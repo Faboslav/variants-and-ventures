@@ -19,4 +19,6 @@ mutable field net/minecraft/world/level/levelgen/structure/structures/JigsawStru
 accessible method net/minecraft/client/model/geom/ModelLayers registerArmorSet (Ljava/lang/String;)Lnet/minecraft/client/renderer/entity/ArmorModelSet;
 accessible field net/minecraft/client/model/geom/LayerDefinitions INNER_ARMOR_DEFORMATION Lnet/minecraft/client/model/geom/builders/CubeDeformation;
 accessible field net/minecraft/client/model/geom/LayerDefinitions OUTER_ARMOR_DEFORMATION Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+accessible field net/minecraft/client/model/geom/LayerDefinitions BABY_INNER_ARMOR_DEFORMATION Lnet/minecraft/client/model/geom/builders/CubeDeformation;
+accessible field net/minecraft/client/model/geom/LayerDefinitions BABY_OUTER_ARMOR_DEFORMATION Lnet/minecraft/client/model/geom/builders/CubeDeformation;
 accessible class net/minecraft/world/item/CreativeModeTab$Output

@@ -98,17 +98,7 @@ public final class OnEntitySpawn
 				}
 			}
 
-			entityToSpawn.finalizeSpawn(
-				(ServerLevelAccessor) world,
-				((ServerLevelAccessor)world).getCurrentDifficultyAt(entity.blockPosition()),
-				event.spawnReason(),
-				null
-				//? < 1.21.1 {
-				//, null
-				//?}
-			);
-
-			boolean spawnResult = world.addFreshEntity(entityToSpawn);
+			boolean spawnResult = event.spawn(entityToSpawn);
 
 			if(!spawnResult) {
 				entity.discard();
@@ -119,5 +109,21 @@ public final class OnEntitySpawn
 		}
 
 		return false;
+	}
+
+	public static boolean spawnEntity(EntitySpawnEvent event, Mob entityToSpawn) {
+		LevelAccessor world = event.worldAccess();
+
+		entityToSpawn.finalizeSpawn(
+			(ServerLevelAccessor) world,
+			((ServerLevelAccessor)world).getCurrentDifficultyAt(event.entity().blockPosition()),
+			event.spawnReason(),
+			null
+			//? < 1.21.1 {
+			//, null
+			//?}
+		);
+
+		return world.addFreshEntity(entityToSpawn);
 	}
 }

@@ -1,6 +1,7 @@
 package com.faboslav.variantsandventures.neoforge;
 
 import com.faboslav.variantsandventures.common.VariantsAndVentures;
+import com.faboslav.variantsandventures.common.entity.event.OnEntitySpawn;
 import com.faboslav.variantsandventures.common.events.AddItemGroupEntriesEvent;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
@@ -59,7 +60,7 @@ public final class VariantsAndVenturesNeoForge
 			return;
 		}
 
-		boolean spawn = EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(event.getEntity(), event.getLevel(), event.getEntity().isBaby(), event.getSpawnType()), event.isCanceled());
+		boolean spawn = EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(event.getEntity(), event.getLevel(), event.getEntity().isBaby(), event.getSpawnType(), OnEntitySpawn::spawnEntity), event.isCanceled());
 
 		if(spawn) {
 			event.setSpawnCancelled(true);

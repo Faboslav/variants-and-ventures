@@ -28,6 +28,9 @@ public class ThicketOverlayFeatureRenderer extends RenderLayer<ZombieRenderState
 //?}
 {
 	private static final Identifier OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/thicket/thicket_overlay.png");
+	//? if >= 26.1 {
+	private static final Identifier BABY_OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/thicket/thicket_baby_overlay.png");
+	//?}
 	private final ThicketEntityModel model;
 	//? if >=1.21.3 {
 	private final ThicketEntityModel babyModel;
@@ -61,8 +64,11 @@ public class ThicketOverlayFeatureRenderer extends RenderLayer<ZombieRenderState
 		ThicketEntityModel thicketModel = renderState.isBaby ? this.babyModel : this.model;
 		//?}
 
-		//? if >= 1.21.9 {
-		coloredCutoutModelCopyLayerRender(thicketModel, OVERLAY_TEXTURE, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
+		//? if >= 26.1 {
+		Identifier overlayTexture = renderState.isBaby ? BABY_OVERLAY_TEXTURE : OVERLAY_TEXTURE;
+		coloredCutoutModelCopyLayerRender(thicketModel, overlayTexture, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
+		//?} else if >= 1.21.9 {
+		//coloredCutoutModelCopyLayerRender(thicketModel, OVERLAY_TEXTURE, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
 		//?} else if >= 1.21.3 {
 		//coloredCutoutModelCopyLayerRender(thicketModel, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, renderState, -1);
 		//?} else if >= 1.21.1 {

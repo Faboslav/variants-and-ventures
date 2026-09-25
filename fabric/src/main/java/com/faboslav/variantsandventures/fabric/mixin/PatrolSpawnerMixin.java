@@ -1,5 +1,6 @@
 package com.faboslav.variantsandventures.fabric.mixin;
 
+import com.faboslav.variantsandventures.common.entity.event.OnEntitySpawn;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
@@ -49,10 +50,11 @@ public class PatrolSpawnerMixin
 				serverLevel,
 				patrollingMonster.isBaby(),
 				//? if >=1.21.3 {
-				EntitySpawnReason.STRUCTURE
+				EntitySpawnReason.STRUCTURE,
 				 //?} else {
-				//MobSpawnType.STRUCTURE
+				//MobSpawnType.STRUCTURE,
 				//?}
+				OnEntitySpawn::spawnEntity
 			)
 		)) {
             cir.setReturnValue(false);

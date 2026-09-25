@@ -1,9 +1,12 @@
 package com.faboslav.variantsandventures.fabric.mixin;
 
+import com.faboslav.variantsandventures.common.entity.event.OnEntitySpawn;
 import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.versions.VersionedEntitySpawnReason;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.LevelAccessor;
@@ -31,13 +34,19 @@ public final class SpawnHelperMixin
 		ServerLevel serverWorld,
 		Mob mob,
 		double d,
-		Operation<Boolean> operation
+		Operation<Boolean> operation,
+		@Local(ordinal = 0) LocalRef<Mob> mobRef
 	) {
-		if (EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(mob, serverWorld, mob.isBaby(), VersionedEntitySpawnReason.NATURAL))) {
+		boolean spawn = EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(mob, serverWorld, mob.isBaby(), VersionedEntitySpawnReason.NATURAL, (event, entityToSpawn) -> {
+			mobRef.set(entityToSpawn);
+			return true;
+		}));
+
+		if (spawn && mobRef.get() == mob) {
 			return false;
 		}
 
-		return operation.call(serverWorld, mob, d);
+		return operation.call(serverWorld, mobRef.get(), d);
 	}
 
 	@WrapOperation(
@@ -61,7 +70,7 @@ public final class SpawnHelperMixin
 		 //?}
 		Operation<Boolean> operation
 	) {
-		if (EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(instance, worldAccess, instance.isBaby(), spawnReason))) {
+		if (EntitySpawnEvent.EVENT.invoke(new EntitySpawnEvent(instance, worldAccess, instance.isBaby(), spawnReason, OnEntitySpawn::spawnEntity))) {
 			return false;
 		}
 

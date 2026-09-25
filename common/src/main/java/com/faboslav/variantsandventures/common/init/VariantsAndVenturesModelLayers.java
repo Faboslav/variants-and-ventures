@@ -15,8 +15,8 @@ import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 //?}
 
-//? if >= 1.21.3 {
-import net.minecraft.client.model.monster.zombie.ZombieModel;
+//? if >= 1.21.3 && < 26.1 {
+//import net.minecraft.client.model.monster.zombie.ZombieModel;
 //?}
 
 /**
@@ -83,10 +83,8 @@ public final class VariantsAndVenturesModelLayers
 
 		//? if >=1.21.9 {
 		registerArmorLayers(event, GELID_ARMOR, GelidEntityModel.createArmorLayers());
-		registerArmorLayers(event, GELID_BABY_ARMOR, GelidEntityModel.createArmorLayers().map((layerDefinition) -> layerDefinition.apply(ZombieModel.BABY_TRANSFORMER)));
 		registerArmorLayers(event, MURK_ARMOR, MurkEntityModel.createArmorLayers());
 		registerArmorLayers(event, THICKET_ARMOR, ThicketEntityModel.createArmorLayers());
-		registerArmorLayers(event, THICKET_BABY_ARMOR, ThicketEntityModel.createArmorLayers().map((layerDefinition) -> layerDefinition.apply(ZombieModel.BABY_TRANSFORMER)));
 		registerArmorLayers(event, VERDANT_ARMOR, LayerDefinitionFactory.createArmorLayers());
 		//?} else {
 		/*event.register(GELID_INNER_ARMOR, GelidEntityModel::createInnerArmorLayer);
@@ -100,19 +98,30 @@ public final class VariantsAndVenturesModelLayers
 		*///?}
 		
 
-		//? if >= 1.21.3 && < 1.21.9 {
+		//? if >= 26.1 {
+		registerArmorLayers(event, GELID_BABY_ARMOR, GelidEntityModel.createBabyArmorLayers());
+		registerArmorLayers(event, THICKET_BABY_ARMOR, ThicketEntityModel.createBabyArmorLayers());
+		//?} else if >= 1.21.9 {
+		/*registerArmorLayers(event, GELID_BABY_ARMOR, GelidEntityModel.createArmorLayers().map((layerDefinition) -> layerDefinition.apply(ZombieModel.BABY_TRANSFORMER)));
+		registerArmorLayers(event, THICKET_BABY_ARMOR, ThicketEntityModel.createArmorLayers().map((layerDefinition) -> layerDefinition.apply(ZombieModel.BABY_TRANSFORMER)));
+		*///?} else if >= 1.21.3 {
 		/*event.register(GELID_BABY_INNER_ARMOR, () -> GelidEntityModel.createInnerArmorLayer().apply(ZombieModel.BABY_TRANSFORMER));
 		event.register(GELID_BABY_OUTER_ARMOR, () -> GelidEntityModel.createOuterArmorLayer().apply(ZombieModel.BABY_TRANSFORMER));
 		event.register(THICKET_BABY_INNER_ARMOR, () -> ThicketEntityModel.createInnerArmorLayer().apply(ZombieModel.BABY_TRANSFORMER));
 		event.register(THICKET_BABY_OUTER_ARMOR, () -> ThicketEntityModel.createOuterArmorLayer().apply(ZombieModel.BABY_TRANSFORMER));
 		*///?}
 
-		//? if >= 1.21.3 {
-		event.register(GELID_BABY, () -> GelidEntityModel.createBodyLayer().apply(ZombieModel.BABY_TRANSFORMER));
+		//? if >= 26.1 {
+		event.register(GELID_BABY, GelidEntityModel::createBabyBodyLayer);
+		event.register(GELID_BABY_OUTER, GelidEntityModel::createBabyOuterLayer);
+		event.register(THICKET_BABY, ThicketEntityModel::createBabyBodyLayer);
+		event.register(THICKET_BABY_OUTER, ThicketEntityModel::createBabyOuterLayer);
+		//?} else if >= 1.21.3 {
+		/*event.register(GELID_BABY, () -> GelidEntityModel.createBodyLayer().apply(ZombieModel.BABY_TRANSFORMER));
 		event.register(GELID_BABY_OUTER, () -> GelidEntityModel.createOuterLayer().apply(ZombieModel.BABY_TRANSFORMER));
 		event.register(THICKET_BABY, () -> ThicketEntityModel.createBodyLayer().apply(ZombieModel.BABY_TRANSFORMER));
 		event.register(THICKET_BABY_OUTER, () -> ThicketEntityModel.createOuterLayer().apply(ZombieModel.BABY_TRANSFORMER));
-		//?}
+		*///?}
 	}
 
 	//? if >=1.21.9 {

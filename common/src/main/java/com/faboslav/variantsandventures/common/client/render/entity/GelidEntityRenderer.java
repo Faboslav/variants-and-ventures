@@ -29,6 +29,9 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Zom
 //?}
 {
 	public static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
+	//? if >= 26.1 {
+	public static final Identifier BABY_TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid_baby.png");
+	//?}
 
 	public GelidEntityRenderer(EntityRendererProvider.Context context) {
 		//? if >= 1.21.9 {
@@ -68,7 +71,11 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Zom
 
 	@Override
 	public Identifier getTextureLocation(ZombieRenderState state) {
-		return TEXTURE;
+		//? if >= 26.1 {
+		return state.isBaby ? BABY_TEXTURE : TEXTURE;
+		//?} else {
+		//return TEXTURE;
+		//?}
 	}
 	//?} else {
 	/*@Override

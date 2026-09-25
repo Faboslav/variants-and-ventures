@@ -18,10 +18,20 @@ import net.minecraft.world.entity.EntitySpawnReason;
  * <a href="https://github.com/Team-Resourceful/ResourcefulLib">https://github.com/Team-Resourceful/ResourcefulLib</a>
  */
 //? if >=1.21.3 {
-public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, EntitySpawnReason spawnReason)
+public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, EntitySpawnReason spawnReason, Spawner spawner)
 //?} else {
-//public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, MobSpawnType spawnReason)
+//public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, MobSpawnType spawnReason, Spawner spawner)
 //?}
 {
 	public static final CancellableEventHandler<EntitySpawnEvent> EVENT = new CancellableEventHandler<>();
+
+	public boolean spawn(Mob entityToSpawn) {
+		return spawner.spawn(this, entityToSpawn);
+	}
+
+	@FunctionalInterface
+	public interface Spawner
+	{
+		boolean spawn(EntitySpawnEvent event, Mob entityToSpawn);
+	}
 }

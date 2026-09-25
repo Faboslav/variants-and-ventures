@@ -29,6 +29,9 @@ public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, 
 //?}
 {
 	private static final Identifier OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid_overlay.png");
+	//? if >= 26.1 {
+	private static final Identifier BABY_OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid_baby_overlay.png");
+	//?}
 	private final GelidEntityModel model;
 	//? if >=1.21.3 {
 	private final GelidEntityModel babyModel;
@@ -62,8 +65,11 @@ public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, 
 		GelidEntityModel gelidModel = renderState.isBaby ? this.babyModel : this.model;
 		//?}
 
-		//? if >= 1.21.9 {
-		coloredCutoutModelCopyLayerRender(gelidModel, OVERLAY_TEXTURE, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
+		//? if >= 26.1 {
+		Identifier overlayTexture = renderState.isBaby ? BABY_OVERLAY_TEXTURE : OVERLAY_TEXTURE;
+		coloredCutoutModelCopyLayerRender(gelidModel, overlayTexture, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
+		//?} else if >= 1.21.9 {
+		//coloredCutoutModelCopyLayerRender(gelidModel, OVERLAY_TEXTURE, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
 		 //?} else if >= 1.21.3 {
 		//coloredCutoutModelCopyLayerRender(gelidModel, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, renderState, -1);
 		 //?} else if >= 1.21.1 {
