@@ -1,3 +1,7 @@
+## 1.0.28
+
+- Fixed spawn chance config options being ignored
+
 ## 1.0.27
 
 - Added murk spawn config options

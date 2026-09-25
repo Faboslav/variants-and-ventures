@@ -38,7 +38,7 @@ public final class OnEntitySpawn
 
 			if (
 				!spawnCondition
-				|| random.nextFloat() >= spawnChanceCondition
+				|| random.nextInt(100) >= spawnChanceCondition
 				|| entity.blockPosition().getY() < minimumSpawnYLevel
 			) {
 				return false;

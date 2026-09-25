@@ -36,7 +36,7 @@ public abstract class DungeonFeatureMixin
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_HUSK)
 				&& VariantsAndVentures.getConfig().enableHuskSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().huskSpawnerChance
+				&& random.get().nextInt(100) < VariantsAndVentures.getConfig().huskSpawnerChance
 			) {
 				return VersionedEntityType.HUSK;
 			}
@@ -45,7 +45,7 @@ public abstract class DungeonFeatureMixin
 				biome.is(VariantsAndVenturesTags.HAS_GELID)
 				&& VariantsAndVentures.getConfig().enableGelid
 				&& VariantsAndVentures.getConfig().enableGelidSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().gelidSpawnerChance
+				&& random.get().nextInt(100) < VariantsAndVentures.getConfig().gelidSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.GELID.get();
 			}
@@ -54,7 +54,7 @@ public abstract class DungeonFeatureMixin
 				biome.is(VariantsAndVenturesTags.HAS_THICKET)
 				&& VariantsAndVentures.getConfig().enableThicket
 				&& VariantsAndVentures.getConfig().enableThicketSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().thicketSpawnerChance
+				&& random.get().nextInt(100) < VariantsAndVentures.getConfig().thicketSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.THICKET.get();
 			}
@@ -62,7 +62,7 @@ public abstract class DungeonFeatureMixin
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_STRAY)
 				&& VariantsAndVentures.getConfig().enableStraySpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().straySpawnerChance
+				&& random.get().nextInt(100) < VariantsAndVentures.getConfig().straySpawnerChance
 			) {
 				return VersionedEntityType.STRAY;
 			}
@@ -71,7 +71,7 @@ public abstract class DungeonFeatureMixin
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_BOGGED)
 				&& VariantsAndVentures.getConfig().enableBoggedSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().boggedSpawnerChance
+				&& random.get().nextInt(100) < VariantsAndVentures.getConfig().boggedSpawnerChance
 			) {
 				return VersionedEntityType.BOGGED;
 			}
@@ -81,7 +81,7 @@ public abstract class DungeonFeatureMixin
 			if (
 				biome.is(VariantsAndVenturesTags.HAS_PARCHED)
 				&& VariantsAndVentures.getConfig().enableParchedSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().parchedSpawnerChance
+				&& random.get().nextInt(100) < VariantsAndVentures.getConfig().parchedSpawnerChance
 			) {
 				return VersionedEntityType.PARCHED;
 			}
@@ -91,7 +91,7 @@ public abstract class DungeonFeatureMixin
 				biome.is(VariantsAndVenturesTags.HAS_VERDANT)
 				&& VariantsAndVentures.getConfig().enableVerdant
 				&& VariantsAndVentures.getConfig().enableVerdantSpawners
-				&& random.get().nextInt(100) <= VariantsAndVentures.getConfig().verdantSpawnerChance
+				&& random.get().nextInt(100) < VariantsAndVentures.getConfig().verdantSpawnerChance
 			) {
 				return VariantsAndVenturesEntityTypes.VERDANT.get();
 			}
