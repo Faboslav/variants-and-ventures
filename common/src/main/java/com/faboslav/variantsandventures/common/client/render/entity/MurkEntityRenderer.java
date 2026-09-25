@@ -28,8 +28,8 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 //? if >= 1.21.3 {
 public class MurkEntityRenderer extends AbstractSkeletonRenderer<MurkEntity, MurkEntityRenderState>
  //? } else {
-/*public class MurkEntityRenderer extends HumanoidMobRenderer<MurkEntity, MurkEntityModel>
-*///?}
+//public class MurkEntityRenderer extends HumanoidMobRenderer<MurkEntity, MurkEntityModel>
+//?}
 {
 	public static final Map<MurkEntity.Variant, Identifier> TEXTURES = Util.make(Maps.newHashMap(), (textures) -> {
 		for (MurkEntity.Variant variant : MurkEntity.Variant.VARIANTS) {
@@ -41,8 +41,8 @@ public class MurkEntityRenderer extends AbstractSkeletonRenderer<MurkEntity, Mur
 		//? if >= 1.21.9 {
 		super(context, VariantsAndVenturesModelLayers.MURK_ARMOR, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK)));
 		//?} else if >= 1.21.3 {
-		/*super(context, VariantsAndVenturesModelLayers.MURK_INNER_ARMOR, VariantsAndVenturesModelLayers.MURK_OUTER_ARMOR, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK)));
-		*///?} else {
+		//super(context, VariantsAndVenturesModelLayers.MURK_INNER_ARMOR, VariantsAndVenturesModelLayers.MURK_OUTER_ARMOR, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK)));
+		//?} else {
 		/*super(context, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK)), 0.5F);
 		this.addLayer(new HumanoidArmorLayer<>(this, new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK_INNER_ARMOR)), new MurkEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.MURK_OUTER_ARMOR)), context.getModelManager()));
 		*///?}

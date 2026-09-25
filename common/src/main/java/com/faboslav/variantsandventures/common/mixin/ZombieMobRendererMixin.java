@@ -14,8 +14,8 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 //? if >= 1.21.3 {
 public abstract class ZombieMobRendererMixin<T extends Mob, S extends LivingEntityRenderState, M extends EntityModel<? super S>> extends ZombieLivingEntityRendererMixin<T, S, M>
 //?} else {
-/*public abstract class ZombieMobRendererMixin<T extends Mob, M extends EntityModel<T>> extends ZombieLivingEntityRendererMixin<T, M>
-*///?}
+//public abstract class ZombieMobRendererMixin<T extends Mob, M extends EntityModel<T>> extends ZombieLivingEntityRendererMixin<T, M>
+//?}
 {
 	protected ZombieMobRendererMixin(EntityRendererProvider.Context context) {
 		super(context);

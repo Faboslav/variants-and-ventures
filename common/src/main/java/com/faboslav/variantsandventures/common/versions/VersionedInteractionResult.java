@@ -11,8 +11,8 @@ public class VersionedInteractionResult
 		//? if >=1.21.3 {
 		interactionResult = InteractionResult.SUCCESS;
 		//?} else {
-		/*interactionResult = InteractionResult.sidedSuccess(entity.level().isClientSide());
-		 *///?}
+		//interactionResult = InteractionResult.sidedSuccess(entity.level().isClientSide());
+		 //?}
 
 		return interactionResult;
 	}

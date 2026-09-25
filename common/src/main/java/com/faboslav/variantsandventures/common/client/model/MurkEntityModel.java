@@ -13,14 +13,14 @@ import net.minecraft.client.model.geom.LayerDefinitions;
 //? if >=1.21.3 {
 import com.faboslav.variantsandventures.common.client.render.entity.state.MurkEntityRenderState;
 //?} else {
-/*import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
-*///?}
+//import com.faboslav.variantsandventures.common.entity.mob.MurkEntity;
+//?}
 
 //? if >= 1.21.3 {
 public class MurkEntityModel extends SkeletonModel<MurkEntityRenderState>
 //?} else {
-/*public class MurkEntityModel extends SkeletonModel<MurkEntity>
-*///?}
+//public class MurkEntityModel extends SkeletonModel<MurkEntity>
+//?}
 {
 	private final ModelPart corals;
 

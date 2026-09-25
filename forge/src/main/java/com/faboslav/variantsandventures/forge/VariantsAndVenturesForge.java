@@ -6,6 +6,7 @@ import com.faboslav.variantsandventures.common.events.entity.EntitySpawnEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAttributesEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
+import com.faboslav.variantsandventures.forge.init.VariantsAndVenturesBiomeModifiers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -30,6 +31,7 @@ public final class VariantsAndVenturesForge
 		IEventBus eventBus = MinecraftForge.EVENT_BUS;
 
 		VariantsAndVentures.init();
+		VariantsAndVenturesBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 
 		if (FMLEnvironment.dist == Dist.CLIENT)
 		{

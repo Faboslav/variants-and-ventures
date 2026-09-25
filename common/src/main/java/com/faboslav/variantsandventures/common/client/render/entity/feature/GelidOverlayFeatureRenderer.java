@@ -13,20 +13,20 @@ import net.minecraft.resources.Identifier;
 //? if >= 1.21.9 {
 import net.minecraft.client.renderer.SubmitNodeCollector;
 //?} else {
-/*import net.minecraft.client.renderer.MultiBufferSource;
-*///?}
+//import net.minecraft.client.renderer.MultiBufferSource;
+//?}
 
 //? if >= 1.21.3 {
 import net.minecraft.client.renderer.entity.state.ZombieRenderState;
 //?} else {
-/*import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
-*///?}
+//import com.faboslav.variantsandventures.common.entity.mob.GelidEntity;
+//?}
 
 //? if >= 1.21.3 {
 public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, GelidEntityModel<ZombieRenderState>>
 //?} else {
-/*public class GelidOverlayFeatureRenderer<T extends GelidEntity> extends RenderLayer<T, GelidEntityModel<T>>
-*///?}
+//public class GelidOverlayFeatureRenderer<T extends GelidEntity> extends RenderLayer<T, GelidEntityModel<T>>
+//?}
 {
 	private static final Identifier OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid_overlay.png");
 	private final GelidEntityModel model;
@@ -53,10 +53,10 @@ public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, 
 	//? if >= 1.21.9 {
 	public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, ZombieRenderState renderState, float yRot, float xRot)
 	//?} else if >= 1.21.3 {
-	/*public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ZombieRenderState renderState, float yRot, float xRot)
-	*///?} else {
-	/*public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T gelid, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch)
-	*///?}
+	//public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ZombieRenderState renderState, float yRot, float xRot)
+	//?} else {
+	//public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T gelid, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch)
+	//?}
 	{
 		//? if >= 1.21.3 {
 		GelidEntityModel gelidModel = renderState.isBaby ? this.babyModel : this.model;
@@ -65,11 +65,11 @@ public class GelidOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, 
 		//? if >= 1.21.9 {
 		coloredCutoutModelCopyLayerRender(gelidModel, OVERLAY_TEXTURE, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
 		 //?} else if >= 1.21.3 {
-		/*coloredCutoutModelCopyLayerRender(gelidModel, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, renderState, -1);
-		 *///?} else if >= 1.21.1 {
-		/*coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, gelid, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, -1);
-		*///?} else {
-		/*coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, gelid, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, 1.0F, 1.0F, 1.0F);
-		 *///?}
+		//coloredCutoutModelCopyLayerRender(gelidModel, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, renderState, -1);
+		 //?} else if >= 1.21.1 {
+		//coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, gelid, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, -1);
+		//?} else {
+		//coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, gelid, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, 1.0F, 1.0F, 1.0F);
+		 //?}
 	}
 }

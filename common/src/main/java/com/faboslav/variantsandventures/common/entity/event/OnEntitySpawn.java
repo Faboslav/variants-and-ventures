@@ -60,8 +60,8 @@ public final class OnEntitySpawn
 			//? if >=1.21.5 {
 			entityToSpawn.snapTo(entity.getX(), entity.getY(), entity.getZ(), entityToSpawn.getRandom().nextFloat() * 360.0F, 0.0F);
 			//?} else {
-			/*entityToSpawn.moveTo(entity.getX(), entity.getY(), entity.getZ(), entityToSpawn.getRandom().nextFloat() * 360.0F, 0.0F);
-			*///?}
+			//entityToSpawn.moveTo(entity.getX(), entity.getY(), entity.getZ(), entityToSpawn.getRandom().nextFloat() * 360.0F, 0.0F);
+			//?}
 
 			entityToSpawn.copyPosition(entity);
 			entityToSpawn.yBodyRotO = entity.yBodyRotO;
@@ -70,7 +70,7 @@ public final class OnEntitySpawn
 			entityToSpawn.yHeadRot = entity.yHeadRot;
 			entityToSpawn.setBaby(entity.isBaby());
 			entityToSpawn.setNoAi(entity.isNoAi());
-			entityToSpawn.setInvulnerable(entity.isInvulnerable());
+			entityToSpawn.setPermanentlyInvulnerable(entity.isPermanentlyInvulnerable());
 
 			if(entity.hasCustomName()) {
 				entityToSpawn.setCustomName(entity.getCustomName());
@@ -92,8 +92,8 @@ public final class OnEntitySpawn
 					//? if >= 1.21.5 {
 					dropChance = entity.getDropChances().byEquipment(equipmentSlot);
 					//?} else {
-					/*dropChance = ((MobAccessor) entity).variantsandventures$getEquipmentDropChance(equipmentSlot);
-					*///?}
+					//dropChance = ((MobAccessor) entity).variantsandventures$getEquipmentDropChance(equipmentSlot);
+					//?}
 					entityToSpawn.setDropChance(equipmentSlot, dropChance);
 				}
 			}
@@ -104,8 +104,8 @@ public final class OnEntitySpawn
 				event.spawnReason(),
 				null
 				//? < 1.21.1 {
-				/*, null
-				*///?}
+				//, null
+				//?}
 			);
 
 			boolean spawnResult = world.addFreshEntity(entityToSpawn);

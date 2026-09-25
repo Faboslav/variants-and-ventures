@@ -25,8 +25,8 @@ import net.minecraft.client.renderer.entity.ArmorModelSet;
 //? if >= 1.21.3 {
 public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, ZombieRenderState, GelidEntityModel<ZombieRenderState>>
 //? } else {
-/*public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, GelidEntityModel<GelidEntity>>
-*///?}
+//public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, GelidEntityModel<GelidEntity>>
+//?}
 {
 	public static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/gelid/gelid.png");
 
@@ -122,7 +122,7 @@ public class GelidEntityRenderer extends AbstractZombieRenderer<GelidEntity, Zom
 		float h = gelid.getSwimAmount(tickDelta);
 		if (h > 0.0F) {
 			float angle = Mth.lerp(h, gelid.getXRot(), -10.0F - gelid.getXRot());
-			matrices.mulPose(Axis.XP.rotationDegrees(angle));
+			matrices.rotate(Axis.XP.rotationDegrees(angle));
 		}
 	}
 	*///?}

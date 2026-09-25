@@ -85,6 +85,21 @@ public final class VariantsAndVenturesConfig
 	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
 	public boolean enableMurkSpawns = true;
 
+	@SerialEntry()
+	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
+	@IntSlider(min = 0, max = 100, step = 1)
+	public int murkSpawnWeight = 4;
+
+	@SerialEntry()
+	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
+	@IntSlider(min = 0, max = 100, step = 1)
+	public int murkSpawnMinGroupSize = 1;
+
+	@SerialEntry()
+	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
+	@IntSlider(min = 0, max = 100, step = 1)
+	public int murkSpawnMaxGroupSize = 1;
+
 	//? if >= 1.21 {
 	@SerialEntry()
 	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)

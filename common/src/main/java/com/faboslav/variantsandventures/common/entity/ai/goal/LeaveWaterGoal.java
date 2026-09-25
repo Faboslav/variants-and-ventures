@@ -18,8 +18,8 @@ public final class LeaveWaterGoal extends MoveToBlockGoal
 		//? if >=1.21.5 {
 		var isDay = this.murk.level().isBrightOutside();
 		//?} else {
-		/*var isDay = this.murk.level().isDay();
-		*///?}
+		//var isDay = this.murk.level().isDay();
+		//?}
 
 		return super.canUse() && !isDay && this.murk.isInWater() && this.murk.getY() >= (double) (this.murk.level().getSeaLevel() - 3);
 	}

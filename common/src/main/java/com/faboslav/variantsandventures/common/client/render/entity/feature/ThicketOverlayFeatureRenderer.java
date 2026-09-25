@@ -12,20 +12,20 @@ import net.minecraft.resources.Identifier;
 //? if >= 1.21.9 {
 import net.minecraft.client.renderer.SubmitNodeCollector;
 //?} else {
-/*import net.minecraft.client.renderer.MultiBufferSource;
-*///?}
+//import net.minecraft.client.renderer.MultiBufferSource;
+//?}
 
 //? if >= 1.21.3 {
 import net.minecraft.client.renderer.entity.state.ZombieRenderState;
 //?} else {
-/*import com.faboslav.variantsandventures.common.entity.mob.ThicketEntity;
-*///?}
+//import com.faboslav.variantsandventures.common.entity.mob.ThicketEntity;
+//?}
 
 //? if >= 1.21.3 {
 public class ThicketOverlayFeatureRenderer extends RenderLayer<ZombieRenderState, ThicketEntityModel<ZombieRenderState>>
 //?} else {
-/*public class ThicketOverlayFeatureRenderer<T extends ThicketEntity> extends RenderLayer<T, ThicketEntityModel<T>>
-*///?}
+//public class ThicketOverlayFeatureRenderer<T extends ThicketEntity> extends RenderLayer<T, ThicketEntityModel<T>>
+//?}
 {
 	private static final Identifier OVERLAY_TEXTURE = VariantsAndVentures.makeID("textures/entity/thicket/thicket_overlay.png");
 	private final ThicketEntityModel model;
@@ -52,10 +52,10 @@ public class ThicketOverlayFeatureRenderer extends RenderLayer<ZombieRenderState
 	//? if >= 1.21.9 {
 	public void submit(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int packedLight, ZombieRenderState renderState, float yRot, float xRot)
 	//?} else if >= 1.21.3 {
-	/*public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ZombieRenderState renderState, float yRot, float xRot)
-	*///?} else {
-	/*public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T thicket, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch)
-	*///?}
+	//public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, ZombieRenderState renderState, float yRot, float xRot)
+	//?} else {
+	//public void render(PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, T thicket, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch)
+	//?}
 	{
 		//? if >= 1.21.3 {
 		ThicketEntityModel thicketModel = renderState.isBaby ? this.babyModel : this.model;
@@ -64,11 +64,11 @@ public class ThicketOverlayFeatureRenderer extends RenderLayer<ZombieRenderState
 		//? if >= 1.21.9 {
 		coloredCutoutModelCopyLayerRender(thicketModel, OVERLAY_TEXTURE, poseStack, submitNodeCollector, packedLight, renderState, -1, 1);
 		//?} else if >= 1.21.3 {
-		/*coloredCutoutModelCopyLayerRender(thicketModel, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, renderState, -1);
-		*///?} else if >= 1.21.1 {
-		/*coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, -1);
-		*///?} else {
-		/*coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, 1.0F, 1.0F, 1.0F);
-		*///?}
+		//coloredCutoutModelCopyLayerRender(thicketModel, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, renderState, -1);
+		//?} else if >= 1.21.1 {
+		//coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, -1);
+		//?} else {
+		//coloredCutoutModelCopyLayerRender(this.getParentModel(), this.model, OVERLAY_TEXTURE, poseStack, bufferSource, packedLight, thicket, limbAngle, limbDistance, animationProgress, headYaw, headPitch, tickDelta, 1.0F, 1.0F, 1.0F);
+		//?}
 	}
 }

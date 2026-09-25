@@ -14,8 +14,8 @@ import net.minecraft.world.entity.monster.zombie.Zombie;
 //? if >= 1.21.1 {
 import net.minecraft.network.RegistryFriendlyByteBuf;
 //?} else {
-/*import net.minecraft.network.FriendlyByteBuf;
-*///?}
+//import net.minecraft.network.FriendlyByteBuf;
+//?}
 
 public record SyncZombieIsShakingPacketFromServer(int zombieId, boolean isShaking) implements Packet<SyncZombieIsShakingPacketFromServer> {
 
@@ -39,8 +39,8 @@ public record SyncZombieIsShakingPacketFromServer(int zombieId, boolean isShakin
 			//? if >= 1.21.1 {
 			RegistryFriendlyByteBuf buffer
 			//?} else {
-			/*FriendlyByteBuf buffer
-			 *///?}
+			//FriendlyByteBuf buffer
+			 //?}
 		) {
 			buffer.writeVarInt(message.zombieId());
 			buffer.writeBoolean(message.isShaking());
@@ -51,8 +51,8 @@ public record SyncZombieIsShakingPacketFromServer(int zombieId, boolean isShakin
 			//? if >= 1.21.1 {
 			RegistryFriendlyByteBuf buffer
 			//?} else {
-			/*FriendlyByteBuf buffer
-			*///?}
+			//FriendlyByteBuf buffer
+			//?}
 		) {
 			return new SyncZombieIsShakingPacketFromServer(buffer.readVarInt(), buffer.readBoolean());
 		}

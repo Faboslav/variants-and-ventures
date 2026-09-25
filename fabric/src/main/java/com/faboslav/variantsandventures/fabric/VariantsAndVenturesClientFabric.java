@@ -26,7 +26,7 @@ public final class VariantsAndVenturesClientFabric implements ClientModInitializ
 		RegisterEntityRenderersEvent.EVENT.invoke(new RegisterEntityRenderersEvent(EntityRendererRegistry::register));
 		RegisterEntityLayersEvent.EVENT.invoke(new RegisterEntityLayersEvent((type, supplier) -> ModelLayerRegistry.registerModelLayer(type, supplier::get)));
 		//? if < 1.21.4 {
-		/*RegisterItemColorEvent.EVENT.invoke(new RegisterItemColorEvent(ColorProviderRegistry.ITEM::register));
-		*///?}
+		//RegisterItemColorEvent.EVENT.invoke(new RegisterItemColorEvent(ColorProviderRegistry.ITEM::register));
+		//?}
 	}
 }

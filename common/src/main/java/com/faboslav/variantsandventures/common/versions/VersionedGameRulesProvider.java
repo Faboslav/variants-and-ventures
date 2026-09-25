@@ -12,8 +12,8 @@ public final class VersionedGameRulesProvider
 		//? if >=1.21.3 {
 		gameRules = ((ServerLevel)entity.level()).getGameRules();
 		//?} else {
-		/*gameRules = entity.level().getGameRules();
-		 *///?}
+		//gameRules = entity.level().getGameRules();
+		 //?}
 
 		return gameRules;
 	}

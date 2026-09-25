@@ -24,12 +24,12 @@ import net.minecraft.resources.ResourceKey;
 //?}
 
 //? if < 1.21.1 {
-/*import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
-*///?}
+//import com.faboslav.variantsandventures.common.items.DispenserAddedSpawnEgg;
+//?}
 
 //? if < 1.21.4 {
-/*import com.faboslav.variantsandventures.common.events.item.RegisterItemColorEvent;
-*///?}
+//import com.faboslav.variantsandventures.common.events.item.RegisterItemColorEvent;
+//?}
 
 /**
  * @see Items
@@ -55,14 +55,14 @@ public final class VariantsAndVenturesItems
 			//? if >= 1.21.9 {
 			var spawnEgg = new SpawnEggItem(new Item.Properties().spawnEgg(typeIn.get()).stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
 			//?} else if >=1.21.4 {
-			/*var spawnEgg = new SpawnEggItem(typeIn.get(), new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
-			*///?} else =1.21.3 {
+			//var spawnEgg = new SpawnEggItem(typeIn.get(), new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeID(id))));
+			//?} else =1.21.3 {
 			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64).setId(ResourceKey.create(Registries.ITEM, VariantsAndVentures.makeId(id))));
 			/*///?} else >=1.21.1 {
-			/*var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
-			*///?} else {
-			/*var spawnEgg = new DispenserAddedSpawnEgg(typeIn, primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
-			*///?}
+			//var spawnEgg = new SpawnEggItem(typeIn.get(), primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
+			//?} else {
+			//var spawnEgg = new DispenserAddedSpawnEgg(typeIn, primaryColorIn, secondaryColorIn, new Item.Properties().stacksTo(64));
+			//?}
 
 			SPAWN_EGGS.add(new Pair<>(typeIn, spawnEgg));
 

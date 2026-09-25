@@ -14,8 +14,8 @@ import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 //? if >= 1.21.3 {
 public abstract class ZombieHumanoidMobRendererMixin<T extends Mob, S extends HumanoidRenderState, M extends HumanoidModel<S>> extends ZombieMobRendererMixin<T, S, M>
 //?} else {
-/*public abstract class ZombieHumanoidMobRendererMixin<T extends Mob, M extends HumanoidModel<T>> extends ZombieMobRendererMixin<T, M>
-*///?}
+//public abstract class ZombieHumanoidMobRendererMixin<T extends Mob, M extends HumanoidModel<T>> extends ZombieMobRendererMixin<T, M>
+//?}
 {
 	protected ZombieHumanoidMobRendererMixin(EntityRendererProvider.Context context) {
 		super(context);

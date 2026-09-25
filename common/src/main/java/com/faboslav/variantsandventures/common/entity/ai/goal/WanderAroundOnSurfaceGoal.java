@@ -31,8 +31,8 @@ public final class WanderAroundOnSurfaceGoal extends Goal
 		//? if >=1.21.5 {
 		var isDay = this.world.isBrightOutside();
 		//?} else {
-		/*var isDay = this.world.isDay();
-		*///?}
+		//var isDay = this.world.isDay();
+		//?}
 
 		if (!isDay) {
 			return false;

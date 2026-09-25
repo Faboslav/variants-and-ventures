@@ -24,8 +24,8 @@ public final class VariantsAndVenturesClientNeoForge
 		modEventBus.addListener(VariantsAndVenturesClientNeoForge::onRegisterEntityRenderers);
 		modEventBus.addListener(VariantsAndVenturesClientNeoForge::onRegisterEntityLayers);
 		//? if < 1.21.4 {
-		/*modEventBus.addListener(VariantsAndVenturesClientNeoForge::onRegisterItemColors);
-		*///?}
+		//modEventBus.addListener(VariantsAndVenturesClientNeoForge::onRegisterItemColors);
+		//?}
 	}
 
 	private static void onClientSetup(final FMLClientSetupEvent event) {

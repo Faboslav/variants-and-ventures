@@ -20,8 +20,8 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.levelgen.Heightmap;
 
 //? if < 26.2 {
-/*import net.minecraft.world.level.block.Blocks;
-*///?}
+//import net.minecraft.world.level.block.Blocks;
+//?}
 
 import java.util.function.Supplier;
 
@@ -61,7 +61,14 @@ public final class VariantsAndVenturesEntityTypes
 
 	public static void addSpawnBiomeModifications(AddSpawnBiomeModificationsEvent event) {
 		if (VariantsAndVentures.getConfig().enableMurk && VariantsAndVentures.getConfig().enableMurkSpawns) {
-			event.add(VariantsAndVenturesTags.HAS_MURK, MobCategory.MONSTER, MURK.get(), 4, 1, 1);
+			event.add(
+				VariantsAndVenturesTags.HAS_MURK,
+				MobCategory.MONSTER,
+				MURK.get(),
+				VariantsAndVentures.getConfig().murkSpawnWeight,
+				VariantsAndVentures.getConfig().murkSpawnMinGroupSize,
+				VariantsAndVentures.getConfig().murkSpawnMaxGroupSize
+			);
 		}
 	}
 }

@@ -28,6 +28,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
+//? if >=26.3 {
+import net.minecraft.world.item.component.SwingAnimation;
+//?}
+
 import java.util.List;
 
 public final class GelidEntity extends Zombie
@@ -94,8 +98,8 @@ public final class GelidEntity extends Zombie
 		//? if >=1.21.3 {
 		Snowball snowball = new Snowball(this.level(), this, itemStack);
 		//?} else {
-		/*Snowball snowball = new Snowball(this.level(), this);
-		*///?}
+		//Snowball snowball = new Snowball(this.level(), this);
+		//?}
 		double d = target.getEyeY() - 1.100000023841858;
 		double e = target.getX() - this.getX();
 		double f = d - snowball.getY();
@@ -103,7 +107,11 @@ public final class GelidEntity extends Zombie
 		double h = Math.sqrt(e * e + g * g) * 0.20000000298023224;
 		snowball.shoot(e, f + h, g, 1.6F, 7.0F);
 		this.playSound(SoundEvents.SNOW_GOLEM_SHOOT, 1.0F, 0.4F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-		this.swing(InteractionHand.OFF_HAND);
+		//? if >=26.3 {
+		this.swing(InteractionHand.OFF_HAND, SwingAnimation.DEFAULT);
+		//?} else {
+		//this.swing(InteractionHand.OFF_HAND);
+		//?}
 		this.level().addFreshEntity(snowball);
 	}
 
@@ -111,20 +119,20 @@ public final class GelidEntity extends Zombie
 	//? if >=1.21.3 {
 	public boolean doHurtTarget(ServerLevel level, Entity source)
 	//?} else {
-	/*public boolean doHurtTarget(Entity source)
-	 *///?}
+	//public boolean doHurtTarget(Entity source)
+	 //?}
 	{
 		//? if < 1.21.3 {
-		/*var level = this.level();
-		*///?}
+		//var level = this.level();
+		//?}
 
 		level.broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_GELID_ATTACK.get(), 1.0f, this.getVoicePitch());
 		//? if >=1.21.3 {
 		boolean attackResult = super.doHurtTarget(level, source);
 		//?} else {
-		/*boolean attackResult = super.doHurtTarget(source);
-		*///?}
+		//boolean attackResult = super.doHurtTarget(source);
+		//?}
 
 		if (
 			attackResult && this.getMainHandItem().isEmpty()

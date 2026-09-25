@@ -7,8 +7,8 @@ import net.minecraft.world.level.LevelAccessor;
 //? if >=1.21.3 {
 import net.minecraft.world.entity.EntitySpawnReason;
 //?} else {
-/*import net.minecraft.world.entity.MobSpawnType;
-*///?}
+//import net.minecraft.world.entity.MobSpawnType;
+//?}
 /**
  * Event related is code based on The Bumblezone/Resourceful Lib mods with permissions from the authors
  *
@@ -20,8 +20,8 @@ import net.minecraft.world.entity.EntitySpawnReason;
 //? if >=1.21.3 {
 public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, EntitySpawnReason spawnReason)
 //?} else {
-/*public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, MobSpawnType spawnReason)
-*///?}
+//public record EntitySpawnEvent(Mob entity, LevelAccessor worldAccess, boolean isBaby, MobSpawnType spawnReason)
+//?}
 {
 	public static final CancellableEventHandler<EntitySpawnEvent> EVENT = new CancellableEventHandler<>();
 }

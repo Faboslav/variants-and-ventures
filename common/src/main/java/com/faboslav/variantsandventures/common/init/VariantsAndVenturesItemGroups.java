@@ -41,8 +41,8 @@ public class VariantsAndVenturesItemGroups
 				nbtCompound.putBoolean("isCreativeTabIcon", true);
 				iconStack.set(DataComponents.CUSTOM_DATA, CustomData.of(nbtCompound));
 				//?} else if >= 1.20.2 {
-				/*iconStack.getOrCreateNbt().putBoolean("isCreativeTabIcon", true);
-				*///?}
+				//iconStack.getOrCreateNbt().putBoolean("isCreativeTabIcon", true);
+				//?}
 
 				return iconStack;
 			})

@@ -3,8 +3,8 @@ package com.faboslav.variantsandventures.common.versions;
 //? if >=1.21.3 {
 import net.minecraft.world.entity.EntitySpawnReason;
  //?} else {
-/*import net.minecraft.world.entity.MobSpawnType;
-*///?}
+//import net.minecraft.world.entity.MobSpawnType;
+//?}
 
 public final class VersionedEntitySpawnReason
 {

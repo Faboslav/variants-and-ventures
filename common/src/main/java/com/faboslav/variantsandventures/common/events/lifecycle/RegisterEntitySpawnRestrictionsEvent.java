@@ -19,8 +19,8 @@ public record RegisterEntitySpawnRestrictionsEvent(Registrar registrar)
 		//? if >= 1.21 {
 		SpawnPlacementType location,
 		//?} else {
-		/*SpawnPlacements.Type location,
-		*///?}
+		//SpawnPlacements.Type location,
+		//?}
 		Heightmap.Types heightmap,
 		SpawnPlacements.SpawnPredicate<T> predicate
 	) {
@@ -32,8 +32,8 @@ public record RegisterEntitySpawnRestrictionsEvent(Registrar registrar)
 		//? if >= 1.21 {
 		SpawnPlacementType location,
 		 //?} else {
-		/*SpawnPlacements.Type location,
-		*///?}
+		//SpawnPlacements.Type location,
+		//?}
 		Heightmap.Types heightmap
 	)
 	{

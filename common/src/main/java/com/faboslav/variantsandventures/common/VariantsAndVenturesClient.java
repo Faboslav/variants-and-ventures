@@ -9,8 +9,8 @@ import com.faboslav.variantsandventures.common.init.VariantsAndVenturesModelLaye
 import net.minecraft.client.gui.screens.Screen;
 
 //? if < 1.21.4 {
-/*import com.faboslav.variantsandventures.common.events.item.RegisterItemColorEvent;
-*///?}
+//import com.faboslav.variantsandventures.common.events.item.RegisterItemColorEvent;
+//?}
 
 public final class VariantsAndVenturesClient
 {
@@ -18,8 +18,8 @@ public final class VariantsAndVenturesClient
 		RegisterEntityRenderersEvent.EVENT.addListener(VariantsAndVenturesEntityRenderers::init);
 		RegisterEntityLayersEvent.EVENT.addListener(VariantsAndVenturesModelLayers::registerEntityLayers);
 		//? if < 1.21.4 {
-		/*RegisterItemColorEvent.EVENT.addListener(VariantsAndVenturesItems::registerItemColors);
-		*///?}
+		//RegisterItemColorEvent.EVENT.addListener(VariantsAndVenturesItems::registerItemColors);
+		//?}
 	}
 
 	public static Screen getConfigScreen(Screen parentScreen) {

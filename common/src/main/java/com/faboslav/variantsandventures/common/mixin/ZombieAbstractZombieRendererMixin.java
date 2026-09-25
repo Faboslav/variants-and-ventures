@@ -16,8 +16,8 @@ import net.minecraft.client.renderer.entity.state.ZombieRenderState;
 //? if >= 1.21.3 {
 public abstract class ZombieAbstractZombieRendererMixin<T extends Zombie, S extends ZombieRenderState, M extends ZombieModel<S>> extends ZombieHumanoidMobRendererMixin<T, S, M>
 //?} else {
-/*public abstract class ZombieAbstractZombieRendererMixin<T extends Zombie, M extends ZombieModel<T>> extends ZombieHumanoidMobRendererMixin<T, M>
-*///?}
+//public abstract class ZombieAbstractZombieRendererMixin<T extends Zombie, M extends ZombieModel<T>> extends ZombieHumanoidMobRendererMixin<T, M>
+//?}
 {
 	protected ZombieAbstractZombieRendererMixin(EntityRendererProvider.Context context) {
 		super(context);
@@ -28,8 +28,8 @@ public abstract class ZombieAbstractZombieRendererMixin<T extends Zombie, S exte
 		//? if >= 1.21.11 {
 		method = "extractRenderState(Lnet/minecraft/world/entity/monster/zombie/Zombie;Lnet/minecraft/client/renderer/entity/state/ZombieRenderState;F)V"
 		//?} else {
-		/*method = "extractRenderState(Lnet/minecraft/world/entity/monster/Zombie;Lnet/minecraft/client/renderer/entity/state/ZombieRenderState;F)V"
-		*///?}
+		//method = "extractRenderState(Lnet/minecraft/world/entity/monster/Zombie;Lnet/minecraft/client/renderer/entity/state/ZombieRenderState;F)V"
+		//?}
 	)
 	public void variantsandventures$extractRenderState(
 		Zombie zombie,

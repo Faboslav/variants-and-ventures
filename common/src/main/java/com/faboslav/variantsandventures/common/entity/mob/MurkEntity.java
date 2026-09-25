@@ -55,8 +55,8 @@ import org.jetbrains.annotations.Nullable;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 //?} else {
-/*import net.minecraft.nbt.CompoundTag;
-*///?}
+//import net.minecraft.nbt.CompoundTag;
+//?}
 
 //? if >=1.21.3 {
 import net.minecraft.world.entity.projectile.Projectile;
@@ -113,20 +113,20 @@ public final class MurkEntity extends Skeleton implements Shearable
 		//? if >=1.21.3 {
 		EntitySpawnReason spawnReason,
 		//?} else {
-		/*MobSpawnType spawnReason,
-		*///?}
+		//MobSpawnType spawnReason,
+		//?}
 		@Nullable SpawnGroupData entityData
 		//? if < 1.21.1 {
-		/*, @Nullable CompoundTag dataTag
-		*///?}
+		//, @Nullable CompoundTag dataTag
+		//?}
 	) {
 		this.setVariant(Variant.getRandom(random));
 
 		//? if >= 1.21.1 {
 		return super.finalizeSpawn(world, difficulty, spawnReason, entityData);
 		//?} else {
-		/*return super.finalizeSpawn(world, difficulty, spawnReason, entityData, dataTag);
-		*///?}
+		//return super.finalizeSpawn(world, difficulty, spawnReason, entityData, dataTag);
+		//?}
 	}
 
 	public static boolean canSpawn(
@@ -135,8 +135,8 @@ public final class MurkEntity extends Skeleton implements Shearable
 		//? if >=1.21.3 {
 		EntitySpawnReason spawnReason,
 		//?} else {
-		/*MobSpawnType spawnReason,
-		 *///?}
+		//MobSpawnType spawnReason,
+		 //?}
 		BlockPos pos,
 		RandomSource random
 	) {
@@ -167,8 +167,8 @@ public final class MurkEntity extends Skeleton implements Shearable
 			return this.canAttackTarget(livingEntity);
 		}));
 		//?} else {
-		/*this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, PLAYER_FILTER));
-		*///?}
+		//this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, PLAYER_FILTER));
+		//?}
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Axolotl.class, true, false));
 		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
@@ -180,18 +180,18 @@ public final class MurkEntity extends Skeleton implements Shearable
 	//? >= 1.20.5 {
 	protected void defineSynchedData(SynchedEntityData.Builder builder)
 	//? } else {
-	/*protected void defineSynchedData()
-	*///?}
+	//protected void defineSynchedData()
+	//?}
 	{
 		//? >= 1.20.5 {
 		super.defineSynchedData(builder);
 		//?} else {
-		/*super.defineSynchedData();
-		*///?}
+		//super.defineSynchedData();
+		//?}
 
 		//? if < 1.20.5 {
-		/*var builder = this.getEntityData();
-		*///?}
+		//var builder = this.getEntityData();
+		//?}
 
 		builder.define(VARIANT, 0);
 		builder.define(SHEARED, false);
@@ -201,8 +201,8 @@ public final class MurkEntity extends Skeleton implements Shearable
 	//? if >= 1.21.6 {
 	public void addAdditionalSaveData(ValueOutput nbt)
 	//?} else {
-	/*public void addAdditionalSaveData(CompoundTag nbt)
-	*///?}
+	//public void addAdditionalSaveData(CompoundTag nbt)
+	//?}
 	{
 		super.addAdditionalSaveData(nbt);
 		nbt.putInt(VARIANT_NBT_KEY, this.getVariant().getId());
@@ -214,8 +214,8 @@ public final class MurkEntity extends Skeleton implements Shearable
 	//? if >= 1.21.6 {
 	public void readAdditionalSaveData(ValueInput nbt)
 	//?} else {
-	/*public void readAdditionalSaveData(CompoundTag nbt)
-	*///?}
+	//public void readAdditionalSaveData(CompoundTag nbt)
+	//?}
 	{
 		super.readAdditionalSaveData(nbt);
 		this.setVariant(Variant.VARIANTS[VersionedNbt.getInt(nbt, VARIANT_NBT_KEY, Variant.PURPLE.ordinal())]);
@@ -384,16 +384,16 @@ public final class MurkEntity extends Skeleton implements Shearable
 				//? if >=1.21.3 {
 				this.shear(((ServerLevel) this.level()), SoundSource.PLAYERS, itemStack);
 				//?} else {
-				/*this.shear(SoundSource.PLAYERS);
-				*///?}
+				//this.shear(SoundSource.PLAYERS);
+				//?}
 				this.gameEvent(GameEvent.SHEAR, player);
 				//? if >= 1.21.9 {
 				var equipment = hand.asEquipmentSlot();
 				//?} else if >= 1.21.1 {
-				/*var equipment = Player.getSlotForHand(hand);
-				*///?} else {
-				/*Consumer<Player> equipment = p -> p.broadcastBreakEvent(hand);
-				*///?}
+				//var equipment = Player.getSlotForHand(hand);
+				//?} else {
+				//Consumer<Player> equipment = p -> p.broadcastBreakEvent(hand);
+				//?}
 
 				itemStack.hurtAndBreak(1, player, equipment);
 			}
@@ -441,8 +441,8 @@ public final class MurkEntity extends Skeleton implements Shearable
 		//? >= 1.21.1 {
 		var shearingLootTable = world.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, VariantsAndVentures.makeID(String.format(Locale.ROOT, "shearing/murk_%s", this.getVariant().getName()))));
 		//?} else {
-		/^var shearingLootTable = world.getServer().getLootData().getLootTable(VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName())));
-		^///?}
+		//var shearingLootTable = world.getServer().getLootData().getLootTable(VariantsAndVentures.makeID(String.format(Locale.ROOT, "entities/murk_%s_shearing", this.getVariant().getName())));
+		//?}
 
 		LootParams lootContextParameterSet = new LootParams.Builder((ServerLevel) world)
 			.withParameter(LootContextParams.ORIGIN, this.position())
@@ -461,19 +461,29 @@ public final class MurkEntity extends Skeleton implements Shearable
 		return !this.isSheared() && this.isAlive();
 	}
 
-	@Override
+	//? if <26.3 {
+	/*@Override
 	public boolean isFreezeConverting() {
 		return false;
 	}
+	*///?}
 
 	@Override
 	public boolean isShaking() {
 		return false;
 	}
 
-	@Override
+	//? if <26.3 {
+	/*@Override
 	protected void doFreezeConversion() {
 	}
+	*///?}
+
+	//? if >=26.3 {
+	@Override
+	public void setIsInPowderSnow(boolean isInPowderSnow) {
+	}
+	//?}
 
 	@Override
 	public boolean canFreeze() {
@@ -492,8 +502,8 @@ public final class MurkEntity extends Skeleton implements Shearable
 			//? if >=1.21.5 {
 			var isDay = this.level().isBrightOutside();
 			//?} else {
-			/*var isDay = this.level().isDay();
-			*///?}
+			//var isDay = this.level().isDay();
+			//?}
 
 			return !isDay || target.isInWater();
 		} else {

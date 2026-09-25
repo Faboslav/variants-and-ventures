@@ -17,8 +17,8 @@ import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 //? if >= 1.21.3 {
 public abstract class ZombieLivingEntityRendererMixin<T extends LivingEntity, S extends LivingEntityRenderState, M extends EntityModel<? super S>> extends EntityRenderer<T, S>
 //?} else {
-/*public abstract class ZombieLivingEntityRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T>
-*///?}
+//public abstract class ZombieLivingEntityRendererMixin<T extends LivingEntity, M extends EntityModel<T>> extends EntityRenderer<T>
+//?}
 {
 	protected ZombieLivingEntityRendererMixin(EntityRendererProvider.Context context) {
 		super(context);
@@ -30,13 +30,13 @@ public abstract class ZombieLivingEntityRendererMixin<T extends LivingEntity, S 
 	//? if >= 1.21.3 {
 	public boolean variantsandventures$isShaking(S entityRenderState, Operation<Boolean> original)
 	//?} else {
-	/*public boolean variantsandventures$isShaking(LivingEntity entity, Operation<Boolean> original)
-	*///?}
+	//public boolean variantsandventures$isShaking(LivingEntity entity, Operation<Boolean> original)
+	//?}
 	{
 		//? if >= 1.21.3 {
 		return original.call(entityRenderState);
 		//?} else {
-		/*return original.call(entity);
-		*///?}
+		//return original.call(entity);
+		//?}
 	}
 }

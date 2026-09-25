@@ -24,8 +24,8 @@ import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 //? if >= 1.21.3 {
 public class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntity, SkeletonRenderState>
 //? } else {
-/*public class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, VerdantEntityModel>
-*///?}
+//public class VerdantEntityRenderer extends HumanoidMobRenderer<VerdantEntity, VerdantEntityModel>
+//?}
 {
 	private static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/verdant/verdant.png");
 
@@ -33,8 +33,8 @@ public class VerdantEntityRenderer extends AbstractSkeletonRenderer<VerdantEntit
 		//? if >= 1.21.9 {
 		super(context, VariantsAndVenturesModelLayers.VERDANT_ARMOR, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT)));
 		//?} else if >= 1.21.3 {
-		/*super(context, VariantsAndVenturesModelLayers.VERDANT_INNER_ARMOR, VariantsAndVenturesModelLayers.VERDANT_OUTER_ARMOR, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT)));
-		 *///?} else {
+		//super(context, VariantsAndVenturesModelLayers.VERDANT_INNER_ARMOR, VariantsAndVenturesModelLayers.VERDANT_OUTER_ARMOR, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT)));
+		 //?} else {
 		/*super(context, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT)), 0.5F);
 		this.addLayer(new HumanoidArmorLayer<>(this, new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT_INNER_ARMOR)), new VerdantEntityModel(context.bakeLayer(VariantsAndVenturesModelLayers.VERDANT_OUTER_ARMOR)), context.getModelManager()));
 		*///?}

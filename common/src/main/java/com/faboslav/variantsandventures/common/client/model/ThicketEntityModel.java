@@ -8,8 +8,8 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.ArmorModelSet;
 import net.minecraft.client.model.geom.LayerDefinitions;
 //?} else {
-/*import net.minecraft.world.entity.monster.zombie.Zombie;
-*///?}
+//import net.minecraft.world.entity.monster.zombie.Zombie;
+//?}
 
 //? if >= 1.21.3 {
 import net.minecraft.client.renderer.entity.state.ZombieRenderState;
@@ -18,8 +18,8 @@ import net.minecraft.client.renderer.entity.state.ZombieRenderState;
 //? if >= 1.21.3 {
 public class ThicketEntityModel<T extends ZombieRenderState> extends ZombieModel<T>
  //? } else {
-/*public class ThicketEntityModel<T extends Zombie> extends ZombieModel<T>
-*///?}
+//public class ThicketEntityModel<T extends Zombie> extends ZombieModel<T>
+//?}
 {
 	public ThicketEntityModel(ModelPart root) {
 		super(root);

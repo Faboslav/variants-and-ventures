@@ -22,8 +22,8 @@ public class TargetAboveWaterGoal extends Goal
 		//? if >=1.21.5 {
 		var isDay = this.murk.level().isBrightOutside();
 		//?} else {
-		/*var isDay = this.murk.level().isDay();
-		*///?}
+		//var isDay = this.murk.level().isDay();
+		//?}
 		return !isDay && this.murk.isInWater() && this.murk.getY() < (double) (this.minY - 2);
 	}
 

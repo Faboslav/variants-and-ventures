@@ -20,20 +20,20 @@ public final class VersionedNbt
 		//? if >= 1.21.5 {
 		return nbt.getIntOr(key, defaultValue);
 		//?} else {
-		/*return nbt.contains(key) ? nbt.getInt(key) : defaultValue;
-		*///?}
+		//return nbt.contains(key) ? nbt.getInt(key) : defaultValue;
+		//?}
 	}
 
 	//? if >=1.21.6 {
 	public static boolean getBoolean(ValueInput nbt, String key, boolean defaultValue)
 	//?} else {
-	/*public static boolean getBoolean(CompoundTag nbt, String key, boolean defaultValue)
-	*///?}
+	//public static boolean getBoolean(CompoundTag nbt, String key, boolean defaultValue)
+	//?}
 	{
 		//? if >= 1.21.5 {
 		return nbt.getBooleanOr(key, defaultValue);
 		 //?} else {
-		/*return nbt.contains(key) ? nbt.getBoolean(key) : defaultValue;
-		*///?}
+		//return nbt.contains(key) ? nbt.getBoolean(key) : defaultValue;
+		//?}
 	}
 }

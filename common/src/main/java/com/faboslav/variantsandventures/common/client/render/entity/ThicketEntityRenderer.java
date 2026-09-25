@@ -25,8 +25,8 @@ import net.minecraft.client.renderer.entity.ArmorModelSet;
 //? if >= 1.21.3 {
 public class ThicketEntityRenderer extends AbstractZombieRenderer<ThicketEntity, ZombieRenderState, ThicketEntityModel<ZombieRenderState>>
  //? } else {
-/*public class ThicketEntityRenderer extends AbstractZombieRenderer<ThicketEntity, ThicketEntityModel<ThicketEntity>>
-*///?}
+//public class ThicketEntityRenderer extends AbstractZombieRenderer<ThicketEntity, ThicketEntityModel<ThicketEntity>>
+//?}
 {
 	public static final Identifier TEXTURE = VariantsAndVentures.makeID("textures/entity/thicket/thicket.png");
 
@@ -114,7 +114,7 @@ public class ThicketEntityRenderer extends AbstractZombieRenderer<ThicketEntity,
 		float h = thicket.getSwimAmount(tickDelta);
 		if (h > 0.0F) {
 			float angle = Mth.lerp(h, thicket.getXRot(), -10.0F - thicket.getXRot());
-			matrices.mulPose(Axis.XP.rotationDegrees(angle));
+			matrices.rotate(Axis.XP.rotationDegrees(angle));
 		}
 	}
 	*///?}

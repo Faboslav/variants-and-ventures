@@ -7,6 +7,7 @@ import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntityAt
 import com.faboslav.variantsandventures.common.events.lifecycle.RegisterEntitySpawnRestrictionsEvent;
 import com.faboslav.variantsandventures.common.events.lifecycle.SetupEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesStructurePoolAliases;
+import com.faboslav.variantsandventures.neoforge.init.VariantsAndVenturesBiomeModifiers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -29,12 +30,13 @@ public final class VariantsAndVenturesNeoForge
 		IEventBus eventBus = NeoForge.EVENT_BUS;
 
 		VariantsAndVentures.init();
+		VariantsAndVenturesBiomeModifiers.BIOME_MODIFIERS.register(modEventBus);
 
 		//? if >= 1.21.9 {
 		if (FMLEnvironment.getDist() == Dist.CLIENT)
 		//?} else {
-		/*if (FMLEnvironment.dist == Dist.CLIENT)
-		*///?}
+		//if (FMLEnvironment.dist == Dist.CLIENT)
+		//?}
 		{
 			VariantsAndVenturesClientNeoForge.init(modEventBus, eventBus);
 		}

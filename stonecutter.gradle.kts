@@ -2,14 +2,20 @@ val IS_CI = System.getenv("CI") == "true"
 
 plugins {
 	id("dev.kikugie.stonecutter")
-	id("net.neoforged.moddev") version "2.0.141" apply false
-	id("net.fabricmc.fabric-loom") version "1.17-SNAPSHOT" apply false
-	id("net.fabricmc.fabric-loom-remap") version "1.17-SNAPSHOT" apply false
+	id("net.neoforged.moddev") version "2.0.147" apply false
+	id("net.fabricmc.fabric-loom") version "1.18-SNAPSHOT" apply false
+	id("net.fabricmc.fabric-loom-remap") version "1.18-SNAPSHOT" apply false
 }
 
 stonecutter {
 	parameters {
 		filters.exclude("**/*.accesswidener")
+
+		replacements.string(current.parsed >= "26.3") {
+			replace("setInvulnerable(", "setPermanentlyInvulnerable(")
+			replace(".isInvulnerable()", ".isPermanentlyInvulnerable()")
+			replace(".mulPose(Axis.", ".rotate(Axis.")
+		}
 
 		replacements.string(current.parsed >= "26.2") {
 			replace("net.minecraft.advancements.Criterion", "net.minecraft.advancements.triggers.Criterion")
@@ -43,4 +49,4 @@ stonecutter {
 }
 
 if (IS_CI) stonecutter active null
-else stonecutter active "26.2" /* [SC] DO NOT EDIT */
+else stonecutter active "26.3" /* [SC] DO NOT EDIT */

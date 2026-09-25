@@ -1,3 +1,7 @@
+## 1.0.27
+
+- Added murk spawn config options
+
 ## 1.0.26
 
 - Fixed crash related to "Not Enough Trials" mod

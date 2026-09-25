@@ -51,8 +51,8 @@ public final class VariantsAndVenturesStructurePoolAliases
 			//? if >=1.21.5 {
 			if (originalPoolAliasBinding instanceof RandomGroupPoolAlias randomGroupStructurePoolAliasBinding)
 			//?} else {
-			/*if (originalPoolAliasBinding instanceof RandomGroup randomGroupStructurePoolAliasBinding)
-			*///?}
+			//if (originalPoolAliasBinding instanceof RandomGroup randomGroupStructurePoolAliasBinding)
+			//?}
 			{
 				//? if >=1.21.5 {
 				RandomGroupPoolAlias newRandomGroupStructurePoolAliasBinding;
@@ -67,8 +67,8 @@ public final class VariantsAndVenturesStructurePoolAliases
 					//? if >=1.21.5 {
 					dataPoolBuilder.add(group.value());
 					//?} else {
-					/*dataPoolBuilder.add(group.data());
-					 *///?}
+					//dataPoolBuilder.add(group.data());
+					 //?}
 				}
 
 				if (config.enableMurkSpawnersInTrialChambers) {
@@ -106,34 +106,34 @@ public final class VariantsAndVenturesStructurePoolAliases
 			//? if >=1.21.5 {
 			else if (originalPoolAliasBinding instanceof RandomPoolAlias randomStructurePoolAliasBinding)
 			//?} else {
-			/*else if (originalPoolAliasBinding instanceof Random randomStructurePoolAliasBinding)
-			*///?}
+			//else if (originalPoolAliasBinding instanceof Random randomStructurePoolAliasBinding)
+			//?}
 			{
 				//? if >=1.21.5 {
 				RandomPoolAlias newRandomStructurePoolAliasBinding;
 				//?} else {
-				/*Random newRandomStructurePoolAliasBinding;
-				*///?}
+				//Random newRandomStructurePoolAliasBinding;
+				//?}
 				//? if >= 1.21.11 {
 				var alias = randomStructurePoolAliasBinding.alias().identifier().getPath();
 				//?} else {
-				/*var alias = randomStructurePoolAliasBinding.alias().location().getPath();
-				*///?}
+				//var alias = randomStructurePoolAliasBinding.alias().location().getPath();
+				//?}
 				var registryKeys = randomStructurePoolAliasBinding.allTargets().toList();
 
 				if (Objects.equals(alias, "trial_chambers/spawner/contents/melee")) {
 					//? if >=1.21.5 {
 					var dataPoolBuilder = WeightedList.<String>builder();
 					//?} else {
-					/*var dataPoolBuilder = SimpleWeightedRandomList.<String>builder();
-					*///?}
+					//var dataPoolBuilder = SimpleWeightedRandomList.<String>builder();
+					//?}
 
 					registryKeys.forEach(registryKey -> {
 						//? if >= 1.21.11 {
 						var value = registryKey.identifier().getPath();
 						//?} else {
-						/*var value = registryKey.location().getPath();
-						*///?}
+						//var value = registryKey.location().getPath();
+						//?}
 						dataPoolBuilder.add(value);
 					});
 

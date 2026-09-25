@@ -134,19 +134,29 @@ public final class VerdantEntity extends Skeleton
 		return persistentProjectileEntity;
 	}
 
-	@Override
+	//? if <26.3 {
+	/*@Override
 	public boolean isFreezeConverting() {
 		return false;
 	}
+	*///?}
 
 	@Override
 	public boolean isShaking() {
 		return false;
 	}
 
-	@Override
+	//? if <26.3 {
+	/*@Override
 	protected void doFreezeConversion() {
 	}
+	*///?}
+
+	//? if >=26.3 {
+	@Override
+	public void setIsInPowderSnow(boolean isInPowderSnow) {
+	}
+	//?}
 
 	@Override
 	public boolean canFreeze() {

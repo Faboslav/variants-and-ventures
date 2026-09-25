@@ -71,8 +71,8 @@ public final class ThicketEntity extends Zombie
 		//? >= 1.21.1 {
 		var isPoison = mobEffectInstance.is(MobEffects.POISON);
 		//?} else {
-		/*var isPoison = mobEffectInstance.getEffect() == MobEffects.POISON;
-		*///?}
+		//var isPoison = mobEffectInstance.getEffect() == MobEffects.POISON;
+		//?}
 
 		return !isPoison && super.canBeAffected(mobEffectInstance);
 	}
@@ -81,16 +81,16 @@ public final class ThicketEntity extends Zombie
 	//? if >=1.21.3 {
 	public boolean doHurtTarget(ServerLevel level, Entity source)
 	//?} else {
-	/*public boolean doHurtTarget(Entity source)
- 	*///?}
+	//public boolean doHurtTarget(Entity source)
+ 	//?}
 	{
 		this.level().broadcastEntityEvent(this, EntityEvent.START_ATTACKING);
 		this.playSound(VariantsAndVenturesSoundEvents.ENTITY_THICKET_ATTACK.get(), 0.6f, this.getVoicePitch());
 		//? if >=1.21.3 {
 		boolean attackResult = super.doHurtTarget(level, source);
 		//?} else {
-		/*boolean attackResult = super.doHurtTarget(source);
-		*///?}
+		//boolean attackResult = super.doHurtTarget(source);
+		//?}
 
 		if (attackResult && this.getMainHandItem().isEmpty() && source instanceof LivingEntity) {
 			((LivingEntity) source).addEffect(new MobEffectInstance(MobEffects.POISON, 100), this);

@@ -70,8 +70,8 @@ public final class VariantsAndVentures
 	private static void initEvents() {
 		SetupEvent.EVENT.addListener(VariantsAndVentures::setup);
 		//? if <= 1.21.11 {
-		/*SetupEvent.EVENT.addListener(VariantsAndVenturesItems::registerSpawnEggs);
-		 *///?}
+		//SetupEvent.EVENT.addListener(VariantsAndVenturesItems::registerSpawnEggs);
+		 //?}
 		EntitySpawnEvent.EVENT.addListener(GelidOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(HuskOnEntitySpawn::handleEntitySpawn);
 		EntitySpawnEvent.EVENT.addListener(StrayOnEntitySpawn::handleEntitySpawn);
