@@ -37,7 +37,9 @@ dependencies {
 			)
 		}"
 	)
-	modImplementation("dev.isxander:yet-another-config-lib:${commonMod.dep("yacl")}-fabric")
+	commonMod.depOrNull("yacl")?.let { yaclVersion ->
+		modImplementation("dev.isxander:yet-another-config-lib:${yaclVersion}-fabric")
+	}
 
 	// Optional dependencies
 	// Mod Menu (https://www.curseforge.com/minecraft/mc-mods/modmenu)

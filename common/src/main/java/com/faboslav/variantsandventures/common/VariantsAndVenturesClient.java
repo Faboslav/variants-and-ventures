@@ -1,6 +1,6 @@
 package com.faboslav.variantsandventures.common;
 
-import com.faboslav.variantsandventures.common.config.VariantsAndVenturesConfig;
+import com.faboslav.variantsandventures.common.config.client.gui.VariantsAndVenturesConfigScreen;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityLayersEvent;
 import com.faboslav.variantsandventures.common.events.client.RegisterEntityRenderersEvent;
 import com.faboslav.variantsandventures.common.init.VariantsAndVenturesEntityRenderers;
@@ -23,7 +23,7 @@ public final class VariantsAndVenturesClient
 	}
 
 	public static Screen getConfigScreen(Screen parentScreen) {
-		return VariantsAndVenturesConfig.HANDLER.generateGui().generateScreen(parentScreen);
+		return new VariantsAndVenturesConfigScreen().generateScreen(parentScreen);
 	}
 }
 

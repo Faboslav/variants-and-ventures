@@ -29,7 +29,9 @@ dependencies {
 			)
 		}"
 	)
-	implementation("dev.isxander:yet-another-config-lib:${commonMod.dep("yacl")}-neoforge")
+	commonMod.depOrNull("yacl")?.let { yaclVersion ->
+		implementation("dev.isxander:yet-another-config-lib:${yaclVersion}-neoforge")
+	}
 }
 
 neoForge {

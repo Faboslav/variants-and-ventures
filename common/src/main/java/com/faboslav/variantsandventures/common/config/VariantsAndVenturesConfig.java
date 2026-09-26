@@ -1,289 +1,142 @@
 package com.faboslav.variantsandventures.common.config;
 
-import com.faboslav.variantsandventures.common.VariantsAndVentures;
-import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
-import dev.isxander.yacl3.config.v2.api.SerialEntry;
-import dev.isxander.yacl3.config.v2.api.autogen.AutoGen;
-import dev.isxander.yacl3.config.v2.api.autogen.Boolean;
-import dev.isxander.yacl3.config.v2.api.autogen.DoubleSlider;
-import dev.isxander.yacl3.config.v2.api.autogen.IntSlider;
-import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
-import java.nio.file.Path;
-
 public final class VariantsAndVenturesConfig
 {
-	public static ConfigClassHandler<VariantsAndVenturesConfig> HANDLER = ConfigClassHandler.createBuilder(VariantsAndVenturesConfig.class)
-		.id(VariantsAndVentures.makeID(VariantsAndVentures.MOD_ID))
-		.serializer(config -> GsonConfigSerializerBuilder.create(config).setPath(Path.of("config", VariantsAndVentures.MOD_ID + ".json")).build())
-		.build();
-
-	public static final int MIN_PERCENT_VALUE = 0;
-	public static final int MAX_PERCENT_VALUE = 100;
-	public static final int PERCENT_STEP = 1;
-	public static final String PERCENT_FORMAT = "%.0f%%";
-
-	private static final String MOD_MOBS_CATEGORY = "mod_mobs";
-	private static final String GELID_GROUP = "gelid";
-	private static final String MURK_GROUP = "murk";
-	private static final String THICKET_GROUP = "thicket";
-	private static final String VERDANT_GROUP = "verdant";
-	private static final String VANILLA_MOBS_CATEGORY = "vanilla_mobs";
-	private static final String STRAY_GROUP = "stray";
-	private static final String HUSK_GROUP = "husk";
-	//? if >= 1.20.6 {
-	private static final String BOGGED_GROUP = "bogged";
-	//?}
-	//? if >= 1.21.11 {
-	private static final String PARCHED_GROUP = "parched";
-	//?}
-
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableGelid = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableGelidSpawns = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double gelidSpawnChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@IntSlider(min = -256, max = 256, step = 1)
-	public int gelidMinimumYLevel = -64;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableGelidSpawners = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double gelidSpawnerChance = 80;
-
+	public static final boolean ENABLE_GELID_DEFAULT_VALUE = true;
+	public static final boolean ENABLE_GELID_SPAWNS_DEFAULT_VALUE = true;
+	public static final double GELID_SPAWN_CHANCE_DEFAULT_VALUE = 80;
+	public static final int GELID_MINIMUM_Y_LEVEL_DEFAULT_VALUE = -64;
+	public static final boolean ENABLE_GELID_SPAWNERS_DEFAULT_VALUE = true;
+	public static final double GELID_SPAWNER_CHANCE_DEFAULT_VALUE = 80;
 	//? if >= 1.21 {
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = GELID_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableGelidSpawnersInTrialChambers = true;
+	public static final boolean ENABLE_GELID_SPAWNERS_IN_TRIAL_CHAMBERS_DEFAULT_VALUE = true;
 	//?}
 
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableMurk = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableMurkSpawns = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int murkSpawnWeight = 4;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int murkSpawnMinGroupSize = 1;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
-	@IntSlider(min = 0, max = 100, step = 1)
-	public int murkSpawnMaxGroupSize = 1;
-
+	public static final boolean ENABLE_MURK_DEFAULT_VALUE = true;
+	public static final boolean ENABLE_MURK_SPAWNS_DEFAULT_VALUE = true;
+	public static final int MURK_SPAWN_WEIGHT_DEFAULT_VALUE = 4;
+	public static final int MURK_SPAWN_MIN_GROUP_SIZE_DEFAULT_VALUE = 1;
+	public static final int MURK_SPAWN_MAX_GROUP_SIZE_DEFAULT_VALUE = 1;
 	//? if >= 1.21 {
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = MURK_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableMurkSpawnersInTrialChambers = true;
+	public static final boolean ENABLE_MURK_SPAWNERS_IN_TRIAL_CHAMBERS_DEFAULT_VALUE = true;
 	//?}
 
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableThicket = true;
+	public static final boolean ENABLE_THICKET_DEFAULT_VALUE = true;
+	public static final boolean ENABLE_THICKET_SPAWNS_DEFAULT_VALUE = true;
+	public static final double THICKET_SPAWN_CHANCE_DEFAULT_VALUE = 80;
+	public static final int THICKET_MINIMUM_Y_LEVEL_DEFAULT_VALUE = -64;
+	public static final boolean ENABLE_THICKET_SPAWNERS_DEFAULT_VALUE = true;
+	public static final double THICKET_SPAWNER_CHANCE_DEFAULT_VALUE = 80;
+	public static final boolean ENABLE_THICKET_SPAWNERS_IN_TRIAL_CHAMBERS_DEFAULT_VALUE = true;
 
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableThicketSpawns = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double thicketSpawnChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@IntSlider(min = -256, max = 256, step = 1)
-	public int thicketMinimumYLevel = -64;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableThicketSpawners = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double thicketSpawnerChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = THICKET_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableThicketSpawnersInTrialChambers = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableVerdant = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableVerdantSpawns = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double verdantSpawnChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@IntSlider(min = -256, max = 256, step = 1)
-	public int verdantMinimumYLevel = -64;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableVerdantSpawners = true;
-
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double verdantSpawnerChance = 80;
-
+	public static final boolean ENABLE_VERDANT_DEFAULT_VALUE = true;
+	public static final boolean ENABLE_VERDANT_SPAWNS_DEFAULT_VALUE = true;
+	public static final double VERDANT_SPAWN_CHANCE_DEFAULT_VALUE = 80;
+	public static final int VERDANT_MINIMUM_Y_LEVEL_DEFAULT_VALUE = -64;
+	public static final boolean ENABLE_VERDANT_SPAWNERS_DEFAULT_VALUE = true;
+	public static final double VERDANT_SPAWNER_CHANCE_DEFAULT_VALUE = 80;
 	//? if >= 1.21 {
-	@SerialEntry()
-	@AutoGen(category = MOD_MOBS_CATEGORY, group = VERDANT_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableVerdantSpawnersInTrialChambers = true;
+	public static final boolean ENABLE_VERDANT_SPAWNERS_IN_TRIAL_CHAMBERS_DEFAULT_VALUE = true;
 	//?}
 
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = STRAY_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableBetterStraySpawns = true;
+	public static final boolean ENABLE_BETTER_STRAY_SPAWNS_DEFAULT_VALUE = true;
+	public static final double STRAY_SPAWN_CHANCE_DEFAULT_VALUE = 80;
+	public static final int STRAY_MINIMUM_Y_LEVEL_DEFAULT_VALUE = -64;
+	public static final boolean ENABLE_STRAY_SPAWNERS_DEFAULT_VALUE = true;
+	public static final double STRAY_SPAWNER_CHANCE_DEFAULT_VALUE = 80;
 
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = STRAY_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double straySpawnChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = STRAY_GROUP)
-	@IntSlider(min = -256, max = 256, step = 1)
-	public int strayMinimumYLevel = -64;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = STRAY_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableStraySpawners = true;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = STRAY_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double straySpawnerChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = HUSK_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableBetterHuskSpawns = true;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = HUSK_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double huskSpawnChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = HUSK_GROUP)
-	@IntSlider(min = -256, max = 256, step = 1)
-	public int huskMinimumYLevel = -64;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = HUSK_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableHuskSpawners = true;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = HUSK_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double huskSpawnerChance = 80;
+	public static final boolean ENABLE_BETTER_HUSK_SPAWNS_DEFAULT_VALUE = true;
+	public static final double HUSK_SPAWN_CHANCE_DEFAULT_VALUE = 80;
+	public static final int HUSK_MINIMUM_Y_LEVEL_DEFAULT_VALUE = -64;
+	public static final boolean ENABLE_HUSK_SPAWNERS_DEFAULT_VALUE = true;
+	public static final double HUSK_SPAWNER_CHANCE_DEFAULT_VALUE = 80;
 
 	//? if >= 1.20.6 {
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableBetterBoggedSpawns = true;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double boggedSpawnChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
-	@IntSlider(min = -256, max = 256, step = 1)
-	public int boggedMinimumYLevel = -64;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableBoggedSpawners = true;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = BOGGED_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double boggedSpawnerChance = 80;
+	public static final boolean ENABLE_BETTER_BOGGED_SPAWNS_DEFAULT_VALUE = true;
+	public static final double BOGGED_SPAWN_CHANCE_DEFAULT_VALUE = 80;
+	public static final int BOGGED_MINIMUM_Y_LEVEL_DEFAULT_VALUE = -64;
+	public static final boolean ENABLE_BOGGED_SPAWNERS_DEFAULT_VALUE = true;
+	public static final double BOGGED_SPAWNER_CHANCE_DEFAULT_VALUE = 80;
 	//?}
 
 	//? if >= 1.21.11 {
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableBetterParchedSpawns = true;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double parchedSpawnChance = 80;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
-	@IntSlider(min = -256, max = 256, step = 1)
-	public int parchedMinimumYLevel = -64;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
-	@Boolean(formatter = Boolean.Formatter.YES_NO, colored = true)
-	public boolean enableParchedSpawners = true;
-
-	@SerialEntry()
-	@AutoGen(category = VANILLA_MOBS_CATEGORY, group = PARCHED_GROUP)
-	@DoubleSlider(min = VariantsAndVenturesConfig.MIN_PERCENT_VALUE, max = VariantsAndVenturesConfig.MAX_PERCENT_VALUE, step = VariantsAndVenturesConfig.PERCENT_STEP, format = VariantsAndVenturesConfig.PERCENT_FORMAT)
-	public double parchedSpawnerChance = 80;
+	public static final boolean ENABLE_BETTER_PARCHED_SPAWNS_DEFAULT_VALUE = true;
+	public static final double PARCHED_SPAWN_CHANCE_DEFAULT_VALUE = 80;
+	public static final int PARCHED_MINIMUM_Y_LEVEL_DEFAULT_VALUE = -64;
+	public static final boolean ENABLE_PARCHED_SPAWNERS_DEFAULT_VALUE = true;
+	public static final double PARCHED_SPAWNER_CHANCE_DEFAULT_VALUE = 80;
 	//?}
 
-	public void load() {
-		HANDLER.load();
+	public boolean enableGelid = ENABLE_GELID_DEFAULT_VALUE;
+	public boolean enableGelidSpawns = ENABLE_GELID_SPAWNS_DEFAULT_VALUE;
+	public double gelidSpawnChance = GELID_SPAWN_CHANCE_DEFAULT_VALUE;
+	public int gelidMinimumYLevel = GELID_MINIMUM_Y_LEVEL_DEFAULT_VALUE;
+	public boolean enableGelidSpawners = ENABLE_GELID_SPAWNERS_DEFAULT_VALUE;
+	public double gelidSpawnerChance = GELID_SPAWNER_CHANCE_DEFAULT_VALUE;
+	//? if >= 1.21 {
+	public boolean enableGelidSpawnersInTrialChambers = ENABLE_GELID_SPAWNERS_IN_TRIAL_CHAMBERS_DEFAULT_VALUE;
+	//?}
+
+	public boolean enableMurk = ENABLE_MURK_DEFAULT_VALUE;
+	public boolean enableMurkSpawns = ENABLE_MURK_SPAWNS_DEFAULT_VALUE;
+	public int murkSpawnWeight = MURK_SPAWN_WEIGHT_DEFAULT_VALUE;
+	public int murkSpawnMinGroupSize = MURK_SPAWN_MIN_GROUP_SIZE_DEFAULT_VALUE;
+	public int murkSpawnMaxGroupSize = MURK_SPAWN_MAX_GROUP_SIZE_DEFAULT_VALUE;
+	//? if >= 1.21 {
+	public boolean enableMurkSpawnersInTrialChambers = ENABLE_MURK_SPAWNERS_IN_TRIAL_CHAMBERS_DEFAULT_VALUE;
+	//?}
+
+	public boolean enableThicket = ENABLE_THICKET_DEFAULT_VALUE;
+	public boolean enableThicketSpawns = ENABLE_THICKET_SPAWNS_DEFAULT_VALUE;
+	public double thicketSpawnChance = THICKET_SPAWN_CHANCE_DEFAULT_VALUE;
+	public int thicketMinimumYLevel = THICKET_MINIMUM_Y_LEVEL_DEFAULT_VALUE;
+	public boolean enableThicketSpawners = ENABLE_THICKET_SPAWNERS_DEFAULT_VALUE;
+	public double thicketSpawnerChance = THICKET_SPAWNER_CHANCE_DEFAULT_VALUE;
+	public boolean enableThicketSpawnersInTrialChambers = ENABLE_THICKET_SPAWNERS_IN_TRIAL_CHAMBERS_DEFAULT_VALUE;
+
+	public boolean enableVerdant = ENABLE_VERDANT_DEFAULT_VALUE;
+	public boolean enableVerdantSpawns = ENABLE_VERDANT_SPAWNS_DEFAULT_VALUE;
+	public double verdantSpawnChance = VERDANT_SPAWN_CHANCE_DEFAULT_VALUE;
+	public int verdantMinimumYLevel = VERDANT_MINIMUM_Y_LEVEL_DEFAULT_VALUE;
+	public boolean enableVerdantSpawners = ENABLE_VERDANT_SPAWNERS_DEFAULT_VALUE;
+	public double verdantSpawnerChance = VERDANT_SPAWNER_CHANCE_DEFAULT_VALUE;
+	//? if >= 1.21 {
+	public boolean enableVerdantSpawnersInTrialChambers = ENABLE_VERDANT_SPAWNERS_IN_TRIAL_CHAMBERS_DEFAULT_VALUE;
+	//?}
+
+	public boolean enableBetterStraySpawns = ENABLE_BETTER_STRAY_SPAWNS_DEFAULT_VALUE;
+	public double straySpawnChance = STRAY_SPAWN_CHANCE_DEFAULT_VALUE;
+	public int strayMinimumYLevel = STRAY_MINIMUM_Y_LEVEL_DEFAULT_VALUE;
+	public boolean enableStraySpawners = ENABLE_STRAY_SPAWNERS_DEFAULT_VALUE;
+	public double straySpawnerChance = STRAY_SPAWNER_CHANCE_DEFAULT_VALUE;
+
+	public boolean enableBetterHuskSpawns = ENABLE_BETTER_HUSK_SPAWNS_DEFAULT_VALUE;
+	public double huskSpawnChance = HUSK_SPAWN_CHANCE_DEFAULT_VALUE;
+	public int huskMinimumYLevel = HUSK_MINIMUM_Y_LEVEL_DEFAULT_VALUE;
+	public boolean enableHuskSpawners = ENABLE_HUSK_SPAWNERS_DEFAULT_VALUE;
+	public double huskSpawnerChance = HUSK_SPAWNER_CHANCE_DEFAULT_VALUE;
+
+	//? if >= 1.20.6 {
+	public boolean enableBetterBoggedSpawns = ENABLE_BETTER_BOGGED_SPAWNS_DEFAULT_VALUE;
+	public double boggedSpawnChance = BOGGED_SPAWN_CHANCE_DEFAULT_VALUE;
+	public int boggedMinimumYLevel = BOGGED_MINIMUM_Y_LEVEL_DEFAULT_VALUE;
+	public boolean enableBoggedSpawners = ENABLE_BOGGED_SPAWNERS_DEFAULT_VALUE;
+	public double boggedSpawnerChance = BOGGED_SPAWNER_CHANCE_DEFAULT_VALUE;
+	//?}
+
+	//? if >= 1.21.11 {
+	public boolean enableBetterParchedSpawns = ENABLE_BETTER_PARCHED_SPAWNS_DEFAULT_VALUE;
+	public double parchedSpawnChance = PARCHED_SPAWN_CHANCE_DEFAULT_VALUE;
+	public int parchedMinimumYLevel = PARCHED_MINIMUM_Y_LEVEL_DEFAULT_VALUE;
+	public boolean enableParchedSpawners = ENABLE_PARCHED_SPAWNERS_DEFAULT_VALUE;
+	public double parchedSpawnerChance = PARCHED_SPAWNER_CHANCE_DEFAULT_VALUE;
+	//?}
+
+	public static void load() {
+		VariantsAndVenturesConfigSerializer.load();
+	}
+
+	public static void save() {
+		VariantsAndVenturesConfigSerializer.save();
 	}
 }

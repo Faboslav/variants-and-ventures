@@ -1,6 +1,8 @@
 ## 1.0.28
 
 - Fixed spawn chance config options being ignored
+- Fixed config not being applied
+- Updated YACL to be an optional dependency
 
 ## 1.0.27
 

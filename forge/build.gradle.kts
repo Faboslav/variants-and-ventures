@@ -55,7 +55,9 @@ dependencies {
 			)
 		}"
 	)
-	modImplementation("dev.isxander:yet-another-config-lib:${commonMod.dep("yacl")}-forge")
+	commonMod.depOrNull("yacl")?.let { yaclVersion ->
+		modImplementation("dev.isxander:yet-another-config-lib:${yaclVersion}-forge")
+	}
 }
 
 legacyForge {

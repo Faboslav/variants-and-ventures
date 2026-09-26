@@ -20,6 +20,10 @@ fletchingTable {
 	}
 }
 
+stonecutter {
+	constants["yacl"] = commonMod.depOrNull("yacl") != null
+}
+
 dependencies {
 	minecraft(group = "com.mojang", name = "minecraft", version = commonMod.mc)
 
@@ -34,7 +38,10 @@ dependencies {
 
 	modCompileOnly("net.fabricmc:fabric-loader:${commonMod.dep("fabric_loader")}")
 	modCompileOnly("com.teamresourceful.resourcefullib:resourcefullib-common-${commonMod.dep("resourceful_lib.mc")}:${commonMod.dep("resourceful_lib.lib")}")
-	modCompileOnly("dev.isxander:yet-another-config-lib:${commonMod.dep("yacl")}-fabric")
+
+	commonMod.depOrNull("yacl")?.let { yaclVersion ->
+		modCompileOnly("dev.isxander:yet-another-config-lib:${yaclVersion}-fabric")
+	}
 }
 
 val commonJava: Configuration by configurations.creating {
