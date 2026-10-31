@@ -1,3 +1,8 @@
+## 1.0.29
+
+- Fixed crash on world load with newer NeoForge 26.3 versions
+- Added es_es translations (Thanks to warbacon)
+
 ## 1.0.28
 
 - Fixed spawn chance config options being ignored
