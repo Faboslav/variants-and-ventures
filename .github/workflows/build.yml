@@ -118,8 +118,8 @@ jobs:
                     mc-runtime-test: ${{ matrix.mod_loader_alias }}
                     java: ${{ steps.gradle-properties.outputs.JAVA_VERSION }}
                     fabric-api: ${{ steps.gradle-properties.outputs.DEPS_FABRIC_API }}
-                    xvfb: false
-                    headlessmc-command: -lwjgl --retries 3 --jvm -Djava.awt.headless=true
+                    xvfb: ${{ matrix.version == '26.3' }}
+                    headlessmc-command: ${{ matrix.version == '26.3' && '--retries 3 --jvm -Djava.awt.headless=true' || '-lwjgl --retries 3 --jvm -Djava.awt.headless=true' }}
                     cache-mc: true
 
     run-server:
