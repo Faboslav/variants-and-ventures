@@ -109,6 +109,12 @@ jobs:
                     MOD_URL=$(./.github/scripts/get-modrinth-dependency-url.sh "yacl" "${{ steps.gradle-properties.outputs.DEPS_YACL }}-${{ matrix.mod_loader }}" "${{ matrix.mod_loader }}")
                     wget -P run/mods "$MOD_URL"
 
+            -   name: "Install software rendering"
+                if: ${{ matrix.version == '26.3' }}
+                run: |
+                    sudo apt-get update
+                    sudo apt-get install -y libgl1-mesa-dri libglx-mesa0 mesa-vulkan-drivers
+
             -   name: Run ${{ matrix.version }} ${{ matrix.mod_loader }} client
                 uses: headlesshq/mc-runtime-test@645691de43520240e1d1e45b4b9a4d9cd9c294a4 # v4.5.2
                 with:
