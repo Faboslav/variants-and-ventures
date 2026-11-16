@@ -1,0 +1,50 @@
+{
+	"type": "minecraft:shearing",
+	"pools": [
+		{
+			"bonus_rolls": 0.0,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					//? if >=26.3 {
+					"modifier": {
+						"type": "minecraft:set_count",
+						"add": false,
+						"count": 1
+					},
+					//?} else {
+					/*"functions": [
+						{
+							"add": false,
+							"count": 1.0,
+							"function": "minecraft:set_count"
+						}
+					],
+					*///?}
+					"name": "minecraft:fire_coral"
+				},
+				{
+					"type": "minecraft:item",
+					//? if >=26.3 {
+					"modifier": {
+						"type": "minecraft:set_count",
+						"add": false,
+						"count": 1
+					},
+					//?} else {
+					/*"functions": [
+						{
+							"add": false,
+							"count": 1.0,
+							"function": "minecraft:set_count"
+						}
+					],
+					*///?}
+					"name": "minecraft:dead_fire_coral"
+				}
+			],
+			"rolls": 2.0
+		}
+	],
+	"random_sequence": "variantsandventures:shearing/murk_red"
+}

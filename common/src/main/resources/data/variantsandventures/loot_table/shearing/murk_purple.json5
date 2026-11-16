@@ -6,25 +6,41 @@
 			"entries": [
 				{
 					"type": "minecraft:item",
-					"functions": [
+					//? if >=26.3 {
+					"modifier": {
+						"type": "minecraft:set_count",
+						"add": false,
+						"count": 1
+					},
+					//?} else {
+					/*"functions": [
 						{
 							"add": false,
 							"count": 1.0,
 							"function": "minecraft:set_count"
 						}
 					],
-					"name": "minecraft:fire_coral"
+					*///?}
+					"name": "minecraft:bubble_coral"
 				},
 				{
 					"type": "minecraft:item",
-					"functions": [
+					//? if >=26.3 {
+					"modifier": {
+						"type": "minecraft:set_count",
+						"add": false,
+						"count": 1
+					},
+					//?} else {
+					/*"functions": [
 						{
 							"add": false,
 							"count": 1.0,
 							"function": "minecraft:set_count"
 						}
 					],
-					"name": "minecraft:dead_fire_coral"
+					*///?}
+					"name": "minecraft:dead_bubble_coral"
 				}
 			],
 			"rolls": 2.0

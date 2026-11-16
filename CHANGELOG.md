@@ -1,3 +1,8 @@
+## 1.0.30
+
+- Fixed verdant dropping uncraftable tipped arrows instead of arrows of poison
+- Fixed loot tables of verdant, gelid, thicket and murk
+
 ## 1.0.29
 
 - Fixed crash on world load with newer NeoForge 26.3 versions
